@@ -67,6 +67,18 @@ class Tailwindify {
 // Export types and functions
 export { toTailwind } from './core/rulesEngine';
 export { transformRule, transformDeclarations };
+export {
+  normalizeValue,
+  isPx,
+  isRem,
+  isEm,
+  isPct,
+  isNumber,
+  toArbitrary,
+  arbitraryProperty,
+  parseBoxShorthand,
+  parseColorNormalize
+} from './core/normalizers';
 
 // Export both named and default exports
 export { Tailwindify };
