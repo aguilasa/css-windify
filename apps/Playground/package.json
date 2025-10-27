@@ -1,0 +1,19 @@
+{
+  "name": "playground",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Playground app for testing tailwindify-core",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "tailwindify-core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  }
+}
