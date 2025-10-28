@@ -45,6 +45,9 @@ importers:
 
   apps/Playground:
     dependencies:
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.6
       tailwindify-core:
         specifier: workspace:*
         version: link:../../packages/core

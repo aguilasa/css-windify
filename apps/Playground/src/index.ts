@@ -1,5 +1,101 @@
-import { loadTheme, transformRule, transformDeclarations, parseInlineCss, parseCssRules } from 'tailwindify-core';
+import { loadTheme, transformRule, transformDeclarations } from 'tailwindify-core';
+import postcss from 'postcss';
 import { createInterface } from 'readline';
+
+// Define types locally to avoid dependency issues
+interface CssDeclaration {
+  prop: string;
+  value: string;
+  variants?: string[];
+}
+
+interface CssRule {
+  selector: string;
+  declarations: CssDeclaration[];
+}
+
+/**
+ * Parse an inline CSS style string into an array of CSS declarations
+ */
+function parseInlineCss(style: string): CssDeclaration[] {
+  if (!style) {
+    return [];
+  }
+
+  // Split the style string by semicolons
+  const declarations: CssDeclaration[] = [];
+  const parts = style.split(';');
+
+  for (const part of parts) {
+    // Skip empty parts
+    const trimmedPart = part.trim();
+    if (!trimmedPart) {
+      continue;
+    }
+
+    // Split each part by the first colon
+    const colonIndex = trimmedPart.indexOf(':');
+    if (colonIndex === -1) {
+      continue; // Skip invalid parts without a colon
+    }
+
+    const prop = trimmedPart.substring(0, colonIndex).trim();
+    const value = trimmedPart.substring(colonIndex + 1).trim();
+
+    // Skip if property or value is empty
+    if (!prop || !value) {
+      continue;
+    }
+
+    declarations.push({ prop, value });
+  }
+
+  return declarations;
+}
+
+/**
+ * Parse a CSS string into an array of CSS rules
+ */
+function parseCssRules(css: string): CssRule[] {
+  if (!css) {
+    return [];
+  }
+
+  try {
+    // Parse the CSS using PostCSS
+    const root = postcss.parse(css);
+    const rules: CssRule[] = [];
+
+    // Process each rule
+    root.walkRules((rule) => {
+      // Skip @media rules for now
+      if (rule.parent?.type === 'atrule' && rule.parent.name === 'media') {
+        return;
+      }
+
+      const declarations: CssDeclaration[] = [];
+
+      // Process each declaration in the rule
+      rule.walkDecls((decl) => {
+        declarations.push({
+          prop: decl.prop,
+          value: decl.value
+        });
+      });
+
+      // Add the rule to the result
+      rules.push({
+        selector: rule.selector,
+        declarations
+      });
+    });
+
+    return rules;
+  } catch (error) {
+    console.error('Error parsing CSS:', error);
+    return [];
+  }
+}
 
 // Initialize the readline interface for stdin/stdout
 const rl = createInterface({

@@ -10,6 +10,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "postcss": "^8.5.6",
     "tailwindify-core": "workspace:*"
   },
   "devDependencies": {
