@@ -124,26 +124,63 @@ describe('themeLoader', () => {
 
   describe('resolveSpacingToken', () => {
     it('should resolve exact spacing matches', () => {
-      expect(resolveSpacingToken('1rem', mockTheme)).toBe('4');
-      expect(resolveSpacingToken('0.25rem', mockTheme)).toBe('1');
-      expect(resolveSpacingToken('15px', mockTheme)).toBe('custom');
+      expect(resolveSpacingToken('1rem', mockTheme).token).toBe('4');
+      expect(resolveSpacingToken('1rem', mockTheme).type).toBe('exact');
+      expect(resolveSpacingToken('0.25rem', mockTheme).token).toBe('1');
+      expect(resolveSpacingToken('15px', mockTheme).token).toBe('custom');
     });
 
     it('should normalize values before matching', () => {
-      expect(resolveSpacingToken('  1rem  ', mockTheme)).toBe('4');
-      expect(resolveSpacingToken('0.5REM', mockTheme)).toBe('2');
+      expect(resolveSpacingToken('  1rem  ', mockTheme).token).toBe('4');
+      expect(resolveSpacingToken('0.5REM', mockTheme).token).toBe('2');
     });
 
-    it('should return null for unmatched values', () => {
-      expect(resolveSpacingToken('3rem', mockTheme)).toBeNull();
-      expect(resolveSpacingToken('', mockTheme)).toBeNull();
-      expect(resolveSpacingToken('invalid', mockTheme)).toBeNull();
+    it('should return null token for unmatched values', () => {
+      expect(resolveSpacingToken('3rem', mockTheme).token).toBeNull();
+      expect(resolveSpacingToken('3rem', mockTheme).type).toBe('none');
+      expect(resolveSpacingToken('', mockTheme).token).toBeNull();
+      expect(resolveSpacingToken('invalid', mockTheme).token).toBeNull();
     });
 
     it('should handle null or undefined inputs', () => {
-      expect(resolveSpacingToken(null as unknown as string, mockTheme)).toBeNull();
-      expect(resolveSpacingToken(undefined as unknown as string, mockTheme)).toBeNull();
-      expect(resolveSpacingToken('1rem', null as unknown as any)).toBeNull();
+      expect(resolveSpacingToken(null as unknown as string, mockTheme).token).toBeNull();
+      expect(resolveSpacingToken(undefined as unknown as string, mockTheme).token).toBeNull();
+      expect(resolveSpacingToken('1rem', null as unknown as any).token).toBeNull();
+    });
+    
+    it('should support approximate matching', () => {
+      // Create a theme without the 'custom' entry to test approximation
+      const themeWithoutCustom = {
+        spacing: {
+          '0': '0px',
+          '1': '0.25rem',
+          '2': '0.5rem',
+          '4': '1rem'
+        }
+      };
+      
+      // 15px is close to 16px (1rem/4)
+      const result = resolveSpacingToken('15px', themeWithoutCustom, { approximate: true, maxDiffPx: 1 });
+      expect(result.token).toBe('4');
+      expect(result.type).toBe('approximate');
+      expect(result.diff).toBeCloseTo(1, 5);
+    });
+    
+    it('should not approximate when difference is too large', () => {
+      // Create a theme without the 'custom' entry to test approximation
+      const themeWithoutCustom = {
+        spacing: {
+          '0': '0px',
+          '1': '0.25rem',
+          '2': '0.5rem',
+          '4': '1rem'
+        }
+      };
+      
+      // 14px is too far from 16px with maxDiffPx: 1
+      const result = resolveSpacingToken('14px', themeWithoutCustom, { approximate: true, maxDiffPx: 1 });
+      expect(result.token).toBeNull();
+      expect(result.type).toBe('none');
     });
   });
 
@@ -179,53 +216,57 @@ describe('themeLoader', () => {
 
   describe('resolveFontSizeToken', () => {
     it('should resolve exact font size matches', () => {
-      expect(resolveFontSizeToken('0.875rem', mockTheme)).toBe('sm');
-      expect(resolveFontSizeToken('1rem', mockTheme)).toBe('base');
-      expect(resolveFontSizeToken('1.125rem', mockTheme)).toBe('lg');
-      expect(resolveFontSizeToken('22px', mockTheme)).toBe('custom');
+      expect(resolveFontSizeToken('0.875rem', mockTheme).token).toBe('sm');
+      expect(resolveFontSizeToken('0.875rem', mockTheme).type).toBe('exact');
+      expect(resolveFontSizeToken('1rem', mockTheme).token).toBe('base');
+      expect(resolveFontSizeToken('1.125rem', mockTheme).token).toBe('lg');
+      expect(resolveFontSizeToken('22px', mockTheme).token).toBe('custom');
     });
 
     it('should normalize values before matching', () => {
-      expect(resolveFontSizeToken('  0.875rem  ', mockTheme)).toBe('sm');
-      expect(resolveFontSizeToken('1REM', mockTheme)).toBe('base');
+      expect(resolveFontSizeToken('  0.875rem  ', mockTheme).token).toBe('sm');
+      expect(resolveFontSizeToken('1REM', mockTheme).token).toBe('base');
     });
 
-    it('should return null for unmatched values', () => {
-      expect(resolveFontSizeToken('3rem', mockTheme)).toBeNull();
-      expect(resolveFontSizeToken('', mockTheme)).toBeNull();
-      expect(resolveFontSizeToken('invalid', mockTheme)).toBeNull();
+    it('should return null token for unmatched values', () => {
+      expect(resolveFontSizeToken('3rem', mockTheme).token).toBeNull();
+      expect(resolveFontSizeToken('3rem', mockTheme).type).toBe('none');
+      expect(resolveFontSizeToken('', mockTheme).token).toBeNull();
+      expect(resolveFontSizeToken('invalid', mockTheme).token).toBeNull();
     });
 
     it('should handle null or undefined inputs', () => {
-      expect(resolveFontSizeToken(null as unknown as string, mockTheme)).toBeNull();
-      expect(resolveFontSizeToken(undefined as unknown as string, mockTheme)).toBeNull();
-      expect(resolveFontSizeToken('1rem', null as unknown as any)).toBeNull();
+      expect(resolveFontSizeToken(null as unknown as string, mockTheme).token).toBeNull();
+      expect(resolveFontSizeToken(undefined as unknown as string, mockTheme).token).toBeNull();
+      expect(resolveFontSizeToken('1rem', null as unknown as any).token).toBeNull();
     });
   });
 
   describe('resolveLineHeightToken', () => {
     it('should resolve exact line height matches', () => {
-      expect(resolveLineHeightToken('1', mockTheme)).toBe('none');
-      expect(resolveLineHeightToken('1.25', mockTheme)).toBe('tight');
-      expect(resolveLineHeightToken('1.5', mockTheme)).toBe('normal');
-      expect(resolveLineHeightToken('2.2', mockTheme)).toBe('custom');
+      expect(resolveLineHeightToken('1', mockTheme).token).toBe('none');
+      expect(resolveLineHeightToken('1', mockTheme).type).toBe('exact');
+      expect(resolveLineHeightToken('1.25', mockTheme).token).toBe('tight');
+      expect(resolveLineHeightToken('1.5', mockTheme).token).toBe('normal');
+      expect(resolveLineHeightToken('2.2', mockTheme).token).toBe('custom');
     });
 
     it('should normalize values before matching', () => {
-      expect(resolveLineHeightToken('  1.5  ', mockTheme)).toBe('normal');
-      expect(resolveLineHeightToken('1.25', mockTheme)).toBe('tight');
+      expect(resolveLineHeightToken('  1.5  ', mockTheme).token).toBe('normal');
+      expect(resolveLineHeightToken('1.25', mockTheme).token).toBe('tight');
     });
 
-    it('should return null for unmatched values', () => {
-      expect(resolveLineHeightToken('3', mockTheme)).toBeNull();
-      expect(resolveLineHeightToken('', mockTheme)).toBeNull();
-      expect(resolveLineHeightToken('invalid', mockTheme)).toBeNull();
+    it('should return null token for unmatched values', () => {
+      expect(resolveLineHeightToken('3', mockTheme).token).toBeNull();
+      expect(resolveLineHeightToken('3', mockTheme).type).toBe('none');
+      expect(resolveLineHeightToken('', mockTheme).token).toBeNull();
+      expect(resolveLineHeightToken('invalid', mockTheme).token).toBeNull();
     });
 
     it('should handle null or undefined inputs', () => {
-      expect(resolveLineHeightToken(null as unknown as string, mockTheme)).toBeNull();
-      expect(resolveLineHeightToken(undefined as unknown as string, mockTheme)).toBeNull();
-      expect(resolveLineHeightToken('1.5', null as unknown as any)).toBeNull();
+      expect(resolveLineHeightToken(null as unknown as string, mockTheme).token).toBeNull();
+      expect(resolveLineHeightToken(undefined as unknown as string, mockTheme).token).toBeNull();
+      expect(resolveLineHeightToken('1.5', null as unknown as any).token).toBeNull();
     });
   });
 });

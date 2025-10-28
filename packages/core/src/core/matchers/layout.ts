@@ -59,19 +59,20 @@ export function matchPosition(value: string): string {
 }
 
 /**
- * Matches inset properties (top, right, bottom, left) to Tailwind classes
+ * Matches the inset property to Tailwind classes
  * 
  * @param property The CSS property (top, right, bottom, left)
  * @param value The CSS value
  * @param ctx The matching context
- * @returns Array of Tailwind classes
+ * @returns Array of Tailwind classes and warnings
  */
 export function matchInset(
   property: 'top' | 'right' | 'bottom' | 'left',
   value: string,
   ctx: MatchCtx
-): string[] {
-  return matchSpacing(property, value, ctx);
+): string[] | { classes: string[]; warnings: string[] } {
+  const result = matchSpacing(property, value, ctx);
+  return result.warnings.length > 0 ? result : result.classes;
 }
 
 /**
@@ -79,17 +80,31 @@ export function matchInset(
  * 
  * @param value The CSS inset value
  * @param ctx The matching context
- * @returns Array of Tailwind classes
+ * @returns Array of Tailwind classes and warnings
  */
-export function matchInsetShorthand(value: string, ctx: MatchCtx): string[] {
+export function matchInsetShorthand(value: string, ctx: MatchCtx): { classes: string[]; warnings: string[] } {
   // For inset shorthand, we need to handle each direction
   
   // Use spacing matcher for each direction
-  const topClasses = matchSpacing('top', value, ctx);
-  const rightClasses = matchSpacing('right', value, ctx);
-  const bottomClasses = matchSpacing('bottom', value, ctx);
-  const leftClasses = matchSpacing('left', value, ctx);
+  const topResult = matchSpacing('top', value, ctx);
+  const rightResult = matchSpacing('right', value, ctx);
+  const bottomResult = matchSpacing('bottom', value, ctx);
+  const leftResult = matchSpacing('left', value, ctx);
   
-  // Combine all classes
-  return [...topClasses, ...rightClasses, ...bottomClasses, ...leftClasses];
+  // Combine all classes and warnings
+  const classes = [
+    ...topResult.classes,
+    ...rightResult.classes,
+    ...bottomResult.classes,
+    ...leftResult.classes
+  ];
+  
+  const warnings = [
+    ...topResult.warnings,
+    ...rightResult.warnings,
+    ...bottomResult.warnings,
+    ...leftResult.warnings
+  ];
+  
+  return { classes, warnings };
 }

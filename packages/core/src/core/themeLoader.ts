@@ -3,7 +3,7 @@
  */
 import * as fs from 'fs';
 import * as path from 'path';
-import { normalizeValue, parseColorNormalize } from './normalizers';
+import { normalizeValue, parseColorNormalize, findNearestToken } from './normalizers';
 
 /**
  * Default minimal theme with basic Tailwind CSS defaults
@@ -134,22 +134,44 @@ export async function loadTheme(cwd: string): Promise<any> {
  * 
  * @param value CSS spacing value (margin, padding, etc.)
  * @param theme Tailwind theme object
- * @returns Tailwind spacing token or null if not found
+ * @param opts Options for token resolution
+ * @returns Object with token, match type, and difference if approximate
  */
-export function resolveSpacingToken(value: string, theme: any): string | null {
-  if (!value || !theme || !theme.spacing) return null;
+export function resolveSpacingToken(
+  value: string, 
+  theme: any, 
+  opts?: { approximate?: boolean; maxDiffPx?: number }
+): { token: string | null; type: 'exact' | 'approximate' | 'none'; diff?: number } {
+  if (!value || !theme || !theme.spacing) {
+    return { token: null, type: 'none' };
+  }
   
   const normalizedValue = normalizeValue(value);
+  const spacing = theme.spacing as Record<string, string>;
   
   // Direct match in theme
-  for (const [key, themeValue] of Object.entries(theme.spacing)) {
+  for (const [key, themeValue] of Object.entries(spacing)) {
     if (normalizedValue === themeValue) {
-      return key;
+      return { token: key, type: 'exact' };
+    }
+  }
+  
+  // If approximate matching is enabled, try to find the closest token
+  if (opts?.approximate) {
+    const maxDiffPx = opts.maxDiffPx ?? 1; // Default to 1px max difference
+    const nearest = findNearestToken(value, spacing);
+    
+    if (nearest && nearest.diff <= maxDiffPx) {
+      return { 
+        token: nearest.token, 
+        type: 'approximate', 
+        diff: nearest.diff 
+      };
     }
   }
   
   // No match found
-  return null;
+  return { token: null, type: 'none' };
 }
 
 /**
@@ -196,25 +218,55 @@ export function resolveColorToken(hexOrNamed: string, theme: any): { type: 'exac
  * 
  * @param pxOrRem CSS font size value
  * @param theme Tailwind theme object
- * @returns Tailwind font size token or null if not found
+ * @param opts Options for token resolution
+ * @returns Object with token, match type, and difference if approximate
  */
-export function resolveFontSizeToken(pxOrRem: string, theme: any): string | null {
-  if (!pxOrRem || !theme || !theme.fontSize) return null;
+export function resolveFontSizeToken(
+  pxOrRem: string, 
+  theme: any,
+  opts?: { approximate?: boolean; maxDiffPx?: number }
+): { token: string | null; type: 'exact' | 'approximate' | 'none'; diff?: number } {
+  if (!pxOrRem || !theme || !theme.fontSize) {
+    return { token: null, type: 'none' };
+  }
   
   const normalizedValue = normalizeValue(pxOrRem);
+  
+  // Create a map of font size values for easier processing
+  const fontSizeMap: Record<string, string> = {};
   
   // Check for direct matches in theme fontSize
   for (const [key, value] of Object.entries(theme.fontSize)) {
     // Handle both string values and arrays with line height
-    if (typeof value === 'string' && normalizedValue === value) {
-      return key;
-    } else if (Array.isArray(value) && value[0] && normalizedValue === value[0]) {
-      return key;
+    if (typeof value === 'string') {
+      fontSizeMap[key] = value;
+      if (normalizedValue === value) {
+        return { token: key, type: 'exact' };
+      }
+    } else if (Array.isArray(value) && value[0]) {
+      fontSizeMap[key] = value[0];
+      if (normalizedValue === value[0]) {
+        return { token: key, type: 'exact' };
+      }
+    }
+  }
+  
+  // If approximate matching is enabled, try to find the closest token
+  if (opts?.approximate) {
+    const maxDiffPx = opts.maxDiffPx ?? 1; // Default to 1px max difference
+    const nearest = findNearestToken(pxOrRem, fontSizeMap);
+    
+    if (nearest && nearest.diff <= maxDiffPx) {
+      return { 
+        token: nearest.token, 
+        type: 'approximate', 
+        diff: nearest.diff 
+      };
     }
   }
   
   // No match found
-  return null;
+  return { token: null, type: 'none' };
 }
 
 /**
@@ -222,20 +274,47 @@ export function resolveFontSizeToken(pxOrRem: string, theme: any): string | null
  * 
  * @param value CSS line height value
  * @param theme Tailwind theme object
- * @returns Tailwind line height token or null if not found
+ * @param opts Options for token resolution
+ * @returns Object with token, match type, and difference if approximate
  */
-export function resolveLineHeightToken(value: string, theme: any): string | null {
-  if (!value || !theme || !theme.lineHeight) return null;
+export function resolveLineHeightToken(
+  value: string, 
+  theme: any,
+  opts?: { approximate?: boolean; maxDiffPx?: number }
+): { token: string | null; type: 'exact' | 'approximate' | 'none'; diff?: number } {
+  if (!value || !theme || !theme.lineHeight) {
+    return { token: null, type: 'none' };
+  }
   
   const normalizedValue = normalizeValue(value);
   
+  // Create a map of line height values for easier processing
+  const lineHeightMap: Record<string, string> = {};
+  
   // Direct match in theme
   for (const [key, themeValue] of Object.entries(theme.lineHeight)) {
-    if (normalizedValue === String(themeValue)) {
-      return key;
+    const stringValue = String(themeValue);
+    lineHeightMap[key] = stringValue;
+    
+    if (normalizedValue === stringValue) {
+      return { token: key, type: 'exact' };
+    }
+  }
+  
+  // If approximate matching is enabled, try to find the closest token
+  if (opts?.approximate) {
+    const maxDiffPx = opts.maxDiffPx ?? 1; // Default to 1px max difference
+    const nearest = findNearestToken(value, lineHeightMap);
+    
+    if (nearest && nearest.diff <= maxDiffPx) {
+      return { 
+        token: nearest.token, 
+        type: 'approximate', 
+        diff: nearest.diff 
+      };
     }
   }
   
   // No match found
-  return null;
+  return { token: null, type: 'none' };
 }

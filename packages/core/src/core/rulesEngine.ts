@@ -21,8 +21,6 @@ import {
   // Border matchers
   matchBorderWidth,
   matchBorderRadius,
-  matchBorderColor,
-  parseBorderShorthand,
   matchBorderShorthand,
   
   // Typography matchers
@@ -33,7 +31,6 @@ import {
   matchBackgroundSize,
   matchBackgroundPosition,
   matchBackgroundImage,
-  parseBackgroundShorthand,
   matchBackgroundShorthand,
   
   // Flexbox and Grid matchers
@@ -144,39 +141,94 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'inset': (value, ctx) => matchInsetShorthand(value, ctx),
   
   // Spacing properties
-  'margin': (value, ctx) => matchSpacing('m', value, ctx),
-  'margin-top': (value, ctx) => matchSpacing('m' as any, value, ctx),
-  'margin-right': (value, ctx) => matchSpacing('m' as any, value, ctx),
-  'margin-bottom': (value, ctx) => matchSpacing('m' as any, value, ctx),
-  'margin-left': (value, ctx) => matchSpacing('m' as any, value, ctx),
-  'padding': (value, ctx) => matchSpacing('p', value, ctx),
-  'padding-top': (value, ctx) => matchSpacing('p' as any, value, ctx),
-  'padding-right': (value, ctx) => matchSpacing('p' as any, value, ctx),
-  'padding-bottom': (value, ctx) => matchSpacing('p' as any, value, ctx),
-  'padding-left': (value, ctx) => matchSpacing('p' as any, value, ctx),
+  'margin': (value, ctx) => {
+    const result = matchSpacing('m', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'margin-top': (value, ctx) => {
+    const result = matchSpacing('mt', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'margin-right': (value, ctx) => {
+    const result = matchSpacing('mr', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'margin-bottom': (value, ctx) => {
+    const result = matchSpacing('mb', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'margin-left': (value, ctx) => {
+    const result = matchSpacing('ml', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'padding': (value, ctx) => {
+    const result = matchSpacing('p', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'padding-top': (value, ctx) => {
+    const result = matchSpacing('pt', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'padding-right': (value, ctx) => {
+    const result = matchSpacing('pr', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'padding-bottom': (value, ctx) => {
+    const result = matchSpacing('pb', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'padding-left': (value, ctx) => {
+    const result = matchSpacing('pl', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
   
   // Sizing properties
-  'width': (value, ctx) => matchSpacing('w', value, ctx),
-  'height': (value, ctx) => matchSpacing('h', value, ctx),
-  'min-width': (value, ctx) => matchSpacing('w' as any, value, ctx),
-  'min-height': (value, ctx) => matchSpacing('h' as any, value, ctx),
-  'max-width': (value, ctx) => matchSpacing('w' as any, value, ctx),
-  'max-height': (value, ctx) => matchSpacing('h' as any, value, ctx),
+  'width': (value, ctx) => {
+    const result = matchSpacing('w', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'height': (value, ctx) => {
+    const result = matchSpacing('h', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'min-width': (value, ctx) => {
+    const result = matchSpacing('min-w', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'min-height': (value, ctx) => {
+    const result = matchSpacing('min-h', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'max-width': (value, ctx) => {
+    const result = matchSpacing('max-w', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
+  'max-height': (value, ctx) => {
+    const result = matchSpacing('max-h', value, ctx);
+    return result.warnings.length > 0 ? { classes: result.classes, warnings: result.warnings } : result.classes;
+  },
   
   // Color properties
   'color': (value, ctx) => [matchColor('text', value, ctx)],
-  'background-color': (value, ctx) => [matchColor('bg', value, ctx)],
   'border-color': (value, ctx) => [matchColor('border', value, ctx)],
   
   // Border properties
   'border-width': (value) => [matchBorderWidth(value)],
-  'border': (value) => [matchBorderWidth(value)], // Simplified - in reality would need to parse value
   'border-radius': (value) => [matchBorderRadius(value)],
   
   // Typography properties
-  'font-size': (value, ctx) => [matchTypography('font-size', value, ctx)],
-  'line-height': (value, ctx) => [matchTypography('line-height', value, ctx)],
-  'letter-spacing': (value, ctx) => [matchTypography('letter-spacing', value, ctx)],
+  'font-size': (value, ctx) => {
+    const result = matchTypography('font-size', value, ctx);
+    return result.warning ? { classes: [result.class], warnings: [result.warning] } : [result.class];
+  },
+  'line-height': (value, ctx) => {
+    const result = matchTypography('line-height', value, ctx);
+    return result.warning ? { classes: [result.class], warnings: [result.warning] } : [result.class];
+  },
+  'letter-spacing': (value, ctx) => {
+    const result = matchTypography('letter-spacing', value, ctx);
+    return result.warning ? { classes: [result.class], warnings: [result.warning] } : [result.class];
+  },
   'font-weight': (value) => {
     // Map font-weight values to Tailwind classes
     const weightMap: Record<string, string> = {
@@ -252,11 +304,11 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'place-self': (value) => [matchPlaceSelf(value)],
   
   // Background properties
+  'background': (value, ctx) => matchBackgroundShorthand(value, ctx),
   'background-color': (value, ctx) => [matchBackgroundColor(value, ctx)],
   'background-size': (value) => [matchBackgroundSize(value)],
   'background-position': (value) => [matchBackgroundPosition(value)],
   'background-image': (value) => [matchBackgroundImage(value)],
-  'background': (value, ctx) => matchBackgroundShorthand(value, ctx),
   
   // Border properties
   'border': (value, ctx) => matchBorderShorthand(value, ctx),
@@ -285,20 +337,32 @@ export function toTailwind(prop: string, value: string, ctx: MatchCtx): { classe
   
   if (handler) {
     // Use the handler to convert the property
-    const classes = handler(value, ctx);
+    const result = handler(value, ctx);
     
-    if (classes && classes.length > 0) {
-      // Check if any class uses arbitrary values
-      const hasArbitrary = classes.some(cls => cls.includes('[') && cls.includes(']'));
-      
-      if (hasArbitrary) {
+    if (result) {
+      // If the result is already in the expected format
+      if (typeof result === 'object' && 'classes' in result && 'warnings' in result) {
+        const warnings = result.warnings;
         return {
-          classes,
-          warning: `Used arbitrary value for '${prop}: ${value}'`
+          classes: result.classes,
+          warning: warnings.length > 0 ? warnings.join('; ') : null
         };
       }
       
-      return { classes, warning: null };
+      // If the result is an array of classes
+      if (Array.isArray(result) && result.length > 0) {
+        // Check if any class uses arbitrary values
+        const hasArbitrary = result.some(cls => cls.includes('[') && cls.includes(']'));
+        
+        if (hasArbitrary) {
+          return {
+            classes: result,
+            warning: `Used arbitrary value for '${prop}: ${value}'`
+          };
+        }
+        
+        return { classes: result, warning: null };
+      }
     }
   }
   

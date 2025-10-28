@@ -174,3 +174,91 @@ export function parseColorNormalize(v: string): string {
   
   return trimmed;
 }
+
+/**
+ * Converts a CSS value to pixels
+ * 
+ * @param value The CSS value (px, rem, em)
+ * @param baseFontSize The base font size in pixels (default: 16px)
+ * @returns The value in pixels or null if conversion is not possible
+ */
+export function toPx(value: string, baseFontSize: number = 16): number | null {
+  if (!value) return null;
+  
+  const normalizedValue = normalizeValue(value);
+  
+  // Already in pixels
+  if (isPx(normalizedValue)) {
+    return parseFloat(normalizedValue);
+  }
+  
+  // Convert from rem
+  if (isRem(normalizedValue)) {
+    const remValue = parseFloat(normalizedValue);
+    return remValue * baseFontSize;
+  }
+  
+  // Convert from em
+  if (isEm(normalizedValue)) {
+    const emValue = parseFloat(normalizedValue);
+    return emValue * baseFontSize;
+  }
+  
+  // Handle unitless values as pixels
+  if (isNumber(normalizedValue)) {
+    return parseFloat(normalizedValue);
+  }
+  
+  return null;
+}
+
+/**
+ * Find the nearest token in a token map based on a value
+ * 
+ * @param value The value to find the nearest token for (px or rem)
+ * @param tokenMap The mapping of token names to their values
+ * @param baseFontSize The base font size in pixels (default: 16px)
+ * @returns Object with the nearest token, its value, and the difference in pixels
+ */
+export function findNearestToken(
+  value: string, 
+  tokenMap: Record<string, string>,
+  baseFontSize: number = 16
+): { token: string; value: string; diff: number } | null {
+  if (!value || !tokenMap || Object.keys(tokenMap).length === 0) {
+    return null;
+  }
+  
+  // Convert the input value to pixels for comparison
+  const valuePx = toPx(value, baseFontSize);
+  if (valuePx === null) {
+    return null;
+  }
+  
+  let nearestToken = '';
+  let nearestValue = '';
+  let minDiff = Infinity;
+  
+  // Find the token with the closest value
+  for (const [token, tokenValue] of Object.entries(tokenMap)) {
+    const tokenPx = toPx(tokenValue, baseFontSize);
+    if (tokenPx === null) continue;
+    
+    const diff = Math.abs(valuePx - tokenPx);
+    if (diff < minDiff) {
+      minDiff = diff;
+      nearestToken = token;
+      nearestValue = tokenValue;
+    }
+  }
+  
+  if (nearestToken) {
+    return {
+      token: nearestToken,
+      value: nearestValue,
+      diff: minDiff
+    };
+  }
+  
+  return null;
+}

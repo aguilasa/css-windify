@@ -7,14 +7,33 @@ import { resolveSpacingToken } from '../themeLoader';
 
 // Mapping of prefix to Tailwind class prefix
 const prefixMap: Record<string, string> = {
+  // Margin
   'm': 'm',      // margin
+  'mt': 'mt',    // margin-top
+  'mr': 'mr',    // margin-right
+  'mb': 'mb',    // margin-bottom
+  'ml': 'ml',    // margin-left
+  
+  // Padding
   'p': 'p',      // padding
+  'pt': 'pt',    // padding-top
+  'pr': 'pr',    // padding-right
+  'pb': 'pb',    // padding-bottom
+  'pl': 'pl',    // padding-left
+  
+  // Sizing
   'w': 'w',      // width
   'h': 'h',      // height
-  'top': 'top',  // top
+  'min-w': 'min-w', // min-width
+  'min-h': 'min-h', // min-height
+  'max-w': 'max-w', // max-width
+  'max-h': 'max-h', // max-height
+  
+  // Positioning
+  'top': 'top',     // top
   'right': 'right', // right
   'bottom': 'bottom', // bottom
-  'left': 'left', // left
+  'left': 'left',   // left
 };
 
 // Mapping for margin/padding shorthand directions
@@ -27,17 +46,17 @@ const directionMap: Record<string, string[]> = {
  * Matches spacing values to Tailwind classes
  * Supports shorthand notation for margin and padding
  * 
- * @param prefix The CSS property prefix (m, p, w, h, top, right, bottom, left)
+ * @param prefix The CSS property prefix
  * @param raw The raw CSS value
  * @param ctx The matching context with theme
- * @returns Array of Tailwind classes
+ * @returns Object with classes and warnings
  */
 export function matchSpacing(
-  prefix: 'm' | 'p' | 'w' | 'h' | 'top' | 'right' | 'bottom' | 'left',
+  prefix: string,
   raw: string,
   ctx: MatchCtx
-): string[] {
-  if (!raw || !prefix) return [];
+): { classes: string[]; warnings: string[] } {
+  if (!raw || !prefix) return { classes: [], warnings: [] };
 
   // Handle shorthand for margin and padding (1-4 values)
   if (prefix === 'm' || prefix === 'p') {
@@ -54,86 +73,100 @@ export function matchSpacing(
  * @param prefix The property prefix (m or p)
  * @param raw The raw CSS value
  * @param ctx The matching context
- * @returns Array of Tailwind classes
+ * @returns Array of Tailwind classes and warnings
  */
-function handleShorthand(prefix: 'm' | 'p', raw: string, ctx: MatchCtx): string[] {
+function handleShorthand(prefix: 'm' | 'p', raw: string, ctx: MatchCtx): { classes: string[]; warnings: string[] } {
   const values = parseBoxShorthand(raw);
-  if (!values.length) return [];
+  if (!values.length) return { classes: [], warnings: [] };
 
   const directions = directionMap[prefix];
-  const result: string[] = [];
+  const classes: string[] = [];
+  const warnings: string[] = [];
 
   // If all values are the same, use the shorthand
   if (values.every(v => v === values[0])) {
-    const cls = createSpacingClass(directions[0], values[0], ctx);
-    if (cls) result.push(cls);
-    return result;
+    const result = createSpacingClass(directions[0], values[0], ctx);
+    if (result.class) classes.push(result.class);
+    if (result.warning) warnings.push(result.warning);
+    return { classes, warnings };
   }
   
   // Handle two-value shorthand (vertical | horizontal)
   if (values.length === 2 || (values.length === 4 && values[0] === values[2] && values[1] === values[3])) {
     // Vertical value (same for top and bottom)
-    const verticalCls = createSpacingClass(directions[2], values[0], ctx); // my/py
-    if (verticalCls) result.push(verticalCls);
+    const verticalResult = createSpacingClass(directions[2], values[0], ctx); // my/py
+    if (verticalResult.class) classes.push(verticalResult.class);
+    if (verticalResult.warning) warnings.push(verticalResult.warning);
     
     // Horizontal value (same for left and right)
-    const horizontalCls = createSpacingClass(directions[1], values[1], ctx); // mx/px
-    if (horizontalCls) result.push(horizontalCls);
+    const horizontalResult = createSpacingClass(directions[1], values[1], ctx); // mx/px
+    if (horizontalResult.class) classes.push(horizontalResult.class);
+    if (horizontalResult.warning) warnings.push(horizontalResult.warning);
     
-    return result;
+    return { classes, warnings };
   }
 
   // Handle three-value shorthand (top | horizontal | bottom)
   if (values.length === 3) {
     // Top value
-    const topCls = createSpacingClass(directions[3], values[0], ctx); // mt/pt
-    if (topCls) result.push(topCls);
+    const topResult = createSpacingClass(directions[3], values[0], ctx); // mt/pt
+    if (topResult.class) classes.push(topResult.class);
+    if (topResult.warning) warnings.push(topResult.warning);
     
     // Horizontal value (same for left and right)
-    const horizontalCls = createSpacingClass(directions[1], values[1], ctx); // mx/px
-    if (horizontalCls) result.push(horizontalCls);
+    const horizontalResult = createSpacingClass(directions[1], values[1], ctx); // mx/px
+    if (horizontalResult.class) classes.push(horizontalResult.class);
+    if (horizontalResult.warning) warnings.push(horizontalResult.warning);
     
     // Bottom value
-    const bottomCls = createSpacingClass(directions[5], values[2], ctx); // mb/pb
-    if (bottomCls) result.push(bottomCls);
+    const bottomResult = createSpacingClass(directions[5], values[2], ctx); // mb/pb
+    if (bottomResult.class) classes.push(bottomResult.class);
+    if (bottomResult.warning) warnings.push(bottomResult.warning);
     
-    return result;
+    return { classes, warnings };
   }
   
   // If we have 4 different values, use individual directions
   if (values.length === 4) {
     // Top, Right, Bottom, Left
-    const topCls = createSpacingClass(directions[3], values[0], ctx); // mt/pt
-    const rightCls = createSpacingClass(directions[4], values[1], ctx); // mr/pr
-    const bottomCls = createSpacingClass(directions[5], values[2], ctx); // mb/pb
-    const leftCls = createSpacingClass(directions[6], values[3], ctx); // ml/pl
+    const topResult = createSpacingClass(directions[3], values[0], ctx); // mt/pt
+    const rightResult = createSpacingClass(directions[4], values[1], ctx); // mr/pr
+    const bottomResult = createSpacingClass(directions[5], values[2], ctx); // mb/pb
+    const leftResult = createSpacingClass(directions[6], values[3], ctx); // ml/pl
     
-    if (topCls) result.push(topCls);
-    if (rightCls) result.push(rightCls);
-    if (bottomCls) result.push(bottomCls);
-    if (leftCls) result.push(leftCls);
+    if (topResult.class) classes.push(topResult.class);
+    if (rightResult.class) classes.push(rightResult.class);
+    if (bottomResult.class) classes.push(bottomResult.class);
+    if (leftResult.class) classes.push(leftResult.class);
     
-    return result;
+    if (topResult.warning) warnings.push(topResult.warning);
+    if (rightResult.warning) warnings.push(rightResult.warning);
+    if (bottomResult.warning) warnings.push(bottomResult.warning);
+    if (leftResult.warning) warnings.push(leftResult.warning);
+    
+    return { classes, warnings };
   }
 
-  return result;
+  return { classes, warnings };
 }
 
 /**
- * Handles single value properties (width, height, top, right, bottom, left)
+ * Handles single value properties
  * 
  * @param prefix The property prefix
  * @param raw The raw CSS value
  * @param ctx The matching context
- * @returns Array of Tailwind classes
+ * @returns Array of Tailwind classes and warnings
  */
 function handleSingleValue(
-  prefix: 'w' | 'h' | 'top' | 'right' | 'bottom' | 'left',
+  prefix: string,
   raw: string,
   ctx: MatchCtx
-): string[] {
-  const cls = createSpacingClass(prefixMap[prefix], raw, ctx);
-  return cls ? [cls] : [];
+): { classes: string[]; warnings: string[] } {
+  const result = createSpacingClass(prefixMap[prefix], raw, ctx);
+  const classes: string[] = result.class ? [result.class] : [];
+  const warnings: string[] = result.warning ? [result.warning] : [];
+  return { classes, warnings };
 }
 
 /**
@@ -142,25 +175,38 @@ function handleSingleValue(
  * @param prefix The Tailwind class prefix
  * @param value The CSS value
  * @param ctx The matching context
- * @returns Tailwind class or null if not matched
+ * @returns Object with Tailwind class and warning if approximate
  */
-function createSpacingClass(prefix: string, value: string, ctx: MatchCtx): string | null {
+function createSpacingClass(prefix: string, value: string, ctx: MatchCtx): { class: string | null; warning?: string } {
   // Special case for 0
   if (value === '0' || value === '0px') {
-    return `${prefix}-0`;
+    return { class: `${prefix}-0` };
   }
 
   // Special case for auto
   if (value === 'auto') {
-    return `${prefix}-auto`;
+    return { class: `${prefix}-auto` };
   }
 
-  // Try to resolve from theme
-  const token = resolveSpacingToken(value, ctx.theme);
-  if (token) {
-    return `${prefix}-${token}`;
+  // Try to resolve from theme with approximation if enabled and not in strict mode
+  const result = resolveSpacingToken(value, ctx.theme, {
+    approximate: ctx.opts.approximate && !ctx.opts.strict,
+    maxDiffPx: 1 // Default to 1px max difference
+  });
+  
+  if (result.token) {
+    // If it's an approximate match, add a warning
+    if (result.type === 'approximate') {
+      return { 
+        class: `${prefix}-${result.token}`,
+        warning: `approximate mapping: ${value} → ${prefix}-${result.token} (${result.diff}px difference)`
+      };
+    }
+    
+    // Exact match
+    return { class: `${prefix}-${result.token}` };
   }
 
   // Use arbitrary value if no match found
-  return toArbitrary(prefix, value);
+  return { class: toArbitrary(prefix, value) };
 }

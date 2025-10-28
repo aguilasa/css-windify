@@ -9,7 +9,9 @@ import {
   toArbitrary,
   arbitraryProperty,
   parseBoxShorthand,
-  parseColorNormalize
+  parseColorNormalize,
+  toPx,
+  findNearestToken
 } from './normalizers';
 
 describe('normalizers', () => {
@@ -210,6 +212,7 @@ describe('normalizers', () => {
     it('should convert hex shorthand with alpha to full form', () => {
       expect(parseColorNormalize('#fffa')).toBe('#ffffffaa');
       expect(parseColorNormalize('#f00a')).toBe('#ff0000aa');
+      expect(parseColorNormalize('#abcd')).toBe('#aabbccdd');
     });
 
     it('should preserve full hex format', () => {
@@ -220,7 +223,7 @@ describe('normalizers', () => {
     it('should remove whitespace from functional notation', () => {
       expect(parseColorNormalize('rgb(255, 0, 0)')).toBe('rgb(255,0,0)');
       expect(parseColorNormalize('rgba(255, 0, 0, 0.5)')).toBe('rgba(255,0,0,0.5)');
-      expect(parseColorNormalize('hsl(0, 100%, 50%)')).toBe('hsl(0,100%,50%)');
+      expect(parseColorNormalize('hsl(120, 100%, 50%)')).toBe('hsl(120,100%,50%)');
     });
 
     it('should preserve named colors', () => {
@@ -237,6 +240,105 @@ describe('normalizers', () => {
     it('should handle empty input', () => {
       expect(parseColorNormalize('')).toBe('');
       expect(parseColorNormalize('   ')).toBe('');
+    });
+  });
+
+  describe('toPx', () => {
+    it('should convert px values', () => {
+      expect(toPx('10px')).toBe(10);
+      expect(toPx('0px')).toBe(0);
+      expect(toPx('-5px')).toBe(-5);
+    });
+
+    it('should convert rem values with default base font size', () => {
+      expect(toPx('1rem')).toBe(16);
+      expect(toPx('0.5rem')).toBe(8);
+      expect(toPx('1.5rem')).toBe(24);
+    });
+
+    it('should convert rem values with custom base font size', () => {
+      expect(toPx('1rem', 20)).toBe(20);
+      expect(toPx('0.5rem', 20)).toBe(10);
+      expect(toPx('1.5rem', 20)).toBe(30);
+    });
+
+    it('should convert em values', () => {
+      expect(toPx('1em')).toBe(16);
+      expect(toPx('0.5em')).toBe(8);
+      expect(toPx('1.5em')).toBe(24);
+    });
+
+    it('should handle unitless values as pixels', () => {
+      expect(toPx('10')).toBe(10);
+      expect(toPx('0')).toBe(0);
+      expect(toPx('-5')).toBe(-5);
+    });
+
+    it('should return null for unsupported units', () => {
+      expect(toPx('10%')).toBe(null);
+      expect(toPx('10vw')).toBe(null);
+      expect(toPx('auto')).toBe(null);
+    });
+
+    it('should handle empty or invalid values', () => {
+      expect(toPx('')).toBe(null);
+      expect(toPx(null as unknown as string)).toBe(null);
+    });
+  });
+
+  describe('findNearestToken', () => {
+    const tokenMap = {
+      '0': '0px',
+      'px': '1px',
+      '0.5': '0.125rem',
+      '1': '0.25rem',
+      '2': '0.5rem',
+      '4': '1rem',
+      '6': '1.5rem',
+      '8': '2rem',
+      '12': '3rem',
+      '16': '4rem'
+    };
+
+    it('should find exact matches', () => {
+      const result = findNearestToken('1rem', tokenMap);
+      expect(result).not.toBeNull();
+      expect(result?.token).toBe('4');
+      expect(result?.value).toBe('1rem');
+      expect(result?.diff).toBe(0);
+    });
+
+    it('should find the nearest token', () => {
+      // 15px is closest to 16px (1rem)
+      const result = findNearestToken('15px', tokenMap);
+      expect(result).not.toBeNull();
+      expect(result?.token).toBe('4');
+      expect(result?.value).toBe('1rem');
+      expect(result?.diff).toBe(1);
+    });
+
+    it('should handle the acceptance criteria case (15px → 4)', () => {
+      // With 1rem = 16px, 15px should map to token '4' (1rem/16px)
+      const result = findNearestToken('15px', tokenMap);
+      expect(result).not.toBeNull();
+      expect(result?.token).toBe('4');
+      expect(result?.diff).toBe(1);
+    });
+
+    it('should work with different units', () => {
+      // 0.95rem is closest to 1rem (token '4')
+      const result = findNearestToken('0.95rem', tokenMap);
+      expect(result).not.toBeNull();
+      expect(result?.token).toBe('4');
+      // Use toBeCloseTo for floating point comparisons
+      expect(result?.diff).toBeCloseTo(0.8, 5);
+    });
+
+    it('should handle empty or invalid values', () => {
+      expect(findNearestToken('', tokenMap)).toBeNull();
+      expect(findNearestToken(null as unknown as string, tokenMap)).toBeNull();
+      expect(findNearestToken('10px', {})).toBeNull();
+      expect(findNearestToken('invalid', tokenMap)).toBeNull();
     });
   });
 });

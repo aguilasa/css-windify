@@ -36,4 +36,4 @@ export interface MatchCtx {
   };
 }
 
-export type RuleHandler = (value: string, ctx: MatchCtx) => string[] | null;
+export type RuleHandler = (value: string, ctx: MatchCtx) => string[] | { classes: string[]; warnings: string[] } | null;

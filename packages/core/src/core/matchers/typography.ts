@@ -29,17 +29,17 @@ const letterSpacingMap: Record<string, string> = {
  * @param kind The typography property (font-size, line-height, letter-spacing)
  * @param value The CSS value
  * @param ctx The matching context with theme
- * @returns Tailwind class
+ * @returns Object with Tailwind class and warning if approximate
  */
 export function matchTypography(
   kind: 'font-size' | 'line-height' | 'letter-spacing',
   value: string,
   ctx: MatchCtx
-): string {
-  if (!value || !kind) return '';
+): { class: string; warning?: string } {
+  if (!value || !kind) return { class: '' };
 
   const prefix = typographyPrefixMap[kind];
-  if (!prefix) return '';
+  if (!prefix) return { class: '' };
 
   // Handle each typography property differently
   switch (kind) {
@@ -50,7 +50,7 @@ export function matchTypography(
     case 'letter-spacing':
       return handleLetterSpacing(value, ctx);
     default:
-      return '';
+      return { class: '' };
   }
 }
 
@@ -59,17 +59,30 @@ export function matchTypography(
  * 
  * @param value The CSS value
  * @param ctx The matching context
- * @returns Tailwind class
+ * @returns Object with Tailwind class and warning if approximate
  */
-function handleFontSize(value: string, ctx: MatchCtx): string {
-  // Try to resolve from theme
-  const token = resolveFontSizeToken(value, ctx.theme);
-  if (token) {
-    return `text-${token}`;
+function handleFontSize(value: string, ctx: MatchCtx): { class: string; warning?: string } {
+  // Try to resolve from theme with approximation if enabled and not in strict mode
+  const result = resolveFontSizeToken(value, ctx.theme, {
+    approximate: ctx.opts.approximate && !ctx.opts.strict,
+    maxDiffPx: 1 // Default to 1px max difference
+  });
+
+  if (result.token) {
+    // If it's an approximate match, add a warning
+    if (result.type === 'approximate') {
+      return { 
+        class: `text-${result.token}`,
+        warning: `approximate mapping: ${value} → text-${result.token} (${result.diff}px difference)`
+      };
+    }
+    
+    // Exact match
+    return { class: `text-${result.token}` };
   }
 
   // Use arbitrary value if no match found
-  return toArbitrary('text', value);
+  return { class: toArbitrary('text', value) };
 }
 
 /**
@@ -77,17 +90,30 @@ function handleFontSize(value: string, ctx: MatchCtx): string {
  * 
  * @param value The CSS value
  * @param ctx The matching context
- * @returns Tailwind class
+ * @returns Object with Tailwind class and warning if approximate
  */
-function handleLineHeight(value: string, ctx: MatchCtx): string {
-  // Try to resolve from theme
-  const token = resolveLineHeightToken(value, ctx.theme);
-  if (token) {
-    return `leading-${token}`;
+function handleLineHeight(value: string, ctx: MatchCtx): { class: string; warning?: string } {
+  // Try to resolve from theme with approximation if enabled and not in strict mode
+  const result = resolveLineHeightToken(value, ctx.theme, {
+    approximate: ctx.opts.approximate && !ctx.opts.strict,
+    maxDiffPx: 1 // Default to 1px max difference
+  });
+
+  if (result.token) {
+    // If it's an approximate match, add a warning
+    if (result.type === 'approximate') {
+      return { 
+        class: `leading-${result.token}`,
+        warning: `approximate mapping: ${value} → leading-${result.token} (${result.diff}px difference)`
+      };
+    }
+    
+    // Exact match
+    return { class: `leading-${result.token}` };
   }
 
   // Use arbitrary value if no match found
-  return toArbitrary('leading', value);
+  return { class: toArbitrary('leading', value) };
 }
 
 /**
@@ -95,15 +121,15 @@ function handleLineHeight(value: string, ctx: MatchCtx): string {
  * 
  * @param value The CSS value
  * @param ctx The matching context
- * @returns Tailwind class
+ * @returns Object with Tailwind class and warning if approximate
  */
-function handleLetterSpacing(value: string, _ctx: MatchCtx): string {
+function handleLetterSpacing(value: string, _ctx: MatchCtx): { class: string; warning?: string } {
   // Check for predefined values
   const normalizedValue = value.trim().toLowerCase();
   if (letterSpacingMap[normalizedValue]) {
-    return `tracking-${letterSpacingMap[normalizedValue]}`;
+    return { class: `tracking-${letterSpacingMap[normalizedValue]}` };
   }
 
   // Use arbitrary value if no match found
-  return toArbitrary('tracking', value);
+  return { class: toArbitrary('tracking', value) };
 }
