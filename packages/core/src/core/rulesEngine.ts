@@ -2,7 +2,7 @@
  * Rules engine for transforming CSS to Tailwind classes
  */
 import { CssDeclaration, CssRule, MatchCtx, RuleHandler, TransformResult } from '../types';
-import { calculateCoverage, aggregateWarnings } from './reporter';
+import { calculateCoverage, aggregateWarnings, countNonArbitraryClasses, calculateCategoryStats } from './reporter';
 import { arbitraryProperty } from './normalizers';
 import { withVariants } from './variants';
 import {
@@ -424,6 +424,7 @@ export function transformDeclarations(decls: CssDeclaration[], ctx: MatchCtx): T
   const warnings: string[] = [];
   let matched = 0;
   const total = decls.length;
+  const matchedProps = new Set<string>();
   
   // Process each declaration
   for (const decl of decls) {
@@ -437,6 +438,7 @@ export function transformDeclarations(decls: CssDeclaration[], ctx: MatchCtx): T
       
       allClasses.push(...classesWithVariants);
       matched++;
+      matchedProps.add(decl.prop.toLowerCase());
       
       // Add warning if present
       if (result.warning) {
@@ -450,9 +452,23 @@ export function transformDeclarations(decls: CssDeclaration[], ctx: MatchCtx): T
   // Deduplicate and sort classes
   const classes = sortClasses(allClasses);
   
-  // Calculate coverage and aggregate warnings
-  const coverage = calculateCoverage(matched, total);
-  const aggregatedWarnings = aggregateWarnings(warnings);
+  // Count non-arbitrary classes
+  const nonArbitrary = countNonArbitraryClasses(classes);
+  
+  // Calculate category statistics
+  const categoryStats = calculateCategoryStats(decls, matchedProps);
+  
+  // Aggregate and categorize warnings
+  const { warnings: aggregatedWarnings, byCategory: warningsByCategory } = aggregateWarnings(warnings);
+  
+  // Calculate enhanced coverage
+  const coverage = calculateCoverage(
+    matched, 
+    total, 
+    nonArbitrary,
+    categoryStats,
+    warningsByCategory
+  );
   
   return {
     classes,

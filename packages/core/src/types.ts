@@ -19,12 +19,26 @@ export interface CssRule {
   declarations: CssDeclaration[];
 }
 
+export type PropertyCategory = 'spacing' | 'color' | 'typography' | 'layout' | 'border' | 'background' | 'effects' | 'other';
+
+export type WarningCategory = 'arbitrary-value' | 'no-handler' | 'approximate' | 'other';
+
+export interface CategoryStats {
+  matched: number;
+  total: number;
+  percentage: number;
+}
+
 export interface TransformResult {
   classes: string[];
   warnings: string[];
   coverage: {
     matched: number;
     total: number;
+    percentage: number;
+    nonArbitrary: number;
+    categories?: Record<PropertyCategory, CategoryStats>;
+    warningsByCategory?: Record<WarningCategory, number>;
   };
 }
 
