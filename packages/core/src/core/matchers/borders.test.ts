@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { matchBorderWidth, matchBorderColor, matchBorderRadius } from './borders';
+import { matchBorderWidth, matchBorderColor, matchBorderRadius, parseBorderShorthand, matchBorderShorthand } from './borders';
 import { MatchCtx } from '../../types';
 
 describe('borders matcher', () => {
@@ -65,6 +65,77 @@ describe('borders matcher', () => {
     it('should use arbitrary values for non-theme colors', () => {
       expect(matchBorderColor('#ff0000', ctx)).toBe('border-[#ff0000]');
       expect(matchBorderColor('rgb(255, 0, 0)', ctx)).toBe('border-[rgb(255,0,0)]');
+    });
+  });
+
+  describe('border shorthand', () => {
+    it('should parse border shorthand components', () => {
+      const result1 = parseBorderShorthand('1px solid black');
+      expect(result1.width).toBe('1px');
+      expect(result1.style).toBe('solid');
+      expect(result1.color).toBe('black');
+
+      const result2 = parseBorderShorthand('2px dashed red');
+      expect(result2.width).toBe('2px');
+      expect(result2.style).toBe('dashed');
+      expect(result2.color).toBe('red');
+
+      const result3 = parseBorderShorthand('medium dotted #000');
+      expect(result3.width).toBe('medium');
+      expect(result3.style).toBe('dotted');
+      expect(result3.color).toBe('#000');
+    });
+
+    it('should handle partial shorthand', () => {
+      const result1 = parseBorderShorthand('solid black');
+      expect(result1.width).toBeUndefined();
+      expect(result1.style).toBe('solid');
+      expect(result1.color).toBe('black');
+
+      const result2 = parseBorderShorthand('1px black');
+      expect(result2.width).toBe('1px');
+      expect(result2.style).toBeUndefined();
+      expect(result2.color).toBe('black');
+
+      const result3 = parseBorderShorthand('1px solid');
+      expect(result3.width).toBe('1px');
+      expect(result3.style).toBe('solid');
+      expect(result3.color).toBeUndefined();
+    });
+
+    it('should match border shorthand to Tailwind classes', () => {
+      // Default border (1px solid) with color
+      const result1 = matchBorderShorthand('1px solid black', ctx);
+      expect(result1).toContain('border');
+      expect(result1).toContain('border-black');
+      expect(result1.length).toBe(2); // No style class for 'solid' as it's default
+
+      // Custom width with default style and color
+      const result2 = matchBorderShorthand('2px solid red', ctx);
+      expect(result2).toContain('border-2');
+      expect(result2).toContain('border-[red]');
+      expect(result2.length).toBe(2); // No style class for 'solid' as it's default
+
+      // Default width with custom style and color
+      const result3 = matchBorderShorthand('dashed blue', ctx);
+      expect(result3).toContain('border');
+      expect(result3).toContain('[border-style:dashed]');
+      expect(result3).toContain('border-[blue]');
+      expect(result3.length).toBe(3);
+
+      // Zero width border
+      const result4 = matchBorderShorthand('0 solid black', ctx);
+      expect(result4).toContain('border-0');
+      expect(result4).toContain('border-black');
+      expect(result4.length).toBe(2);
+    });
+
+    it('should handle the specific acceptance criteria', () => {
+      // Acceptance criteria: "border: 1px solid #000" → border, border-[1px] ou border se token 1px for "border" default, cor via border-color
+      const result = matchBorderShorthand('1px solid #000', ctx);
+      expect(result).toContain('border'); // Default width
+      expect(result).toContain('border-black'); // Color via theme
+      expect(result.length).toBe(2); // No style class for 'solid' as it's default
     });
   });
 

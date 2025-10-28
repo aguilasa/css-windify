@@ -9,3 +9,4 @@ export * from './colors';
 export * from './borders';
 export * from './backgrounds';
 export * from './flexGrid';
+export * from './misc';

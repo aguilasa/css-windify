@@ -21,9 +21,20 @@ import {
   // Border matchers
   matchBorderWidth,
   matchBorderRadius,
+  matchBorderColor,
+  parseBorderShorthand,
+  matchBorderShorthand,
   
   // Typography matchers
   matchTypography,
+  
+  // Background matchers
+  matchBackgroundColor,
+  matchBackgroundSize,
+  matchBackgroundPosition,
+  matchBackgroundImage,
+  parseBackgroundShorthand,
+  matchBackgroundShorthand,
   
   // Flexbox and Grid matchers
   matchFlexDirection,
@@ -33,7 +44,12 @@ import {
   matchGridTemplateColumns,
   matchPlaceContent,
   matchPlaceItems,
-  matchPlaceSelf
+  matchPlaceSelf,
+  
+  // Misc matchers
+  matchOverflow,
+  matchZIndex,
+  matchOpacity
 } from './matchers';
 
 // Define property groups for ordering (used for documentation and future sorting)
@@ -234,6 +250,23 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'place-content': (value) => [matchPlaceContent(value)],
   'place-items': (value) => [matchPlaceItems(value)],
   'place-self': (value) => [matchPlaceSelf(value)],
+  
+  // Background properties
+  'background-color': (value, ctx) => [matchBackgroundColor(value, ctx)],
+  'background-size': (value) => [matchBackgroundSize(value)],
+  'background-position': (value) => [matchBackgroundPosition(value)],
+  'background-image': (value) => [matchBackgroundImage(value)],
+  'background': (value, ctx) => matchBackgroundShorthand(value, ctx),
+  
+  // Border properties
+  'border': (value, ctx) => matchBorderShorthand(value, ctx),
+  
+  // Misc properties
+  'overflow': (value) => [matchOverflow(value)],
+  'overflow-x': (value) => [matchOverflow(value, 'x')],
+  'overflow-y': (value) => [matchOverflow(value, 'y')],
+  'z-index': (value) => [matchZIndex(value)],
+  'opacity': (value) => [matchOpacity(value)],
 };
 
 /**

@@ -104,11 +104,15 @@ export {
   matchBorderWidth,
   matchBorderColor,
   matchBorderRadius,
+  parseBorderShorthand,
+  matchBorderShorthand,
   // Background matchers
   matchBackgroundColor,
   matchBackgroundSize,
   matchBackgroundPosition,
   matchBackgroundImage,
+  parseBackgroundShorthand,
+  matchBackgroundShorthand,
   // Flexbox and Grid matchers
   matchFlexDirection,
   matchJustifyContent,
@@ -117,7 +121,11 @@ export {
   matchGridTemplateColumns,
   matchPlaceContent,
   matchPlaceItems,
-  matchPlaceSelf
+  matchPlaceSelf,
+  // Misc matchers
+  matchOverflow,
+  matchZIndex,
+  matchOpacity
 } from './core/matchers';
 
 // Variant utilities
