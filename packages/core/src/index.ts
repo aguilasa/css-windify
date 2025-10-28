@@ -68,6 +68,7 @@ class Tailwindify {
 export { toTailwind } from './core/rulesEngine';
 export { transformRule, transformDeclarations };
 export { summarize } from './core/reporter';
+export { transformCssText } from './core/cssTransformer';
 export {
   normalizeValue,
   isPx,

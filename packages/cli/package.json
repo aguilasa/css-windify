@@ -1,0 +1,29 @@
+{
+  "name": "tailwindify-cli",
+  "version": "0.0.1",
+  "description": "CLI tool for converting CSS to Tailwind CSS",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "tailwindify": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "tailwindify-core": "workspace:*",
+    "commander": "^11.1.0",
+    "chalk": "^5.3.0",
+    "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}
