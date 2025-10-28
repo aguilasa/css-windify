@@ -89,6 +89,17 @@ export {
   resolveLineHeightToken
 } from './core/themeLoader';
 
+export {
+  matchSpacing,
+  matchTypography,
+  matchDisplay,
+  matchPosition,
+  matchInset,
+  matchInsetShorthand,
+  displayMap,
+  positionMap
+} from './core/matchers';
+
 // Export both named and default exports
 export { Tailwindify };
 export default Tailwindify;
