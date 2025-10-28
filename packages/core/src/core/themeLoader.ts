@@ -1,12 +1,12 @@
 /**
- * Theme loader and token resolvers for Tailwind CSS
+ * Theme loader and token resolvers for Tailwind CSS v4
  */
 import * as fs from 'fs';
 import * as path from 'path';
 import { normalizeValue, parseColorNormalize, findNearestToken } from './normalizers';
 
 /**
- * Default minimal theme with basic Tailwind CSS defaults
+ * Default minimal theme with basic Tailwind CSS v4 defaults
  */
 export const defaultTheme = {
   spacing: {

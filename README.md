@@ -1,6 +1,6 @@
 # CSSWindify
 
-CSSWindify is a tool that automatically converts traditional CSS to Tailwind CSS classes. It analyzes your CSS code and generates equivalent Tailwind classes, making migration to Tailwind CSS faster and more efficient.
+CSSWindify is a tool that automatically converts traditional CSS to Tailwind CSS v4 classes. It analyzes your CSS code and generates equivalent Tailwind classes, making migration to Tailwind CSS faster and more efficient.
 
 ## Project Overview
 

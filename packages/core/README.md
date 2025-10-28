@@ -1,6 +1,6 @@
 # CSSWindify Core
 
-The core engine for converting CSS to Tailwind CSS classes. This package provides the fundamental functionality for analyzing CSS properties and generating equivalent Tailwind classes.
+The core engine for converting CSS to Tailwind CSS v4 classes. This package provides the fundamental functionality for analyzing CSS properties and generating equivalent Tailwind classes.
 
 ## Features
 
