@@ -1,7 +1,7 @@
 {
-  "name": "tailwindify-core",
+  "name": "css-windify-core",
   "version": "0.0.1",
-  "description": "Core library for tailwindify",
+  "description": "Core library for CSSWindify - Convert CSS to Tailwind CSS",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

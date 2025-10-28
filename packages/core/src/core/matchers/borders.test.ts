@@ -1,27 +1,33 @@
 import { describe, it, expect } from 'vitest';
-import { matchBorderWidth, matchBorderColor, matchBorderRadius, parseBorderShorthand, matchBorderShorthand } from './borders';
+import {
+  matchBorderWidth,
+  matchBorderColor,
+  matchBorderRadius,
+  parseBorderShorthand,
+  matchBorderShorthand,
+} from './borders';
 import { MatchCtx } from '../../types';
 
 describe('borders matcher', () => {
   // Mock theme for testing
   const mockTheme = {
     colors: {
-      'black': '#000000',
-      'white': '#ffffff',
-      'primary': '#3b82f6',
-      'secondary': {
+      black: '#000000',
+      white: '#ffffff',
+      primary: '#3b82f6',
+      secondary: {
         '100': '#e0f2fe',
-        '500': '#0ea5e9'
-      }
-    }
+        '500': '#0ea5e9',
+      },
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('border width', () => {

@@ -7,18 +7,18 @@ import { matchColor } from './colors';
 
 // Background size mapping
 const backgroundSizeMap: Record<string, string> = {
-  'cover': 'bg-cover',
-  'contain': 'bg-contain',
-  'auto': 'bg-auto',
+  cover: 'bg-cover',
+  contain: 'bg-contain',
+  auto: 'bg-auto',
 };
 
 // Background position mapping
 const backgroundPositionMap: Record<string, string> = {
-  'center': 'bg-center',
-  'top': 'bg-top',
-  'right': 'bg-right',
-  'bottom': 'bg-bottom',
-  'left': 'bg-left',
+  center: 'bg-center',
+  top: 'bg-top',
+  right: 'bg-right',
+  bottom: 'bg-bottom',
+  left: 'bg-left',
   'top right': 'bg-top-right',
   'top left': 'bg-top-left',
   'bottom right': 'bg-bottom-right',
@@ -31,7 +31,7 @@ const backgroundPositionMap: Record<string, string> = {
 
 /**
  * Matches background color values to Tailwind classes
- * 
+ *
  * @param value The CSS background-color value
  * @param ctx The matching context
  * @returns Tailwind class
@@ -42,79 +42,81 @@ export function matchBackgroundColor(value: string, ctx: MatchCtx): string {
 
 /**
  * Matches background size values to Tailwind classes
- * 
+ *
  * @param value The CSS background-size value
  * @returns Tailwind class
  */
 export function matchBackgroundSize(value: string): string {
   if (!value) return '';
-  
+
   const normalizedValue = normalizeValue(value);
-  
+
   // Check for predefined background sizes
   if (backgroundSizeMap[normalizedValue]) {
     return backgroundSizeMap[normalizedValue];
   }
-  
+
   // Use arbitrary value if no match found
   return toArbitrary('bg', normalizedValue);
 }
 
 /**
  * Matches background position values to Tailwind classes
- * 
+ *
  * @param value The CSS background-position value
  * @returns Tailwind class
  */
 export function matchBackgroundPosition(value: string): string {
   if (!value) return '';
-  
+
   const normalizedValue = normalizeValue(value);
-  
+
   // Check for predefined background positions
   if (backgroundPositionMap[normalizedValue]) {
     return backgroundPositionMap[normalizedValue];
   }
-  
+
   // Use arbitrary value if no match found
   return toArbitrary('bg', normalizedValue);
 }
 
 /**
  * Matches background image values to Tailwind classes
- * 
+ *
  * @param value The CSS background-image value
  * @returns Tailwind class
  */
 export function matchBackgroundImage(value: string): string {
   if (!value) return '';
-  
+
   const normalizedValue = normalizeValue(value);
-  
+
   // Handle gradients and other complex values
-  if (normalizedValue.startsWith('linear-gradient') || 
-      normalizedValue.startsWith('radial-gradient') ||
-      normalizedValue.startsWith('conic-gradient') ||
-      normalizedValue.startsWith('url(')) {
+  if (
+    normalizedValue.startsWith('linear-gradient') ||
+    normalizedValue.startsWith('radial-gradient') ||
+    normalizedValue.startsWith('conic-gradient') ||
+    normalizedValue.startsWith('url(')
+  ) {
     return toArbitrary('bg', normalizedValue);
   }
-  
+
   // Handle none value
   if (normalizedValue === 'none') {
     return 'bg-none';
   }
-  
+
   // Use arbitrary value for other cases
   return toArbitrary('bg', normalizedValue);
 }
 
 /**
  * Parse background shorthand and extract components
- * 
+ *
  * @param value The CSS background shorthand value
  * @returns Object with extracted components
  */
-export function parseBackgroundShorthand(value: string): { 
+export function parseBackgroundShorthand(value: string): {
   color?: string;
   image?: string;
   position?: string;
@@ -122,7 +124,7 @@ export function parseBackgroundShorthand(value: string): {
   repeat?: string;
 } {
   if (!value) return {};
-  
+
   const result: {
     color?: string;
     image?: string;
@@ -130,7 +132,7 @@ export function parseBackgroundShorthand(value: string): {
     size?: string;
     repeat?: string;
   } = {};
-  
+
   // Extract url() if present
   const urlMatch = value.match(/url\([^)]+\)/);
   if (urlMatch) {
@@ -138,7 +140,7 @@ export function parseBackgroundShorthand(value: string): {
     // Remove the url part from the value for further processing
     value = value.replace(urlMatch[0], '').trim();
   }
-  
+
   // Extract position/size if in format "center/cover"
   const positionSizeMatch = value.match(/([\w\s%-]+)\/([\w\s%-]+)/);
   if (positionSizeMatch) {
@@ -147,7 +149,7 @@ export function parseBackgroundShorthand(value: string): {
     // Remove the position/size part from the value
     value = value.replace(positionSizeMatch[0], '').trim();
   }
-  
+
   // Extract repeat values
   const repeatValues = ['repeat', 'no-repeat', 'repeat-x', 'repeat-y', 'space', 'round'];
   for (const repeat of repeatValues) {
@@ -158,10 +160,20 @@ export function parseBackgroundShorthand(value: string): {
       break;
     }
   }
-  
+
   // Extract position if not already found and present in the value
   if (!result.position) {
-    const positions = ['center', 'top', 'right', 'bottom', 'left', 'top left', 'top right', 'bottom left', 'bottom right'];
+    const positions = [
+      'center',
+      'top',
+      'right',
+      'bottom',
+      'left',
+      'top left',
+      'top right',
+      'bottom left',
+      'bottom right',
+    ];
     for (const pos of positions) {
       if (value.includes(pos)) {
         result.position = pos;
@@ -171,49 +183,49 @@ export function parseBackgroundShorthand(value: string): {
       }
     }
   }
-  
+
   // What remains is likely the color
   if (value.trim()) {
     result.color = value.trim();
   }
-  
+
   return result;
 }
 
 /**
  * Matches background shorthand to Tailwind classes
- * 
+ *
  * @param value The CSS background shorthand value
  * @param ctx The matching context with theme
  * @returns Array of Tailwind classes
  */
 export function matchBackgroundShorthand(value: string, ctx: MatchCtx): string[] {
   if (!value) return [];
-  
+
   // Parse the shorthand
   const { color, image, position, size, repeat } = parseBackgroundShorthand(value);
   const classes: string[] = [];
-  
+
   // Handle color
   if (color) {
     classes.push(matchBackgroundColor(color, ctx));
   }
-  
+
   // Handle image
   if (image) {
     classes.push(matchBackgroundImage(image));
   }
-  
+
   // Handle position
   if (position) {
     classes.push(matchBackgroundPosition(position));
   }
-  
+
   // Handle size
   if (size) {
     classes.push(matchBackgroundSize(size));
   }
-  
+
   // Handle repeat
   if (repeat) {
     // Tailwind doesn't have direct utilities for all repeat values
@@ -225,6 +237,6 @@ export function matchBackgroundShorthand(value: string, ctx: MatchCtx): string[]
       classes.push(arbitraryProperty('background-repeat', repeat));
     }
   }
-  
+
   return classes;
 }

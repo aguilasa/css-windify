@@ -1,4 +1,4 @@
-# Tailwindify Core
+# CSSWindify Core
 
 The core engine for converting CSS to Tailwind CSS classes. This package provides the fundamental functionality for analyzing CSS properties and generating equivalent Tailwind classes.
 
@@ -20,11 +20,11 @@ The core engine for converting CSS to Tailwind CSS classes. This package provide
 ## Installation
 
 ```bash
-npm install tailwindify-core
+npm install css-windify-core
 # or
-yarn add tailwindify-core
+yarn add css-windify-core
 # or
-pnpm add tailwindify-core
+pnpm add css-windify-core
 ```
 
 ## Public API
@@ -39,7 +39,11 @@ function transformRule(rule: CssRule, ctx: MatchCtx): TransformResult;
 function transformDeclarations(decls: CssDeclaration[], ctx: MatchCtx): TransformResult;
 
 // Convert a single CSS property to Tailwind classes
-function toTailwind(prop: string, value: string, ctx: MatchCtx): { classes: string[], warning: string | null };
+function toTailwind(
+  prop: string,
+  value: string,
+  ctx: MatchCtx
+): { classes: string[]; warning: string | null };
 
 // Generate a human-readable summary of transformation results
 function summarize(results: TransformResult | TransformResult[]): string;
@@ -52,10 +56,22 @@ function summarize(results: TransformResult | TransformResult[]): string;
 function loadTheme(configPath?: string): Promise<any>;
 
 // Resolve tokens from theme
-function resolveSpacingToken(value: string, theme: any, options?: { approximate: boolean, maxDiffPx: number }): TokenResult;
+function resolveSpacingToken(
+  value: string,
+  theme: any,
+  options?: { approximate: boolean; maxDiffPx: number }
+): TokenResult;
 function resolveColorToken(value: string, theme: any): ColorResult;
-function resolveFontSizeToken(value: string, theme: any, options?: { approximate: boolean, maxDiffPx: number }): TokenResult;
-function resolveLineHeightToken(value: string, theme: any, options?: { approximate: boolean, maxDiffPx: number }): TokenResult;
+function resolveFontSizeToken(
+  value: string,
+  theme: any,
+  options?: { approximate: boolean; maxDiffPx: number }
+): TokenResult;
+function resolveLineHeightToken(
+  value: string,
+  theme: any,
+  options?: { approximate: boolean; maxDiffPx: number }
+): TokenResult;
 ```
 
 ### Types
@@ -99,13 +115,13 @@ interface MatchCtx {
 ### Basic Usage
 
 ```typescript
-import { transformDeclarations } from 'tailwindify-core';
+import { transformDeclarations } from 'css-windify-core';
 
 // CSS declarations to transform
 const declarations = [
   { prop: 'margin', value: '1rem' },
   { prop: 'padding', value: '1rem 2rem' },
-  { prop: 'color', value: '#3b82f6' }
+  { prop: 'color', value: '#3b82f6' },
 ];
 
 // Transform with default options
@@ -113,8 +129,8 @@ const result = transformDeclarations(declarations, {
   theme: {}, // Using default theme
   opts: {
     strict: false,
-    approximate: true
-  }
+    approximate: true,
+  },
 });
 
 console.log(result.classes); // ['m-4', 'py-4', 'px-8', 'text-blue-500']
@@ -123,7 +139,7 @@ console.log(result.classes); // ['m-4', 'py-4', 'px-8', 'text-blue-500']
 ### With Reporting
 
 ```typescript
-import { transformDeclarations, summarize } from 'tailwindify-core';
+import { transformDeclarations, summarize } from 'css-windify-core';
 
 // Transform CSS declarations
 const result = transformDeclarations(declarations, ctx);
@@ -135,12 +151,12 @@ console.log(report);
 
 ## Extending with Custom Handlers
 
-You can extend Tailwindify with custom property handlers to support additional CSS properties or custom transformations.
+You can extend CSSWindify with custom property handlers to support additional CSS properties or custom transformations.
 
 ### Example: Adding a Custom Handler
 
 ```typescript
-import { propertyHandlers } from 'tailwindify-core';
+import { propertyHandlers } from 'css-windify-core';
 
 // Add a custom handler for a new CSS property
 propertyHandlers['aspect-ratio'] = (value, ctx) => {
@@ -158,7 +174,7 @@ propertyHandlers['aspect-ratio'] = (value, ctx) => {
 ### Example: Overriding an Existing Handler
 
 ```typescript
-import { propertyHandlers } from 'tailwindify-core';
+import { propertyHandlers } from 'css-windify-core';
 
 // Override the existing handler for 'display' property
 const originalHandler = propertyHandlers['display'];
@@ -167,7 +183,7 @@ propertyHandlers['display'] = (value, ctx) => {
   if (value === 'grid-inline') {
     return ['inline-grid'];
   }
-  
+
   // Fall back to the original handler for other values
   return originalHandler(value, ctx);
 };

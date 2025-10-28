@@ -11,16 +11,16 @@ describe('layout matcher', () => {
       '2': '0.5rem',
       '4': '1rem',
       '8': '2rem',
-      'px': '1px',
-    }
+      px: '1px',
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('display', () => {
@@ -80,26 +80,26 @@ describe('layout matcher', () => {
       const rightResult = matchInset('right', '0.5rem', ctx);
       const bottomResult = matchInset('bottom', '2rem', ctx);
       const leftResult = matchInset('left', '0.25rem', ctx);
-      
+
       // Check if the results are arrays or objects
       if (Array.isArray(topResult)) {
         expect(topResult).toEqual(['top-4']);
       } else {
         expect(topResult.classes).toEqual(['top-4']);
       }
-      
+
       if (Array.isArray(rightResult)) {
         expect(rightResult).toEqual(['right-2']);
       } else {
         expect(rightResult.classes).toEqual(['right-2']);
       }
-      
+
       if (Array.isArray(bottomResult)) {
         expect(bottomResult).toEqual(['bottom-8']);
       } else {
         expect(bottomResult.classes).toEqual(['bottom-8']);
       }
-      
+
       if (Array.isArray(leftResult)) {
         expect(leftResult).toEqual(['left-1']);
       } else {
@@ -112,25 +112,25 @@ describe('layout matcher', () => {
       const rightResult = matchInset('right', '3rem', ctx);
       const bottomResult = matchInset('bottom', '25%', ctx);
       const leftResult = matchInset('left', 'auto', ctx);
-      
+
       if (Array.isArray(topResult)) {
         expect(topResult).toEqual(['top-[15px]']);
       } else {
         expect(topResult.classes).toEqual(['top-[15px]']);
       }
-      
+
       if (Array.isArray(rightResult)) {
         expect(rightResult).toEqual(['right-[3rem]']);
       } else {
         expect(rightResult.classes).toEqual(['right-[3rem]']);
       }
-      
+
       if (Array.isArray(bottomResult)) {
         expect(bottomResult).toEqual(['bottom-[25%]']);
       } else {
         expect(bottomResult.classes).toEqual(['bottom-[25%]']);
       }
-      
+
       if (Array.isArray(leftResult)) {
         expect(leftResult).toEqual(['left-auto']);
       } else {
@@ -141,13 +141,13 @@ describe('layout matcher', () => {
     it('should handle empty or invalid inset values', () => {
       const emptyResult = matchInset('top', '', ctx);
       const nullResult = matchInset('right', null as unknown as string, ctx);
-      
+
       if (Array.isArray(emptyResult)) {
         expect(emptyResult).toEqual([]);
       } else {
         expect(emptyResult.classes).toEqual([]);
       }
-      
+
       if (Array.isArray(nullResult)) {
         expect(nullResult).toEqual([]);
       } else {

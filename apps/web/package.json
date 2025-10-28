@@ -1,8 +1,8 @@
 {
-  "name": "tailwindify-web",
+  "name": "css-windify-web",
   "version": "0.0.1",
   "private": true,
-  "description": "Web interface for Tailwindify",
+  "description": "Web interface for CSSWindify",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "tailwindify-core": "workspace:*",
+    "css-windify-core": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@monaco-editor/react": "^4.6.0",

@@ -1,10 +1,10 @@
-# Tailwindify Web
+# CSSWindify Web
 
 A web interface for converting CSS to Tailwind CSS classes.
 
 ## Overview
 
-Tailwindify Web is a browser-based tool that provides an interactive interface for converting CSS to Tailwind CSS. It uses the Monaco Editor for code editing and leverages the `tailwindify-core` package in a web worker to perform the conversions without blocking the UI.
+CSSWindify Web is a browser-based tool that provides an interactive interface for converting CSS to Tailwind CSS. It uses the Monaco Editor for code editing and leverages the `css-windify-core` package in a web worker to perform the conversions without blocking the UI.
 
 ## Planned Features
 
@@ -26,7 +26,7 @@ Tailwindify Web is a browser-based tool that provides an interactive interface f
 
 2. **Web Worker Integration**
    - Offload CSS processing to a web worker
-   - Use `transformCssText` from `tailwindify-core` for conversion
+   - Use `transformCssText` from `css-windify-core` for conversion
    - Handle large CSS files without UI freezing
 
 3. **Features**
@@ -57,5 +57,5 @@ pnpm preview
 - Implement Monaco Editor integration
 - Create web worker for CSS processing
 - Design UI components and layout
-- Integrate with tailwindify-core for CSS transformation
+- Integrate with css-windify-core for CSS transformation
 - Add configuration options and preview functionality

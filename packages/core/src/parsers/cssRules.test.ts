@@ -10,9 +10,9 @@ describe('cssRules parser', () => {
         padding: 1rem;
       }
     `;
-    
+
     const result = parseCssRules(css);
-    
+
     expect(result).toHaveLength(1);
     expect(result[0].selector).toBe('.card');
     expect(result[0].declarations).toHaveLength(3);
@@ -33,9 +33,9 @@ describe('cssRules parser', () => {
         color: white;
       }
     `;
-    
+
     const result = parseCssRules(css);
-    
+
     expect(result).toHaveLength(2);
     expect(result[0].selector).toBe('.card');
     expect(result[0].declarations).toHaveLength(2);
@@ -50,9 +50,9 @@ describe('cssRules parser', () => {
         font-weight: bold;
       }
     `;
-    
+
     const result = parseCssRules(css);
-    
+
     expect(result).toHaveLength(1);
     expect(result[0].selector).toBe('.card > .header h2:hover');
     expect(result[0].declarations).toHaveLength(2);
@@ -70,9 +70,9 @@ describe('cssRules parser', () => {
         }
       }
     `;
-    
+
     const result = parseCssRules(css);
-    
+
     expect(result).toHaveLength(1);
     expect(result[0].selector).toBe('.card');
     expect(result[0].declarations).toHaveLength(1);
@@ -92,7 +92,7 @@ describe('cssRules parser', () => {
         padding: 1rem;
       }
     `;
-    
+
     expect(() => parseCssRules(invalidCss)).not.toThrow();
     expect(parseCssRules(invalidCss)).toEqual([]);
   });

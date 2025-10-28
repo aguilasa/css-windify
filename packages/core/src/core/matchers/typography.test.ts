@@ -6,28 +6,28 @@ describe('typography matcher', () => {
   // Mock theme for testing
   const mockTheme = {
     fontSize: {
-      'xs': ['0.75rem', { lineHeight: '1rem' }],
-      'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-      'base': ['1rem', { lineHeight: '1.5rem' }],
-      'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-      'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+      xs: ['0.75rem', { lineHeight: '1rem' }],
+      sm: ['0.875rem', { lineHeight: '1.25rem' }],
+      base: ['1rem', { lineHeight: '1.5rem' }],
+      lg: ['1.125rem', { lineHeight: '1.75rem' }],
+      xl: ['1.25rem', { lineHeight: '1.75rem' }],
       '2xl': ['1.5rem', { lineHeight: '2rem' }],
     },
     lineHeight: {
-      'none': '1',
-      'tight': '1.25',
-      'normal': '1.5',
-      'relaxed': '1.625',
-      'loose': '2',
-    }
+      none: '1',
+      tight: '1.25',
+      normal: '1.5',
+      relaxed: '1.625',
+      loose: '2',
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('font-size', () => {
@@ -108,8 +108,8 @@ describe('typography matcher', () => {
       theme: mockTheme,
       opts: {
         strict: false,
-        approximate: true
-      }
+        approximate: true,
+      },
     };
 
     it('should approximate font-size values when approximate is enabled', () => {
@@ -127,8 +127,8 @@ describe('typography matcher', () => {
         theme: mockTheme,
         opts: {
           strict: true,
-          approximate: true // This should be ignored when strict is true
-        }
+          approximate: true, // This should be ignored when strict is true
+        },
       };
 
       // 15px should use arbitrary value in strict mode

@@ -11,16 +11,16 @@ describe('spacing matcher', () => {
       '2': '0.5rem',
       '4': '1rem',
       '8': '2rem',
-      'px': '1px',
-    }
+      px: '1px',
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('single values', () => {
@@ -163,8 +163,8 @@ describe('spacing matcher', () => {
       theme: mockTheme,
       opts: {
         strict: false,
-        approximate: true
-      }
+        approximate: true,
+      },
     };
 
     it('should approximate spacing values when approximate is enabled', () => {
@@ -183,8 +183,8 @@ describe('spacing matcher', () => {
         theme: mockTheme,
         opts: {
           strict: true,
-          approximate: true // This should be ignored when strict is true
-        }
+          approximate: true, // This should be ignored when strict is true
+        },
       };
 
       // 15px should use arbitrary value in strict mode

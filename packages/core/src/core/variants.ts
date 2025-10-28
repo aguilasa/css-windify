@@ -4,7 +4,7 @@
 
 /**
  * Apply a variant prefix to a list of Tailwind classes
- * 
+ *
  * @param prefix The variant prefix (e.g., 'hover', 'sm', 'md', 'focus')
  * @param classes Array of Tailwind classes to apply the variant to
  * @returns Array of classes with the variant prefix applied
@@ -15,12 +15,12 @@ export function withVariant(prefix: string, classes: string[]): string[] {
   }
 
   // Apply the variant prefix to each class
-  return classes.map(cls => `${prefix}:${cls}`);
+  return classes.map((cls) => `${prefix}:${cls}`);
 }
 
 /**
  * Apply multiple variant prefixes to a list of Tailwind classes
- * 
+ *
  * @param variants Array of variant prefixes (e.g., ['hover', 'sm', 'md', 'focus'])
  * @param classes Array of Tailwind classes to apply the variants to
  * @returns Array of classes with all variant prefixes applied

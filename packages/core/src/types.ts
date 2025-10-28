@@ -19,7 +19,15 @@ export interface CssRule {
   declarations: CssDeclaration[];
 }
 
-export type PropertyCategory = 'spacing' | 'color' | 'typography' | 'layout' | 'border' | 'background' | 'effects' | 'other';
+export type PropertyCategory =
+  | 'spacing'
+  | 'color'
+  | 'typography'
+  | 'layout'
+  | 'border'
+  | 'background'
+  | 'effects'
+  | 'other';
 
 export type WarningCategory = 'arbitrary-value' | 'no-handler' | 'approximate' | 'other';
 
@@ -50,4 +58,7 @@ export interface MatchCtx {
   };
 }
 
-export type RuleHandler = (value: string, ctx: MatchCtx) => string[] | { classes: string[]; warnings: string[] } | null;
+export type RuleHandler = (
+  value: string,
+  ctx: MatchCtx
+) => string[] | { classes: string[]; warnings: string[] } | null;

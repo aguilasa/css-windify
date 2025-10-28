@@ -6,7 +6,7 @@ import {
   resolveSpacingToken,
   resolveColorToken,
   resolveFontSizeToken,
-  resolveLineHeightToken
+  resolveLineHeightToken,
 } from './themeLoader';
 
 // Mock fs and path modules
@@ -15,7 +15,7 @@ vi.mock('path', async () => {
   const actual = await vi.importActual('path');
   return {
     ...actual,
-    join: vi.fn((...args) => args.join('/'))
+    join: vi.fn((...args) => args.join('/')),
   };
 });
 
@@ -27,29 +27,29 @@ describe('themeLoader', () => {
       '1': '0.25rem',
       '2': '0.5rem',
       '4': '1rem',
-      'custom': '15px'
+      custom: '15px',
     },
     colors: {
-      'black': '#000000',
-      'white': '#fff', // Using shorthand to test normalization
-      'primary': '#3b82f6',
-      'secondary': {
+      black: '#000000',
+      white: '#fff', // Using shorthand to test normalization
+      primary: '#3b82f6',
+      secondary: {
         '100': '#e0f2fe',
-        '500': '#0ea5e9'
-      }
+        '500': '#0ea5e9',
+      },
     },
     fontSize: {
-      'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-      'base': ['1rem', { lineHeight: '1.5rem' }],
-      'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-      'custom': '22px'
+      sm: ['0.875rem', { lineHeight: '1.25rem' }],
+      base: ['1rem', { lineHeight: '1.5rem' }],
+      lg: ['1.125rem', { lineHeight: '1.75rem' }],
+      custom: '22px',
     },
     lineHeight: {
-      'none': '1',
-      'tight': '1.25',
-      'normal': '1.5',
-      'custom': '2.2'
-    }
+      none: '1',
+      tight: '1.25',
+      normal: '1.5',
+      custom: '2.2',
+    },
   };
 
   // Mock config file content
@@ -57,12 +57,12 @@ describe('themeLoader', () => {
   beforeEach(() => {
     // Reset mocks
     vi.resetAllMocks();
-    
+
     // Mock fs.existsSync
     vi.spyOn(fs, 'existsSync').mockImplementation((path) => {
       return path === '/test/dir/tailwind.config.js';
     });
-    
+
     // Mock Function constructor to handle dynamic imports
     const originalFunction = global.Function;
     global.Function = vi.fn().mockImplementation((...args) => {
@@ -71,8 +71,8 @@ describe('themeLoader', () => {
           if (path === '/test/dir/tailwind.config.js') {
             return Promise.resolve({
               default: {
-                theme: mockTheme
-              }
+                theme: mockTheme,
+              },
             });
           }
           return Promise.reject(new Error(`Failed to load ${path}`));
@@ -91,7 +91,7 @@ describe('themeLoader', () => {
     it('should load theme from existing config file', async () => {
       // Mock the theme merging behavior instead of checking exact equality
       const theme = await loadTheme('/test/dir');
-      
+
       // Just check that we got a theme object back
       expect(theme).toBeTruthy();
       expect(theme.colors).toBeTruthy();
@@ -107,7 +107,7 @@ describe('themeLoader', () => {
     it('should fall back to default theme if config loading fails', async () => {
       // Mock fs.existsSync to return true
       vi.spyOn(fs, 'existsSync').mockImplementation(() => true);
-      
+
       // Mock Function constructor to throw an error
       const originalFunction = global.Function;
       global.Function = vi.fn().mockImplementation((...args) => {
@@ -116,7 +116,7 @@ describe('themeLoader', () => {
         }
         return originalFunction(...args);
       }) as any;
-      
+
       const theme = await loadTheme('/test/dir');
       expect(theme).toEqual(defaultTheme);
     });
@@ -147,7 +147,7 @@ describe('themeLoader', () => {
       expect(resolveSpacingToken(undefined as unknown as string, mockTheme).token).toBeNull();
       expect(resolveSpacingToken('1rem', null as unknown as any).token).toBeNull();
     });
-    
+
     it('should support approximate matching', () => {
       // Create a theme without the 'custom' entry to test approximation
       const themeWithoutCustom = {
@@ -155,17 +155,20 @@ describe('themeLoader', () => {
           '0': '0px',
           '1': '0.25rem',
           '2': '0.5rem',
-          '4': '1rem'
-        }
+          '4': '1rem',
+        },
       };
-      
+
       // 15px is close to 16px (1rem/4)
-      const result = resolveSpacingToken('15px', themeWithoutCustom, { approximate: true, maxDiffPx: 1 });
+      const result = resolveSpacingToken('15px', themeWithoutCustom, {
+        approximate: true,
+        maxDiffPx: 1,
+      });
       expect(result.token).toBe('4');
       expect(result.type).toBe('approximate');
       expect(result.diff).toBeCloseTo(1, 5);
     });
-    
+
     it('should not approximate when difference is too large', () => {
       // Create a theme without the 'custom' entry to test approximation
       const themeWithoutCustom = {
@@ -173,12 +176,15 @@ describe('themeLoader', () => {
           '0': '0px',
           '1': '0.25rem',
           '2': '0.5rem',
-          '4': '1rem'
-        }
+          '4': '1rem',
+        },
       };
-      
+
       // 14px is too far from 16px with maxDiffPx: 1
-      const result = resolveSpacingToken('14px', themeWithoutCustom, { approximate: true, maxDiffPx: 1 });
+      const result = resolveSpacingToken('14px', themeWithoutCustom, {
+        approximate: true,
+        maxDiffPx: 1,
+      });
       expect(result.token).toBeNull();
       expect(result.type).toBe('none');
     });
@@ -192,13 +198,22 @@ describe('themeLoader', () => {
     });
 
     it('should resolve nested color matches', () => {
-      expect(resolveColorToken('#e0f2fe', mockTheme)).toEqual({ type: 'exact', class: 'secondary-100' });
-      expect(resolveColorToken('#0ea5e9', mockTheme)).toEqual({ type: 'exact', class: 'secondary-500' });
+      expect(resolveColorToken('#e0f2fe', mockTheme)).toEqual({
+        type: 'exact',
+        class: 'secondary-100',
+      });
+      expect(resolveColorToken('#0ea5e9', mockTheme)).toEqual({
+        type: 'exact',
+        class: 'secondary-500',
+      });
     });
 
     it('should normalize colors before matching', () => {
       expect(resolveColorToken('#FFF', mockTheme)).toEqual({ type: 'exact', class: 'white' });
-      expect(resolveColorToken('  #000000  ', mockTheme)).toEqual({ type: 'exact', class: 'black' });
+      expect(resolveColorToken('  #000000  ', mockTheme)).toEqual({
+        type: 'exact',
+        class: 'black',
+      });
     });
 
     it('should return type "none" for unmatched colors', () => {
@@ -209,7 +224,9 @@ describe('themeLoader', () => {
 
     it('should handle null or undefined inputs', () => {
       expect(resolveColorToken(null as unknown as string, mockTheme)).toEqual({ type: 'none' });
-      expect(resolveColorToken(undefined as unknown as string, mockTheme)).toEqual({ type: 'none' });
+      expect(resolveColorToken(undefined as unknown as string, mockTheme)).toEqual({
+        type: 'none',
+      });
       expect(resolveColorToken('#ffffff', null as unknown as any)).toEqual({ type: 'none' });
     });
   });

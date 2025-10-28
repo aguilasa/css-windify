@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { 
-  matchBackgroundColor, 
-  matchBackgroundSize, 
+import {
+  matchBackgroundColor,
+  matchBackgroundSize,
   matchBackgroundPosition,
   matchBackgroundImage,
   parseBackgroundShorthand,
-  matchBackgroundShorthand
+  matchBackgroundShorthand,
 } from './backgrounds';
 import { MatchCtx } from '../../types';
 
@@ -13,22 +13,22 @@ describe('backgrounds matcher', () => {
   // Mock theme for testing
   const mockTheme = {
     colors: {
-      'black': '#000000',
-      'white': '#ffffff',
-      'primary': '#3b82f6',
-      'secondary': {
+      black: '#000000',
+      white: '#ffffff',
+      primary: '#3b82f6',
+      secondary: {
         '100': '#e0f2fe',
-        '500': '#0ea5e9'
-      }
-    }
+        '500': '#0ea5e9',
+      },
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('background color', () => {
@@ -116,8 +116,12 @@ describe('backgrounds matcher', () => {
     });
 
     it('should handle gradient values', () => {
-      expect(matchBackgroundImage('linear-gradient(to right, red, blue)')).toBe('bg-[linear-gradient(to right, red, blue)]');
-      expect(matchBackgroundImage('radial-gradient(circle, red, blue)')).toBe('bg-[radial-gradient(circle, red, blue)]');
+      expect(matchBackgroundImage('linear-gradient(to right, red, blue)')).toBe(
+        'bg-[linear-gradient(to right, red, blue)]'
+      );
+      expect(matchBackgroundImage('radial-gradient(circle, red, blue)')).toBe(
+        'bg-[radial-gradient(circle, red, blue)]'
+      );
     });
 
     it('should handle none value', () => {
@@ -139,7 +143,7 @@ describe('backgrounds matcher', () => {
     it('should parse background shorthand components', () => {
       // Log the actual result for debugging
       const result1 = parseBackgroundShorthand('url(image.jpg) center/cover no-repeat #fff');
-      
+
       // Check each component individually
       expect(result1.image).toBe('url(image.jpg)');
       expect(result1.position).toBe('center');
@@ -189,18 +193,18 @@ describe('backgrounds matcher', () => {
       expect(result1).toContain('bg-[url(image.jpg)]');
       expect(result1).toContain('bg-center');
       // Size might be parsed differently due to regex limitations
-      expect(result1.some(cls => cls.includes('cover'))).toBe(true);
+      expect(result1.some((cls) => cls.includes('cover'))).toBe(true);
       // The repeat might not be parsed correctly due to regex limitations
       // expect(result1).toContain('bg-no-repeat');
       expect(result1).toContain('bg-white');
-      
+
       // Partial background shorthand
       const result2 = matchBackgroundShorthand('center/cover #000', ctx);
       expect(result2).toContain('bg-center');
       // Size might be parsed differently due to regex limitations
-      expect(result2.some(cls => cls.includes('cover'))).toBe(true);
+      expect(result2.some((cls) => cls.includes('cover'))).toBe(true);
       expect(result2).toContain('bg-black');
-      
+
       // Background with non-standard repeat value
       const result3 = matchBackgroundShorthand('url(image.jpg) repeat-x', ctx);
       expect(result3).toContain('bg-[url(image.jpg)]');
@@ -214,7 +218,7 @@ describe('backgrounds matcher', () => {
       expect(result).toContain('bg-[url(x)]'); // Image as arbitrary
       expect(result).toContain('bg-center'); // Position mapped
       // Size might be parsed differently due to regex limitations
-      expect(result.some(cls => cls.includes('cover'))).toBe(true); // Size mapped
+      expect(result.some((cls) => cls.includes('cover'))).toBe(true); // Size mapped
       // The repeat might not be parsed correctly due to regex limitations
       // expect(result).toContain('bg-no-repeat'); // Repeat mapped
       expect(result).toContain('bg-white'); // Color mapped via theme

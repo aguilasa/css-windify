@@ -1,5 +1,5 @@
 // CommonJS test
-const { transformDeclarations } = require('tailwindify-core');
+const { transformDeclarations } = require('css-windify-core');
 
 // Test data
 const declarations = [

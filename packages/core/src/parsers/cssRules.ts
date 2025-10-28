@@ -6,7 +6,7 @@ import { CssDeclaration, CssRule } from '../types';
 
 /**
  * Parse a CSS string into an array of CSS rules
- * 
+ *
  * @param css The CSS string to parse
  * @returns Array of CSS rules
  */
@@ -33,14 +33,14 @@ export function parseCssRules(css: string): CssRule[] {
       rule.walkDecls((decl) => {
         declarations.push({
           prop: decl.prop,
-          value: decl.value
+          value: decl.value,
         });
       });
 
       // Add the rule to the result
       rules.push({
         selector: rule.selector,
-        declarations
+        declarations,
       });
     });
 

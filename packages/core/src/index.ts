@@ -27,17 +27,17 @@ class Tailwindify {
       theme: {}, // Theme would be loaded from Tailwind config
       opts: {
         strict: !!this.options.strict,
-        approximate: !!this.options.approximate
-      }
+        approximate: !!this.options.approximate,
+      },
     };
-    
+
     const result = transformRule(rule, ctx);
-    
+
     // Apply prefix if specified
     if (this.options.prefix) {
-      result.classes = result.classes.map(cls => `${this.options.prefix}${cls}`);
+      result.classes = result.classes.map((cls) => `${this.options.prefix}${cls}`);
     }
-    
+
     return result;
   }
 
@@ -49,17 +49,17 @@ class Tailwindify {
       theme: {}, // Theme would be loaded from Tailwind config
       opts: {
         strict: !!this.options.strict,
-        approximate: !!this.options.approximate
-      }
+        approximate: !!this.options.approximate,
+      },
     };
-    
+
     const result = transformDeclarations(declarations, ctx);
-    
+
     // Apply prefix if specified
     if (this.options.prefix) {
-      result.classes = result.classes.map(cls => `${this.options.prefix}${cls}`);
+      result.classes = result.classes.map((cls) => `${this.options.prefix}${cls}`);
     }
-    
+
     return result;
   }
 }
@@ -79,7 +79,7 @@ export {
   toArbitrary,
   arbitraryProperty,
   parseBoxShorthand,
-  parseColorNormalize
+  parseColorNormalize,
 } from './core/normalizers';
 
 export {
@@ -88,7 +88,7 @@ export {
   resolveSpacingToken,
   resolveColorToken,
   resolveFontSizeToken,
-  resolveLineHeightToken
+  resolveLineHeightToken,
 } from './core/themeLoader';
 
 export {
@@ -127,20 +127,14 @@ export {
   // Misc matchers
   matchOverflow,
   matchZIndex,
-  matchOpacity
+  matchOpacity,
 } from './core/matchers';
 
 // Variant utilities
-export {
-  withVariant,
-  withVariants
-} from './core/variants';
+export { withVariant, withVariants } from './core/variants';
 
 // Parsers
-export {
-  parseInlineCss,
-  parseCssRules
-} from './parsers';
+export { parseInlineCss, parseCssRules } from './parsers';
 
 // Export both named and default exports
 export { Tailwindify };

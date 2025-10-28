@@ -1,17 +1,17 @@
-import { transformDeclarations, TransformResult, CssDeclaration, MatchCtx } from 'tailwindify-core';
+import { transformDeclarations, TransformResult, CssDeclaration, MatchCtx } from 'css-windify-core';
 
 // Teste de tipos
 const declarations: CssDeclaration[] = [
   { prop: 'margin', value: '1rem' },
-  { prop: 'padding', value: '2rem' }
+  { prop: 'padding', value: '2rem' },
 ];
 
 const ctx: MatchCtx = {
   theme: {},
   opts: {
     strict: false,
-    approximate: true
-  }
+    approximate: true,
+  },
 };
 
 const result: TransformResult = transformDeclarations(declarations, ctx);

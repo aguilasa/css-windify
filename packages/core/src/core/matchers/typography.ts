@@ -14,7 +14,7 @@ const typographyPrefixMap: Record<string, string> = {
 
 // Mapping for letter-spacing predefined values
 const letterSpacingMap: Record<string, string> = {
-  'normal': 'normal',
+  normal: 'normal',
   '0': 'normal',
   '0px': 'normal',
   '0.05em': 'wide',
@@ -25,7 +25,7 @@ const letterSpacingMap: Record<string, string> = {
 
 /**
  * Matches typography values to Tailwind classes
- * 
+ *
  * @param kind The typography property (font-size, line-height, letter-spacing)
  * @param value The CSS value
  * @param ctx The matching context with theme
@@ -56,7 +56,7 @@ export function matchTypography(
 
 /**
  * Handles font-size values
- * 
+ *
  * @param value The CSS value
  * @param ctx The matching context
  * @returns Object with Tailwind class and warning if approximate
@@ -65,18 +65,18 @@ function handleFontSize(value: string, ctx: MatchCtx): { class: string; warning?
   // Try to resolve from theme with approximation if enabled and not in strict mode
   const result = resolveFontSizeToken(value, ctx.theme, {
     approximate: ctx.opts.approximate && !ctx.opts.strict,
-    maxDiffPx: 1 // Default to 1px max difference
+    maxDiffPx: 1, // Default to 1px max difference
   });
 
   if (result.token) {
     // If it's an approximate match, add a warning
     if (result.type === 'approximate') {
-      return { 
+      return {
         class: `text-${result.token}`,
-        warning: `approximate mapping: ${value} → text-${result.token} (${result.diff}px difference)`
+        warning: `approximate mapping: ${value} → text-${result.token} (${result.diff}px difference)`,
       };
     }
-    
+
     // Exact match
     return { class: `text-${result.token}` };
   }
@@ -87,7 +87,7 @@ function handleFontSize(value: string, ctx: MatchCtx): { class: string; warning?
 
 /**
  * Handles line-height values
- * 
+ *
  * @param value The CSS value
  * @param ctx The matching context
  * @returns Object with Tailwind class and warning if approximate
@@ -96,18 +96,18 @@ function handleLineHeight(value: string, ctx: MatchCtx): { class: string; warnin
   // Try to resolve from theme with approximation if enabled and not in strict mode
   const result = resolveLineHeightToken(value, ctx.theme, {
     approximate: ctx.opts.approximate && !ctx.opts.strict,
-    maxDiffPx: 1 // Default to 1px max difference
+    maxDiffPx: 1, // Default to 1px max difference
   });
 
   if (result.token) {
     // If it's an approximate match, add a warning
     if (result.type === 'approximate') {
-      return { 
+      return {
         class: `leading-${result.token}`,
-        warning: `approximate mapping: ${value} → leading-${result.token} (${result.diff}px difference)`
+        warning: `approximate mapping: ${value} → leading-${result.token} (${result.diff}px difference)`,
       };
     }
-    
+
     // Exact match
     return { class: `leading-${result.token}` };
   }
@@ -118,7 +118,7 @@ function handleLineHeight(value: string, ctx: MatchCtx): { class: string; warnin
 
 /**
  * Handles letter-spacing values
- * 
+ *
  * @param value The CSS value
  * @param ctx The matching context
  * @returns Object with Tailwind class and warning if approximate

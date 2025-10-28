@@ -9,99 +9,104 @@ describe('Approximation Mode Tests', () => {
     { prop: 'margin', value: '7px', expectedStrict: 'm-[7px]', expectedApprox: 'm-2' },
     { prop: 'padding', value: '23px', expectedStrict: 'p-[23px]', expectedApprox: 'p-6' },
     { prop: 'font-size', value: '15px', expectedStrict: 'text-[15px]', expectedApprox: 'text-sm' },
-    { prop: 'line-height', value: '1.49', expectedStrict: 'leading-[1.49]', expectedApprox: 'leading-normal' },
+    {
+      prop: 'line-height',
+      value: '1.49',
+      expectedStrict: 'leading-[1.49]',
+      expectedApprox: 'leading-normal',
+    },
     // Removed border-radius as it might not be properly implemented for approximation yet
   ];
 
   it('should use arbitrary values in strict mode and approximate in approximate mode', async () => {
     const theme = await loadTheme(process.cwd());
-    
+
     // Test in strict mode
     const strictCtx = { theme, opts: { strict: true, approximate: false } };
-    const strictResults = testCases.map(tc => {
+    const strictResults = testCases.map((tc) => {
       const result = transformDeclarations([{ prop: tc.prop, value: tc.value }], strictCtx);
       return {
         prop: tc.prop,
         value: tc.value,
         classes: result.classes,
         warnings: result.warnings,
-        expected: tc.expectedStrict
+        expected: tc.expectedStrict,
       };
     });
-    
+
     // Test in approximate mode
     const approxCtx = { theme, opts: { strict: false, approximate: true } };
-    const approxResults = testCases.map(tc => {
+    const approxResults = testCases.map((tc) => {
       const result = transformDeclarations([{ prop: tc.prop, value: tc.value }], approxCtx);
       return {
         prop: tc.prop,
         value: tc.value,
         classes: result.classes,
         warnings: result.warnings,
-        expected: tc.expectedApprox
+        expected: tc.expectedApprox,
       };
     });
-    
+
     // Verify strict mode results
-    strictResults.forEach(result => {
+    strictResults.forEach((result) => {
       expect(result.classes).toContain(result.expected);
       // Strict mode should have arbitrary values and warnings
-      expect(result.classes.some(cls => cls.includes('['))).toBe(true);
-      expect(result.warnings.some(w => w.includes('arbitrary value'))).toBe(true);
+      expect(result.classes.some((cls) => cls.includes('['))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('arbitrary value'))).toBe(true);
     });
-    
+
     // Verify approximate mode results
-    approxResults.forEach(result => {
+    approxResults.forEach((result) => {
       expect(result.classes).toContain(result.expected);
       // Approximate mode should have warnings about approximation
-      expect(result.warnings.some(w => w.includes('approximate mapping'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('approximate mapping'))).toBe(true);
     });
-    
+
     // Snapshot the results for future comparison
     expect({ strictResults, approxResults }).toMatchSnapshot();
   });
 
   it('should demonstrate approximation with different settings', async () => {
     const theme = await loadTheme(process.cwd());
-    
+
     // Test with strict mode (no approximation)
-    const strictCtx = { 
-      theme, 
-      opts: { 
-        strict: true, 
-        approximate: true // Should be ignored when strict is true
-      } 
+    const strictCtx = {
+      theme,
+      opts: {
+        strict: true,
+        approximate: true, // Should be ignored when strict is true
+      },
     };
-    
+
     // Test with approximate mode
-    const approxCtx = { 
-      theme, 
-      opts: { 
-        strict: false, 
-        approximate: true
-      } 
+    const approxCtx = {
+      theme,
+      opts: {
+        strict: false,
+        approximate: true,
+      },
     };
-    
+
     // Use a value that's known to work with approximation
     const value = '15px'; // Close to 16px (1rem)
-    
+
     const strictResult = transformDeclarations([{ prop: 'width', value }], strictCtx);
     const approxResult = transformDeclarations([{ prop: 'width', value }], approxCtx);
-    
+
     // Strict mode should have arbitrary values in classes
-    expect(strictResult.classes.some(c => c.includes('['))).toBe(true);
-    
+    expect(strictResult.classes.some((c) => c.includes('['))).toBe(true);
+
     // Snapshot the results for comparison
     expect({
       value,
       strict: {
         classes: strictResult.classes,
-        warnings: strictResult.warnings
+        warnings: strictResult.warnings,
       },
       approximate: {
         classes: approxResult.classes,
-        warnings: approxResult.warnings
-      }
+        warnings: approxResult.warnings,
+      },
     }).toMatchSnapshot();
   });
 });

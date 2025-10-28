@@ -1,11 +1,11 @@
 {
-  "name": "tailwindify-cli",
+  "name": "css-windify-cli",
   "version": "0.0.1",
-  "description": "CLI tool for converting CSS to Tailwind CSS",
+  "description": "CLI tool for converting CSS to Tailwind CSS - CSSWindify",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "tailwindify": "./dist/index.js"
+    "css-windify": "./dist/index.js"
   },
   "files": [
     "dist"
@@ -16,7 +16,7 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "tailwindify-core": "workspace:*",
+    "css-windify-core": "workspace:*",
     "commander": "^11.1.0",
     "chalk": "^5.3.0",
     "glob": "^10.3.10"

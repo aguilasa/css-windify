@@ -6,14 +6,14 @@ describe('colors matcher', () => {
   // Mock theme for testing
   const mockTheme = {
     colors: {
-      'black': '#000000',
-      'white': '#ffffff',
-      'primary': '#3b82f6',
-      'secondary': {
+      black: '#000000',
+      white: '#ffffff',
+      primary: '#3b82f6',
+      secondary: {
         '100': '#e0f2fe',
-        '500': '#0ea5e9'
+        '500': '#0ea5e9',
       },
-      'gray': {
+      gray: {
         '100': '#f3f4f6',
         '200': '#e5e7eb',
         '300': '#d1d5db',
@@ -22,17 +22,17 @@ describe('colors matcher', () => {
         '600': '#4b5563',
         '700': '#374151',
         '800': '#1f2937',
-        '900': '#111827'
-      }
-    }
+        '900': '#111827',
+      },
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('text color', () => {

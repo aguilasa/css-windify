@@ -5,7 +5,7 @@ import { CssDeclaration } from '../types';
 
 /**
  * Parse an inline CSS style string into an array of CSS declarations
- * 
+ *
  * @param style The inline CSS style string (e.g., "color: red; margin: 10px;")
  * @returns Array of CSS declarations
  */

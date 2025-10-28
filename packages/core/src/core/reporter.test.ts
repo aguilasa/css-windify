@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { 
-  calculateCoverage, 
-  aggregateWarnings, 
-  countNonArbitraryClasses, 
+import {
+  calculateCoverage,
+  aggregateWarnings,
+  countNonArbitraryClasses,
   calculateCategoryStats,
   categorizeWarning,
-  summarize
+  summarize,
 } from './reporter';
 import { TransformResult } from '../types';
 
@@ -35,7 +35,7 @@ describe('reporter', () => {
         border: { matched: 0, total: 0, percentage: 0 },
         background: { matched: 0, total: 0, percentage: 0 },
         effects: { matched: 0, total: 0, percentage: 0 },
-        other: { matched: 0, total: 0, percentage: 0 }
+        other: { matched: 0, total: 0, percentage: 0 },
       };
 
       const coverage = calculateCoverage(6, 8, 5, categories);
@@ -47,12 +47,7 @@ describe('reporter', () => {
 
   describe('aggregateWarnings', () => {
     it('should deduplicate warnings', () => {
-      const warnings = [
-        'Warning 1',
-        'Warning 2',
-        'Warning 1',
-        'Warning 3'
-      ];
+      const warnings = ['Warning 1', 'Warning 2', 'Warning 1', 'Warning 3'];
 
       const result = aggregateWarnings(warnings);
       expect(result.warnings).toHaveLength(3);
@@ -63,10 +58,10 @@ describe('reporter', () => {
 
     it('should categorize warnings correctly', () => {
       const warnings = [
-        'Used arbitrary value for \'width: 123px\'',
-        'No direct Tailwind equivalent for \'custom-prop: value\'',
+        "Used arbitrary value for 'width: 123px'",
+        "No direct Tailwind equivalent for 'custom-prop: value'",
         'approximate mapping: 15px → w-4 (1px difference)',
-        'Some other warning'
+        'Some other warning',
       ];
 
       const result = aggregateWarnings(warnings);
@@ -79,13 +74,7 @@ describe('reporter', () => {
 
   describe('countNonArbitraryClasses', () => {
     it('should count classes without arbitrary values', () => {
-      const classes = [
-        'p-4',
-        'w-[123px]',
-        'text-lg',
-        'bg-[#fff]',
-        'flex'
-      ];
+      const classes = ['p-4', 'w-[123px]', 'text-lg', 'bg-[#fff]', 'flex'];
 
       const count = countNonArbitraryClasses(classes);
       expect(count).toBe(3); // p-4, text-lg, flex
@@ -104,7 +93,7 @@ describe('reporter', () => {
         { prop: 'color' },
         { prop: 'font-size' },
         { prop: 'margin' },
-        { prop: 'custom-prop' }
+        { prop: 'custom-prop' },
       ];
 
       const matchedProps = new Set(['width', 'color', 'font-size']);
@@ -130,16 +119,20 @@ describe('reporter', () => {
 
   describe('categorizeWarning', () => {
     it('should categorize arbitrary value warnings', () => {
-      expect(categorizeWarning('Used arbitrary value for \'width: 123px\'')).toBe('arbitrary-value');
+      expect(categorizeWarning("Used arbitrary value for 'width: 123px'")).toBe('arbitrary-value');
     });
 
     it('should categorize no handler warnings', () => {
-      expect(categorizeWarning('No direct Tailwind equivalent for \'custom-prop: value\'')).toBe('no-handler');
+      expect(categorizeWarning("No direct Tailwind equivalent for 'custom-prop: value'")).toBe(
+        'no-handler'
+      );
       expect(categorizeWarning('Could not transform: custom-prop: value')).toBe('no-handler');
     });
 
     it('should categorize approximate warnings', () => {
-      expect(categorizeWarning('approximate mapping: 15px → w-4 (1px difference)')).toBe('approximate');
+      expect(categorizeWarning('approximate mapping: 15px → w-4 (1px difference)')).toBe(
+        'approximate'
+      );
     });
 
     it('should categorize other warnings', () => {
@@ -151,7 +144,7 @@ describe('reporter', () => {
     it('should generate a summary for a single result', () => {
       const result: TransformResult = {
         classes: ['p-4', 'w-[123px]', 'text-lg'],
-        warnings: ['Used arbitrary value for \'width: 123px\''],
+        warnings: ["Used arbitrary value for 'width: 123px'"],
         coverage: {
           matched: 3,
           total: 4,
@@ -165,15 +158,15 @@ describe('reporter', () => {
             border: { matched: 0, total: 0, percentage: 0 },
             background: { matched: 0, total: 0, percentage: 0 },
             effects: { matched: 0, total: 0, percentage: 0 },
-            other: { matched: 0, total: 1, percentage: 0 }
+            other: { matched: 0, total: 1, percentage: 0 },
           },
           warningsByCategory: {
             'arbitrary-value': 1,
             'no-handler': 0,
-            'approximate': 0,
-            'other': 0
-          }
-        }
+            approximate: 0,
+            other: 0,
+          },
+        },
       };
 
       const summary = summarize(result);
@@ -189,7 +182,7 @@ describe('reporter', () => {
       const results: TransformResult[] = [
         {
           classes: ['p-4', 'w-[123px]'],
-          warnings: ['Used arbitrary value for \'width: 123px\''],
+          warnings: ["Used arbitrary value for 'width: 123px'"],
           coverage: {
             matched: 2,
             total: 3,
@@ -203,19 +196,19 @@ describe('reporter', () => {
               border: { matched: 0, total: 0, percentage: 0 },
               background: { matched: 0, total: 0, percentage: 0 },
               effects: { matched: 0, total: 0, percentage: 0 },
-              other: { matched: 0, total: 1, percentage: 0 }
+              other: { matched: 0, total: 1, percentage: 0 },
             },
             warningsByCategory: {
               'arbitrary-value': 1,
               'no-handler': 0,
-              'approximate': 0,
-              'other': 0
-            }
-          }
+              approximate: 0,
+              other: 0,
+            },
+          },
         },
         {
           classes: ['text-lg', 'bg-[#fff]'],
-          warnings: ['Used arbitrary value for \'background-color: #fff\''],
+          warnings: ["Used arbitrary value for 'background-color: #fff'"],
           coverage: {
             matched: 2,
             total: 2,
@@ -229,16 +222,16 @@ describe('reporter', () => {
               border: { matched: 0, total: 0, percentage: 0 },
               background: { matched: 0, total: 0, percentage: 0 },
               effects: { matched: 0, total: 0, percentage: 0 },
-              other: { matched: 0, total: 0, percentage: 0 }
+              other: { matched: 0, total: 0, percentage: 0 },
             },
             warningsByCategory: {
               'arbitrary-value': 1,
               'no-handler': 0,
-              'approximate': 0,
-              'other': 0
-            }
-          }
-        }
+              approximate: 0,
+              other: 0,
+            },
+          },
+        },
       ];
 
       const summary = summarize(results);

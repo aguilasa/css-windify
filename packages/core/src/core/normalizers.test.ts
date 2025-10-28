@@ -11,7 +11,7 @@ import {
   parseBoxShorthand,
   parseColorNormalize,
   toPx,
-  findNearestToken
+  findNearestToken,
 } from './normalizers';
 
 describe('normalizers', () => {
@@ -198,7 +198,12 @@ describe('normalizers', () => {
     });
 
     it('should handle more than four values by ignoring extras', () => {
-      expect(parseBoxShorthand('10px 20px 30px 40px 50px')).toEqual(['10px', '20px', '30px', '40px']);
+      expect(parseBoxShorthand('10px 20px 30px 40px 50px')).toEqual([
+        '10px',
+        '20px',
+        '30px',
+        '40px',
+      ]);
     });
   });
 
@@ -289,7 +294,7 @@ describe('normalizers', () => {
   describe('findNearestToken', () => {
     const tokenMap = {
       '0': '0px',
-      'px': '1px',
+      px: '1px',
       '0.5': '0.125rem',
       '1': '0.25rem',
       '2': '0.5rem',
@@ -297,7 +302,7 @@ describe('normalizers', () => {
       '6': '1.5rem',
       '8': '2rem',
       '12': '3rem',
-      '16': '4rem'
+      '16': '4rem',
     };
 
     it('should find exact matches', () => {

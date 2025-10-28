@@ -14,26 +14,26 @@ describe('rulesEngine', () => {
         '8': '2rem',
       },
       colors: {
-        'black': '#000000',
-        'white': '#ffffff',
-        'red': '#ff0000',
-        'blue': '#0000ff',
+        black: '#000000',
+        white: '#ffffff',
+        red: '#ff0000',
+        blue: '#0000ff',
       },
       fontSize: {
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'base': ['1rem', { lineHeight: '1.5rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        sm: ['0.875rem', { lineHeight: '1.25rem' }],
+        base: ['1rem', { lineHeight: '1.5rem' }],
+        lg: ['1.125rem', { lineHeight: '1.75rem' }],
       },
       lineHeight: {
-        'none': '1',
-        'tight': '1.25',
-        'normal': '1.5',
-      }
+        none: '1',
+        tight: '1.25',
+        normal: '1.5',
+      },
     },
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('toTailwind', () => {
@@ -86,24 +86,24 @@ describe('rulesEngine', () => {
           { prop: 'padding', value: '1rem' },
           { prop: 'background-color', value: 'white' },
           { prop: 'border-radius', value: '0.25rem' },
-          { prop: 'box-shadow', value: '0 2px 4px rgba(0,0,0,0.1)' } // No direct handler
-        ]
+          { prop: 'box-shadow', value: '0 2px 4px rgba(0,0,0,0.1)' }, // No direct handler
+        ],
       };
 
       const result = transformRule(rule, ctx);
-      
+
       // Check that classes were generated
       expect(result.classes).toContain('flex');
       expect(result.classes).toContain('flex-col');
       expect(result.classes).toContain('p-4');
       expect(result.classes).toContain('bg-white');
       expect(result.classes).toContain('rounded');
-      expect(result.classes.some(cls => cls.includes('[box-shadow:'))).toBe(true);
-      
+      expect(result.classes.some((cls) => cls.includes('[box-shadow:'))).toBe(true);
+
       // Check for warnings
-      expect(result.warnings.some(w => w.includes('box-shadow'))).toBe(true);
-      expect(result.warnings.some(w => w.includes("Selector '.card'"))).toBe(true);
-      
+      expect(result.warnings.some((w) => w.includes('box-shadow'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes("Selector '.card'"))).toBe(true);
+
       // Check coverage
       expect(result.coverage.matched).toBe(6);
       expect(result.coverage.total).toBe(6);
@@ -117,20 +117,24 @@ describe('rulesEngine', () => {
           { prop: 'padding-top', value: '0.5rem' }, // Duplicate of what's in the shorthand
           { prop: 'background-color', value: 'blue' },
           { prop: 'color', value: 'white' },
-        ]
+        ],
       };
 
       const result = transformRule(rule, ctx);
-      
+
       // Count occurrences of padding classes
-      const paddingClasses = result.classes.filter(cls => cls.startsWith('p-') || cls.startsWith('px-') || cls.startsWith('py-'));
-      
+      const paddingClasses = result.classes.filter(
+        (cls) => cls.startsWith('p-') || cls.startsWith('px-') || cls.startsWith('py-')
+      );
+
       // Should have deduplicated the padding classes
       expect(new Set(paddingClasses).size).toBe(paddingClasses.length);
-      
+
       // Check that all expected classes are present
-      expect(result.classes.some(cls => cls.includes('bg-') && cls.includes('blue'))).toBe(true);
-      expect(result.classes.some(cls => cls.includes('text-') && cls.includes('white'))).toBe(true);
+      expect(result.classes.some((cls) => cls.includes('bg-') && cls.includes('blue'))).toBe(true);
+      expect(result.classes.some((cls) => cls.includes('text-') && cls.includes('white'))).toBe(
+        true
+      );
     });
   });
 
@@ -140,65 +144,73 @@ describe('rulesEngine', () => {
         { prop: 'margin', value: '1rem' },
         { prop: 'width', value: '100%' }, // Will use arbitrary value
         { prop: 'height', value: '2rem' },
-        { prop: 'unknown-prop', value: 'value' } // No handler
+        { prop: 'unknown-prop', value: 'value' }, // No handler
       ];
 
       const result = transformDeclarations(declarations, ctx);
-      
+
       // Check classes
       expect(result.classes).toContain('m-4');
       expect(result.classes).toContain('h-8');
-      expect(result.classes.some(cls => cls.includes('w-[100%]'))).toBe(true);
-      expect(result.classes.some(cls => cls.includes('[unknown-prop:value]'))).toBe(true);
-      
+      expect(result.classes.some((cls) => cls.includes('w-[100%]'))).toBe(true);
+      expect(result.classes.some((cls) => cls.includes('[unknown-prop:value]'))).toBe(true);
+
       // Check warnings
-      expect(result.warnings.some(w => w.includes('arbitrary'))).toBe(true);
-      expect(result.warnings.some(w => w.includes('unknown-prop'))).toBe(true);
-      
+      expect(result.warnings.some((w) => w.includes('arbitrary'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('unknown-prop'))).toBe(true);
+
       // Check coverage
       expect(result.coverage.matched).toBe(4);
       expect(result.coverage.total).toBe(4);
     });
-    
+
     it('should apply hover variant to declarations', () => {
       const declarations = [
         { prop: 'color', value: 'red', variants: ['hover'] },
-        { prop: 'background-color', value: 'blue' } // No variant
+        { prop: 'background-color', value: 'blue' }, // No variant
       ];
 
       const result = transformDeclarations(declarations, ctx);
-      
+
       // Check that hover variant is applied to color but not to background-color
-      expect(result.classes.some(cls => cls.startsWith('hover:') && cls.includes('text-'))).toBe(true);
-      expect(result.classes.some(cls => !cls.startsWith('hover:') && cls.includes('bg-'))).toBe(true);
+      expect(result.classes.some((cls) => cls.startsWith('hover:') && cls.includes('text-'))).toBe(
+        true
+      );
+      expect(result.classes.some((cls) => !cls.startsWith('hover:') && cls.includes('bg-'))).toBe(
+        true
+      );
     });
-    
+
     it('should apply responsive variants to declarations', () => {
       const declarations = [
         { prop: 'margin', value: '1rem', variants: ['sm', 'md'] },
-        { prop: 'padding', value: '2rem', variants: ['lg'] }
+        { prop: 'padding', value: '2rem', variants: ['lg'] },
       ];
 
       const result = transformDeclarations(declarations, ctx);
-      
+
       // Check that responsive variants are applied correctly
-      expect(result.classes.some(cls => cls.startsWith('sm:md:') && cls.includes('m-'))).toBe(true);
-      expect(result.classes.some(cls => cls.startsWith('lg:') && cls.includes('p-'))).toBe(true);
+      expect(result.classes.some((cls) => cls.startsWith('sm:md:') && cls.includes('m-'))).toBe(
+        true
+      );
+      expect(result.classes.some((cls) => cls.startsWith('lg:') && cls.includes('p-'))).toBe(true);
     });
-    
+
     it('should handle mixed variants and non-variants', () => {
       const declarations = [
         { prop: 'color', value: 'white', variants: ['hover', 'focus'] },
         { prop: 'margin', value: '1rem', variants: ['sm'] },
-        { prop: 'padding', value: '2rem' } // No variant
+        { prop: 'padding', value: '2rem' }, // No variant
       ];
 
       const result = transformDeclarations(declarations, ctx);
-      
+
       // Check that variants are applied correctly
-      expect(result.classes.some(cls => cls.startsWith('hover:focus:') && cls.includes('text-'))).toBe(true);
-      expect(result.classes.some(cls => cls.startsWith('sm:') && cls.includes('m-'))).toBe(true);
-      expect(result.classes.some(cls => !cls.includes(':') && cls.includes('p-'))).toBe(true);
+      expect(
+        result.classes.some((cls) => cls.startsWith('hover:focus:') && cls.includes('text-'))
+      ).toBe(true);
+      expect(result.classes.some((cls) => cls.startsWith('sm:') && cls.includes('m-'))).toBe(true);
+      expect(result.classes.some((cls) => !cls.includes(':') && cls.includes('p-'))).toBe(true);
     });
   });
 });

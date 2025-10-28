@@ -20,7 +20,7 @@ const declarations: CssDeclaration[] = [
   { prop: 'border-radius', value: '0.25rem' },
   { prop: 'opacity', value: '0.8' },
   { prop: 'z-index', value: '10' },
-  { prop: 'custom-property', value: 'custom-value' } // No handler for this
+  { prop: 'custom-property', value: 'custom-value' }, // No handler for this
 ];
 
 // Transform with strict mode (no approximation)
@@ -28,8 +28,8 @@ const strictResult = transformDeclarations(declarations, {
   theme: {}, // Using default theme
   opts: {
     strict: true,
-    approximate: false
-  }
+    approximate: false,
+  },
 });
 
 // Transform with approximation enabled
@@ -37,8 +37,8 @@ const approximateResult = transformDeclarations(declarations, {
   theme: {}, // Using default theme
   opts: {
     strict: false,
-    approximate: true
-  }
+    approximate: true,
+  },
 });
 
 // Generate summaries

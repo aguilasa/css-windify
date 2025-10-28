@@ -1,8 +1,8 @@
 {
-  "name": "tailwindify",
+  "name": "css-windify",
   "private": true,
   "version": "0.0.1",
-  "description": "Tailwindify monorepo",
+  "description": "CSSWindify monorepo - Convert CSS to Tailwind CSS",
   "type": "module",
   "engines": {
     "node": ">=18"
@@ -12,11 +12,11 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "pnpm --filter tailwindify-core build",
+    "build": "pnpm --filter css-windify-core build",
     "test": "vitest run",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.base.json",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "ci": "pnpm build && pnpm check",
     "prepare": "husky install",

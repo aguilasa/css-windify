@@ -1,10 +1,11 @@
-# Tailwindify
+# CSSWindify
 
-Tailwindify is a tool that automatically converts traditional CSS to Tailwind CSS classes. It analyzes your CSS code and generates equivalent Tailwind classes, making migration to Tailwind CSS faster and more efficient.
+CSSWindify is a tool that automatically converts traditional CSS to Tailwind CSS classes. It analyzes your CSS code and generates equivalent Tailwind classes, making migration to Tailwind CSS faster and more efficient.
 
 ## Project Overview
 
-Tailwindify helps developers:
+CSSWindify helps developers:
+
 - Convert legacy CSS to Tailwind CSS
 - Understand how CSS properties map to Tailwind classes
 - Accelerate adoption of Tailwind CSS in existing projects
@@ -15,7 +16,7 @@ Tailwindify helps developers:
 The project is structured as a monorepo with the following components:
 
 ```
-tailwindify/
+css-windify/
 ├── packages/
 │   └── core/         # Core conversion engine
 ├── apps/
@@ -24,7 +25,8 @@ tailwindify/
 
 ### Core Package
 
-The core package (`tailwindify-core`) contains the main conversion logic:
+The core package (`css-windify-core`) contains the main conversion logic:
+
 - CSS parsers for both inline styles and rule blocks
 - Matchers for different CSS properties
 - Theme handling for Tailwind configuration
@@ -40,8 +42,8 @@ The Playground app provides an interactive environment to test the conversion en
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/tailwindify.git
-cd tailwindify
+git clone https://github.com/yourusername/css-windify.git
+cd css-windify
 
 # Install dependencies
 pnpm install
@@ -57,7 +59,7 @@ pnpm build
 pnpm test
 
 # Run core package tests only
-pnpm --filter tailwindify-core test
+pnpm --filter css-windify-core test
 ```
 
 ### Using the Playground

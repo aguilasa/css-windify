@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { 
+import {
   matchFlexDirection,
   matchJustifyContent,
   matchAlignItems,
@@ -7,7 +7,7 @@ import {
   matchGridTemplateColumns,
   matchPlaceContent,
   matchPlaceItems,
-  matchPlaceSelf
+  matchPlaceSelf,
 } from './flexGrid';
 import { MatchCtx } from '../../types';
 
@@ -21,16 +21,16 @@ describe('flexGrid matcher', () => {
       '3': '0.75rem',
       '4': '1rem',
       '8': '2rem',
-      'px': '1px',
-    }
+      px: '1px',
+    },
   };
 
   const ctx: MatchCtx = {
     theme: mockTheme,
     opts: {
       strict: false,
-      approximate: false
-    }
+      approximate: false,
+    },
   };
 
   describe('flex direction', () => {
@@ -150,7 +150,9 @@ describe('flexGrid matcher', () => {
     it('should use arbitrary values for complex grid templates', () => {
       expect(matchGridTemplateColumns('1fr 2fr 1fr')).toBe('grid-cols-[1fr 2fr 1fr]');
       expect(matchGridTemplateColumns('repeat(2, 100px)')).toBe('grid-cols-[repeat(2, 100px)]');
-      expect(matchGridTemplateColumns('minmax(100px, 1fr) 3fr')).toBe('grid-cols-[minmax(100px, 1fr) 3fr]');
+      expect(matchGridTemplateColumns('minmax(100px, 1fr) 3fr')).toBe(
+        'grid-cols-[minmax(100px, 1fr) 3fr]'
+      );
     });
   });
 

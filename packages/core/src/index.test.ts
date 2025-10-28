@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import Tailwindify from './index';
-import { CssRule, CssDeclaration } from './types';
+import { CssRule } from './types';
 
 describe('Tailwindify', () => {
   describe('Class methods', () => {
@@ -28,12 +28,12 @@ describe('Tailwindify', () => {
         selector: '.button',
         declarations: [
           { prop: 'color', value: 'red' },
-          { prop: 'padding', value: '1rem' }
-        ]
+          { prop: 'padding', value: '1rem' },
+        ],
       };
 
       const result = tailwindify.processRule(rule);
-      
+
       expect(result).toBeDefined();
       expect(Array.isArray(result.classes)).toBe(true);
       expect(result.coverage).toBeDefined();
