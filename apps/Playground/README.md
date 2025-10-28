@@ -19,6 +19,18 @@ cd apps/Playground
 pnpm dev
 ```
 
+### Quick Commands from Root
+
+You can also run the Playground directly from the root of the monorepo with specific inputs:
+
+```bash
+# Process inline CSS
+pnpm -w --filter Playground dev -- inline:color: #1f2937; font-size: 18px; line-height: 1.4; margin: 10px 20px;
+
+# Process CSS rule
+pnpm -w --filter Playground dev -- rule:.btn { display: flex; justify-content: center; gap: 12px; }
+```
+
 ## Usage
 
 1. When the Playground starts, you'll see a prompt in your terminal
@@ -39,11 +51,13 @@ pnpm dev
 ## Example Input/Output
 
 ### Input (Inline CSS)
+
 ```
 margin: 1rem; padding: 1rem 2rem; color: #3b82f6;
 ```
 
 ### Output
+
 ```
 ✅ Tailwind Classes:
   m-4 py-4 px-8 text-blue-500
@@ -55,6 +69,7 @@ margin: 1rem; padding: 1rem 2rem; color: #3b82f6;
 ```
 
 ### Input (CSS Rule Block)
+
 ```
 .card {
   display: flex;
@@ -67,6 +82,7 @@ margin: 1rem; padding: 1rem 2rem; color: #3b82f6;
 ```
 
 ### Output
+
 ```
 🔸 Rule: .card
 
@@ -84,11 +100,11 @@ margin: 1rem; padding: 1rem 2rem; color: #3b82f6;
 The Playground uses the default Tailwind theme and configuration. To customize the behavior, you can modify the context options in `src/index.ts`:
 
 ```typescript
-const ctx = { 
-  theme, 
-  opts: { 
-    strict: false,  // Set to true to disable approximation
-    approximate: true  // Set to false to use only exact matches
-  } 
+const ctx = {
+  theme,
+  opts: {
+    strict: false, // Set to true to disable approximation
+    approximate: true, // Set to false to use only exact matches
+  },
 };
 ```
