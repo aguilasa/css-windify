@@ -1,0 +1,4083 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CSS to Tailwind Integration Tests > Button Component > should transform button CSS with approximate mode 1`] = `
+[
+  {
+    "classes": [
+      "inline-block",
+      "py-2",
+      "px-4",
+      "m-1",
+      "text-base",
+      "font-semibold",
+      "leading-normal",
+      "text-center",
+      "[white-space:nowrap]",
+      "[vertical-align:middle]",
+      "[cursor:pointer]",
+      "[user-select:none]",
+      "border",
+      "border-transparent",
+      "rounded",
+      "bg-[#3b82f6]",
+      "text-white",
+      "[transition:background-color 0.15s ease-in-out, border-color 0.15s ease-in-out]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "layout": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "other": {
+          "matched": 4,
+          "percentage": 100,
+          "total": 4,
+        },
+        "spacing": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "typography": {
+          "matched": 4,
+          "percentage": 100,
+          "total": 4,
+        },
+      },
+      "matched": 16,
+      "nonArbitrary": 12,
+      "percentage": 100,
+      "total": 16,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 5,
+        "other": 0,
+      },
+    },
+    "selector": ".btn",
+    "warnings": [
+      "No direct Tailwind equivalent for 'white-space: nowrap', used arbitrary property",
+      "No direct Tailwind equivalent for 'vertical-align: middle', used arbitrary property",
+      "No direct Tailwind equivalent for 'cursor: pointer', used arbitrary property",
+      "No direct Tailwind equivalent for 'user-select: none', used arbitrary property",
+      "Used arbitrary value for 'background-color: #3b82f6'",
+      "No direct Tailwind equivalent for 'transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out', used arbitrary property",
+      "Selector '.btn' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#2563eb]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn:hover",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #2563eb'",
+      "Selector '.btn:hover' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-3",
+      "px-6",
+      "text-xl",
+      "rounded-lg",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 4,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-lg",
+    "warnings": [
+      "Selector '.btn-lg' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-1",
+      "px-2",
+      "text-sm",
+      "rounded-[0.2rem]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 3,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-sm",
+    "warnings": [
+      "Used arbitrary value for 'border-radius: 0.2rem'",
+      "Selector '.btn-sm' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#3b82f6]",
+      "border-[#3b82f6]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-primary",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #3b82f6'",
+      "Used arbitrary value for 'border-color: #3b82f6'",
+      "Selector '.btn-primary' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#6b7280]",
+      "border-[#6b7280]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-secondary",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #6b7280'",
+      "Used arbitrary value for 'border-color: #6b7280'",
+      "Selector '.btn-secondary' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#10b981]",
+      "border-[#10b981]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-success",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #10b981'",
+      "Used arbitrary value for 'border-color: #10b981'",
+      "Selector '.btn-success' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#ef4444]",
+      "border-[#ef4444]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-danger",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #ef4444'",
+      "Used arbitrary value for 'border-color: #ef4444'",
+      "Selector '.btn-danger' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-transparent",
+      "text-[#3b82f6]",
+      "border-[#3b82f6]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 3,
+          "percentage": 100,
+          "total": 3,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-outline",
+    "warnings": [
+      "Used arbitrary value for 'color: #3b82f6'",
+      "Used arbitrary value for 'border-color: #3b82f6'",
+      "Selector '.btn-outline' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#3b82f6]",
+      "text-white",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-outline:hover",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #3b82f6'",
+      "Selector '.btn-outline:hover' was converted but may need manual adjustment",
+    ],
+  },
+]
+`;
+
+exports[`CSS to Tailwind Integration Tests > Button Component > should transform button CSS with strict mode 1`] = `
+[
+  {
+    "classes": [
+      "inline-block",
+      "py-2",
+      "px-4",
+      "m-1",
+      "text-base",
+      "font-semibold",
+      "leading-normal",
+      "text-center",
+      "[white-space:nowrap]",
+      "[vertical-align:middle]",
+      "[cursor:pointer]",
+      "[user-select:none]",
+      "border",
+      "border-transparent",
+      "rounded",
+      "bg-[#3b82f6]",
+      "text-white",
+      "[transition:background-color 0.15s ease-in-out, border-color 0.15s ease-in-out]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "layout": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "other": {
+          "matched": 4,
+          "percentage": 100,
+          "total": 4,
+        },
+        "spacing": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "typography": {
+          "matched": 4,
+          "percentage": 100,
+          "total": 4,
+        },
+      },
+      "matched": 16,
+      "nonArbitrary": 12,
+      "percentage": 100,
+      "total": 16,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 5,
+        "other": 0,
+      },
+    },
+    "selector": ".btn",
+    "warnings": [
+      "No direct Tailwind equivalent for 'white-space: nowrap', used arbitrary property",
+      "No direct Tailwind equivalent for 'vertical-align: middle', used arbitrary property",
+      "No direct Tailwind equivalent for 'cursor: pointer', used arbitrary property",
+      "No direct Tailwind equivalent for 'user-select: none', used arbitrary property",
+      "Used arbitrary value for 'background-color: #3b82f6'",
+      "No direct Tailwind equivalent for 'transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out', used arbitrary property",
+      "Selector '.btn' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#2563eb]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn:hover",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #2563eb'",
+      "Selector '.btn:hover' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-3",
+      "px-6",
+      "text-xl",
+      "rounded-lg",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 4,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-lg",
+    "warnings": [
+      "Selector '.btn-lg' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-1",
+      "px-2",
+      "text-sm",
+      "rounded-[0.2rem]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 3,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-sm",
+    "warnings": [
+      "Used arbitrary value for 'border-radius: 0.2rem'",
+      "Selector '.btn-sm' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#3b82f6]",
+      "border-[#3b82f6]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-primary",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #3b82f6'",
+      "Used arbitrary value for 'border-color: #3b82f6'",
+      "Selector '.btn-primary' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#6b7280]",
+      "border-[#6b7280]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-secondary",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #6b7280'",
+      "Used arbitrary value for 'border-color: #6b7280'",
+      "Selector '.btn-secondary' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#10b981]",
+      "border-[#10b981]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-success",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #10b981'",
+      "Used arbitrary value for 'border-color: #10b981'",
+      "Selector '.btn-success' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#ef4444]",
+      "border-[#ef4444]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-danger",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #ef4444'",
+      "Used arbitrary value for 'border-color: #ef4444'",
+      "Selector '.btn-danger' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-transparent",
+      "text-[#3b82f6]",
+      "border-[#3b82f6]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 3,
+          "percentage": 100,
+          "total": 3,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-outline",
+    "warnings": [
+      "Used arbitrary value for 'color: #3b82f6'",
+      "Used arbitrary value for 'border-color: #3b82f6'",
+      "Selector '.btn-outline' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#3b82f6]",
+      "text-white",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".btn-outline:hover",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #3b82f6'",
+      "Selector '.btn-outline:hover' was converted but may need manual adjustment",
+    ],
+  },
+]
+`;
+
+exports[`CSS to Tailwind Integration Tests > Card Component > should transform card CSS with approximate mode 1`] = `
+[
+  {
+    "classes": [
+      "flex",
+      "flex-col",
+      "bg-white",
+      "rounded-lg",
+      "[box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
+      "overflow-hidden",
+      "m-4",
+      "w-[100%]",
+      "max-w-96",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "layout": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 3,
+          "percentage": 100,
+          "total": 3,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 9,
+      "nonArbitrary": 7,
+      "percentage": 100,
+      "total": 9,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card",
+    "warnings": [
+      "No direct Tailwind equivalent for 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', used arbitrary property",
+      "Used arbitrary value for 'width: 100%'",
+      "Selector '.card' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-5",
+      "px-6",
+      "[border-bottom:1px solid #e5e7eb]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-header",
+    "warnings": [
+      "No direct Tailwind equivalent for 'border-bottom: 1px solid #e5e7eb', used arbitrary property",
+      "Selector '.card-header' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "m-0",
+      "text-xl",
+      "font-semibold",
+      "text-[#111827]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+      },
+      "matched": 4,
+      "nonArbitrary": 3,
+      "percentage": 100,
+      "total": 4,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-title",
+    "warnings": [
+      "Used arbitrary value for 'color: #111827'",
+      "Selector '.card-title' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "p-6",
+      "[flex:1 1 auto]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-body",
+    "warnings": [
+      "No direct Tailwind equivalent for 'flex: 1 1 auto', used arbitrary property",
+      "Selector '.card-body' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "text-[#4b5563]",
+      "leading-normal",
+      "mb-4",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-text",
+    "warnings": [
+      "Used arbitrary value for 'color: #4b5563'",
+      "Selector '.card-text' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-5",
+      "px-6",
+      "bg-[#f9fafb]",
+      "[border-top:1px solid #e5e7eb]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-footer",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #f9fafb'",
+      "No direct Tailwind equivalent for 'border-top: 1px solid #e5e7eb', used arbitrary property",
+      "Selector '.card-footer' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "w-[100%]",
+      "h-60",
+      "object-cover",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-img-top",
+    "warnings": [
+      "Used arbitrary value for 'width: 100%'",
+      "Selector '.card-img-top' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "flex-row",
+      "items-stretch",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-horizontal",
+    "warnings": [
+      "Selector '.card-horizontal' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "w-[33%]",
+      "object-cover",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-horizontal .card-img",
+    "warnings": [
+      "Used arbitrary value for 'width: 33%'",
+      "Selector '.card-horizontal .card-img' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "flex",
+      "flex-col",
+      "[flex:1 1 auto]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-horizontal .card-content",
+    "warnings": [
+      "No direct Tailwind equivalent for 'flex: 1 1 auto', used arbitrary property",
+      "Selector '.card-horizontal .card-content' was converted but may need manual adjustment",
+    ],
+  },
+]
+`;
+
+exports[`CSS to Tailwind Integration Tests > Card Component > should transform card CSS with strict mode 1`] = `
+[
+  {
+    "classes": [
+      "flex",
+      "flex-col",
+      "bg-white",
+      "rounded-lg",
+      "[box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
+      "overflow-hidden",
+      "m-4",
+      "w-[100%]",
+      "max-w-96",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "layout": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 3,
+          "percentage": 100,
+          "total": 3,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 9,
+      "nonArbitrary": 7,
+      "percentage": 100,
+      "total": 9,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card",
+    "warnings": [
+      "No direct Tailwind equivalent for 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', used arbitrary property",
+      "Used arbitrary value for 'width: 100%'",
+      "Selector '.card' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-5",
+      "px-6",
+      "[border-bottom:1px solid #e5e7eb]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-header",
+    "warnings": [
+      "No direct Tailwind equivalent for 'border-bottom: 1px solid #e5e7eb', used arbitrary property",
+      "Selector '.card-header' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "m-0",
+      "text-xl",
+      "font-semibold",
+      "text-[#111827]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+      },
+      "matched": 4,
+      "nonArbitrary": 3,
+      "percentage": 100,
+      "total": 4,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-title",
+    "warnings": [
+      "Used arbitrary value for 'color: #111827'",
+      "Selector '.card-title' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "p-6",
+      "[flex:1 1 auto]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-body",
+    "warnings": [
+      "No direct Tailwind equivalent for 'flex: 1 1 auto', used arbitrary property",
+      "Selector '.card-body' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "text-[#4b5563]",
+      "leading-normal",
+      "mb-4",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-text",
+    "warnings": [
+      "Used arbitrary value for 'color: #4b5563'",
+      "Selector '.card-text' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "py-5",
+      "px-6",
+      "bg-[#f9fafb]",
+      "[border-top:1px solid #e5e7eb]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-footer",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #f9fafb'",
+      "No direct Tailwind equivalent for 'border-top: 1px solid #e5e7eb', used arbitrary property",
+      "Selector '.card-footer' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "w-[100%]",
+      "h-60",
+      "object-cover",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-img-top",
+    "warnings": [
+      "Used arbitrary value for 'width: 100%'",
+      "Selector '.card-img-top' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "flex-row",
+      "items-stretch",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-horizontal",
+    "warnings": [
+      "Selector '.card-horizontal' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "w-[33%]",
+      "object-cover",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".card-horizontal .card-img",
+    "warnings": [
+      "Used arbitrary value for 'width: 33%'",
+      "Selector '.card-horizontal .card-img' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "flex",
+      "flex-col",
+      "[flex:1 1 auto]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".card-horizontal .card-content",
+    "warnings": [
+      "No direct Tailwind equivalent for 'flex: 1 1 auto', used arbitrary property",
+      "Selector '.card-horizontal .card-content' was converted but may need manual adjustment",
+    ],
+  },
+]
+`;
+
+exports[`CSS to Tailwind Integration Tests > Coverage Comparison > should compare coverage between strict and approximate modes 1`] = `
+[
+  {
+    "approximate": {
+      "matched": 36,
+      "nonArbitrary": 21,
+      "total": 36,
+      "warnings": 29,
+    },
+    "fixture": "button",
+    "strict": {
+      "matched": 36,
+      "nonArbitrary": 21,
+      "total": 36,
+      "warnings": 29,
+    },
+  },
+  {
+    "approximate": {
+      "matched": 33,
+      "nonArbitrary": 24,
+      "total": 33,
+      "warnings": 21,
+    },
+    "fixture": "card",
+    "strict": {
+      "matched": 33,
+      "nonArbitrary": 24,
+      "total": 33,
+      "warnings": 21,
+    },
+  },
+  {
+    "approximate": {
+      "matched": 20,
+      "nonArbitrary": 6,
+      "total": 20,
+      "warnings": 25,
+    },
+    "fixture": "grid",
+    "strict": {
+      "matched": 20,
+      "nonArbitrary": 6,
+      "total": 20,
+      "warnings": 25,
+    },
+  },
+]
+`;
+
+exports[`CSS to Tailwind Integration Tests > Grid Component > should transform grid CSS with approximate mode 1`] = `
+[
+  {
+    "classes": [
+      "grid",
+      "grid-cols-[repeat(12, 1fr)]",
+      "[grid-gap:1.5rem]",
+      "p-8",
+      "max-w-[1200px]",
+      "my-0",
+      "mx-auto",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 3,
+          "percentage": 100,
+          "total": 3,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 6,
+      "nonArbitrary": 4,
+      "percentage": 100,
+      "total": 6,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-container",
+    "warnings": [
+      "Used arbitrary value for 'grid-template-columns: repeat(12, 1fr)'",
+      "No direct Tailwind equivalent for 'grid-gap: 1.5rem', used arbitrary property",
+      "Used arbitrary value for 'max-width: 1200px'",
+      "Selector '.grid-container' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 1]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-1",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 1', used arbitrary property",
+      "Selector '.col-span-1' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 2]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-2",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 2', used arbitrary property",
+      "Selector '.col-span-2' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 3]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-3",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 3', used arbitrary property",
+      "Selector '.col-span-3' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 4]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-4",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 4', used arbitrary property",
+      "Selector '.col-span-4' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 6]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-6",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
+      "Selector '.col-span-6' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 8]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-8",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 8', used arbitrary property",
+      "Selector '.col-span-8' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 12]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-12",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 12', used arbitrary property",
+      "Selector '.col-span-12' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "p-6",
+      "bg-[#f3f4f6]",
+      "rounded-md",
+      "h-[100%]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 4,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 4,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-item",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #f3f4f6'",
+      "Used arbitrary value for 'height: 100%'",
+      "Selector '.grid-item' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#dbeafe]",
+      "[grid-column:span 6]",
+      "[grid-row:span 2]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 2,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-item-featured",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #dbeafe'",
+      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
+      "No direct Tailwind equivalent for 'grid-row: span 2', used arbitrary property",
+      "Selector '.grid-item-featured' was converted but may need manual adjustment",
+    ],
+  },
+]
+`;
+
+exports[`CSS to Tailwind Integration Tests > Grid Component > should transform grid CSS with strict mode 1`] = `
+[
+  {
+    "classes": [
+      "grid",
+      "grid-cols-[repeat(12, 1fr)]",
+      "[grid-gap:1.5rem]",
+      "p-8",
+      "max-w-[1200px]",
+      "my-0",
+      "mx-auto",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 3,
+          "percentage": 100,
+          "total": 3,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 6,
+      "nonArbitrary": 4,
+      "percentage": 100,
+      "total": 6,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-container",
+    "warnings": [
+      "Used arbitrary value for 'grid-template-columns: repeat(12, 1fr)'",
+      "No direct Tailwind equivalent for 'grid-gap: 1.5rem', used arbitrary property",
+      "Used arbitrary value for 'max-width: 1200px'",
+      "Selector '.grid-container' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 1]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-1",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 1', used arbitrary property",
+      "Selector '.col-span-1' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 2]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-2",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 2', used arbitrary property",
+      "Selector '.col-span-2' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 3]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-3",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 3', used arbitrary property",
+      "Selector '.col-span-3' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 4]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-4",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 4', used arbitrary property",
+      "Selector '.col-span-4' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 6]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-6",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
+      "Selector '.col-span-6' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 8]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-8",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 8', used arbitrary property",
+      "Selector '.col-span-8' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "[grid-column:span 12]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-12",
+    "warnings": [
+      "No direct Tailwind equivalent for 'grid-column: span 12', used arbitrary property",
+      "Selector '.col-span-12' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "p-6",
+      "bg-[#f3f4f6]",
+      "rounded-md",
+      "h-[100%]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "spacing": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 4,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 4,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 2,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-item",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #f3f4f6'",
+      "Used arbitrary value for 'height: 100%'",
+      "Selector '.grid-item' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "bg-[#dbeafe]",
+      "[grid-column:span 6]",
+      "[grid-row:span 2]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 2,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-item-featured",
+    "warnings": [
+      "Used arbitrary value for 'background-color: #dbeafe'",
+      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
+      "No direct Tailwind equivalent for 'grid-row: span 2', used arbitrary property",
+      "Selector '.grid-item-featured' was converted but may need manual adjustment",
+    ],
+  },
+]
+`;
