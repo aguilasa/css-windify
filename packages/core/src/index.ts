@@ -126,6 +126,12 @@ export {
   withVariants
 } from './core/variants';
 
+// Parsers
+export {
+  parseInlineCss,
+  parseCssRules
+} from './parsers';
+
 // Export both named and default exports
 export { Tailwindify };
 export default Tailwindify;
