@@ -80,6 +80,15 @@ export {
   parseColorNormalize
 } from './core/normalizers';
 
+export {
+  loadTheme,
+  defaultTheme,
+  resolveSpacingToken,
+  resolveColorToken,
+  resolveFontSizeToken,
+  resolveLineHeightToken
+} from './core/themeLoader';
+
 // Export both named and default exports
 export { Tailwindify };
 export default Tailwindify;

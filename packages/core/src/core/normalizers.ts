@@ -151,15 +151,15 @@ export function parseBoxShorthand(v: string): string[] {
 export function parseColorNormalize(v: string): string {
   if (!v) return '';
   
-  const trimmed = v.trim();
+  const trimmed = v.trim().toLowerCase();
   
   // Handle hex shorthand (#fff -> #ffffff)
-  if (/^#[0-9a-fA-F]{3}$/.test(trimmed)) {
+  if (/^#[0-9a-f]{3}$/.test(trimmed)) {
     return '#' + trimmed[1] + trimmed[1] + trimmed[2] + trimmed[2] + trimmed[3] + trimmed[3];
   }
   
   // Handle hex shorthand with alpha (#rgba -> #rrggbbaa)
-  if (/^#[0-9a-fA-F]{4}$/.test(trimmed)) {
+  if (/^#[0-9a-f]{4}$/.test(trimmed)) {
     return '#' + 
       trimmed[1] + trimmed[1] + 
       trimmed[2] + trimmed[2] + 
