@@ -120,6 +120,12 @@ export {
   matchPlaceSelf
 } from './core/matchers';
 
+// Variant utilities
+export {
+  withVariant,
+  withVariants
+} from './core/variants';
+
 // Export both named and default exports
 export { Tailwindify };
 export default Tailwindify;

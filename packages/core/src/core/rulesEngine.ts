@@ -4,6 +4,7 @@
 import { CssDeclaration, CssRule, MatchCtx, RuleHandler, TransformResult } from '../types';
 import { calculateCoverage, aggregateWarnings } from './reporter';
 import { arbitraryProperty } from './normalizers';
+import { withVariants } from './variants';
 import {
   // Layout matchers
   matchDisplay,
@@ -332,7 +333,12 @@ export function transformDeclarations(decls: CssDeclaration[], ctx: MatchCtx): T
     const result = toTailwind(decl.prop, decl.value, ctx);
     
     if (result.classes && result.classes.length > 0) {
-      allClasses.push(...result.classes);
+      // Apply variants if provided
+      const classesWithVariants = decl.variants && decl.variants.length > 0
+        ? withVariants(decl.variants, result.classes)
+        : result.classes;
+      
+      allClasses.push(...classesWithVariants);
       matched++;
       
       // Add warning if present

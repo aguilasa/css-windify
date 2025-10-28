@@ -159,5 +159,46 @@ describe('rulesEngine', () => {
       expect(result.coverage.matched).toBe(4);
       expect(result.coverage.total).toBe(4);
     });
+    
+    it('should apply hover variant to declarations', () => {
+      const declarations = [
+        { prop: 'color', value: 'red', variants: ['hover'] },
+        { prop: 'background-color', value: 'blue' } // No variant
+      ];
+
+      const result = transformDeclarations(declarations, ctx);
+      
+      // Check that hover variant is applied to color but not to background-color
+      expect(result.classes.some(cls => cls.startsWith('hover:') && cls.includes('text-'))).toBe(true);
+      expect(result.classes.some(cls => !cls.startsWith('hover:') && cls.includes('bg-'))).toBe(true);
+    });
+    
+    it('should apply responsive variants to declarations', () => {
+      const declarations = [
+        { prop: 'margin', value: '1rem', variants: ['sm', 'md'] },
+        { prop: 'padding', value: '2rem', variants: ['lg'] }
+      ];
+
+      const result = transformDeclarations(declarations, ctx);
+      
+      // Check that responsive variants are applied correctly
+      expect(result.classes.some(cls => cls.startsWith('sm:md:') && cls.includes('m-'))).toBe(true);
+      expect(result.classes.some(cls => cls.startsWith('lg:') && cls.includes('p-'))).toBe(true);
+    });
+    
+    it('should handle mixed variants and non-variants', () => {
+      const declarations = [
+        { prop: 'color', value: 'white', variants: ['hover', 'focus'] },
+        { prop: 'margin', value: '1rem', variants: ['sm'] },
+        { prop: 'padding', value: '2rem' } // No variant
+      ];
+
+      const result = transformDeclarations(declarations, ctx);
+      
+      // Check that variants are applied correctly
+      expect(result.classes.some(cls => cls.startsWith('hover:focus:') && cls.includes('text-'))).toBe(true);
+      expect(result.classes.some(cls => cls.startsWith('sm:') && cls.includes('m-'))).toBe(true);
+      expect(result.classes.some(cls => !cls.includes(':') && cls.includes('p-'))).toBe(true);
+    });
   });
 });

@@ -11,6 +11,7 @@ export interface TailwindifyOptions {
 export interface CssDeclaration {
   prop: string;
   value: string;
+  variants?: string[];
 }
 
 export interface CssRule {
