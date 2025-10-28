@@ -97,7 +97,18 @@ export {
   matchInset,
   matchInsetShorthand,
   displayMap,
-  positionMap
+  positionMap,
+  // Color matchers
+  matchColor,
+  // Border matchers
+  matchBorderWidth,
+  matchBorderColor,
+  matchBorderRadius,
+  // Background matchers
+  matchBackgroundColor,
+  matchBackgroundSize,
+  matchBackgroundPosition,
+  matchBackgroundImage
 } from './core/matchers';
 
 // Export both named and default exports
