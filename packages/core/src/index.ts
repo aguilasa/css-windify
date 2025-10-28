@@ -108,7 +108,16 @@ export {
   matchBackgroundColor,
   matchBackgroundSize,
   matchBackgroundPosition,
-  matchBackgroundImage
+  matchBackgroundImage,
+  // Flexbox and Grid matchers
+  matchFlexDirection,
+  matchJustifyContent,
+  matchAlignItems,
+  matchGap,
+  matchGridTemplateColumns,
+  matchPlaceContent,
+  matchPlaceItems,
+  matchPlaceSelf
 } from './core/matchers';
 
 // Export both named and default exports

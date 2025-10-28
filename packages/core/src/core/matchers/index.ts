@@ -8,3 +8,4 @@ export * from './layout';
 export * from './colors';
 export * from './borders';
 export * from './backgrounds';
+export * from './flexGrid';
