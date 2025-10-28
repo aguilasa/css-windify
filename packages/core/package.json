@@ -2,16 +2,27 @@
   "name": "tailwindify-core",
   "version": "0.0.1",
   "description": "Core library for tailwindify",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup",
     "test": "vitest run",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch"
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "postcss": "^8.5.6"
   },
   "devDependencies": {
     "tsup": "^8.0.0",
