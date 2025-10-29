@@ -67,6 +67,13 @@ import {
   matchGridRowStart,
   matchGridRowEnd,
 
+  // Font matchers
+  matchFontShorthand,
+
+  // Transition and Animation matchers
+  matchTransitionShorthand,
+  matchAnimationShorthand,
+
   // Misc matchers
   matchOverflow,
   matchZIndex,
@@ -416,6 +423,15 @@ const propertyHandlers: Record<string, RuleHandler> = {
   // Border properties
   border: (value, ctx) => matchBorderShorthand(value, ctx).classes,
   'border-style': (value) => [matchBorderStyle(value)],
+
+  // Font properties
+  font: (value, ctx) => matchFontShorthand(value, ctx).classes,
+
+  // Transition properties
+  transition: (value) => matchTransitionShorthand(value).classes,
+
+  // Animation properties
+  animation: (value) => matchAnimationShorthand(value).classes,
 
   // Misc properties
   overflow: (value) => [matchOverflow(value)],

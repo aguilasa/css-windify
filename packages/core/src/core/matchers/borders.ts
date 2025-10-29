@@ -141,9 +141,9 @@ export function matchBorderShorthand(
     classes.push('border');
   }
 
-  // Handle style (only solid is default in Tailwind, others need arbitrary values)
+  // Handle style
   if (style && style.toLowerCase() !== 'solid') {
-    classes.push(arbitraryProperty('border-style', style));
+    classes.push(matchBorderStyle(style));
   }
 
   // Handle color

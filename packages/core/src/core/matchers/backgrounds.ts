@@ -235,6 +235,7 @@ export function parseBackgroundShorthand(value: string): {
   position?: string;
   size?: string;
   repeat?: string;
+  attachment?: string;
 } {
   if (!value) return {};
 
@@ -244,6 +245,7 @@ export function parseBackgroundShorthand(value: string): {
     position?: string;
     size?: string;
     repeat?: string;
+    attachment?: string;
   } = {};
 
   // Extract url() if present
@@ -264,12 +266,23 @@ export function parseBackgroundShorthand(value: string): {
   }
 
   // Extract repeat values
-  const repeatValues = ['repeat', 'no-repeat', 'repeat-x', 'repeat-y', 'space', 'round'];
+  const repeatValues = ['no-repeat', 'repeat-x', 'repeat-y', 'repeat', 'space', 'round'];
   for (const repeat of repeatValues) {
     if (value.includes(repeat)) {
       result.repeat = repeat;
       // Remove the repeat part from the value
       value = value.replace(repeat, '').trim();
+      break;
+    }
+  }
+
+  // Extract attachment values
+  const attachmentValues = ['fixed', 'local', 'scroll'];
+  for (const attachment of attachmentValues) {
+    if (value.includes(attachment)) {
+      result.attachment = attachment;
+      // Remove the attachment part from the value
+      value = value.replace(attachment, '').trim();
       break;
     }
   }
@@ -319,7 +332,7 @@ export function matchBackgroundShorthand(
   if (!value) return { classes: [], warnings: [] };
 
   // Parse the shorthand
-  const { color, image, position, size, repeat } = parseBackgroundShorthand(value);
+  const { color, image, position, size, repeat, attachment } = parseBackgroundShorthand(value);
   const classes: string[] = [];
   const warnings: string[] = [];
 
@@ -349,14 +362,12 @@ export function matchBackgroundShorthand(
 
   // Handle repeat
   if (repeat) {
-    // Tailwind doesn't have direct utilities for all repeat values
-    if (repeat === 'no-repeat') {
-      classes.push('bg-no-repeat');
-    } else if (repeat === 'repeat') {
-      // Default in Tailwind, no class needed
-    } else {
-      classes.push(arbitraryProperty('background-repeat', repeat));
-    }
+    classes.push(matchBackgroundRepeat(repeat));
+  }
+
+  // Handle attachment
+  if (attachment) {
+    classes.push(matchBackgroundAttachment(attachment));
   }
 
   return { classes, warnings };

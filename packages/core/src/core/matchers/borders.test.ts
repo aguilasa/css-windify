@@ -138,7 +138,7 @@ describe('borders matcher', () => {
       // Default width with custom style and color
       const result3 = matchBorderShorthand('dashed blue', ctx);
       expect(result3.classes).toContain('border');
-      expect(result3.classes).toContain('[border-style:dashed]');
+      expect(result3.classes).toContain('border-dashed');
       expect(result3.classes).toContain('border-[blue]');
       expect(result3.classes.length).toBe(3);
 
