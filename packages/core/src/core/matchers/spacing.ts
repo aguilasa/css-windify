@@ -1,5 +1,14 @@
 /**
  * Spacing matchers for Tailwind CSS
+ *
+ * @see SPEC.md → "Matching and Mapping Rules (v3 baseline)" → "Box model and dimensions" → "margin/padding"
+ * @see SPEC.md → "Shorthand handling" → "margin/padding: decompose 1–4 values into sides and axes"
+ * @see SPEC.md → "Spacing resolution"
+ *
+ * Edge cases handled:
+ * - '0' and 'auto' have special handling (see SPEC.md)
+ * - Shorthand decomposition into 1-4 values
+ * - Approximate matching within threshold
  */
 import { MatchCtx } from '../../types';
 import { parseBoxShorthand, toArbitrary } from '../normalizers';

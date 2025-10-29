@@ -1,9 +1,15 @@
 /**
  * Utility functions for handling Tailwind CSS variants
+ *
+ * @see SPEC.md → "Variants and Responsive Behavior"
+ * @see SPEC.md → "Variants and Responsive Behavior" → "Supported pseudo-classes and state variants"
+ * @see SPEC.md → "Variants and Responsive Behavior" → "Variant application"
  */
 
 /**
  * List of supported pseudo-class variants
+ *
+ * @see SPEC.md → "Variants and Responsive Behavior" → "Supported pseudo-classes and state variants"
  */
 export const PSEUDO_VARIANTS = [
   'hover',
@@ -91,6 +97,10 @@ export function dedupeVariants(variants: string[]): string[] {
 /**
  * Apply multiple variant prefixes to a list of Tailwind classes
  *
+ * @see SPEC.md → "Variants and Responsive Behavior" → "Variant application"
+ * Applies variants as prefixes in the given order, preserving hierarchy.
+ * Example: ['md', 'dark', 'hover'] → 'md:dark:hover:text-blue-600'
+ *
  * @param variants Array of variant prefixes (e.g., ['hover', 'sm', 'md', 'focus'])
  * @param classes Array of Tailwind classes to apply the variants to
  * @returns Array of classes with all variant prefixes applied
@@ -101,6 +111,7 @@ export function withVariants(variants: string[], classes: string[]): string[] {
   }
 
   // Deduplicate variants while preserving order
+  // @see SPEC.md → "Variants and Responsive Behavior" → "Variant application" (dedupe repeated variants)
   const uniqueVariants = dedupeVariants(variants);
   let result: string[] = [...classes];
 

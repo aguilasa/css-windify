@@ -1,12 +1,21 @@
 /**
  * Token resolvers for Tailwind CSS v3 and v4
  * Handles both theme-based (v3) and token-based (v4) resolution
+ *
+ * @see SPEC.md → "Resolvers"
+ * @see SPEC.md → "Spacing resolution"
+ * @see SPEC.md → "Color resolution strategy"
+ * @see SPEC.md → "Tailwind v4 Migration Plan" → "Resolvers in v4"
  */
 import { MatchCtx } from '../types';
 import { normalizeValue, parseColorNormalize, toPx } from './normalizers';
 
 /**
  * Find the nearest token in a numeric token map based on a pixel value
+ *
+ * @see SPEC.md → "Resolvers" → "resolveNearestTokenPx"
+ * @see SPEC.md → "Spacing resolution" (approximation logic)
+ * Used for approximate mode to find closest matching token within threshold
  *
  * @param valuePx The pixel value to find the nearest token for
  * @param tokenMapPx The mapping of token names to their pixel values
@@ -70,6 +79,15 @@ function tokenMapToPx(
 
 /**
  * Resolves a spacing value to a Tailwind token
+ *
+ * @see SPEC.md → "Resolvers" → "resolveSpacingToken"
+ * @see SPEC.md → "Spacing resolution"
+ * @see SPEC.md → "Thresholds by category (defaults)" → spacingPx: 2
+ *
+ * Implements:
+ * - Exact matching in strict mode
+ * - Approximate matching within threshold (default: 2px)
+ * - Arbitrary values for non-matches
  *
  * @param value CSS spacing value (margin, padding, etc.)
  * @param ctx The matching context with theme and options

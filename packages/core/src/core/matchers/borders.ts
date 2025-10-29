@@ -1,11 +1,17 @@
 /**
  * Border matchers for Tailwind CSS
+ *
+ * @see SPEC.md → "Matching and Mapping Rules (v3 baseline)" → "Box model and dimensions" → "border-width"
+ * @see SPEC.md → "Matching and Mapping Rules (v3 baseline)" → "Box model and dimensions" → "border-style"
+ * @see SPEC.md → "Matching and Mapping Rules (v3 baseline)" → "Box model and dimensions" → "border-radius"
+ * @see SPEC.md → "Shorthand handling" → "border"
  */
 import { MatchCtx } from '../../types';
 import { normalizeValue, toArbitrary, arbitraryProperty } from '../normalizers';
 import { matchColor } from './colors';
 
 // Border width mapping
+// @see SPEC.md → "Matching and Mapping Rules (v3 baseline)" → "border-width"
 const borderWidthMap: Record<string, string> = {
   '0': 'border-0',
   '0px': 'border-0',
@@ -16,6 +22,8 @@ const borderWidthMap: Record<string, string> = {
 };
 
 // Border radius mapping
+// @see SPEC.md → "Matching and Mapping Rules (v3 baseline)" → "border-radius"
+// Edge case: 50% and 9999px both map to rounded-full
 const borderRadiusMap: Record<string, string> = {
   '0': 'rounded-none',
   '0px': 'rounded-none',
@@ -52,6 +60,9 @@ export function matchBorderWidth(value: string): string {
 
 /**
  * Parse border shorthand and extract components
+ *
+ * @see SPEC.md → "Shorthand handling" → "border: parse width/style/color components"
+ * Handles edge cases like missing components and order variations
  *
  * @param value The CSS border shorthand value (e.g., "1px solid black")
  * @returns Object with width, style, and color components

@@ -1,6 +1,10 @@
 /**
  * Tokens loader for Tailwind CSS v4
  * Extracts CSS custom properties and converts them to ThemeTokens
+ *
+ * @see SPEC.md → "Tailwind v4 Migration Plan" → "Tokens loader (new)"
+ * @see SPEC.md → "Theme and token handling"
+ * @see SPEC.md → "Tailwind v4 Migration Plan" → "Version detection"
  */
 import * as fs from 'fs';
 import * as path from 'path';
@@ -269,6 +273,12 @@ function projectV3ThemeToTokens(theme: any): ThemeTokens {
 /**
  * Load tokens from CSS custom properties and/or Tailwind config
  *
+ * @see SPEC.md → "Tailwind v4 Migration Plan" → "Tokens loader (new)"
+ * Implements v4-first approach with v3 fallback:
+ * 1. Try CSS custom properties first (v4)
+ * 2. Fall back to tailwind.config.* (v3)
+ * 3. Use default tokens if neither available
+ *
  * @param options Options for loading tokens
  * @returns ThemeTokens object
  */
@@ -277,6 +287,7 @@ export async function loadTokens(options?: {
   configPath?: string;
 }): Promise<ThemeTokens> {
   // Try to load CSS custom properties first (v4 approach)
+  // @see SPEC.md → "Tailwind v4 Migration Plan" → "Version detection"
   if (options?.cssPath && fs.existsSync(options.cssPath)) {
     try {
       const cssContent = fs.readFileSync(options.cssPath, 'utf-8');

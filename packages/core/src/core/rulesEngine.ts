@@ -524,6 +524,14 @@ export function toTailwind(
 
 /**
  * Get the group for a Tailwind class
+ *
+ * @see SPEC.md → "Class Ordering" → "Groups and order"
+ * @see SPEC.md → "Class Ordering" → "Algorithm"
+ *
+ * Implements the 9-group ordering system:
+ * 1. layout, 2. flex-grid, 3. sizing, 4. spacing, 5. typography,
+ * 6. background, 7. border, 8. effects, 9. misc
+ *
  * @param className Tailwind class name
  * @returns Group name and order value
  */
@@ -532,6 +540,7 @@ export function getClassGroup(className: string): { group: string; order: number
   const baseClass = className.split(':').pop() || '';
 
   // Define the groups and their order as specified in SPEC.md
+  // @see SPEC.md → "Class Ordering" → "Groups and order"
   const groups = {
     layout: 1, // display, position, inset/top/right/bottom/left, overflow, object, aspect
     'flex-grid': 2, // flex/grid/gap/justify/items/place-*
@@ -803,11 +812,21 @@ function getVariantPriority(variant: string): number {
 
 /**
  * Sort Tailwind classes by property group
+ *
+ * @see SPEC.md → "Class Ordering" → "Algorithm"
+ * @see SPEC.md → "Class Ordering" → "Goals" (deterministic, readable, stable diff ordering)
+ *
+ * Implements sorting by tuple: (variantPrefix, groupOrder, classKey, classFull)
+ * - Deduplicates classes
+ * - Sorts by variant count, then variant priority, then group, then class key
+ * - Preserves first occurrence order within sort context
+ *
  * @param classes Array of Tailwind classes
  * @returns Sorted array of classes
  */
 export function sortClasses(classes: string[]): string[] {
   // First dedupe the classes to avoid duplicates
+  // @see SPEC.md → "Class Ordering" → "Algorithm" (dedupe at the end)
   const uniqueClasses = [...new Set(classes)];
 
   // Create sort entries with metadata for sorting
