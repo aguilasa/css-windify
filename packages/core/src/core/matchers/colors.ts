@@ -11,13 +11,13 @@ const basicNamedColors = ['black', 'white', 'transparent', 'current'];
 /**
  * Matches color values to Tailwind classes
  *
- * @param prefix The color property prefix (text, bg, border)
+ * @param prefix The color property prefix (text, bg, border, decoration)
  * @param value The CSS color value
  * @param ctx The matching context with theme
  * @returns Tailwind class
  */
 export function matchColor(
-  prefix: 'text' | 'bg' | 'border',
+  prefix: 'text' | 'bg' | 'border' | 'decoration',
   value: string,
   ctx: MatchCtx
 ): { class: string; warning?: string } {

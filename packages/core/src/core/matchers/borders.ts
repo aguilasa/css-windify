@@ -207,3 +207,31 @@ export function matchBorderRadius(value: string): string {
   // Use arbitrary value if no match found
   return toArbitrary('rounded', normalizedValue);
 }
+
+/**
+ * Matches border style values to Tailwind classes
+ *
+ * @param value The CSS border-style value
+ * @returns Tailwind class
+ */
+export function matchBorderStyle(value: string): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Map border-style values to Tailwind classes
+  const styleMap: Record<string, string> = {
+    solid: 'border-solid',
+    dashed: 'border-dashed',
+    dotted: 'border-dotted',
+    double: 'border-double',
+    none: 'border-none',
+  };
+
+  if (styleMap[normalizedValue]) {
+    return styleMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return arbitraryProperty('border-style', normalizedValue);
+}

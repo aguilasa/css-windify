@@ -27,9 +27,14 @@ import {
   matchBorderWidth,
   matchBorderRadius,
   matchBorderShorthand,
+  matchBorderStyle,
 
   // Typography matchers
   matchTypography,
+  matchTextDecoration,
+  matchTextDecorationColor,
+  matchTextDecorationStyle,
+  matchTextDecorationThickness,
 
   // Background matchers
   matchBackgroundColor,
@@ -37,6 +42,10 @@ import {
   matchBackgroundPosition,
   matchBackgroundImage,
   matchBackgroundShorthand,
+  matchBackgroundRepeat,
+  matchBackgroundAttachment,
+  matchBackgroundOrigin,
+  matchBackgroundClip,
 
   // Flexbox and Grid matchers
   matchFlexDirection,
@@ -47,6 +56,16 @@ import {
   matchPlaceContent,
   matchPlaceItems,
   matchPlaceSelf,
+  matchFlexBasis,
+  matchFlexGrow,
+  matchFlexShrink,
+  matchGridAutoFlow,
+  matchGridColumn,
+  matchGridRow,
+  matchGridColumnStart,
+  matchGridColumnEnd,
+  matchGridRowStart,
+  matchGridRowEnd,
 
   // Misc matchers
   matchOverflow,
@@ -320,6 +339,18 @@ const propertyHandlers: Record<string, RuleHandler> = {
     return [arbitraryProperty('text-align', value)];
   },
 
+  // Text decoration properties
+  'text-decoration': (value) => {
+    const result = matchTextDecoration(value);
+    return Array.isArray(result) ? result : [result];
+  },
+  'text-decoration-color': (value, ctx) => {
+    const result = matchTextDecorationColor(value, ctx);
+    return [result];
+  },
+  'text-decoration-style': (value) => [matchTextDecorationStyle(value)],
+  'text-decoration-thickness': (value) => [matchTextDecorationThickness(value)],
+
   // Object properties
   'object-fit': (value) => {
     // Map object-fit values to Tailwind classes
@@ -351,6 +382,22 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'place-content': (value) => [matchPlaceContent(value)],
   'place-items': (value) => [matchPlaceItems(value)],
   'place-self': (value) => [matchPlaceSelf(value)],
+  'flex-basis': (value, ctx) => [matchFlexBasis(value, ctx)],
+  'flex-grow': (value) => [matchFlexGrow(value)],
+  'flex-shrink': (value) => [matchFlexShrink(value)],
+  'grid-auto-flow': (value) => [matchGridAutoFlow(value)],
+  'grid-column': (value) => {
+    const result = matchGridColumn(value);
+    return Array.isArray(result) ? result : [result];
+  },
+  'grid-row': (value) => {
+    const result = matchGridRow(value);
+    return Array.isArray(result) ? result : [result];
+  },
+  'grid-column-start': (value) => [matchGridColumnStart(value)],
+  'grid-column-end': (value) => [matchGridColumnEnd(value)],
+  'grid-row-start': (value) => [matchGridRowStart(value)],
+  'grid-row-end': (value) => [matchGridRowEnd(value)],
 
   // Background properties
   background: (value, ctx) => matchBackgroundShorthand(value, ctx).classes,
@@ -361,9 +408,14 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'background-size': (value) => [matchBackgroundSize(value)],
   'background-position': (value) => [matchBackgroundPosition(value)],
   'background-image': (value) => [matchBackgroundImage(value)],
+  'background-repeat': (value) => [matchBackgroundRepeat(value)],
+  'background-attachment': (value) => [matchBackgroundAttachment(value)],
+  'background-origin': (value) => [matchBackgroundOrigin(value)],
+  'background-clip': (value) => [matchBackgroundClip(value)],
 
   // Border properties
   border: (value, ctx) => matchBorderShorthand(value, ctx).classes,
+  'border-style': (value) => [matchBorderStyle(value)],
 
   // Misc properties
   overflow: (value) => [matchOverflow(value)],

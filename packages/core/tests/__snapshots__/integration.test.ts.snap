@@ -2745,16 +2745,16 @@ exports[`CSS to Tailwind Integration Tests > Coverage Comparison > should compar
   {
     "approximate": {
       "matched": 20,
-      "nonArbitrary": 6,
+      "nonArbitrary": 15,
       "total": 20,
-      "warnings": 25,
+      "warnings": 16,
     },
     "fixture": "grid",
     "strict": {
       "matched": 20,
-      "nonArbitrary": 6,
+      "nonArbitrary": 15,
       "total": 20,
-      "warnings": 25,
+      "warnings": 16,
     },
   },
 ]
@@ -2836,7 +2836,7 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "[grid-column:span 1]",
+      "col-span-1",
     ],
     "coverage": {
       "categories": {
@@ -2882,25 +2882,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-1",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 1', used arbitrary property",
       "Selector '.col-span-1' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 2]",
+      "col-span-2",
     ],
     "coverage": {
       "categories": {
@@ -2946,25 +2945,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-2",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 2', used arbitrary property",
       "Selector '.col-span-2' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 3]",
+      "col-span-3",
     ],
     "coverage": {
       "categories": {
@@ -3010,25 +3008,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-3",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 3', used arbitrary property",
       "Selector '.col-span-3' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 4]",
+      "col-span-4",
     ],
     "coverage": {
       "categories": {
@@ -3074,25 +3071,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-4",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 4', used arbitrary property",
       "Selector '.col-span-4' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 6]",
+      "col-span-6",
     ],
     "coverage": {
       "categories": {
@@ -3138,25 +3134,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-6",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
       "Selector '.col-span-6' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 8]",
+      "col-span-8",
     ],
     "coverage": {
       "categories": {
@@ -3202,25 +3197,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-8",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 8', used arbitrary property",
       "Selector '.col-span-8' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 12]",
+      "col-span-12",
     ],
     "coverage": {
       "categories": {
@@ -3266,19 +3260,18 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-12",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 12', used arbitrary property",
       "Selector '.col-span-12' was converted but may need manual adjustment",
     ],
   },
@@ -3352,9 +3345,9 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
+      "col-span-6",
+      "row-span-2",
       "bg-[#dbeafe]",
-      "[grid-column:span 6]",
-      "[grid-row:span 2]",
     ],
     "coverage": {
       "categories": {
@@ -3400,21 +3393,19 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 3,
-      "nonArbitrary": 0,
+      "nonArbitrary": 2,
       "percentage": 100,
       "total": 3,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 1,
-        "no-handler": 2,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".grid-item-featured",
     "warnings": [
       "Used arbitrary value for 'background-color: #dbeafe'",
-      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
-      "No direct Tailwind equivalent for 'grid-row: span 2', used arbitrary property",
       "Selector '.grid-item-featured' was converted but may need manual adjustment",
     ],
   },
@@ -3497,7 +3488,7 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "[grid-column:span 1]",
+      "col-span-1",
     ],
     "coverage": {
       "categories": {
@@ -3543,25 +3534,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-1",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 1', used arbitrary property",
       "Selector '.col-span-1' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 2]",
+      "col-span-2",
     ],
     "coverage": {
       "categories": {
@@ -3607,25 +3597,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-2",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 2', used arbitrary property",
       "Selector '.col-span-2' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 3]",
+      "col-span-3",
     ],
     "coverage": {
       "categories": {
@@ -3671,25 +3660,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-3",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 3', used arbitrary property",
       "Selector '.col-span-3' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 4]",
+      "col-span-4",
     ],
     "coverage": {
       "categories": {
@@ -3735,25 +3723,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-4",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 4', used arbitrary property",
       "Selector '.col-span-4' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 6]",
+      "col-span-6",
     ],
     "coverage": {
       "categories": {
@@ -3799,25 +3786,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-6",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
       "Selector '.col-span-6' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 8]",
+      "col-span-8",
     ],
     "coverage": {
       "categories": {
@@ -3863,25 +3849,24 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-8",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 8', used arbitrary property",
       "Selector '.col-span-8' was converted but may need manual adjustment",
     ],
   },
   {
     "classes": [
-      "[grid-column:span 12]",
+      "col-span-12",
     ],
     "coverage": {
       "categories": {
@@ -3927,19 +3912,18 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 1,
-      "nonArbitrary": 0,
+      "nonArbitrary": 1,
       "percentage": 100,
       "total": 1,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 0,
-        "no-handler": 1,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".col-span-12",
     "warnings": [
-      "No direct Tailwind equivalent for 'grid-column: span 12', used arbitrary property",
       "Selector '.col-span-12' was converted but may need manual adjustment",
     ],
   },
@@ -4013,9 +3997,9 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
+      "col-span-6",
+      "row-span-2",
       "bg-[#dbeafe]",
-      "[grid-column:span 6]",
-      "[grid-row:span 2]",
     ],
     "coverage": {
       "categories": {
@@ -4061,21 +4045,19 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
         },
       },
       "matched": 3,
-      "nonArbitrary": 0,
+      "nonArbitrary": 2,
       "percentage": 100,
       "total": 3,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 1,
-        "no-handler": 2,
+        "no-handler": 0,
         "other": 0,
       },
     },
     "selector": ".grid-item-featured",
     "warnings": [
       "Used arbitrary value for 'background-color: #dbeafe'",
-      "No direct Tailwind equivalent for 'grid-column: span 6', used arbitrary property",
-      "No direct Tailwind equivalent for 'grid-row: span 2', used arbitrary property",
       "Selector '.grid-item-featured' was converted but may need manual adjustment",
     ],
   },

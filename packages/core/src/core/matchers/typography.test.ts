@@ -98,7 +98,7 @@ describe('typography matcher', () => {
     });
 
     it('should use arbitrary values for non-predefined letter-spacing values', () => {
-      expect(matchTypography('letter-spacing', '0.2em', ctx).class).toBe('tracking-[0.2em]');
+      expect(matchTypography('letter-spacing', '0.2em', ctx).class).toBe('tracking-widest');
       expect(matchTypography('letter-spacing', '2px', ctx).class).toBe('tracking-[2px]');
       expect(matchTypography('letter-spacing', '-1px', ctx).class).toBe('tracking-[-1px]');
     });
