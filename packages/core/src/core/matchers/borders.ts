@@ -109,14 +109,18 @@ export function parseBorderShorthand(value: string): {
  *
  * @param value The CSS border shorthand value
  * @param ctx The matching context with theme
- * @returns Array of Tailwind classes
+ * @returns Object with classes and warnings
  */
-export function matchBorderShorthand(value: string, ctx: MatchCtx): string[] {
-  if (!value) return [];
+export function matchBorderShorthand(
+  value: string,
+  ctx: MatchCtx
+): { classes: string[]; warnings: string[] } {
+  if (!value) return { classes: [], warnings: [] };
 
   // Parse the shorthand
   const { width, style, color } = parseBorderShorthand(value);
   const classes: string[] = [];
+  const warnings: string[] = [];
 
   // Handle width
   if (width) {
@@ -144,10 +148,14 @@ export function matchBorderShorthand(value: string, ctx: MatchCtx): string[] {
 
   // Handle color
   if (color) {
-    classes.push(matchColor('border', color, ctx));
+    const colorResult = matchColor('border', color, ctx);
+    classes.push(colorResult.class);
+    if (colorResult.warning) {
+      warnings.push(colorResult.warning);
+    }
   }
 
-  return classes;
+  return { classes, warnings };
 }
 
 /**
@@ -155,9 +163,12 @@ export function matchBorderShorthand(value: string, ctx: MatchCtx): string[] {
  *
  * @param value The CSS border-color value
  * @param ctx The matching context
- * @returns Tailwind class
+ * @returns Object with class and warning
  */
-export function matchBorderColor(value: string, ctx: MatchCtx): string {
+export function matchBorderColor(
+  value: string,
+  ctx: MatchCtx
+): { class: string; warning?: string } {
   return matchColor('border', value, ctx);
 }
 

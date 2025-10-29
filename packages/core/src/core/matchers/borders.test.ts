@@ -24,9 +24,22 @@ describe('borders matcher', () => {
 
   const ctx: MatchCtx = {
     theme: mockTheme,
+    version: 'v3',
     opts: {
       strict: false,
       approximate: false,
+      thresholds: {
+        spacingPx: 2,
+        fontPx: 1,
+        radiiPx: 2,
+      },
+      screens: {
+        sm: 640,
+        md: 768,
+        lg: 1024,
+        xl: 1280,
+        '2xl': 1536,
+      },
     },
   };
 
@@ -58,19 +71,19 @@ describe('borders matcher', () => {
 
   describe('border color', () => {
     it('should match basic named colors', () => {
-      expect(matchBorderColor('black', ctx)).toBe('border-black');
-      expect(matchBorderColor('white', ctx)).toBe('border-white');
-      expect(matchBorderColor('transparent', ctx)).toBe('border-transparent');
+      expect(matchBorderColor('black', ctx).class).toBe('border-black');
+      expect(matchBorderColor('white', ctx).class).toBe('border-white');
+      expect(matchBorderColor('transparent', ctx).class).toBe('border-transparent');
     });
 
     it('should match theme colors', () => {
-      expect(matchBorderColor('#3b82f6', ctx)).toBe('border-primary');
-      expect(matchBorderColor('#e0f2fe', ctx)).toBe('border-secondary-100');
+      expect(matchBorderColor('#3b82f6', ctx).class).toBe('border-primary');
+      expect(matchBorderColor('#e0f2fe', ctx).class).toBe('border-secondary-100');
     });
 
     it('should use arbitrary values for non-theme colors', () => {
-      expect(matchBorderColor('#ff0000', ctx)).toBe('border-[#ff0000]');
-      expect(matchBorderColor('rgb(255, 0, 0)', ctx)).toBe('border-[rgb(255,0,0)]');
+      expect(matchBorderColor('#ff0000', ctx).class).toBe('border-[#ff0000]');
+      expect(matchBorderColor('rgb(255, 0, 0)', ctx).class).toBe('border-[rgb(255,0,0)]');
     });
   });
 
@@ -112,36 +125,36 @@ describe('borders matcher', () => {
     it('should match border shorthand to Tailwind classes', () => {
       // Default border (1px solid) with color
       const result1 = matchBorderShorthand('1px solid black', ctx);
-      expect(result1).toContain('border');
-      expect(result1).toContain('border-black');
-      expect(result1.length).toBe(2); // No style class for 'solid' as it's default
+      expect(result1.classes).toContain('border');
+      expect(result1.classes).toContain('border-black');
+      expect(result1.classes.length).toBe(2); // No style class for 'solid' as it's default
 
       // Custom width with default style and color
       const result2 = matchBorderShorthand('2px solid red', ctx);
-      expect(result2).toContain('border-2');
-      expect(result2).toContain('border-[red]');
-      expect(result2.length).toBe(2); // No style class for 'solid' as it's default
+      expect(result2.classes).toContain('border-2');
+      expect(result2.classes).toContain('border-[red]');
+      expect(result2.classes.length).toBe(2); // No style class for 'solid' as it's default
 
       // Default width with custom style and color
       const result3 = matchBorderShorthand('dashed blue', ctx);
-      expect(result3).toContain('border');
-      expect(result3).toContain('[border-style:dashed]');
-      expect(result3).toContain('border-[blue]');
-      expect(result3.length).toBe(3);
+      expect(result3.classes).toContain('border');
+      expect(result3.classes).toContain('[border-style:dashed]');
+      expect(result3.classes).toContain('border-[blue]');
+      expect(result3.classes.length).toBe(3);
 
       // Zero width border
       const result4 = matchBorderShorthand('0 solid black', ctx);
-      expect(result4).toContain('border-0');
-      expect(result4).toContain('border-black');
-      expect(result4.length).toBe(2);
+      expect(result4.classes).toContain('border-0');
+      expect(result4.classes).toContain('border-black');
+      expect(result4.classes.length).toBe(2);
     });
 
     it('should handle the specific acceptance criteria', () => {
       // Acceptance criteria: "border: 1px solid #000" → border, border-[1px] ou border se token 1px for "border" default, cor via border-color
       const result = matchBorderShorthand('1px solid #000', ctx);
-      expect(result).toContain('border'); // Default width
-      expect(result).toContain('border-black'); // Color via theme
-      expect(result.length).toBe(2); // No style class for 'solid' as it's default
+      expect(result.classes).toContain('border'); // Default width
+      expect(result.classes).toContain('border-black'); // Color via theme
+      expect(result.classes.length).toBe(2); // No style class for 'solid' as it's default
     });
   });
 

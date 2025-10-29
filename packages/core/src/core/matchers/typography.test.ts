@@ -24,9 +24,22 @@ describe('typography matcher', () => {
 
   const ctx: MatchCtx = {
     theme: mockTheme,
+    version: 'v3',
     opts: {
       strict: false,
       approximate: false,
+      thresholds: {
+        spacingPx: 2,
+        fontPx: 1,
+        radiiPx: 2,
+      },
+      screens: {
+        sm: 640,
+        md: 768,
+        lg: 1024,
+        xl: 1280,
+        '2xl': 1536,
+      },
     },
   };
 
@@ -106,9 +119,22 @@ describe('typography matcher', () => {
     // Create a context with approximate matching enabled
     const approxCtx: MatchCtx = {
       theme: mockTheme,
+      version: 'v3',
       opts: {
         strict: false,
         approximate: true,
+        thresholds: {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: {
+          sm: 640,
+          md: 768,
+          lg: 1024,
+          xl: 1280,
+          '2xl': 1536,
+        },
       },
     };
 
@@ -116,18 +142,31 @@ describe('typography matcher', () => {
       // 15px is close to 16px (1rem/text-base) or 14px (0.875rem/text-sm)
       const result = matchTypography('font-size', '15px', approxCtx);
       expect(result.class).toBe('text-sm');
-      expect(result.warning).toContain('approximate mapping');
+      expect(result.warning).toContain('approximate:');
       expect(result.warning).toContain('15px');
-      expect(result.warning).toContain('text-sm');
+      expect(result.warning).toContain('sm');
     });
 
     it('should not approximate when strict mode is enabled', () => {
       // Create a context with strict mode enabled
       const strictCtx: MatchCtx = {
         theme: mockTheme,
+        version: 'v3',
         opts: {
           strict: true,
           approximate: true, // This should be ignored when strict is true
+          thresholds: {
+            spacingPx: 2,
+            fontPx: 1,
+            radiiPx: 2,
+          },
+          screens: {
+            sm: 640,
+            md: 768,
+            lg: 1024,
+            xl: 1280,
+            '2xl': 1536,
+          },
         },
       };
 

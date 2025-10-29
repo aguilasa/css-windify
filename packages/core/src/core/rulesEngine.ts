@@ -246,8 +246,14 @@ const propertyHandlers: Record<string, RuleHandler> = {
   },
 
   // Color properties
-  color: (value, ctx) => [matchColor('text', value, ctx)],
-  'border-color': (value, ctx) => [matchColor('border', value, ctx)],
+  color: (value, ctx) => {
+    const result = matchColor('text', value, ctx);
+    return [result.class];
+  },
+  'border-color': (value, ctx) => {
+    const result = matchColor('border', value, ctx);
+    return [result.class];
+  },
 
   // Border properties
   'border-width': (value) => [matchBorderWidth(value)],
@@ -347,14 +353,17 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'place-self': (value) => [matchPlaceSelf(value)],
 
   // Background properties
-  background: (value, ctx) => matchBackgroundShorthand(value, ctx),
-  'background-color': (value, ctx) => [matchBackgroundColor(value, ctx)],
+  background: (value, ctx) => matchBackgroundShorthand(value, ctx).classes,
+  'background-color': (value, ctx) => {
+    const result = matchBackgroundColor(value, ctx);
+    return [result.class];
+  },
   'background-size': (value) => [matchBackgroundSize(value)],
   'background-position': (value) => [matchBackgroundPosition(value)],
   'background-image': (value) => [matchBackgroundImage(value)],
 
   // Border properties
-  border: (value, ctx) => matchBorderShorthand(value, ctx),
+  border: (value, ctx) => matchBorderShorthand(value, ctx).classes,
 
   // Misc properties
   overflow: (value) => [matchOverflow(value)],
@@ -410,6 +419,20 @@ export function toTailwind(
 
         return { classes: result, warning: null };
       }
+
+      // If the result is an object with class property (from color matchers)
+      if (typeof result === 'object' && result !== null && 'class' in result) {
+        // Ensure result.class is treated as a string
+        const classValue = result.class as string;
+        const classes = [classValue];
+        // Safely access warning property if it exists
+        const warning =
+          'warning' in result && typeof result.warning === 'string' ? result.warning : null;
+        return {
+          classes,
+          warning: warning,
+        };
+      }
     }
   }
 
@@ -432,14 +455,256 @@ export function toTailwind(
 // }
 
 /**
+ * Get the group for a Tailwind class
+ * @param className Tailwind class name
+ * @returns Group name and order value
+ */
+export function getClassGroup(className: string): { group: string; order: number } {
+  // Extract the base class name without variants
+  const baseClass = className.split(':').pop() || '';
+
+  // Define the groups and their order as specified in SPEC.md
+  const groups = {
+    layout: 1, // display, position, inset/top/right/bottom/left, overflow, object, aspect
+    'flex-grid': 2, // flex/grid/gap/justify/items/place-*
+    sizing: 3, // w-, h-, min-w-, max-w-, min-h-, max-h-
+    spacing: 4, // m-, p-, space-
+    typography: 5, // font-, text-, leading-, tracking-, decoration-
+    background: 6, // bg-
+    border: 7, // border-, rounded-, outline-
+    effects: 8, // shadow-, opacity-, filter, mix-blend-, isolate
+    misc: 9, // everything else
+  };
+
+  // Layout group prefixes
+  if (
+    baseClass === 'block' ||
+    baseClass === 'inline' ||
+    baseClass === 'inline-block' ||
+    baseClass === 'flex' ||
+    baseClass === 'inline-flex' ||
+    baseClass === 'grid' ||
+    baseClass === 'inline-grid' ||
+    baseClass === 'hidden' ||
+    baseClass === 'static' ||
+    baseClass === 'fixed' ||
+    baseClass === 'absolute' ||
+    baseClass === 'relative' ||
+    baseClass === 'sticky' ||
+    baseClass.startsWith('inset-') ||
+    baseClass.startsWith('top-') ||
+    baseClass.startsWith('right-') ||
+    baseClass.startsWith('bottom-') ||
+    baseClass.startsWith('left-') ||
+    baseClass.startsWith('overflow-') ||
+    baseClass.startsWith('object-') ||
+    baseClass.startsWith('aspect-')
+  ) {
+    return { group: 'layout', order: groups.layout };
+  }
+
+  // Flex and Grid group prefixes
+  if (
+    baseClass.startsWith('flex-') ||
+    baseClass.startsWith('items-') ||
+    baseClass.startsWith('justify-') ||
+    baseClass.startsWith('grid-') ||
+    baseClass.startsWith('gap-') ||
+    baseClass.startsWith('place-') ||
+    baseClass.startsWith('content-') ||
+    baseClass.startsWith('col-') ||
+    baseClass.startsWith('row-') ||
+    baseClass === 'justify-between' ||
+    baseClass === 'justify-center' ||
+    baseClass === 'justify-start' ||
+    baseClass === 'justify-end' ||
+    baseClass === 'justify-around' ||
+    baseClass === 'justify-evenly' ||
+    baseClass === 'items-center' ||
+    baseClass === 'items-start' ||
+    baseClass === 'items-end' ||
+    baseClass === 'items-baseline' ||
+    baseClass === 'items-stretch'
+  ) {
+    return { group: 'flex-grid', order: groups['flex-grid'] };
+  }
+
+  // Sizing group prefixes
+  if (
+    baseClass.startsWith('w-') ||
+    baseClass.startsWith('h-') ||
+    baseClass.startsWith('min-w-') ||
+    baseClass.startsWith('min-h-') ||
+    baseClass.startsWith('max-w-') ||
+    baseClass.startsWith('max-h-')
+  ) {
+    return { group: 'sizing', order: groups.sizing };
+  }
+
+  // Spacing group prefixes
+  if (
+    baseClass.startsWith('m-') ||
+    baseClass.startsWith('mx-') ||
+    baseClass.startsWith('my-') ||
+    baseClass.startsWith('mt-') ||
+    baseClass.startsWith('mr-') ||
+    baseClass.startsWith('mb-') ||
+    baseClass.startsWith('ml-') ||
+    baseClass.startsWith('p-') ||
+    baseClass.startsWith('px-') ||
+    baseClass.startsWith('py-') ||
+    baseClass.startsWith('pt-') ||
+    baseClass.startsWith('pr-') ||
+    baseClass.startsWith('pb-') ||
+    baseClass.startsWith('pl-') ||
+    baseClass.startsWith('space-')
+  ) {
+    return { group: 'spacing', order: groups.spacing };
+  }
+
+  // Typography group prefixes
+  if (
+    baseClass.startsWith('font-') ||
+    baseClass.startsWith('text-') ||
+    baseClass.startsWith('leading-') ||
+    baseClass.startsWith('tracking-') ||
+    baseClass.startsWith('decoration-') ||
+    baseClass.startsWith('underline') ||
+    baseClass.startsWith('line-through') ||
+    baseClass.startsWith('no-underline')
+  ) {
+    return { group: 'typography', order: groups.typography };
+  }
+
+  // Background group prefixes
+  if (baseClass.startsWith('bg-')) {
+    return { group: 'background', order: groups.background };
+  }
+
+  // Border group prefixes
+  if (
+    baseClass.startsWith('border-') ||
+    baseClass.startsWith('rounded-') ||
+    baseClass.startsWith('outline-') ||
+    baseClass === 'border' ||
+    baseClass === 'rounded' ||
+    baseClass === 'outline'
+  ) {
+    return { group: 'border', order: groups.border };
+  }
+
+  // Effects group prefixes
+  if (
+    baseClass.startsWith('shadow-') ||
+    baseClass.startsWith('opacity-') ||
+    baseClass.startsWith('filter-') ||
+    baseClass.startsWith('mix-blend-') ||
+    baseClass.startsWith('isolate') ||
+    baseClass === 'shadow' ||
+    baseClass === 'opacity' ||
+    baseClass === 'filter' ||
+    baseClass === 'isolate'
+  ) {
+    return { group: 'effects', order: groups.effects };
+  }
+
+  // Default to misc group
+  return { group: 'misc', order: groups.misc };
+}
+
+/**
+ * Extract variant prefix from a Tailwind class
+ * @param className Tailwind class name
+ * @returns Variant prefix and base class
+ */
+function extractVariantAndBase(className: string): { variantPrefix: string; baseClass: string } {
+  const parts = className.split(':');
+
+  // If there are no variants
+  if (parts.length === 1) {
+    return { variantPrefix: '', baseClass: className };
+  }
+
+  // Extract the base class (last part) and variant prefix (everything else with colons)
+  const baseClass = parts.pop() || '';
+  const variantPrefix = parts.join(':') + ':';
+
+  return { variantPrefix, baseClass };
+}
+
+/**
+ * Get a simplified class key for stable ordering
+ * @param className Tailwind class name
+ * @returns Simplified class key
+ */
+function getClassKey(className: string): string {
+  // Extract the base class without variants
+  const { baseClass } = extractVariantAndBase(className);
+
+  // For arbitrary values, simplify to the prefix
+  if (baseClass.includes('[') && baseClass.includes(']')) {
+    const bracketIndex = baseClass.indexOf('[');
+    if (bracketIndex > 0) {
+      return baseClass.substring(0, bracketIndex);
+    }
+  }
+
+  // For numeric classes, extract the prefix
+  const match = baseClass.match(/^([a-z-]+)(\d+|\d+\.\d+)/);
+  if (match) {
+    return match[1];
+  }
+
+  return baseClass;
+}
+
+/**
  * Sort Tailwind classes by property group
  * @param classes Array of Tailwind classes
  * @returns Sorted array of classes
  */
-function sortClasses(classes: string[]): string[] {
-  // For now, just return the unique classes
-  // In a more advanced implementation, we would sort by property group
-  return [...new Set(classes)];
+export function sortClasses(classes: string[]): string[] {
+  // First dedupe the classes to avoid duplicates
+  const uniqueClasses = [...new Set(classes)];
+
+  // Create sort entries with metadata for sorting
+  const sortEntries = uniqueClasses.map((cls) => {
+    const { variantPrefix, baseClass } = extractVariantAndBase(cls);
+    const { order: groupOrder } = getClassGroup(cls);
+    const classKey = getClassKey(cls);
+
+    return {
+      original: cls,
+      variantPrefix,
+      baseClass,
+      groupOrder,
+      classKey,
+    };
+  });
+
+  // Sort by variant prefix, group order, class key, and full class name
+  sortEntries.sort((a, b) => {
+    // First by variant prefix (lexicographically)
+    if (a.variantPrefix !== b.variantPrefix) {
+      return a.variantPrefix.localeCompare(b.variantPrefix);
+    }
+
+    // Then by group order
+    if (a.groupOrder !== b.groupOrder) {
+      return a.groupOrder - b.groupOrder;
+    }
+
+    // Then by class key
+    if (a.classKey !== b.classKey) {
+      return a.classKey.localeCompare(b.classKey);
+    }
+
+    // Finally by the full original class name
+    return a.original.localeCompare(b.original);
+  });
+
+  // Return the sorted classes
+  return sortEntries.map((entry) => entry.original);
 }
 
 /**

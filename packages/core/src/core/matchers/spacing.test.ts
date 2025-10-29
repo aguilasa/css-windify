@@ -17,9 +17,22 @@ describe('spacing matcher', () => {
 
   const ctx: MatchCtx = {
     theme: mockTheme,
+    version: 'v3',
     opts: {
       strict: false,
       approximate: false,
+      thresholds: {
+        spacingPx: 2,
+        fontPx: 1,
+        radiiPx: 2,
+      },
+      screens: {
+        sm: 640,
+        md: 768,
+        lg: 1024,
+        xl: 1280,
+        '2xl': 1536,
+      },
     },
   };
 
@@ -161,9 +174,22 @@ describe('spacing matcher', () => {
     // Create a context with approximate matching enabled
     const approxCtx: MatchCtx = {
       theme: mockTheme,
+      version: 'v3',
       opts: {
         strict: false,
         approximate: true,
+        thresholds: {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: {
+          sm: 640,
+          md: 768,
+          lg: 1024,
+          xl: 1280,
+          '2xl': 1536,
+        },
       },
     };
 
@@ -172,18 +198,31 @@ describe('spacing matcher', () => {
       const result = matchSpacing('w', '15px', approxCtx);
       expect(result.classes).toEqual(['w-4']);
       expect(result.warnings.length).toBe(1);
-      expect(result.warnings[0]).toContain('approximate mapping');
+      expect(result.warnings[0]).toContain('approximate:');
       expect(result.warnings[0]).toContain('15px');
-      expect(result.warnings[0]).toContain('w-4');
+      expect(result.warnings[0]).toContain('4');
     });
 
     it('should not approximate when strict mode is enabled', () => {
       // Create a context with strict mode enabled
       const strictCtx: MatchCtx = {
         theme: mockTheme,
+        version: 'v3',
         opts: {
           strict: true,
           approximate: true, // This should be ignored when strict is true
+          thresholds: {
+            spacingPx: 2,
+            fontPx: 1,
+            radiiPx: 2,
+          },
+          screens: {
+            sm: 640,
+            md: 768,
+            lg: 1024,
+            xl: 1280,
+            '2xl': 1536,
+          },
         },
       };
 

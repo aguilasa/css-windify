@@ -25,33 +25,48 @@ describe('backgrounds matcher', () => {
 
   const ctx: MatchCtx = {
     theme: mockTheme,
+    version: 'v3',
     opts: {
       strict: false,
       approximate: false,
+      thresholds: {
+        spacingPx: 2,
+        fontPx: 1,
+        radiiPx: 2,
+      },
+      screens: {
+        sm: 640,
+        md: 768,
+        lg: 1024,
+        xl: 1280,
+        '2xl': 1536,
+      },
     },
   };
 
   describe('background color', () => {
     it('should match basic named colors', () => {
-      expect(matchBackgroundColor('black', ctx)).toBe('bg-black');
-      expect(matchBackgroundColor('white', ctx)).toBe('bg-white');
-      expect(matchBackgroundColor('transparent', ctx)).toBe('bg-transparent');
-      expect(matchBackgroundColor('current', ctx)).toBe('bg-current');
+      expect(matchBackgroundColor('black', ctx).class).toBe('bg-black');
+      expect(matchBackgroundColor('white', ctx).class).toBe('bg-white');
+      expect(matchBackgroundColor('transparent', ctx).class).toBe('bg-transparent');
+      expect(matchBackgroundColor('current', ctx).class).toBe('bg-current');
     });
 
     it('should match theme colors', () => {
-      expect(matchBackgroundColor('#3b82f6', ctx)).toBe('bg-primary');
-      expect(matchBackgroundColor('#e0f2fe', ctx)).toBe('bg-secondary-100');
-      expect(matchBackgroundColor('#0ea5e9', ctx)).toBe('bg-secondary-500');
+      expect(matchBackgroundColor('#3b82f6', ctx).class).toBe('bg-primary');
+      expect(matchBackgroundColor('#e0f2fe', ctx).class).toBe('bg-secondary-100');
+      expect(matchBackgroundColor('#0ea5e9', ctx).class).toBe('bg-secondary-500');
     });
 
     it('should use arbitrary values for non-theme colors', () => {
-      expect(matchBackgroundColor('#ff0000', ctx)).toBe('bg-[#ff0000]');
-      expect(matchBackgroundColor('rgb(255, 0, 0)', ctx)).toBe('bg-[rgb(255,0,0)]');
+      expect(matchBackgroundColor('#ff0000', ctx).class).toBe('bg-[#ff0000]');
+      expect(matchBackgroundColor('rgb(255, 0, 0)', ctx).class).toBe('bg-[rgb(255,0,0)]');
     });
 
     it('should handle CSS variables', () => {
-      expect(matchBackgroundColor('var(--color-primary)', ctx)).toBe('bg-[var(--color-primary)]');
+      expect(matchBackgroundColor('var(--color-primary)', ctx).class).toBe(
+        'bg-[var(--color-primary)]'
+      );
     });
   });
 
@@ -190,38 +205,38 @@ describe('backgrounds matcher', () => {
     it('should match background shorthand to Tailwind classes', () => {
       // Full background shorthand
       const result1 = matchBackgroundShorthand('url(image.jpg) center/cover no-repeat #fff', ctx);
-      expect(result1).toContain('bg-[url(image.jpg)]');
-      expect(result1).toContain('bg-center');
+      expect(result1.classes).toContain('bg-[url(image.jpg)]');
+      expect(result1.classes).toContain('bg-center');
       // Size might be parsed differently due to regex limitations
-      expect(result1.some((cls) => cls.includes('cover'))).toBe(true);
+      expect(result1.classes.some((cls) => cls.includes('cover'))).toBe(true);
       // The repeat might not be parsed correctly due to regex limitations
-      // expect(result1).toContain('bg-no-repeat');
-      expect(result1).toContain('bg-white');
+      // expect(result1.classes).toContain('bg-no-repeat');
+      expect(result1.classes).toContain('bg-white');
 
       // Partial background shorthand
       const result2 = matchBackgroundShorthand('center/cover #000', ctx);
-      expect(result2).toContain('bg-center');
+      expect(result2.classes).toContain('bg-center');
       // Size might be parsed differently due to regex limitations
-      expect(result2.some((cls) => cls.includes('cover'))).toBe(true);
-      expect(result2).toContain('bg-black');
+      expect(result2.classes.some((cls) => cls.includes('cover'))).toBe(true);
+      expect(result2.classes).toContain('bg-black');
 
       // Background with non-standard repeat value
       const result3 = matchBackgroundShorthand('url(image.jpg) repeat-x', ctx);
-      expect(result3).toContain('bg-[url(image.jpg)]');
+      expect(result3.classes).toContain('bg-[url(image.jpg)]');
       // The repeat might not be parsed correctly
-      // expect(result3.some(cls => cls.includes('repeat-x'))).toBe(true);
+      // expect(result3.classes.some(cls => cls.includes('repeat-x'))).toBe(true);
     });
 
     it('should handle the specific acceptance criteria', () => {
       // Acceptance criteria: parse "background: url(x) center/cover no-repeat #fff" e mapear partes suportadas, resto arbitrário
       const result = matchBackgroundShorthand('url(x) center/cover no-repeat #fff', ctx);
-      expect(result).toContain('bg-[url(x)]'); // Image as arbitrary
-      expect(result).toContain('bg-center'); // Position mapped
+      expect(result.classes).toContain('bg-[url(x)]'); // Image as arbitrary
+      expect(result.classes).toContain('bg-center'); // Position mapped
       // Size might be parsed differently due to regex limitations
-      expect(result.some((cls) => cls.includes('cover'))).toBe(true); // Size mapped
+      expect(result.classes.some((cls) => cls.includes('cover'))).toBe(true); // Size mapped
       // The repeat might not be parsed correctly due to regex limitations
-      // expect(result).toContain('bg-no-repeat'); // Repeat mapped
-      expect(result).toContain('bg-white'); // Color mapped via theme
+      // expect(result.classes).toContain('bg-no-repeat'); // Repeat mapped
+      expect(result.classes).toContain('bg-white'); // Color mapped via theme
     });
   });
 });

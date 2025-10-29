@@ -3,34 +3,47 @@
  */
 import { transformRule, transformDeclarations } from './core/rulesEngine';
 import { TailwindifyOptions, CssRule, CssDeclaration, MatchCtx, TransformResult } from './types';
+import { loadTokens, detectTailwindVersion } from './core/tokensLoader';
 
 // Re-export types
 export * from './types';
 
 class Tailwindify {
   private options: TailwindifyOptions;
+  private tokensPromise: Promise<any> | null = null;
 
   constructor(options: TailwindifyOptions = {}) {
     this.options = {
       prefix: '',
       strict: true,
       approximate: false,
+      version: 'auto',
+      thresholds: {
+        spacingPx: 2,
+        fontPx: 1,
+        radiiPx: 2,
+      },
       ...options,
     };
+
+    // Start loading tokens in the background
+    this.preloadTokens();
+  }
+
+  /**
+   * Preload tokens to improve performance for subsequent calls
+   */
+  private preloadTokens(): void {
+    if (!this.tokensPromise) {
+      this.tokensPromise = loadTokens();
+    }
   }
 
   /**
    * Convert a CSS rule to Tailwind classes
    */
-  processRule(rule: CssRule): TransformResult {
-    const ctx: MatchCtx = {
-      theme: {}, // Theme would be loaded from Tailwind config
-      opts: {
-        strict: !!this.options.strict,
-        approximate: !!this.options.approximate,
-      },
-    };
-
+  async processRule(rule: CssRule): Promise<TransformResult> {
+    const ctx = await this.createMatchContext();
     const result = transformRule(rule, ctx);
 
     // Apply prefix if specified
@@ -42,17 +55,49 @@ class Tailwindify {
   }
 
   /**
-   * Process a list of CSS declarations
+   * Create a match context with loaded tokens
    */
-  processDeclarations(declarations: CssDeclaration[]): TransformResult {
-    const ctx: MatchCtx = {
-      theme: {}, // Theme would be loaded from Tailwind config
+  private async createMatchContext(): Promise<MatchCtx> {
+    // Ensure tokens are loaded
+    if (!this.tokensPromise) {
+      this.preloadTokens();
+    }
+
+    const tokens = await this.tokensPromise;
+    const version =
+      this.options.version === 'auto'
+        ? detectTailwindVersion({ version: this.options.version })
+        : this.options.version || 'v3';
+
+    return {
+      theme: tokens, // For backward compatibility
+      tokens,
+      version,
       opts: {
         strict: !!this.options.strict,
         approximate: !!this.options.approximate,
+        thresholds: this.options.thresholds || {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: this.options.screens ||
+          tokens.screens || {
+            sm: 640,
+            md: 768,
+            lg: 1024,
+            xl: 1280,
+            '2xl': 1536,
+          },
       },
     };
+  }
 
+  /**
+   * Process a list of CSS declarations
+   */
+  async processDeclarations(declarations: CssDeclaration[]): Promise<TransformResult> {
+    const ctx = await this.createMatchContext();
     const result = transformDeclarations(declarations, ctx);
 
     // Apply prefix if specified
@@ -82,14 +127,17 @@ export {
   parseColorNormalize,
 } from './core/normalizers';
 
+export { loadTheme, defaultTheme } from './core/themeLoader';
+
+export { loadTokens, defaultTokens, detectTailwindVersion } from './core/tokensLoader';
+
 export {
-  loadTheme,
-  defaultTheme,
+  resolveNearestTokenPx,
   resolveSpacingToken,
   resolveColorToken,
   resolveFontSizeToken,
   resolveLineHeightToken,
-} from './core/themeLoader';
+} from './core/resolvers';
 
 export {
   matchSpacing,

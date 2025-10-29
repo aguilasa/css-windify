@@ -5,23 +5,23 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   {
     "classes": [
       "inline-block",
-      "py-2",
-      "px-4",
       "m-1",
-      "text-base",
+      "px-4",
+      "py-2",
       "font-semibold",
       "leading-normal",
+      "text-base",
       "text-center",
-      "[white-space:nowrap]",
-      "[vertical-align:middle]",
-      "[cursor:pointer]",
-      "[user-select:none]",
+      "text-white",
+      "bg-[#3b82f6]",
       "border",
       "border-transparent",
       "rounded",
-      "bg-[#3b82f6]",
-      "text-white",
+      "[cursor:pointer]",
       "[transition:background-color 0.15s ease-in-out, border-color 0.15s ease-in-out]",
+      "[user-select:none]",
+      "[vertical-align:middle]",
+      "[white-space:nowrap]",
     ],
     "coverage": {
       "categories": {
@@ -154,8 +154,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "py-3",
       "px-6",
+      "py-3",
       "text-xl",
       "rounded-lg",
     ],
@@ -220,8 +220,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "py-1",
       "px-2",
+      "py-1",
       "text-sm",
       "rounded-[0.2rem]",
     ],
@@ -551,8 +551,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "bg-transparent",
       "text-[#3b82f6]",
+      "bg-transparent",
       "border-[#3b82f6]",
     ],
     "coverage": {
@@ -618,8 +618,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "bg-[#3b82f6]",
       "text-white",
+      "bg-[#3b82f6]",
     ],
     "coverage": {
       "categories": {
@@ -689,23 +689,23 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   {
     "classes": [
       "inline-block",
-      "py-2",
-      "px-4",
       "m-1",
-      "text-base",
+      "px-4",
+      "py-2",
       "font-semibold",
       "leading-normal",
+      "text-base",
       "text-center",
-      "[white-space:nowrap]",
-      "[vertical-align:middle]",
-      "[cursor:pointer]",
-      "[user-select:none]",
+      "text-white",
+      "bg-[#3b82f6]",
       "border",
       "border-transparent",
       "rounded",
-      "bg-[#3b82f6]",
-      "text-white",
+      "[cursor:pointer]",
       "[transition:background-color 0.15s ease-in-out, border-color 0.15s ease-in-out]",
+      "[user-select:none]",
+      "[vertical-align:middle]",
+      "[white-space:nowrap]",
     ],
     "coverage": {
       "categories": {
@@ -838,8 +838,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "py-3",
       "px-6",
+      "py-3",
       "text-xl",
       "rounded-lg",
     ],
@@ -904,8 +904,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "py-1",
       "px-2",
+      "py-1",
       "text-sm",
       "rounded-[0.2rem]",
     ],
@@ -1235,8 +1235,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "bg-transparent",
       "text-[#3b82f6]",
+      "bg-transparent",
       "border-[#3b82f6]",
     ],
     "coverage": {
@@ -1302,8 +1302,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "bg-[#3b82f6]",
       "text-white",
+      "bg-[#3b82f6]",
     ],
     "coverage": {
       "categories": {
@@ -1373,14 +1373,14 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   {
     "classes": [
       "flex",
+      "overflow-hidden",
       "flex-col",
+      "max-w-96",
+      "w-[100%]",
+      "m-4",
       "bg-white",
       "rounded-lg",
       "[box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
-      "overflow-hidden",
-      "m-4",
-      "w-[100%]",
-      "max-w-96",
     ],
     "coverage": {
       "categories": {
@@ -1445,8 +1445,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "py-5",
       "px-6",
+      "py-5",
       "[border-bottom:1px solid #e5e7eb]",
     ],
     "coverage": {
@@ -1512,9 +1512,9 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   {
     "classes": [
       "m-0",
-      "text-xl",
       "font-semibold",
       "text-[#111827]",
+      "text-xl",
     ],
     "coverage": {
       "categories": {
@@ -1643,9 +1643,9 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "text-[#4b5563]",
-      "leading-normal",
       "mb-4",
+      "leading-normal",
+      "text-[#4b5563]",
     ],
     "coverage": {
       "categories": {
@@ -1709,8 +1709,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "py-5",
       "px-6",
+      "py-5",
       "bg-[#f9fafb]",
       "[border-top:1px solid #e5e7eb]",
     ],
@@ -1777,9 +1777,9 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "w-[100%]",
-      "h-60",
       "object-cover",
+      "h-60",
+      "w-[100%]",
     ],
     "coverage": {
       "categories": {
@@ -1907,8 +1907,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "w-[33%]",
       "object-cover",
+      "w-[33%]",
     ],
     "coverage": {
       "categories": {
@@ -2044,14 +2044,14 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   {
     "classes": [
       "flex",
+      "overflow-hidden",
       "flex-col",
+      "max-w-96",
+      "w-[100%]",
+      "m-4",
       "bg-white",
       "rounded-lg",
       "[box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
-      "overflow-hidden",
-      "m-4",
-      "w-[100%]",
-      "max-w-96",
     ],
     "coverage": {
       "categories": {
@@ -2116,8 +2116,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "py-5",
       "px-6",
+      "py-5",
       "[border-bottom:1px solid #e5e7eb]",
     ],
     "coverage": {
@@ -2183,9 +2183,9 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   {
     "classes": [
       "m-0",
-      "text-xl",
       "font-semibold",
       "text-[#111827]",
+      "text-xl",
     ],
     "coverage": {
       "categories": {
@@ -2314,9 +2314,9 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "text-[#4b5563]",
-      "leading-normal",
       "mb-4",
+      "leading-normal",
+      "text-[#4b5563]",
     ],
     "coverage": {
       "categories": {
@@ -2380,8 +2380,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "py-5",
       "px-6",
+      "py-5",
       "bg-[#f9fafb]",
       "[border-top:1px solid #e5e7eb]",
     ],
@@ -2448,9 +2448,9 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "w-[100%]",
-      "h-60",
       "object-cover",
+      "h-60",
+      "w-[100%]",
     ],
     "coverage": {
       "categories": {
@@ -2578,8 +2578,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
   },
   {
     "classes": [
-      "w-[33%]",
       "object-cover",
+      "w-[33%]",
     ],
     "coverage": {
       "categories": {
@@ -2766,11 +2766,11 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
     "classes": [
       "grid",
       "grid-cols-[repeat(12, 1fr)]",
-      "[grid-gap:1.5rem]",
-      "p-8",
       "max-w-[1200px]",
-      "my-0",
       "mx-auto",
+      "my-0",
+      "p-8",
+      "[grid-gap:1.5rem]",
     ],
     "coverage": {
       "categories": {
@@ -3284,10 +3284,10 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
+      "h-[100%]",
       "p-6",
       "bg-[#f3f4f6]",
       "rounded-md",
-      "h-[100%]",
     ],
     "coverage": {
       "categories": {
@@ -3427,11 +3427,11 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
     "classes": [
       "grid",
       "grid-cols-[repeat(12, 1fr)]",
-      "[grid-gap:1.5rem]",
-      "p-8",
       "max-w-[1200px]",
-      "my-0",
       "mx-auto",
+      "my-0",
+      "p-8",
+      "[grid-gap:1.5rem]",
     ],
     "coverage": {
       "categories": {
@@ -3945,10 +3945,10 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
+      "h-[100%]",
       "p-6",
       "bg-[#f3f4f6]",
       "rounded-md",
-      "h-[100%]",
     ],
     "coverage": {
       "categories": {

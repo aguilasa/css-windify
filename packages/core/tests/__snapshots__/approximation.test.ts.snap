@@ -7,7 +7,7 @@ exports[`Approximation Mode Tests > should demonstrate approximation with differ
       "w-4",
     ],
     "warnings": [
-      "approximate mapping: 15px → w-4 (1px difference)",
+      "approximate: spacing 15px → 4 (1.0px difference)",
     ],
   },
   "strict": {
@@ -33,7 +33,7 @@ exports[`Approximation Mode Tests > should use arbitrary values in strict mode a
       "prop": "width",
       "value": "15px",
       "warnings": [
-        "approximate mapping: 15px → w-4 (1px difference)",
+        "approximate: spacing 15px → 4 (1.0px difference)",
       ],
     },
     {
@@ -44,7 +44,7 @@ exports[`Approximation Mode Tests > should use arbitrary values in strict mode a
       "prop": "height",
       "value": "31px",
       "warnings": [
-        "approximate mapping: 31px → h-8 (1px difference)",
+        "approximate: spacing 31px → 8 (1.0px difference)",
       ],
     },
     {
@@ -55,7 +55,7 @@ exports[`Approximation Mode Tests > should use arbitrary values in strict mode a
       "prop": "margin",
       "value": "7px",
       "warnings": [
-        "approximate mapping: 7px → m-2 (1px difference)",
+        "approximate: spacing 7px → 2 (1.0px difference)",
       ],
     },
     {
@@ -66,7 +66,7 @@ exports[`Approximation Mode Tests > should use arbitrary values in strict mode a
       "prop": "padding",
       "value": "23px",
       "warnings": [
-        "approximate mapping: 23px → p-6 (1px difference)",
+        "approximate: spacing 23px → 6 (1.0px difference)",
       ],
     },
     {
@@ -77,7 +77,7 @@ exports[`Approximation Mode Tests > should use arbitrary values in strict mode a
       "prop": "font-size",
       "value": "15px",
       "warnings": [
-        "approximate mapping: 15px → text-sm (1px difference)",
+        "approximate: font-size 15px → sm (1.0px difference)",
       ],
     },
     {
@@ -88,7 +88,7 @@ exports[`Approximation Mode Tests > should use arbitrary values in strict mode a
       "prop": "line-height",
       "value": "1.49",
       "warnings": [
-        "approximate mapping: 1.49 → leading-normal (0.010000000000000009px difference)",
+        "approximate: line-height 1.49 → normal (0.01 difference)",
       ],
     },
   ],

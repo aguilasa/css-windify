@@ -3,7 +3,7 @@
  */
 import { MatchCtx } from '../../types';
 import { parseBoxShorthand, toArbitrary } from '../normalizers';
-import { resolveSpacingToken } from '../themeLoader';
+import { resolveSpacingToken } from '../resolvers';
 
 // Mapping of prefix to Tailwind class prefix
 const prefixMap: Record<string, string> = {
@@ -199,18 +199,15 @@ function createSpacingClass(
     return { class: `${prefix}-auto` };
   }
 
-  // Try to resolve from theme with approximation if enabled and not in strict mode
-  const result = resolveSpacingToken(value, ctx.theme, {
-    approximate: ctx.opts.approximate && !ctx.opts.strict,
-    maxDiffPx: 1, // Default to 1px max difference
-  });
+  // Try to resolve from theme or tokens with approximation if enabled and not in strict mode
+  const result = resolveSpacingToken(value, ctx);
 
   if (result.token) {
-    // If it's an approximate match, add a warning
-    if (result.type === 'approximate') {
+    // If there's a warning, pass it through
+    if (result.warning) {
       return {
         class: `${prefix}-${result.token}`,
-        warning: `approximate mapping: ${value} → ${prefix}-${result.token} (${result.diff}px difference)`,
+        warning: result.warning,
       };
     }
 

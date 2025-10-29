@@ -34,9 +34,12 @@ const backgroundPositionMap: Record<string, string> = {
  *
  * @param value The CSS background-color value
  * @param ctx The matching context
- * @returns Tailwind class
+ * @returns Object with class and warning
  */
-export function matchBackgroundColor(value: string, ctx: MatchCtx): string {
+export function matchBackgroundColor(
+  value: string,
+  ctx: MatchCtx
+): { class: string; warning?: string } {
   return matchColor('bg', value, ctx);
 }
 
@@ -108,6 +111,116 @@ export function matchBackgroundImage(value: string): string {
 
   // Use arbitrary value for other cases
   return toArbitrary('bg', normalizedValue);
+}
+
+/**
+ * Matches background-repeat values to Tailwind classes
+ *
+ * @param value The CSS background-repeat value
+ * @returns Tailwind class
+ */
+export function matchBackgroundRepeat(value: string): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Map background-repeat values to Tailwind classes
+  const repeatMap: Record<string, string> = {
+    repeat: 'bg-repeat',
+    'no-repeat': 'bg-no-repeat',
+    'repeat-x': 'bg-repeat-x',
+    'repeat-y': 'bg-repeat-y',
+    round: 'bg-repeat-round',
+    space: 'bg-repeat-space',
+  };
+
+  if (repeatMap[normalizedValue]) {
+    return repeatMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return arbitraryProperty('background-repeat', normalizedValue);
+}
+
+/**
+ * Matches background-attachment values to Tailwind classes
+ *
+ * @param value The CSS background-attachment value
+ * @returns Tailwind class
+ */
+export function matchBackgroundAttachment(value: string): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Map background-attachment values to Tailwind classes
+  const attachmentMap: Record<string, string> = {
+    fixed: 'bg-fixed',
+    local: 'bg-local',
+    scroll: 'bg-scroll',
+  };
+
+  if (attachmentMap[normalizedValue]) {
+    return attachmentMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return arbitraryProperty('background-attachment', normalizedValue);
+}
+
+/**
+ * Matches background-origin values to Tailwind classes
+ *
+ * @param value The CSS background-origin value
+ * @returns Tailwind class
+ */
+export function matchBackgroundOrigin(value: string): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Map background-origin values to Tailwind classes
+  // Note: Tailwind doesn't have built-in utilities for background-origin
+  // so we use arbitrary properties
+  const originMap: Record<string, string> = {
+    'border-box': 'bg-origin-border',
+    'padding-box': 'bg-origin-padding',
+    'content-box': 'bg-origin-content',
+  };
+
+  if (originMap[normalizedValue]) {
+    return originMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return arbitraryProperty('background-origin', normalizedValue);
+}
+
+/**
+ * Matches background-clip values to Tailwind classes
+ *
+ * @param value The CSS background-clip value
+ * @returns Tailwind class
+ */
+export function matchBackgroundClip(value: string): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Map background-clip values to Tailwind classes
+  const clipMap: Record<string, string> = {
+    'border-box': 'bg-clip-border',
+    'padding-box': 'bg-clip-padding',
+    'content-box': 'bg-clip-content',
+    text: 'bg-clip-text',
+  };
+
+  if (clipMap[normalizedValue]) {
+    return clipMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return arbitraryProperty('background-clip', normalizedValue);
 }
 
 /**
@@ -197,18 +310,26 @@ export function parseBackgroundShorthand(value: string): {
  *
  * @param value The CSS background shorthand value
  * @param ctx The matching context with theme
- * @returns Array of Tailwind classes
+ * @returns Object with classes and warnings
  */
-export function matchBackgroundShorthand(value: string, ctx: MatchCtx): string[] {
-  if (!value) return [];
+export function matchBackgroundShorthand(
+  value: string,
+  ctx: MatchCtx
+): { classes: string[]; warnings: string[] } {
+  if (!value) return { classes: [], warnings: [] };
 
   // Parse the shorthand
   const { color, image, position, size, repeat } = parseBackgroundShorthand(value);
   const classes: string[] = [];
+  const warnings: string[] = [];
 
   // Handle color
   if (color) {
-    classes.push(matchBackgroundColor(color, ctx));
+    const colorResult = matchBackgroundColor(color, ctx);
+    classes.push(colorResult.class);
+    if (colorResult.warning) {
+      warnings.push(colorResult.warning);
+    }
   }
 
   // Handle image
@@ -238,5 +359,5 @@ export function matchBackgroundShorthand(value: string, ctx: MatchCtx): string[]
     }
   }
 
-  return classes;
+  return { classes, warnings };
 }

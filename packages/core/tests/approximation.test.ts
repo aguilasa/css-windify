@@ -22,7 +22,26 @@ describe('Approximation Mode Tests', () => {
     const theme = await loadTheme(process.cwd());
 
     // Test in strict mode
-    const strictCtx = { theme, opts: { strict: true, approximate: false } };
+    const strictCtx = {
+      theme,
+      version: 'v3' as const,
+      opts: {
+        strict: true,
+        approximate: false,
+        thresholds: {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: {
+          sm: 640,
+          md: 768,
+          lg: 1024,
+          xl: 1280,
+          '2xl': 1536,
+        },
+      },
+    };
     const strictResults = testCases.map((tc) => {
       const result = transformDeclarations([{ prop: tc.prop, value: tc.value }], strictCtx);
       return {
@@ -35,7 +54,26 @@ describe('Approximation Mode Tests', () => {
     });
 
     // Test in approximate mode
-    const approxCtx = { theme, opts: { strict: false, approximate: true } };
+    const approxCtx = {
+      theme,
+      version: 'v3' as const,
+      opts: {
+        strict: false,
+        approximate: true,
+        thresholds: {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: {
+          sm: 640,
+          md: 768,
+          lg: 1024,
+          xl: 1280,
+          '2xl': 1536,
+        },
+      },
+    };
     const approxResults = testCases.map((tc) => {
       const result = transformDeclarations([{ prop: tc.prop, value: tc.value }], approxCtx);
       return {
@@ -59,7 +97,7 @@ describe('Approximation Mode Tests', () => {
     approxResults.forEach((result) => {
       expect(result.classes).toContain(result.expected);
       // Approximate mode should have warnings about approximation
-      expect(result.warnings.some((w) => w.includes('approximate mapping'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('approximate:'))).toBe(true);
     });
 
     // Snapshot the results for future comparison
@@ -72,18 +110,44 @@ describe('Approximation Mode Tests', () => {
     // Test with strict mode (no approximation)
     const strictCtx = {
       theme,
+      version: 'v3' as const,
       opts: {
         strict: true,
         approximate: true, // Should be ignored when strict is true
+        thresholds: {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: {
+          sm: 640,
+          md: 768,
+          lg: 1024,
+          xl: 1280,
+          '2xl': 1536,
+        },
       },
     };
 
     // Test with approximate mode
     const approxCtx = {
       theme,
+      version: 'v3' as const,
       opts: {
         strict: false,
         approximate: true,
+        thresholds: {
+          spacingPx: 2,
+          fontPx: 1,
+          radiiPx: 2,
+        },
+        screens: {
+          sm: 640,
+          md: 768,
+          lg: 1024,
+          xl: 1280,
+          '2xl': 1536,
+        },
       },
     };
 
