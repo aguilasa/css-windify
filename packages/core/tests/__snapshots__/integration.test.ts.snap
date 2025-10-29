@@ -19,10 +19,10 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
       "rounded",
       "duration-150",
       "transition-colors",
-      "[cursor:pointer]",
-      "[user-select:none]",
       "[vertical-align:middle]",
+      "[user-select:none]",
       "[white-space:nowrap]",
+      "[cursor:pointer]",
     ],
     "coverage": {
       "categories": {
@@ -90,7 +90,7 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "bg-[#2563eb]",
+      "hover:bg-[#2563eb]",
     ],
     "coverage": {
       "categories": {
@@ -618,8 +618,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "text-white",
-      "bg-[#3b82f6]",
+      "hover:text-white",
+      "hover:bg-[#3b82f6]",
     ],
     "coverage": {
       "categories": {
@@ -703,10 +703,10 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
       "rounded",
       "duration-150",
       "transition-colors",
-      "[cursor:pointer]",
-      "[user-select:none]",
       "[vertical-align:middle]",
+      "[user-select:none]",
       "[white-space:nowrap]",
+      "[cursor:pointer]",
     ],
     "coverage": {
       "categories": {
@@ -774,7 +774,7 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "bg-[#2563eb]",
+      "hover:bg-[#2563eb]",
     ],
     "coverage": {
       "categories": {
@@ -1302,8 +1302,8 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
   },
   {
     "classes": [
-      "text-white",
-      "bg-[#3b82f6]",
+      "hover:text-white",
+      "hover:bg-[#3b82f6]",
     ],
     "coverage": {
       "categories": {
@@ -2744,17 +2744,17 @@ exports[`CSS to Tailwind Integration Tests > Coverage Comparison > should compar
   },
   {
     "approximate": {
-      "matched": 20,
-      "nonArbitrary": 15,
-      "total": 20,
-      "warnings": 16,
+      "matched": 29,
+      "nonArbitrary": 20,
+      "total": 29,
+      "warnings": 25,
     },
     "fixture": "grid",
     "strict": {
-      "matched": 20,
-      "nonArbitrary": 15,
-      "total": 20,
-      "warnings": 16,
+      "matched": 29,
+      "nonArbitrary": 20,
+      "total": 29,
+      "warnings": 25,
     },
   },
 ]
@@ -3409,6 +3409,329 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
       "Selector '.grid-item-featured' was converted but may need manual adjustment",
     ],
   },
+  {
+    "classes": [
+      "max-md:grid-cols-[repeat(6, 1fr)]",
+      "max-md:p-4",
+      "max-md:[grid-gap:1rem]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-container",
+    "warnings": [
+      "Used arbitrary value for 'grid-template-columns: repeat(6, 1fr)'",
+      "No direct Tailwind equivalent for 'grid-gap: 1rem', used arbitrary property",
+      "Selector '.grid-container' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-md:col-span-6",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-4, .col-span-6, .col-span-8",
+    "warnings": [
+      "Selector '.col-span-4, .col-span-6, .col-span-8' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-md:col-span-6",
+      "max-md:row-span-1",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-item-featured",
+    "warnings": [
+      "Selector '.grid-item-featured' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-sm:grid-cols-[1fr]",
+      "max-sm:[grid-gap:0.75rem]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-container",
+    "warnings": [
+      "Used arbitrary value for 'grid-template-columns: 1fr'",
+      "No direct Tailwind equivalent for 'grid-gap: 0.75rem', used arbitrary property",
+      "Selector '.grid-container' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-sm:col-span-1",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-1, .col-span-2, .col-span-3, .col-span-4, .col-span-6, .col-span-8, .col-span-12",
+    "warnings": [
+      "Selector '.col-span-1, .col-span-2, .col-span-3, .col-span-4, .col-span-6, .col-span-8, .col-span-12' was converted but may need manual adjustment",
+    ],
+  },
 ]
 `;
 
@@ -4059,6 +4382,329 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
     "warnings": [
       "Used arbitrary value for 'background-color: #dbeafe'",
       "Selector '.grid-item-featured' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-md:grid-cols-[repeat(6, 1fr)]",
+      "max-md:p-4",
+      "max-md:[grid-gap:1rem]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 3,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 3,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-container",
+    "warnings": [
+      "Used arbitrary value for 'grid-template-columns: repeat(6, 1fr)'",
+      "No direct Tailwind equivalent for 'grid-gap: 1rem', used arbitrary property",
+      "Selector '.grid-container' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-md:col-span-6",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-4, .col-span-6, .col-span-8",
+    "warnings": [
+      "Selector '.col-span-4, .col-span-6, .col-span-8' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-md:col-span-6",
+      "max-md:row-span-1",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 2,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-item-featured",
+    "warnings": [
+      "Selector '.grid-item-featured' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-sm:grid-cols-[1fr]",
+      "max-sm:[grid-gap:0.75rem]",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 2,
+          "percentage": 100,
+          "total": 2,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 2,
+      "nonArbitrary": 0,
+      "percentage": 100,
+      "total": 2,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 1,
+        "no-handler": 1,
+        "other": 0,
+      },
+    },
+    "selector": ".grid-container",
+    "warnings": [
+      "Used arbitrary value for 'grid-template-columns: 1fr'",
+      "No direct Tailwind equivalent for 'grid-gap: 0.75rem', used arbitrary property",
+      "Selector '.grid-container' was converted but may need manual adjustment",
+    ],
+  },
+  {
+    "classes": [
+      "max-sm:col-span-1",
+    ],
+    "coverage": {
+      "categories": {
+        "background": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "border": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "color": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "effects": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "layout": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "other": {
+          "matched": 1,
+          "percentage": 100,
+          "total": 1,
+        },
+        "spacing": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+        "typography": {
+          "matched": 0,
+          "percentage": 0,
+          "total": 0,
+        },
+      },
+      "matched": 1,
+      "nonArbitrary": 1,
+      "percentage": 100,
+      "total": 1,
+      "warningsByCategory": {
+        "approximate": 0,
+        "arbitrary-value": 0,
+        "no-handler": 0,
+        "other": 0,
+      },
+    },
+    "selector": ".col-span-1, .col-span-2, .col-span-3, .col-span-4, .col-span-6, .col-span-8, .col-span-12",
+    "warnings": [
+      "Selector '.col-span-1, .col-span-2, .col-span-3, .col-span-4, .col-span-6, .col-span-8, .col-span-12' was converted but may need manual adjustment",
     ],
   },
 ]

@@ -685,19 +685,35 @@ export function getClassGroup(className: string): { group: string; order: number
  * @param className Tailwind class name
  * @returns Variant prefix and base class
  */
-function extractVariantAndBase(className: string): { variantPrefix: string; baseClass: string } {
+export function extractVariantAndBase(className: string): {
+  variantPrefix: string;
+  baseClass: string;
+  variants: string[];
+} {
   const parts = className.split(':');
 
   // If there are no variants
   if (parts.length === 1) {
-    return { variantPrefix: '', baseClass: className };
+    return { variantPrefix: '', baseClass: className, variants: [] };
   }
 
   // Extract the base class (last part) and variant prefix (everything else with colons)
   const baseClass = parts.pop() || '';
-  const variantPrefix = parts.join(':') + ':';
 
-  return { variantPrefix, baseClass };
+  // Deduplicate variants while preserving order
+  const variants: string[] = [];
+  const seen = new Set<string>();
+
+  for (const variant of parts) {
+    if (!seen.has(variant)) {
+      seen.add(variant);
+      variants.push(variant);
+    }
+  }
+
+  const variantPrefix = variants.join(':') + ':';
+
+  return { variantPrefix, baseClass, variants };
 }
 
 /**
@@ -727,6 +743,65 @@ function getClassKey(className: string): string {
 }
 
 /**
+ * Define the variant priority order
+ * Lower number means higher priority (will be sorted first)
+ */
+const VARIANT_PRIORITY: Record<string, number> = {
+  // Responsive variants (screen sizes) - highest priority
+  sm: 10,
+  md: 11,
+  lg: 12,
+  xl: 13,
+  '2xl': 14,
+  'max-sm': 15,
+  'max-md': 16,
+  'max-lg': 17,
+  'max-xl': 18,
+  'max-2xl': 19,
+
+  // Color scheme variants
+  dark: 20,
+  light: 21,
+
+  // Group variants
+  'group-hover': 30,
+  'group-focus': 31,
+  'group-active': 32,
+  'group-focus-visible': 33,
+  'group-focus-within': 34,
+
+  // Peer variants
+  'peer-hover': 40,
+  'peer-focus': 41,
+  'peer-active': 42,
+  'peer-checked': 43,
+  'peer-focus-visible': 44,
+  'peer-focus-within': 45,
+
+  // Pseudo-class variants
+  first: 50,
+  last: 51,
+  odd: 52,
+  even: 53,
+  visited: 54,
+  hover: 55,
+  focus: 56,
+  'focus-visible': 57,
+  'focus-within': 58,
+  active: 59,
+  disabled: 60,
+};
+
+/**
+ * Get the priority of a variant
+ * @param variant The variant name
+ * @returns The priority value (lower is higher priority)
+ */
+function getVariantPriority(variant: string): number {
+  return VARIANT_PRIORITY[variant] || 100; // Default to lowest priority if not found
+}
+
+/**
  * Sort Tailwind classes by property group
  * @param classes Array of Tailwind classes
  * @returns Sorted array of classes
@@ -737,24 +812,42 @@ export function sortClasses(classes: string[]): string[] {
 
   // Create sort entries with metadata for sorting
   const sortEntries = uniqueClasses.map((cls) => {
-    const { variantPrefix, baseClass } = extractVariantAndBase(cls);
+    const { variantPrefix, baseClass, variants } = extractVariantAndBase(cls);
     const { order: groupOrder } = getClassGroup(cls);
     const classKey = getClassKey(cls);
+
+    // Calculate variant priority score (for sorting variants in the correct order)
+    const variantPriorityScore =
+      variants.length > 0
+        ? variants.reduce((score, variant, index) => {
+            // Use variant priority and position to calculate score
+            return score + getVariantPriority(variant) * Math.pow(10, index);
+          }, 0)
+        : 0;
 
     return {
       original: cls,
       variantPrefix,
+      variants,
       baseClass,
       groupOrder,
       classKey,
+      variantPriorityScore,
     };
   });
 
   // Sort by variant prefix, group order, class key, and full class name
   sortEntries.sort((a, b) => {
-    // First by variant prefix (lexicographically)
-    if (a.variantPrefix !== b.variantPrefix) {
-      return a.variantPrefix.localeCompare(b.variantPrefix);
+    // First by variant count (fewer variants first)
+    const aVariantCount = a.variants.length;
+    const bVariantCount = b.variants.length;
+    if (aVariantCount !== bVariantCount) {
+      return aVariantCount - bVariantCount;
+    }
+
+    // Then by variant priority score
+    if (a.variantPriorityScore !== b.variantPriorityScore) {
+      return a.variantPriorityScore - b.variantPriorityScore;
     }
 
     // Then by group order
@@ -771,8 +864,14 @@ export function sortClasses(classes: string[]): string[] {
     return a.original.localeCompare(b.original);
   });
 
-  // Return the sorted classes
-  return sortEntries.map((entry) => entry.original);
+  // Return the sorted classes with deduplicated variants
+  return sortEntries.map((entry) => {
+    // Reconstruct the class name with deduplicated variants
+    if (entry.variants.length > 0) {
+      return `${entry.variants.join(':')}:${entry.baseClass}`;
+    }
+    return entry.baseClass;
+  });
 }
 
 /**

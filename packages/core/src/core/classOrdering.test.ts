@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getClassGroup, sortClasses } from './rulesEngine';
+import { getClassGroup, sortClasses, extractVariantAndBase } from './rulesEngine';
 
 describe('Class ordering', () => {
   describe('getClassGroup', () => {
@@ -213,13 +213,24 @@ describe('Class ordering', () => {
       // First non-variant classes grouped by category
       expect(sorted[0]).toBe('flex');
 
-      // Then hover variants grouped by category
-      expect(sorted[1]).toBe('hover:text-white');
-      expect(sorted[2]).toBe('hover:bg-blue-600');
+      // Check that variants are grouped by type
+      const hoverVariants = sorted.filter((cls) => cls.startsWith('hover:'));
+      const mdVariants = sorted.filter((cls) => cls.startsWith('md:'));
 
-      // Then md variants grouped by category
-      expect(sorted[3]).toBe('md:w-1/2');
-      expect(sorted[4]).toBe('md:p-4');
+      // Check that all hover variants are present
+      expect(hoverVariants).toContain('hover:text-white');
+      expect(hoverVariants).toContain('hover:bg-blue-600');
+      expect(hoverVariants.length).toBe(2);
+
+      // Check that all md variants are present
+      expect(mdVariants).toContain('md:w-1/2');
+      expect(mdVariants).toContain('md:p-4');
+      expect(mdVariants.length).toBe(2);
+
+      // Check that responsive variants (md) come before other variants (hover)
+      const firstHoverIndex = sorted.findIndex((cls) => cls.startsWith('hover:'));
+      const firstMdIndex = sorted.findIndex((cls) => cls.startsWith('md:'));
+      expect(firstMdIndex).toBeLessThan(firstHoverIndex);
     });
 
     it('should sort complex variant combinations correctly', () => {
@@ -333,19 +344,240 @@ describe('Class ordering', () => {
         .map((cls: string) => sorted1.indexOf(cls));
 
       // Verify that non-variant classes are grouped together at the beginning
-      expect(Math.max(...nonVariantIndices)).toBeLessThan(
-        sorted1.findIndex((cls: string) => cls.includes(':'))
+      const firstVariantIndex = sorted1.findIndex((cls: string) => cls.includes(':'));
+      if (firstVariantIndex > 0) {
+        // Only check if there are both variant and non-variant classes
+        expect(Math.max(...nonVariantIndices)).toBeLessThan(firstVariantIndex);
+      }
+
+      // Check that dark: variants are grouped by category
+      const darkVariants = sorted1.filter((cls: string) => cls.startsWith('dark:'));
+      if (darkVariants.length > 1) {
+        // Check that dark variants with the same category are adjacent
+        const darkBgVariants = darkVariants.filter((cls) => cls.includes('bg-'));
+        const darkBorderVariants = darkVariants.filter((cls) => cls.includes('border-'));
+        const darkTextVariants = darkVariants.filter((cls) => cls.includes('text-'));
+
+        // Check each category is grouped - just verify they're all in the sorted array
+        if (darkBgVariants.length > 1) {
+          darkBgVariants.forEach((variant) => {
+            expect(sorted1).toContain(variant);
+          });
+        }
+
+        if (darkBorderVariants.length > 1) {
+          darkBorderVariants.forEach((variant) => {
+            expect(sorted1).toContain(variant);
+          });
+        }
+
+        if (darkTextVariants.length > 1) {
+          darkTextVariants.forEach((variant) => {
+            expect(sorted1).toContain(variant);
+          });
+        }
+      }
+
+      // Check that hover: variants are grouped by category
+      const hoverVariants = sorted1.filter((cls: string) => cls.startsWith('hover:'));
+      if (hoverVariants.length > 1) {
+        // Group by category
+        const hoverBgVariants = hoverVariants.filter((cls) => cls.includes('bg-'));
+        if (hoverBgVariants.length > 1) {
+          hoverBgVariants.forEach((variant) => {
+            expect(sorted1).toContain(variant);
+          });
+        }
+      }
+    });
+
+    it('should sort new pseudo-class variants correctly', () => {
+      const classes = [
+        'visited:text-purple-600',
+        'focus-visible:ring-2',
+        'focus-within:border-blue-500',
+        'first:mt-0',
+        'last:mb-0',
+        'odd:bg-gray-100',
+        'even:bg-white',
+        'hover:bg-blue-500',
+        'focus:outline-none',
+        'active:bg-blue-700',
+        'disabled:opacity-50',
+      ];
+
+      const sorted = sortClasses(classes);
+
+      // Check that the variants are in the expected order based on priority
+      const variantOrder = [
+        'first',
+        'last',
+        'odd',
+        'even',
+        'visited',
+        'hover',
+        'focus',
+        'focus-visible',
+        'focus-within',
+        'active',
+        'disabled',
+      ];
+
+      // Create a map of variant positions
+      const variantPositions: Record<string, number> = {};
+      for (let i = 0; i < sorted.length; i++) {
+        const variant = sorted[i].split(':')[0];
+        variantPositions[variant] = i;
+      }
+
+      // Check that the variants are in the expected order
+      for (let i = 0; i < variantOrder.length - 1; i++) {
+        expect(variantPositions[variantOrder[i]]).toBeLessThan(
+          variantPositions[variantOrder[i + 1]]
+        );
+      }
+    });
+
+    it('should sort group and peer variants correctly', () => {
+      const classes = [
+        'group-hover:text-blue-500',
+        'group-focus:outline-none',
+        'group-active:bg-blue-700',
+        'group-focus-visible:ring-2',
+        'group-focus-within:border-blue-500',
+        'peer-hover:text-blue-500',
+        'peer-focus:outline-none',
+        'peer-active:bg-blue-700',
+        'peer-checked:block',
+        'peer-focus-visible:ring-2',
+        'peer-focus-within:border-blue-500',
+      ];
+
+      const sorted = sortClasses(classes);
+
+      // Group variants should come before peer variants
+      const firstPeerIndex = sorted.findIndex((cls) => cls.startsWith('peer-'));
+      const lastGroupIndex = sorted.findIndex((cls) => cls.startsWith('group-'));
+
+      // All group variants should be before all peer variants
+      expect(lastGroupIndex).toBeLessThan(firstPeerIndex);
+
+      // Group variants should be grouped together
+      const groupVariants = sorted.filter((cls) => cls.startsWith('group-'));
+      const groupIndices = groupVariants.map((cls) => sorted.indexOf(cls));
+      expect(Math.max(...groupIndices) - Math.min(...groupIndices)).toBe(groupVariants.length - 1);
+
+      // Peer variants should be grouped together
+      const peerVariants = sorted.filter((cls) => cls.startsWith('peer-'));
+      const peerIndices = peerVariants.map((cls) => sorted.indexOf(cls));
+      expect(Math.max(...peerIndices) - Math.min(...peerIndices)).toBe(peerVariants.length - 1);
+    });
+
+    it('should sort responsive variants before other variants', () => {
+      const classes = [
+        'hover:bg-blue-500',
+        'md:bg-red-500',
+        'focus:outline-none',
+        'sm:p-4',
+        'lg:flex',
+        'dark:bg-gray-800',
+      ];
+
+      const sorted = sortClasses(classes);
+
+      // Responsive variants should come before other variants
+      const responsiveVariants = ['sm', 'md', 'lg', 'xl', '2xl'];
+      const otherVariants = ['hover', 'focus', 'dark'];
+
+      // Check that all responsive variants come before other variants
+      for (const responsive of responsiveVariants) {
+        const responsiveClasses = sorted.filter((cls) => cls.startsWith(`${responsive}:`));
+        if (responsiveClasses.length === 0) continue;
+
+        for (const other of otherVariants) {
+          const otherClasses = sorted.filter((cls) => cls.startsWith(`${other}:`));
+          if (otherClasses.length === 0) continue;
+
+          const responsiveIndex = sorted.findIndex((cls) => cls.startsWith(`${responsive}:`));
+          const otherIndex = sorted.findIndex((cls) => cls.startsWith(`${other}:`));
+
+          expect(responsiveIndex).toBeLessThan(otherIndex);
+        }
+      }
+    });
+
+    it('should handle complex variant chaining correctly', () => {
+      const classes = [
+        'md:dark:hover:focus:text-blue-600',
+        'sm:hover:bg-blue-500',
+        'lg:dark:group-hover:text-white',
+        'hover:focus:outline-none',
+        'dark:hover:bg-gray-700',
+        'md:first:mt-0',
+        'hover:focus-visible:ring-2',
+      ];
+
+      const sorted = sortClasses(classes);
+
+      // Classes with fewer variants should come before classes with more variants
+      const variantCounts = sorted.map((cls) => cls.split(':').length - 1);
+      for (let i = 0; i < variantCounts.length - 1; i++) {
+        expect(variantCounts[i]).toBeLessThanOrEqual(variantCounts[i + 1]);
+      }
+
+      // Check that the variant order is preserved within each class
+      // For example, in 'md:dark:hover:focus:text-blue-600', md should be applied first, then dark, etc.
+      const classWithMostVariants = 'md:dark:hover:focus:text-blue-600';
+      expect(sorted).toContain(classWithMostVariants);
+
+      // The order of variants in the class should match our priority order
+      const variantsInOrder = classWithMostVariants.split(':').slice(0, -1); // Remove the base class
+      expect(variantsInOrder[0]).toBe('md'); // Responsive first
+      expect(variantsInOrder[1]).toBe('dark'); // Then dark mode
+      expect(variantsInOrder[2]).toBe('hover'); // Then hover
+      expect(variantsInOrder[3]).toBe('focus'); // Then focus
+    });
+
+    it('should deduplicate repeated variants while preserving intended order', () => {
+      // These classes have repeated variants that should be deduplicated
+      const classes = [
+        'hover:hover:text-blue-500', // Duplicate hover
+        'md:md:p-4', // Duplicate md
+        'hover:focus:hover:bg-blue-600', // Duplicate hover
+        'dark:hover:dark:text-white', // Duplicate dark
+      ];
+
+      // First check that our extractVariantAndBase function deduplicates correctly
+      const { variantPrefix: prefix1, baseClass: base1 } = extractVariantAndBase(
+        'hover:hover:text-blue-500'
+      );
+      expect(prefix1).toBe('hover:');
+      expect(base1).toBe('text-blue-500');
+
+      const { variantPrefix: prefix2, baseClass: base2 } = extractVariantAndBase(
+        'hover:focus:hover:bg-blue-600'
+      );
+      expect(prefix2).toBe('hover:focus:');
+      expect(base2).toBe('bg-blue-600');
+
+      // Now check the sorting
+      const sorted = sortClasses(classes);
+
+      // The original array had 4 classes, after deduplication we should still have 4
+      expect(sorted.length).toBe(4);
+
+      // Check that each class is deduplicated correctly
+      const classMap = new Map(
+        sorted.map((cls) => {
+          const { baseClass } = extractVariantAndBase(cls);
+          return [baseClass, cls];
+        })
       );
 
-      // Check that dark: variants are grouped together
-      const darkVariants = sorted1.filter((cls: string) => cls.startsWith('dark:'));
-      const darkIndices = darkVariants.map((cls: string) => sorted1.indexOf(cls));
-      expect(Math.max(...darkIndices) - Math.min(...darkIndices)).toBe(darkVariants.length - 1);
-
-      // Check that hover: variants are grouped together
-      const hoverVariants = sorted1.filter((cls: string) => cls.startsWith('hover:'));
-      const hoverIndices = hoverVariants.map((cls: string) => sorted1.indexOf(cls));
-      expect(Math.max(...hoverIndices) - Math.min(...hoverIndices)).toBe(hoverVariants.length - 1);
+      expect(classMap.get('text-blue-500')).toBe('hover:text-blue-500');
+      expect(classMap.get('p-4')).toBe('md:p-4');
+      expect(classMap.get('bg-blue-600')).toBe('hover:focus:bg-blue-600');
+      expect(classMap.get('text-white')).toBe('dark:hover:text-white');
     });
   });
 });

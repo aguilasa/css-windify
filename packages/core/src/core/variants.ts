@@ -3,6 +3,51 @@
  */
 
 /**
+ * List of supported pseudo-class variants
+ */
+export const PSEUDO_VARIANTS = [
+  'hover',
+  'focus',
+  'active',
+  'disabled',
+  'visited',
+  'focus-visible',
+  'focus-within',
+  'first',
+  'last',
+  'odd',
+  'even',
+];
+
+/**
+ * List of supported group variants
+ */
+export const GROUP_VARIANTS = [
+  'group-hover',
+  'group-focus',
+  'group-active',
+  'group-focus-visible',
+  'group-focus-within',
+];
+
+/**
+ * List of supported peer variants
+ */
+export const PEER_VARIANTS = [
+  'peer-focus',
+  'peer-hover',
+  'peer-active',
+  'peer-checked',
+  'peer-focus-visible',
+  'peer-focus-within',
+];
+
+/**
+ * List of all supported variants
+ */
+export const ALL_VARIANTS = [...PSEUDO_VARIANTS, ...GROUP_VARIANTS, ...PEER_VARIANTS];
+
+/**
  * Apply a variant prefix to a list of Tailwind classes
  *
  * @param prefix The variant prefix (e.g., 'hover', 'sm', 'md', 'focus')
@@ -19,6 +64,31 @@ export function withVariant(prefix: string, classes: string[]): string[] {
 }
 
 /**
+ * Deduplicate variants while preserving order
+ *
+ * @param variants Array of variant prefixes that may contain duplicates
+ * @returns Array of unique variants preserving the original order
+ */
+export function dedupeVariants(variants: string[]): string[] {
+  if (!variants || variants.length === 0) {
+    return [];
+  }
+
+  const seen = new Set<string>();
+  const result: string[] = [];
+
+  // Keep only the first occurrence of each variant
+  for (const variant of variants) {
+    if (!seen.has(variant)) {
+      seen.add(variant);
+      result.push(variant);
+    }
+  }
+
+  return result;
+}
+
+/**
  * Apply multiple variant prefixes to a list of Tailwind classes
  *
  * @param variants Array of variant prefixes (e.g., ['hover', 'sm', 'md', 'focus'])
@@ -30,12 +100,14 @@ export function withVariants(variants: string[], classes: string[]): string[] {
     return classes;
   }
 
+  // Deduplicate variants while preserving order
+  const uniqueVariants = dedupeVariants(variants);
   let result: string[] = [...classes];
 
   // Apply each variant in reverse order to get the correct nesting
-  // e.g., ['hover', 'focus'] should result in 'hover:focus:class'
-  for (let i = variants.length - 1; i >= 0; i--) {
-    result = withVariant(variants[i], result);
+  // e.g., ['md', 'dark', 'hover'] should result in 'md:dark:hover:class'
+  for (let i = uniqueVariants.length - 1; i >= 0; i--) {
+    result = withVariant(uniqueVariants[i], result);
   }
 
   return result;
