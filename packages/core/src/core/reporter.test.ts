@@ -35,6 +35,8 @@ describe('reporter', () => {
         border: { matched: 0, total: 0, percentage: 0 },
         background: { matched: 0, total: 0, percentage: 0 },
         effects: { matched: 0, total: 0, percentage: 0 },
+        'flex-grid': { matched: 0, total: 0, percentage: 0 },
+        sizing: { matched: 0, total: 0, percentage: 0 },
         other: { matched: 0, total: 0, percentage: 0 },
       };
 
@@ -133,6 +135,17 @@ describe('reporter', () => {
       expect(categorizeWarning('approximate mapping: 15px → w-4 (1px difference)')).toBe(
         'approximate'
       );
+      expect(categorizeWarning('Using approximate value')).toBe('approximate');
+    });
+
+    it('should categorize token-miss warnings', () => {
+      expect(categorizeWarning('token-miss: spacing token not found')).toBe('token-miss');
+      expect(categorizeWarning('token not found in v4 theme')).toBe('token-miss');
+    });
+
+    it('should categorize v3-fallback warnings', () => {
+      expect(categorizeWarning('v3-fallback: using v3 theme')).toBe('v3-fallback');
+      expect(categorizeWarning('falling back to v3 config')).toBe('v3-fallback');
     });
 
     it('should categorize other warnings', () => {
@@ -158,24 +171,34 @@ describe('reporter', () => {
             border: { matched: 0, total: 0, percentage: 0 },
             background: { matched: 0, total: 0, percentage: 0 },
             effects: { matched: 0, total: 0, percentage: 0 },
+            'flex-grid': { matched: 0, total: 0, percentage: 0 },
+            sizing: { matched: 0, total: 0, percentage: 0 },
             other: { matched: 0, total: 1, percentage: 0 },
           },
           warningsByCategory: {
             'arbitrary-value': 1,
             'no-handler': 0,
             approximate: 0,
+            'token-miss': 0,
+            'v3-fallback': 0,
             other: 0,
           },
         },
       };
 
       const summary = summarize(result);
-      expect(summary).toContain('Overall Coverage: 75% (3/4)');
-      expect(summary).toContain('Non-arbitrary classes: 2');
-      expect(summary).toContain('spacing: 100% (2/2)');
-      expect(summary).toContain('typography: 100% (1/1)');
-      expect(summary).toContain('arbitrary-value: 1');
-      expect(summary).toContain('p-4 w-[123px] text-lg');
+      expect(summary.text).toContain('Overall Coverage: 75% (3/4)');
+      expect(summary.text).toContain('Non-arbitrary classes: 2');
+      expect(summary.text).toContain('spacing: 100% (2/2)');
+      expect(summary.text).toContain('typography: 100% (1/1)');
+      expect(summary.text).toContain('arbitrary-value: 1');
+      expect(summary.text).toContain('p-4 w-[123px] text-lg');
+      expect(summary.stats.totals.matched).toBe(3);
+      expect(summary.stats.totals.total).toBe(4);
+      expect(summary.stats.totals.percentage).toBe(75);
+      expect(summary.stats.totals.nonArbitrary).toBe(2);
+      expect(summary.stats.samples.classes).toEqual(['p-4', 'w-[123px]', 'text-lg']);
+      expect(summary.stats.samples.warnings).toEqual(["Used arbitrary value for 'width: 123px'"]);
     });
 
     it('should combine multiple results', () => {
@@ -196,12 +219,16 @@ describe('reporter', () => {
               border: { matched: 0, total: 0, percentage: 0 },
               background: { matched: 0, total: 0, percentage: 0 },
               effects: { matched: 0, total: 0, percentage: 0 },
+              'flex-grid': { matched: 0, total: 0, percentage: 0 },
+              sizing: { matched: 0, total: 0, percentage: 0 },
               other: { matched: 0, total: 1, percentage: 0 },
             },
             warningsByCategory: {
               'arbitrary-value': 1,
               'no-handler': 0,
               approximate: 0,
+              'token-miss': 0,
+              'v3-fallback': 0,
               other: 0,
             },
           },
@@ -222,12 +249,16 @@ describe('reporter', () => {
               border: { matched: 0, total: 0, percentage: 0 },
               background: { matched: 0, total: 0, percentage: 0 },
               effects: { matched: 0, total: 0, percentage: 0 },
+              'flex-grid': { matched: 0, total: 0, percentage: 0 },
+              sizing: { matched: 0, total: 0, percentage: 0 },
               other: { matched: 0, total: 0, percentage: 0 },
             },
             warningsByCategory: {
               'arbitrary-value': 1,
               'no-handler': 0,
               approximate: 0,
+              'token-miss': 0,
+              'v3-fallback': 0,
               other: 0,
             },
           },
@@ -235,12 +266,137 @@ describe('reporter', () => {
       ];
 
       const summary = summarize(results);
-      expect(summary).toContain('Overall Coverage: 80% (4/5)');
-      expect(summary).toContain('Non-arbitrary classes: 2');
-      expect(summary).toContain('spacing: 100% (2/2)');
-      expect(summary).toContain('typography: 100% (1/1)');
-      expect(summary).toContain('color: 100% (1/1)');
-      expect(summary).toContain('arbitrary-value: 2');
+      expect(summary.text).toContain('Overall Coverage: 80% (4/5)');
+      expect(summary.text).toContain('Non-arbitrary classes: 2');
+      expect(summary.text).toContain('spacing: 100% (2/2)');
+      expect(summary.text).toContain('typography: 100% (1/1)');
+      expect(summary.text).toContain('color: 100% (1/1)');
+      expect(summary.text).toContain('arbitrary-value: 2');
+      expect(summary.stats.totals.matched).toBe(4);
+      expect(summary.stats.totals.total).toBe(5);
+      expect(summary.stats.totals.percentage).toBe(80);
+      expect(summary.stats.warningsByCategory['arbitrary-value']).toBe(2);
+    });
+
+    it('should handle new warning categories (token-miss, v3-fallback)', () => {
+      const result: TransformResult = {
+        classes: ['p-4', 'text-base'],
+        warnings: [
+          'token-miss: spacing token not found for 13px',
+          'v3-fallback: using v3 theme for color resolution',
+          'approximate: font-size 17px → text-base (1px diff)',
+        ],
+        coverage: {
+          matched: 2,
+          total: 3,
+          percentage: 67,
+          nonArbitrary: 2,
+          categories: {
+            spacing: { matched: 1, total: 1, percentage: 100 },
+            color: { matched: 0, total: 0, percentage: 0 },
+            typography: { matched: 1, total: 1, percentage: 100 },
+            layout: { matched: 0, total: 0, percentage: 0 },
+            border: { matched: 0, total: 0, percentage: 0 },
+            background: { matched: 0, total: 0, percentage: 0 },
+            effects: { matched: 0, total: 0, percentage: 0 },
+            'flex-grid': { matched: 0, total: 0, percentage: 0 },
+            sizing: { matched: 0, total: 0, percentage: 0 },
+            other: { matched: 0, total: 1, percentage: 0 },
+          },
+          warningsByCategory: {
+            'arbitrary-value': 0,
+            'no-handler': 0,
+            approximate: 1,
+            'token-miss': 1,
+            'v3-fallback': 1,
+            other: 0,
+          },
+        },
+      };
+
+      const summary = summarize(result);
+      expect(summary.stats.warningsByCategory['token-miss']).toBe(1);
+      expect(summary.stats.warningsByCategory['v3-fallback']).toBe(1);
+      expect(summary.stats.warningsByCategory.approximate).toBe(1);
+      expect(summary.text).toContain('token-miss: 1');
+      expect(summary.text).toContain('v3-fallback: 1');
+      expect(summary.text).toContain('approximate: 1');
+    });
+
+    it('should extract sample classes and warnings', () => {
+      const manyClasses = Array.from({ length: 20 }, (_, i) => `class-${i}`);
+      const manyWarnings = Array.from({ length: 10 }, (_, i) => `warning-${i}`);
+
+      const result: TransformResult = {
+        classes: manyClasses,
+        warnings: manyWarnings,
+        coverage: {
+          matched: 20,
+          total: 20,
+          percentage: 100,
+          nonArbitrary: 20,
+        },
+      };
+
+      const summary = summarize(result);
+      // Should only include first 10 classes
+      expect(summary.stats.samples.classes).toHaveLength(10);
+      expect(summary.stats.samples.classes[0]).toBe('class-0');
+      expect(summary.stats.samples.classes[9]).toBe('class-9');
+
+      // Should only include first 5 warnings
+      expect(summary.stats.samples.warnings).toHaveLength(5);
+      expect(summary.stats.samples.warnings[0]).toBe('warning-0');
+      expect(summary.stats.samples.warnings[4]).toBe('warning-4');
+    });
+
+    it('should provide complete stats structure', () => {
+      const result: TransformResult = {
+        classes: ['p-4'],
+        warnings: [],
+        coverage: {
+          matched: 1,
+          total: 1,
+          percentage: 100,
+          nonArbitrary: 1,
+        },
+      };
+
+      const summary = summarize(result);
+
+      // Verify structure
+      expect(summary).toHaveProperty('text');
+      expect(summary).toHaveProperty('stats');
+      expect(summary.stats).toHaveProperty('totals');
+      expect(summary.stats).toHaveProperty('byCategory');
+      expect(summary.stats).toHaveProperty('warningsByCategory');
+      expect(summary.stats).toHaveProperty('samples');
+
+      // Verify totals
+      expect(summary.stats.totals).toHaveProperty('matched');
+      expect(summary.stats.totals).toHaveProperty('total');
+      expect(summary.stats.totals).toHaveProperty('percentage');
+      expect(summary.stats.totals).toHaveProperty('nonArbitrary');
+
+      // Verify all categories are present
+      expect(summary.stats.byCategory).toHaveProperty('spacing');
+      expect(summary.stats.byCategory).toHaveProperty('color');
+      expect(summary.stats.byCategory).toHaveProperty('typography');
+      expect(summary.stats.byCategory).toHaveProperty('layout');
+      expect(summary.stats.byCategory).toHaveProperty('border');
+      expect(summary.stats.byCategory).toHaveProperty('background');
+      expect(summary.stats.byCategory).toHaveProperty('effects');
+      expect(summary.stats.byCategory).toHaveProperty('flex-grid');
+      expect(summary.stats.byCategory).toHaveProperty('sizing');
+      expect(summary.stats.byCategory).toHaveProperty('other');
+
+      // Verify all warning categories are present
+      expect(summary.stats.warningsByCategory).toHaveProperty('arbitrary-value');
+      expect(summary.stats.warningsByCategory).toHaveProperty('no-handler');
+      expect(summary.stats.warningsByCategory).toHaveProperty('approximate');
+      expect(summary.stats.warningsByCategory).toHaveProperty('token-miss');
+      expect(summary.stats.warningsByCategory).toHaveProperty('v3-fallback');
+      expect(summary.stats.warningsByCategory).toHaveProperty('other');
     });
   });
 });

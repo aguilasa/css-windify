@@ -36,6 +36,8 @@ export type PropertyCategory =
   | 'border'
   | 'background'
   | 'effects'
+  | 'flex-grid'
+  | 'sizing'
   | 'other';
 
 export type WarningCategory =
@@ -91,3 +93,21 @@ export type RuleHandler = (
   value: string,
   ctx: MatchCtx
 ) => string[] | { classes: string[]; warnings: string[] } | null;
+
+export interface SummarizeResult {
+  text: string;
+  stats: {
+    totals: {
+      matched: number;
+      total: number;
+      percentage: number;
+      nonArbitrary: number;
+    };
+    byCategory: Record<PropertyCategory, CategoryStats>;
+    warningsByCategory: Record<WarningCategory, number>;
+    samples: {
+      classes: string[];
+      warnings: string[];
+    };
+  };
+}

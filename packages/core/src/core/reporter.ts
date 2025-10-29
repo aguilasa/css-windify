@@ -1,7 +1,13 @@
 /**
  * Reporter utilities for calculating coverage and aggregating warnings
  */
-import { TransformResult, PropertyCategory, WarningCategory, CategoryStats } from '../types';
+import {
+  TransformResult,
+  PropertyCategory,
+  WarningCategory,
+  CategoryStats,
+  SummarizeResult,
+} from '../types';
 
 /**
  * Maps CSS properties to their categories
@@ -90,8 +96,14 @@ export function categorizeWarning(warning: string): WarningCategory {
   ) {
     return 'no-handler';
   }
-  if (warning.includes('approximate mapping')) {
+  if (warning.includes('approximate mapping') || warning.includes('approximate')) {
     return 'approximate';
+  }
+  if (warning.includes('token-miss') || warning.includes('token not found')) {
+    return 'token-miss';
+  }
+  if (warning.includes('v3-fallback') || warning.includes('falling back to v3')) {
+    return 'v3-fallback';
   }
   return 'other';
 }
@@ -140,6 +152,8 @@ export function aggregateWarnings(warnings: string[]): {
     'arbitrary-value': 0,
     'no-handler': 0,
     approximate: 0,
+    'token-miss': 0,
+    'v3-fallback': 0,
     other: 0,
   };
 
@@ -195,6 +209,8 @@ export function calculateCategoryStats(
     border: { matched: 0, total: 0, percentage: 0 },
     background: { matched: 0, total: 0, percentage: 0 },
     effects: { matched: 0, total: 0, percentage: 0 },
+    'flex-grid': { matched: 0, total: 0, percentage: 0 },
+    sizing: { matched: 0, total: 0, percentage: 0 },
     other: { matched: 0, total: 0, percentage: 0 },
   };
 
@@ -220,9 +236,9 @@ export function calculateCategoryStats(
 /**
  * Generate a human-readable summary of transformation results
  * @param results Single result or array of results to summarize
- * @returns Formatted summary string
+ * @returns Object with text summary and structured stats
  */
-export function summarize(results: TransformResult | TransformResult[]): string {
+export function summarize(results: TransformResult | TransformResult[]): SummarizeResult {
   // Handle array of results
   if (Array.isArray(results)) {
     // Combine results
@@ -257,6 +273,8 @@ export function summarize(results: TransformResult | TransformResult[]): string 
         'border',
         'background',
         'effects',
+        'flex-grid',
+        'sizing',
         'other',
       ] as PropertyCategory[]) {
         categories[category] = {
@@ -288,6 +306,8 @@ export function summarize(results: TransformResult | TransformResult[]): string 
         'arbitrary-value',
         'no-handler',
         'approximate',
+        'token-miss',
+        'v3-fallback',
         'other',
       ] as WarningCategory[]) {
         warningsByCategory[category] = results.reduce(
@@ -299,11 +319,11 @@ export function summarize(results: TransformResult | TransformResult[]): string 
       combined.coverage.warningsByCategory = warningsByCategory;
     }
 
-    return formatSummary(combined);
+    return buildSummarizeResult(combined);
   }
 
   // Handle single result
-  return formatSummary(results);
+  return buildSummarizeResult(results);
 }
 
 /**
@@ -371,4 +391,64 @@ function formatSummary(result: TransformResult): string {
   }
 
   return lines.join('\n');
+}
+
+/**
+ * Build a structured SummarizeResult from a TransformResult
+ * @param result Transformation result to process
+ * @returns Structured summary with text and stats
+ */
+function buildSummarizeResult(result: TransformResult): SummarizeResult {
+  const { coverage, classes, warnings } = result;
+
+  // Initialize category stats with all categories
+  const byCategory: Record<PropertyCategory, CategoryStats> = coverage.categories || {
+    spacing: { matched: 0, total: 0, percentage: 0 },
+    color: { matched: 0, total: 0, percentage: 0 },
+    typography: { matched: 0, total: 0, percentage: 0 },
+    layout: { matched: 0, total: 0, percentage: 0 },
+    border: { matched: 0, total: 0, percentage: 0 },
+    background: { matched: 0, total: 0, percentage: 0 },
+    effects: { matched: 0, total: 0, percentage: 0 },
+    'flex-grid': { matched: 0, total: 0, percentage: 0 },
+    sizing: { matched: 0, total: 0, percentage: 0 },
+    other: { matched: 0, total: 0, percentage: 0 },
+  };
+
+  // Initialize warning categories with all categories
+  const warningsByCategory: Record<WarningCategory, number> = coverage.warningsByCategory || {
+    'arbitrary-value': 0,
+    'no-handler': 0,
+    approximate: 0,
+    'token-miss': 0,
+    'v3-fallback': 0,
+    other: 0,
+  };
+
+  // Sample classes (up to 10)
+  const sampleClasses = classes.slice(0, 10);
+
+  // Sample warnings (up to 5)
+  const sampleWarnings = warnings.slice(0, 5);
+
+  // Generate text summary
+  const text = formatSummary(result);
+
+  return {
+    text,
+    stats: {
+      totals: {
+        matched: coverage.matched,
+        total: coverage.total,
+        percentage: coverage.percentage,
+        nonArbitrary: coverage.nonArbitrary,
+      },
+      byCategory,
+      warningsByCategory,
+      samples: {
+        classes: sampleClasses,
+        warnings: sampleWarnings,
+      },
+    },
+  };
 }
