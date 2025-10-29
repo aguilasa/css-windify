@@ -21,8 +21,8 @@
     "ci": "pnpm build && pnpm check",
     "prepare": "husky install",
     "playground": "cd apps/Playground && pnpm dev",
-    "playground:inline": "cd apps/Playground && npx tsx src/index.ts 'inline:color: #1f2937; font-size: 18px; line-height: 1.4; margin: 10px 20px;'",
-    "playground:rule": "cd apps/Playground && npx tsx src/index.ts 'rule:.btn { display: flex; justify-content: center; gap: 12px; }'"
+    "playground:inline": "cd apps/Playground && pnpm exec tsx src/index.ts 'inline:color: #1f2937; font-size: 18px; line-height: 1.4; margin: 10px 20px;'",
+    "playground:rule": "cd apps/Playground && pnpm exec tsx src/index.ts 'rule:.btn { display: flex; justify-content: center; gap: 12px; }'"
   },
   "devDependencies": {
     "@types/node": "^24.9.1",

@@ -13,7 +13,8 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "tsup src/index.ts --format esm --dts --watch",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test": "cd test && ./cli.test.sh"
   },
   "dependencies": {
     "css-windify-core": "workspace:*",

@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "files": ["fixtures/button.css"],
+    "timestamp": "2025-10-29T22:52:27.701Z"
+  },
+  "results": [
+    {
+      "selector": ".btn",
+      "classes": "inline-block m-[0.25rem] px-[1rem] py-[0.5rem] font-semibold leading-[1.5] text-[#ffffff] text-[1rem] text-center bg-[#3b82f6] border border-transparent rounded",
+      "warnings": [
+        "Used arbitrary value for 'padding: 0.5rem 1rem'",
+        "Used arbitrary value for 'margin: 0.25rem'",
+        "Used arbitrary value for 'font-size: 1rem'",
+        "Used arbitrary value for 'line-height: 1.5'",
+        "Used arbitrary value for 'background-color: #3b82f6'",
+        "Used arbitrary value for 'color: #fff'",
+        "Selector '.btn' was converted but may need manual adjustment"
+      ],
+      "coverage": {
+        "matched": 11,
+        "total": 11,
+        "percentage": 100,
+        "nonArbitrary": 6,
+        "categories": {
+          "spacing": {
+            "matched": 2,
+            "total": 2,
+            "percentage": 100
+          },
+          "color": {
+            "matched": 2,
+            "total": 2,
+            "percentage": 100
+          },
+          "typography": {
+            "matched": 4,
+            "total": 4,
+            "percentage": 100
+          },
+          "layout": {
+            "matched": 1,
+            "total": 1,
+            "percentage": 100
+          },
+          "border": {
+            "matched": 2,
+            "total": 2,
+            "percentage": 100
+          },
+          "background": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "effects": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "flex-grid": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "sizing": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "other": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          }
+        },
+        "warningsByCategory": {
+          "arbitrary-value": 6,
+          "no-handler": 0,
+          "approximate": 0,
+          "token-miss": 0,
+          "v3-fallback": 0,
+          "other": 0
+        }
+      }
+    },
+    {
+      "selector": ".btn:hover",
+      "classes": "hover:bg-[#2563eb]",
+      "warnings": [
+        "Used arbitrary value for 'background-color: #2563eb'",
+        "Selector '.btn:hover' was converted but may need manual adjustment"
+      ],
+      "coverage": {
+        "matched": 1,
+        "total": 1,
+        "percentage": 100,
+        "nonArbitrary": 0,
+        "categories": {
+          "spacing": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "color": {
+            "matched": 1,
+            "total": 1,
+            "percentage": 100
+          },
+          "typography": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "layout": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "border": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "background": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "effects": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "flex-grid": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "sizing": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          },
+          "other": {
+            "matched": 0,
+            "total": 0,
+            "percentage": 0
+          }
+        },
+        "warningsByCategory": {
+          "arbitrary-value": 1,
+          "no-handler": 0,
+          "approximate": 0,
+          "token-miss": 0,
+          "v3-fallback": 0,
+          "other": 0
+        }
+      }
+    }
+  ],
+  "summary": {
+    "text": "# Tailwind CSS Transformation Summary\n\n## Overall Coverage: 100% (12/12)\n- Non-arbitrary classes: 6\n- Total classes generated: 14\n- Total warnings: 9\n\n## Coverage by Category\n- spacing: 100% (2/2)\n- color: 100% (3/3)\n- typography: 100% (4/4)\n- layout: 100% (1/1)\n- border: 100% (2/2)\n\n## Warnings by Category\n- arbitrary-value: 7\n\n## Sample Classes\ninline-block m-[0.25rem] px-[1rem] py-[0.5rem] font-semibold leading-[1.5] text-[#ffffff] text-[1rem] text-center bg-[#3b82f6] ...\n\n## Sample Warnings\n- Used arbitrary value for 'padding: 0.5rem 1rem'\n- Used arbitrary value for 'margin: 0.25rem'\n- Used arbitrary value for 'font-size: 1rem'\n- Used arbitrary value for 'line-height: 1.5'\n- Used arbitrary value for 'background-color: #3b82f6'\n- ... and 4 more",
+    "stats": {
+      "totals": {
+        "matched": 12,
+        "total": 12,
+        "percentage": 100,
+        "nonArbitrary": 6
+      },
+      "byCategory": {
+        "spacing": {
+          "matched": 2,
+          "total": 2,
+          "percentage": 100
+        },
+        "color": {
+          "matched": 3,
+          "total": 3,
+          "percentage": 100
+        },
+        "typography": {
+          "matched": 4,
+          "total": 4,
+          "percentage": 100
+        },
+        "layout": {
+          "matched": 1,
+          "total": 1,
+          "percentage": 100
+        },
+        "border": {
+          "matched": 2,
+          "total": 2,
+          "percentage": 100
+        },
+        "background": {
+          "matched": 0,
+          "total": 0,
+          "percentage": 0
+        },
+        "effects": {
+          "matched": 0,
+          "total": 0,
+          "percentage": 0
+        },
+        "flex-grid": {
+          "matched": 0,
+          "total": 0,
+          "percentage": 0
+        },
+        "sizing": {
+          "matched": 0,
+          "total": 0,
+          "percentage": 0
+        },
+        "other": {
+          "matched": 0,
+          "total": 0,
+          "percentage": 0
+        }
+      },
+      "warningsByCategory": {
+        "arbitrary-value": 7,
+        "no-handler": 0,
+        "approximate": 0,
+        "token-miss": 0,
+        "v3-fallback": 0,
+        "other": 0
+      },
+      "samples": {
+        "classes": [
+          "inline-block",
+          "m-[0.25rem]",
+          "px-[1rem]",
+          "py-[0.5rem]",
+          "font-semibold",
+          "leading-[1.5]",
+          "text-[#ffffff]",
+          "text-[1rem]",
+          "text-center",
+          "bg-[#3b82f6]"
+        ],
+        "warnings": [
+          "Used arbitrary value for 'padding: 0.5rem 1rem'",
+          "Used arbitrary value for 'margin: 0.25rem'",
+          "Used arbitrary value for 'font-size: 1rem'",
+          "Used arbitrary value for 'line-height: 1.5'",
+          "Used arbitrary value for 'background-color: #3b82f6'"
+        ]
+      }
+    }
+  }
+}
