@@ -71,13 +71,13 @@
 
 #### Features Adicionais
 
-- [ ] Shareable URLs (encode CSS in URL)
-- [ ] Local storage para salvar última sessão
-- [ ] Exemplos pré-carregados
-- [ ] Theme switcher (dark/light)
-- [ ] Responsive design
+- [x] Shareable URLs (encode CSS in URL)
+- [x] Local storage para salvar última sessão
+- [x] Exemplos pré-carregados
+- [x] Theme switcher (dark/light)
+- [x] Responsive design
 
-**Tempo estimado:** 1-2 dias
+**Tempo estimado:** 1-2 dias ✅ **COMPLETO**
 
 **Total Web App:** 5-7 dias
 

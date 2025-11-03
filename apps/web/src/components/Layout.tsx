@@ -1,15 +1,56 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { InputPanel } from './InputPanel';
 import { OutputPanel } from './OutputPanel';
 import { SidePanel } from './SidePanel';
 import { ExportButton } from './ExportButton';
+import { ExamplesModal } from './ExamplesModal';
 import { useWorker } from '../hooks/useWorker';
 import { useApp, getMatchCtxFromSettings } from '../contexts/AppContext';
 
 export function Layout() {
-  const { cssInput, setResult, settings } = useApp();
+  const { cssInput, setCssInput, setResult, settings, setShowExamplesModal, setActiveTab } =
+    useApp();
   const { state, transform, cancel } = useWorker();
   const [leftWidth, setLeftWidth] = useState(40); // percentage
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + Enter: Transform
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        handleTransform();
+      }
+      // Ctrl/Cmd + K: Clear
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setCssInput('');
+      }
+      // Ctrl/Cmd + /: Toggle settings
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        setActiveTab('settings');
+      }
+      // Esc: Close modals
+      if (e.key === 'Escape') {
+        setShowExamplesModal(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [cssInput]);
 
   const handleTransform = async () => {
     try {
@@ -32,6 +73,12 @@ export function Layout() {
           </span>
         </div>
         <div className="flex gap-3">
+          <button
+            onClick={() => setShowExamplesModal(true)}
+            className="rounded bg-gray-700 px-4 py-2 font-semibold text-white hover:bg-gray-600"
+          >
+            Examples
+          </button>
           <button
             onClick={handleTransform}
             disabled={state === 'processing' || !cssInput}
@@ -96,7 +143,15 @@ export function Layout() {
       {/* Footer */}
       <footer className="border-t border-gray-700 bg-gray-900 px-6 py-2 text-center text-xs text-gray-400">
         Made with ❤️ by the CSSWindify team • MIT License
+        {!isMobile && (
+          <span className="ml-4 text-gray-500">
+            Shortcuts: Ctrl+Enter (Transform) • Ctrl+K (Clear) • Ctrl+/ (Settings) • Esc (Close)
+          </span>
+        )}
       </footer>
+
+      {/* Examples Modal */}
+      <ExamplesModal />
     </div>
   );
 }
