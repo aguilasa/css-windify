@@ -37,6 +37,12 @@ Atualizar o README.md principal do projeto CSSWindify com:
 4. Link para documentação completa
 
 Manter o README conciso e focado. Usar exemplos práticos e reais.
+
+Após completar, marcar como completo no TODO.md:
+- [x] Adicionar badges (build status, coverage, version, license)
+- [x] Adicionar exemplos de uso básico
+- [x] Adicionar quick start guide
+- [x] Adicionar link para documentação completa
 ```
 
 ### Prompt 2: Package.json Metadata
@@ -62,6 +68,12 @@ Atualizar metadata nos package.json de todos os pacotes:
    - Bin configuration correta
 
 Garantir que todos os campos estejam preenchidos para publicação no NPM.
+
+Após completar, marcar como completo no TODO.md:
+- [x] Adicionar keywords para npm
+- [x] Adicionar repository URLs
+- [x] Adicionar homepage e bugs URLs
+- [x] Verificar license
 ```
 
 ---
@@ -106,6 +118,14 @@ Tarefas:
 5. Criar testes básicos com Vitest + Testing Library
 
 Referência: https://github.com/suren-atoyan/monaco-react
+
+Após completar, marcar como completo no TODO.md:
+
+- [x] Instalar @monaco-editor/react
+- [x] Criar componente Editor.tsx
+- [x] Configurar syntax highlighting CSS
+- [x] Adicionar auto-complete básico
+- [x] Configurar theme (dark/light)
 
 ```
 
@@ -230,6 +250,15 @@ State Management:
 
 Usar shadcn/ui para componentes base (Button, Select, Slider, etc.)
 
+Após completar, marcar como completo no TODO.md:
+
+- [x] Input panel (CSS editor)
+- [x] Output panel (Tailwind classes)
+- [x] Side panel (warnings/coverage stats)
+- [x] Settings panel (strict/approximate, thresholds)
+- [x] Export button (copy, download)
+- [x] Split view resizable
+
 ```
 
 ### Prompt 6: Web App Features Adicionais
@@ -282,11 +311,15 @@ Implementar features avançadas do web app:
 Usar React Router para navegação (se necessário)
 Adicionar analytics (opcional): Plausible ou similar
 
+Após completar, marcar como completo no TODO.md:
+
+- [x] Shareable URLs (encode CSS in URL)
+- [x] Local storage para salvar última sessão
+- [x] Exemplos pré-carregados
+- [x] Theme switcher (dark/light)
+- [x] Responsive design
+
 ```
-
----
-
-## 📚 v1.1 - Documentação Expandida
 
 ### Prompt 7: TypeDoc API Documentation
 
@@ -337,6 +370,13 @@ Configurar e gerar documentação automática com TypeDoc:
    - URL: https://username.github.io/css-windify/
 
 6. Adicionar link no README principal
+
+Após completar, marcar como completo no TODO.md:
+
+- [x] Configurar TypeDoc
+- [x] Gerar documentação automática
+- [x] Adicionar exemplos em JSDoc
+- [x] Publicar em GitHub Pages ou similar
 
 ```
 
@@ -416,11 +456,15 @@ Criar MIGRATION.md na raiz com:
    - Como migrar gradualmente?
    - Breaking changes?
 
-```
+Após completar, marcar como completo no TODO.md:
+
+- [x] Criar MIGRATION.md
+- [x] Guia v3 → v4 Tailwind
+- [x] Exemplos de migração
+- [x] Troubleshooting comum
+- [x] Breaking changes (se houver)
 
 ### Prompt 9: Contributing Guide
-
-```
 
 Criar guia completo para contribuidores:
 
@@ -562,6 +606,13 @@ Cada tutorial deve:
 - Listar pré-requisitos
 - Ter seção de troubleshooting
 
+Após completar, marcar como completo no TODO.md:
+
+- [x] Tutorial: Converter um componente React
+- [x] Tutorial: Usar no CI/CD
+- [x] Tutorial: Criar plugins customizados
+- [x] Exemplos de casos de uso reais
+
 ```
 
 ---
@@ -630,6 +681,14 @@ Configurar secrets necessários no GitHub:
 - NPM_TOKEN
 - CODECOV_TOKEN
 
+Após completar, marcar como completo no TODO.md:
+
+- [x] Workflow de testes (CI)
+- [x] Workflow de build
+- [x] Coverage report (Codecov)
+- [x] Automated releases
+- [x] Dependabot setup
+
 ```
 
 ### Prompt 12: NPM Publishing Setup
@@ -693,12 +752,20 @@ Configurar publicação automática no NPM:
    pnpm publish:all
    ```
 
-```
+Após completar, marcar como completo no TODO.md:
+
+- [x] Configurar npm publish
+- [x] Semantic versioning
+- [x] Changelog automático
+- [x] Pre-publish checks
+- [x] Publish @css-windify/core
+- [x] Publish @css-windify/cli
+
+````
 
 ### Prompt 13: Quality Checks e Linting
 
-```
-
+...
 Configurar quality checks completos:
 
 1. ESLint Setup:
@@ -719,7 +786,7 @@ Configurar quality checks completos:
        "@typescript-eslint/explicit-function-return-type": "warn"
      }
    }
-   ```
+````
 
 2. Prettier Setup:
 
@@ -846,6 +913,13 @@ Features:
 
 Publicar no VS Code Marketplace.
 
+Após completar, marcar como completo no TODO.md (v1.2+):
+
+- [x] Criar extensão VS Code
+- [x] Inline CSS → Tailwind conversion
+- [x] Hover para preview
+- [x] Code actions (quick fixes)
+
 ```
 
 ### Prompt 15: Advanced Matchers
@@ -904,6 +978,14 @@ Implementar matchers avançados para CSS moderno:
 
 Adicionar testes abrangentes para cada matcher.
 Documentar no SPEC.md.
+
+Após completar, marcar como completo no TODO.md (v1.2+):
+
+- [x] CSS Grid advanced (subgrid, masonry)
+- [x] Container queries (@container)
+- [x] CSS custom properties (--var)
+- [x] CSS functions (calc, clamp, min, max)
+- [x] Advanced animations (@keyframes)
 
 ```
 
