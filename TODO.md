@@ -208,12 +208,12 @@
 
 ### 6. Grid Template Areas
 
-- [ ] Implementar matchGridTemplateAreas()
-- [ ] Sempre usar arbitrary [grid-template-areas:"..."]
-- [ ] Adicionar testes
-- [ ] Adicionar ao propertyHandlers
+- [x] Implementar matchGridTemplateAreas()
+- [x] Sempre usar arbitrary [grid-template-areas:"..."]
+- [x] Adicionar testes
+- [x] Adicionar ao propertyHandlers
 
-**Arquivo:** `packages/core/src/core/matchers/flexGrid.ts`
+**Arquivo:** `packages/core/src/core/matchers/flexGrid.ts` ✅ **COMPLETO**
 
 ---
 

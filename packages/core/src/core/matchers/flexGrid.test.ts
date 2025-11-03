@@ -8,6 +8,7 @@ import {
   matchPlaceContent,
   matchPlaceItems,
   matchPlaceSelf,
+  matchGridTemplateAreas,
 } from './flexGrid';
 import { MatchCtx } from '../../types';
 
@@ -214,6 +215,28 @@ describe('flexGrid matcher', () => {
     it('should use arbitrary values for non-predefined place self', () => {
       expect(matchPlaceSelf('inherit')).toBe('place-self-[inherit]');
       expect(matchPlaceSelf('baseline')).toBe('place-self-[baseline]');
+    });
+  });
+
+  describe('matchGridTemplateAreas', () => {
+    it('should always use arbitrary values for grid-template-areas', () => {
+      expect(matchGridTemplateAreas('"header header" "sidebar main" "footer footer"')).toBe(
+        '[grid-template-areas:"header header" "sidebar main" "footer footer"]'
+      );
+    });
+
+    it('should handle single area', () => {
+      expect(matchGridTemplateAreas('"main"')).toBe('[grid-template-areas:"main"]');
+    });
+
+    it('should handle complex grid areas', () => {
+      expect(matchGridTemplateAreas('"a a a" "b c c" "b c c"')).toBe(
+        '[grid-template-areas:"a a a" "b c c" "b c c"]'
+      );
+    });
+
+    it('should handle empty values', () => {
+      expect(matchGridTemplateAreas('')).toBe('');
     });
   });
 });

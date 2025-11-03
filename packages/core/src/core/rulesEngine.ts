@@ -68,6 +68,7 @@ import {
   matchGridColumnEnd,
   matchGridRowStart,
   matchGridRowEnd,
+  matchGridTemplateAreas,
 
   // Font matchers
   matchFontShorthand,
@@ -420,6 +421,7 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'grid-column-end': (value) => [matchGridColumnEnd(value)],
   'grid-row-start': (value) => [matchGridRowStart(value)],
   'grid-row-end': (value) => [matchGridRowEnd(value)],
+  'grid-template-areas': (value) => [matchGridTemplateAreas(value)],
 
   // Background properties
   background: (value, ctx) => matchBackgroundShorthand(value, ctx).classes,

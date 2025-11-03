@@ -649,3 +649,19 @@ export function matchGridRowEnd(value: string): string {
   // Use arbitrary value if no match found
   return toArbitrary('row-end', normalizedValue);
 }
+
+/**
+ * Matches grid-template-areas values to Tailwind classes
+ * Always uses arbitrary values as grid-template-areas is too complex for predefined classes
+ *
+ * @param value The CSS grid-template-areas value
+ * @param _ctx Match context (for future extensibility)
+ * @returns Tailwind class with arbitrary value
+ */
+export function matchGridTemplateAreas(value: string, _ctx?: MatchCtx): string {
+  if (!value) return '';
+
+  // grid-template-areas always uses arbitrary values
+  // The value is already formatted as a string with quotes
+  return `[grid-template-areas:${value}]`;
+}
