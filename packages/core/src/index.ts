@@ -136,7 +136,12 @@ export {
 
 export { loadTheme, defaultTheme } from './core/themeLoader';
 
-export { loadTokens, defaultTokens, detectTailwindVersion } from './core/tokensLoader';
+export {
+  loadTokens,
+  defaultTokens,
+  detectTailwindVersion,
+  parseCustomProperties,
+} from './core/tokensLoader';
 
 export {
   resolveNearestTokenPx,

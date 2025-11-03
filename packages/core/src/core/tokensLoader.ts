@@ -13,7 +13,7 @@ import { loadTheme } from './themeLoader';
 
 // Regular expressions for extracting CSS custom properties
 const ROOT_SELECTOR_REGEX = /:root\s*{([^}]*)}/g;
-const CSS_VAR_REGEX = /--([a-zA-Z0-9-_.]+)\s*:\s*([^;]+);/g;
+const CSS_VAR_REGEX = /--([a-zA-Z0-9-_.\\]+)\s*:\s*([^;]+);/g;
 
 // Token prefix patterns
 const TOKEN_PATTERNS = {
@@ -321,6 +321,17 @@ export async function loadTokens(options?: {
 
   // Return default tokens if all else fails
   return { ...defaultTokens };
+}
+
+/**
+ * Parse CSS custom properties from CSS content (public API)
+ * Alias for parseCssCustomProperties
+ *
+ * @param cssContent CSS file content
+ * @returns Object with extracted custom properties
+ */
+export function parseCustomProperties(cssContent: string): Record<string, string> {
+  return parseCssCustomProperties(cssContent);
 }
 
 /**

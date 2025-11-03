@@ -1,0 +1,133 @@
+/**
+ * Tailwind CSS v4 Tokens Fixture
+ * Contains CSS custom properties that represent Tailwind v4 design tokens
+ */
+
+:root {
+  /* Spacing tokens */
+  --spacing-0: 0px;
+  --spacing-0\.5: 0.125rem;
+  --spacing-1: 0.25rem;
+  --spacing-1\.5: 0.375rem;
+  --spacing-2: 0.5rem;
+  --spacing-2\.5: 0.625rem;
+  --spacing-3: 0.75rem;
+  --spacing-3\.5: 0.875rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 1.75rem;
+  --spacing-8: 2rem;
+  --spacing-9: 2.25rem;
+  --spacing-10: 2.5rem;
+  --spacing-11: 2.75rem;
+  --spacing-12: 3rem;
+  --spacing-14: 3.5rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-28: 7rem;
+  --spacing-32: 8rem;
+  --spacing-36: 9rem;
+  --spacing-40: 10rem;
+  --spacing-44: 11rem;
+  --spacing-48: 12rem;
+  --spacing-52: 13rem;
+  --spacing-56: 14rem;
+  --spacing-60: 15rem;
+  --spacing-64: 16rem;
+  --spacing-72: 18rem;
+  --spacing-80: 20rem;
+  --spacing-96: 24rem;
+  --spacing-px: 1px;
+
+  /* Color tokens - Slate */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Color tokens - Blue */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-blue-950: #172554;
+
+  /* Color tokens - Red */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+  --color-red-950: #450a0a;
+
+  /* Color tokens - Simple colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  /* Font size tokens */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6rem;
+  --font-size-9xl: 8rem;
+
+  /* Line height tokens */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  --leading-3: 0.75rem;
+  --leading-4: 1rem;
+  --leading-5: 1.25rem;
+  --leading-6: 1.5rem;
+  --leading-7: 1.75rem;
+  --leading-8: 2rem;
+  --leading-9: 2.25rem;
+  --leading-10: 2.5rem;
+
+  /* Screen breakpoints */
+  --screen-sm: 640px;
+  --screen-md: 768px;
+  --screen-lg: 1024px;
+  --screen-xl: 1280px;
+  --screen-2xl: 1536px;
+}
+
+/* Additional layer for testing @layer support */
+@layer base {
+  :root {
+    --color-primary: #3b82f6;
+    --color-secondary: #64748b;
+  }
+}

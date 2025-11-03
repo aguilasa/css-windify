@@ -73,48 +73,48 @@
 
 #### CSS Custom Properties Parser
 
-- [ ] Criar função parseCustomProperties(cssContent: string)
-- [ ] Extrair tokens de :root
-- [ ] Suporte para cascade layers (@layer)
-- [ ] Extrair spacing tokens (--spacing-0, --spacing-0\.5, --spacing-1, etc.)
-- [ ] Extrair font sizes (--font-size-sm, --font-size-base, etc.)
-- [ ] Extrair line-heights (--leading-normal, --leading-tight, etc.)
-- [ ] Extrair colors (--color-slate-900, --color-blue-500, etc.)
-- [ ] Extrair screens (--screen-sm: 640px, etc.)
+- [x] Criar função parseCustomProperties(cssContent: string)
+- [x] Extrair tokens de :root
+- [x] Suporte para cascade layers (@layer)
+- [x] Extrair spacing tokens (--spacing-0, --spacing-0\.5, --spacing-1, etc.)
+- [x] Extrair font sizes (--font-size-sm, --font-size-base, etc.)
+- [x] Extrair line-heights (--leading-normal, --leading-tight, etc.)
+- [x] Extrair colors (--color-slate-900, --color-blue-500, etc.)
+- [x] Extrair screens (--screen-sm: 640px, etc.)
 
-**Arquivo:** `packages/core/src/core/tokensLoader.ts`
+**Arquivo:** `packages/core/src/core/tokensLoader.ts` ✅ **COMPLETO**
 
 #### loadTokens() Enhancement
 
-- [ ] Implementar leitura de arquivo CSS quando cssPath fornecido
-- [ ] Integrar parseCustomProperties()
-- [ ] Fallback para v3 theme quando tokens não encontrados
-- [ ] Emitir warning 'v3-fallback' quando apropriado
-- [ ] Adicionar testes com fixtures v4 reais
+- [x] Implementar leitura de arquivo CSS quando cssPath fornecido
+- [x] Integrar parseCustomProperties()
+- [x] Fallback para v3 theme quando tokens não encontrados
+- [x] Emitir warning 'v3-fallback' quando apropriado
+- [x] Adicionar testes com fixtures v4 reais
 
-**Arquivo:** `packages/core/src/core/tokensLoader.ts`
+**Arquivo:** `packages/core/src/core/tokensLoader.ts` ✅ **COMPLETO**
 
 #### Resolvers v4
 
-- [ ] Atualizar resolveSpacingToken() para preferir tokens v4
-- [ ] Atualizar resolveColorToken() para preferir tokens v4
-- [ ] Atualizar resolveFontSizeToken() para preferir tokens v4
-- [ ] Atualizar resolveLineHeightToken() para preferir tokens v4
-- [ ] Emitir 'token-miss' quando token esperado não encontrado
+- [x] Atualizar resolveSpacingToken() para preferir tokens v4
+- [x] Atualizar resolveColorToken() para preferir tokens v4
+- [x] Atualizar resolveFontSizeToken() para preferir tokens v4
+- [x] Atualizar resolveLineHeightToken() para preferir tokens v4
+- [x] Emitir 'token-miss' quando token esperado não encontrado
 
-**Arquivo:** `packages/core/src/core/resolvers.ts`
+**Arquivo:** `packages/core/src/core/resolvers.ts` ✅ **COMPLETO**
 
 #### Testes v4
 
-- [ ] Criar fixture com CSS v4 completo (tokens em :root)
-- [ ] Testar extração de spacing tokens
-- [ ] Testar extração de color tokens
-- [ ] Testar extração de font tokens
-- [ ] Testar extração de screens
-- [ ] Testar fallback v3
-- [ ] Testar warnings v4 (token-miss, v3-fallback)
+- [x] Criar fixture com CSS v4 completo (tokens em :root)
+- [x] Testar extração de spacing tokens
+- [x] Testar extração de color tokens
+- [x] Testar extração de font tokens
+- [x] Testar extração de screens
+- [x] Testar fallback v3
+- [x] Testar warnings v4 (token-miss, v3-fallback)
 
-**Arquivo:** `packages/core/src/core/tokensLoader.test.ts`
+**Arquivo:** `packages/core/src/core/tokensLoader.test.ts` ✅ **COMPLETO**
 
 ---
 
