@@ -9,8 +9,8 @@ import { Command } from 'commander';
 import { readFileSync, writeFileSync } from 'fs';
 import { glob } from 'glob';
 import chalk from 'chalk';
-import { transformCssText, summarize, sortClasses } from 'css-windify-core';
-import type { MatchCtx } from 'css-windify-core';
+import { transformCssText, summarize, sortClasses } from '@css-windify/core';
+import type { MatchCtx } from '@css-windify/core';
 
 interface ApproximationThresholds {
   spacingPx?: number;
