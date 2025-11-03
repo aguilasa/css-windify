@@ -21,12 +21,12 @@
 
 #### Package.json Metadata
 
-- [ ] Adicionar keywords para npm
-- [ ] Adicionar repository URLs
-- [ ] Adicionar homepage e bugs URLs
-- [ ] Verificar license
+- [x] Adicionar keywords para npm
+- [x] Adicionar repository URLs
+- [x] Adicionar homepage e bugs URLs
+- [x] Verificar license
 
-**Arquivo:** `package.json` (root e packages)
+**Arquivo:** `package.json` (root e packages) ✅ **COMPLETO**
 **Tempo estimado:** 30 minutos
 
 ---

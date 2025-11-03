@@ -2,8 +2,28 @@
   "name": "css-windify",
   "private": true,
   "version": "0.0.1",
-  "description": "CSSWindify monorepo - Convert CSS to Tailwind CSS",
+  "description": "CSSWindify monorepo - Convert CSS to Tailwind CSS automatically with high fidelity",
   "type": "module",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "css",
+    "converter",
+    "utility-first",
+    "css-to-tailwind",
+    "css-parser",
+    "tailwind-migration"
+  ],
+  "homepage": "https://github.com/yourusername/css-windify#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/css-windify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/css-windify.git"
+  },
+  "license": "MIT",
+  "author": "Your Name <your.email@example.com>",
   "engines": {
     "node": ">=18"
   },

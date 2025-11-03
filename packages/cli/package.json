@@ -1,15 +1,42 @@
 {
-  "name": "css-windify-cli",
-  "version": "0.0.1",
-  "description": "CLI tool for converting CSS to Tailwind CSS - CSSWindify",
+  "name": "@css-windify/cli",
+  "version": "1.0.0",
+  "description": "Command-line tool for converting CSS to Tailwind CSS classes. Supports batch processing, coverage thresholds, and multiple output formats.",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "css",
+    "converter",
+    "cli",
+    "command-line",
+    "css-to-tailwind",
+    "tailwind-cli",
+    "css-converter-cli"
+  ],
+  "homepage": "https://github.com/yourusername/css-windify#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/css-windify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/css-windify.git",
+    "directory": "packages/cli"
+  },
+  "license": "MIT",
+  "author": "Your Name <your.email@example.com>",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "css-windify": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "tsup src/index.ts --format esm --dts --watch",
@@ -26,5 +53,8 @@
     "@types/node": "^20.10.0",
     "tsup": "^8.0.0",
     "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

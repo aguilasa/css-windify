@@ -1,7 +1,31 @@
 {
-  "name": "css-windify-core",
-  "version": "0.0.1",
-  "description": "Core library for CSSWindify - Convert CSS to Tailwind CSS",
+  "name": "@css-windify/core",
+  "version": "1.0.0",
+  "description": "Core library for converting CSS to Tailwind CSS classes. Supports v3 and v4, 100+ matchers, strict/approximate modes, plugin system, and advanced reporting.",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "css",
+    "converter",
+    "utility-first",
+    "css-to-tailwind",
+    "css-parser",
+    "tailwind-v3",
+    "tailwind-v4",
+    "css-transformer",
+    "postcss"
+  ],
+  "homepage": "https://github.com/yourusername/css-windify#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/css-windify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/css-windify.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "author": "Your Name <your.email@example.com>",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,9 +37,14 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
@@ -24,9 +53,16 @@
   "dependencies": {
     "postcss": "^8.5.6"
   },
+  "peerDependencies": {
+    "postcss": "^8.0.0"
+  },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.3.0",
     "vitest": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
