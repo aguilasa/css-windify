@@ -1,7 +1,6 @@
 {
   "entryPoints": ["packages/core/src/index.ts"],
   "out": "docs/api",
-  "plugin": ["typedoc-plugin-markdown"],
   "readme": "none",
   "excludePrivate": true,
   "excludeInternal": true,
@@ -15,5 +14,9 @@
   "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/test/**", "**/__tests__/**"],
   "compilerOptions": {
     "downlevelIteration": true
+  },
+  "name": "CSSWindify API Documentation",
+  "navigationLinks": {
+    "GitHub": "https://github.com/aguilasa/css-windify"
   }
 }
