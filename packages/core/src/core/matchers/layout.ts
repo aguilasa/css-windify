@@ -2,7 +2,7 @@
  * Layout matchers for Tailwind CSS
  */
 import { MatchCtx } from '../../types';
-import { normalizeValue } from '../normalizers';
+import { normalizeValue, toArbitrary } from '../normalizers';
 import { matchSpacing } from './spacing';
 
 // Display property mapping
@@ -110,4 +110,43 @@ export function matchInsetShorthand(
   ];
 
   return { classes, warnings };
+}
+
+// Object position mapping
+const objectPositionMap: Record<string, string> = {
+  center: 'object-center',
+  top: 'object-top',
+  right: 'object-right',
+  bottom: 'object-bottom',
+  left: 'object-left',
+  // Two-value combinations
+  'top left': 'object-left-top',
+  'left top': 'object-left-top',
+  'top right': 'object-right-top',
+  'right top': 'object-right-top',
+  'bottom left': 'object-left-bottom',
+  'left bottom': 'object-left-bottom',
+  'bottom right': 'object-right-bottom',
+  'right bottom': 'object-right-bottom',
+};
+
+/**
+ * Matches object-position values to Tailwind classes
+ *
+ * @param value The CSS object-position value
+ * @param _ctx Match context (for future extensibility)
+ * @returns Tailwind class
+ */
+export function matchObjectPosition(value: string, _ctx?: MatchCtx): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Check for predefined position values
+  if (objectPositionMap[normalizedValue]) {
+    return objectPositionMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return toArbitrary('object', normalizedValue);
 }

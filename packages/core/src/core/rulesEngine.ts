@@ -16,6 +16,7 @@ import {
   matchPosition,
   matchInset,
   matchInsetShorthand,
+  matchObjectPosition,
 
   // Spacing matchers
   matchSpacing,
@@ -169,6 +170,7 @@ const propertyHandlers: Record<string, RuleHandler> = {
   // Layout properties
   display: (value) => [matchDisplay(value)],
   position: (value) => [matchPosition(value)],
+  'object-position': (value) => [matchObjectPosition(value)],
   top: (value, ctx) => matchInset('top', value, ctx),
   right: (value, ctx) => matchInset('right', value, ctx),
   bottom: (value, ctx) => matchInset('bottom', value, ctx),

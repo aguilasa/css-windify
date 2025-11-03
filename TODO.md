@@ -49,13 +49,13 @@
 
 #### object-position
 
-- [ ] Implementar matchObjectPosition()
-- [ ] Mapear: center, top, right, bottom, left, top-left, top-right, bottom-left, bottom-right
-- [ ] Fallback para arbitrary object-[pos]
-- [ ] Adicionar testes
-- [ ] Adicionar ao propertyHandlers
+- [x] Implementar matchObjectPosition()
+- [x] Mapear: center, top, right, bottom, left, top-left, top-right, bottom-left, bottom-right
+- [x] Fallback para arbitrary object-[pos]
+- [x] Adicionar testes
+- [x] Adicionar ao propertyHandlers
 
-**Arquivo:** `packages/core/src/core/matchers/layout.ts`
+**Arquivo:** `packages/core/src/core/matchers/layout.ts` ✅ **COMPLETO**
 
 #### aspect-ratio
 

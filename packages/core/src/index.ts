@@ -153,6 +153,7 @@ export {
   matchPosition,
   matchInset,
   matchInsetShorthand,
+  matchObjectPosition,
   displayMap,
   positionMap,
   // Color matchers

@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { matchDisplay, matchPosition, matchInset, matchInsetShorthand } from './layout';
+import {
+  matchDisplay,
+  matchPosition,
+  matchInset,
+  matchInsetShorthand,
+  matchObjectPosition,
+} from './layout';
 import { MatchCtx } from '../../types';
 
 describe('layout matcher', () => {
@@ -176,6 +182,44 @@ describe('layout matcher', () => {
     it('should handle empty inset shorthand values', () => {
       const result = matchInsetShorthand('', ctx);
       expect(result.classes).toEqual([]);
+    });
+  });
+
+  describe('matchObjectPosition', () => {
+    it('should match single position values', () => {
+      expect(matchObjectPosition('center')).toBe('object-center');
+      expect(matchObjectPosition('top')).toBe('object-top');
+      expect(matchObjectPosition('right')).toBe('object-right');
+      expect(matchObjectPosition('bottom')).toBe('object-bottom');
+      expect(matchObjectPosition('left')).toBe('object-left');
+    });
+
+    it('should match two-value combinations', () => {
+      expect(matchObjectPosition('top left')).toBe('object-left-top');
+      expect(matchObjectPosition('left top')).toBe('object-left-top');
+      expect(matchObjectPosition('top right')).toBe('object-right-top');
+      expect(matchObjectPosition('right top')).toBe('object-right-top');
+      expect(matchObjectPosition('bottom left')).toBe('object-left-bottom');
+      expect(matchObjectPosition('left bottom')).toBe('object-left-bottom');
+      expect(matchObjectPosition('bottom right')).toBe('object-right-bottom');
+      expect(matchObjectPosition('right bottom')).toBe('object-right-bottom');
+    });
+
+    it('should normalize values before matching', () => {
+      expect(matchObjectPosition('  center  ')).toBe('object-center');
+      expect(matchObjectPosition('TOP')).toBe('object-top');
+      expect(matchObjectPosition('  TOP LEFT  ')).toBe('object-left-top');
+    });
+
+    it('should use arbitrary values for custom positions', () => {
+      expect(matchObjectPosition('25% 75%')).toBe('object-[25% 75%]');
+      expect(matchObjectPosition('10px 20px')).toBe('object-[10px 20px]');
+      expect(matchObjectPosition('inherit')).toBe('object-[inherit]');
+    });
+
+    it('should handle empty values', () => {
+      expect(matchObjectPosition('')).toBe('');
+      expect(matchObjectPosition(null as unknown as string)).toBe('');
     });
   });
 });
