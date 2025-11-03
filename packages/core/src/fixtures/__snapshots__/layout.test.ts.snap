@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Complex Layout Fixture > Snapshots > should match complex layout snapshot 1`] = `
+{
+  "footerClasses": [
+    "bg-[#111827]",
+    "mt-auto",
+    "px-[2rem]",
+    "py-[3rem]",
+    "text-[#ffffff]",
+  ],
+  "headerClasses": [
+    "dark:[border-bottom:1px solid #374151]",
+    "dark:bg-[#1f2937]",
+  ],
+  "layoutClasses": [
+    "dark:bg-[#111827]",
+  ],
+  "mainClasses": [
+    "lg:p-[3rem]",
+  ],
+  "selectors": [
+    ".content-area",
+    ".footer",
+    ".footer-content",
+    ".header",
+    ".header-logo",
+    ".header-nav",
+    ".layout",
+    ".main-content",
+    ".nav-link",
+    ".nav-link:hover",
+    ".sidebar",
+  ],
+  "sidebarClasses": [
+    "dark:bg-[#1f2937]",
+  ],
+}
+`;

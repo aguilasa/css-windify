@@ -244,40 +244,40 @@
 
 #### Button Fixture
 
-- [ ] Criar fixture completo de button
-- [ ] Testar em strict mode
-- [ ] Testar em approximate mode
-- [ ] Snapshot de classes geradas
-- [ ] Verificar warnings
+- [x] Criar fixture completo de button
+- [x] Testar em strict mode
+- [x] Testar em approximate mode
+- [x] Snapshot de classes geradas
+- [x] Verificar warnings
 
-**Arquivo:** `packages/core/src/fixtures/button.test.ts` (criar)
+**Arquivo:** `packages/core/src/fixtures/button.test.ts` ✅ **COMPLETO**
 
 #### Card Fixture
 
-- [ ] Criar fixture completo de card
-- [ ] Incluir box-shadow
-- [ ] Testar strict e approximate
-- [ ] Snapshot de resultados
+- [x] Criar fixture completo de card
+- [x] Incluir box-shadow
+- [x] Testar strict e approximate
+- [x] Snapshot de resultados
 
-**Arquivo:** `packages/core/src/fixtures/card.test.ts` (criar)
+**Arquivo:** `packages/core/src/fixtures/card.test.ts` ✅ **COMPLETO**
 
 #### Grid Layout Fixture
 
-- [ ] Criar fixture de grid layout
-- [ ] Incluir grid-template-columns/rows
-- [ ] Incluir gap
-- [ ] Testar strict e approximate
+- [x] Criar fixture de grid layout
+- [x] Incluir grid-template-columns/rows
+- [x] Incluir gap
+- [x] Testar strict e approximate
 
-**Arquivo:** `packages/core/src/fixtures/grid.test.ts` (criar)
+**Arquivo:** `packages/core/src/fixtures/grid.test.ts` ✅ **COMPLETO**
 
 #### Complex Layout Fixture
 
-- [ ] Criar fixture de layout complexo
-- [ ] Incluir flexbox + grid
-- [ ] Incluir responsive
-- [ ] Incluir variants (hover, focus)
+- [x] Criar fixture de layout complexo
+- [x] Incluir flexbox + grid
+- [x] Incluir responsive
+- [x] Incluir variants (hover, focus)
 
-**Arquivo:** `packages/core/src/fixtures/layout.test.ts` (criar)
+**Arquivo:** `packages/core/src/fixtures/layout.test.ts` ✅ **COMPLETO**
 
 ---
 

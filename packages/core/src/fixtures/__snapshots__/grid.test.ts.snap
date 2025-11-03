@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Grid Layout Fixture > Snapshots > should match grid layout snapshot 1`] = `
+{
+  "containerClasses": [
+    "lg:gap-[2rem]",
+    "lg:grid-cols-12",
+  ],
+  "itemClasses": [
+    "bg-[#f3f4f6]",
+    "border",
+    "border-[#e5e7eb]",
+    "p-[1.5rem]",
+    "rounded-lg",
+  ],
+  "selectors": [
+    ".grid-auto-rows",
+    ".grid-container",
+    ".grid-dense",
+    ".grid-item",
+    ".grid-item-span-12",
+    ".grid-item-span-2",
+    ".grid-item-span-3",
+    ".grid-item-span-4",
+    ".grid-item-span-6",
+  ],
+  "span2Classes": [
+    "col-[span 2 / span 2]",
+  ],
+  "span6Classes": [
+    "col-[span 6 / span 6]",
+  ],
+}
+`;

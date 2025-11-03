@@ -1,0 +1,177 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button Component Fixture > Approximate Mode > should match snapshot in approximate mode 1`] = `
+{
+  "baseClasses": [
+    "md:px-[1.5rem]",
+    "md:py-[0.75rem]",
+    "md:text-[1rem]",
+  ],
+  "coverage": {
+    "categories": {
+      "background": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "border": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "color": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "effects": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "flex-grid": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "layout": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "other": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "sizing": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "spacing": {
+        "matched": 1,
+        "percentage": 100,
+        "total": 1,
+      },
+      "typography": {
+        "matched": 1,
+        "percentage": 100,
+        "total": 1,
+      },
+    },
+    "matched": 2,
+    "nonArbitrary": 0,
+    "percentage": 100,
+    "total": 2,
+    "warningsByCategory": {
+      "approximate": 0,
+      "arbitrary-value": 2,
+      "no-handler": 0,
+      "other": 0,
+      "token-miss": 0,
+      "v3-fallback": 0,
+    },
+  },
+  "selectors": [
+    ".button",
+    ".button:hover",
+    ".button:focus",
+    ".button:active",
+    ".button:disabled",
+  ],
+}
+`;
+
+exports[`Button Component Fixture > Strict Mode > should match snapshot in strict mode 1`] = `
+{
+  "baseClasses": [
+    "md:px-[1.5rem]",
+    "md:py-[0.75rem]",
+    "md:text-[1rem]",
+  ],
+  "coverage": {
+    "categories": {
+      "background": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "border": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "color": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "effects": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "flex-grid": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "layout": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "other": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "sizing": {
+        "matched": 0,
+        "percentage": 0,
+        "total": 0,
+      },
+      "spacing": {
+        "matched": 1,
+        "percentage": 100,
+        "total": 1,
+      },
+      "typography": {
+        "matched": 1,
+        "percentage": 100,
+        "total": 1,
+      },
+    },
+    "matched": 2,
+    "nonArbitrary": 0,
+    "percentage": 100,
+    "total": 2,
+    "warningsByCategory": {
+      "approximate": 0,
+      "arbitrary-value": 2,
+      "no-handler": 0,
+      "other": 0,
+      "token-miss": 0,
+      "v3-fallback": 0,
+    },
+  },
+  "focusClasses": [
+    "focus:[outline-offset:2px]",
+    "focus:[outline:2px solid transparent]",
+    "focus:shadow-[0 0 0 3px rgba(59, 130, 246, 0.5)]",
+  ],
+  "hoverClasses": [
+    "hover:bg-[#2563eb]",
+    "hover:shadow-[0 4px 6px -1px rgba(0, 0, 0, 0.1)]",
+    "hover:translate-y-[-1px]",
+  ],
+  "selectors": [
+    ".button",
+    ".button:hover",
+    ".button:focus",
+    ".button:active",
+    ".button:disabled",
+  ],
+}
+`;

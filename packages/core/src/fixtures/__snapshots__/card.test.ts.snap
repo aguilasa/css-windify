@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card Component Fixture > Snapshots > should match card snapshot 1`] = `
+{
+  "bodyClasses": [
+    "[flex:1 1 0%]",
+    "p-[1.5rem]",
+  ],
+  "cardClasses": [
+    "md:flex-row",
+  ],
+  "cardHoverClasses": [
+    "hover:shadow-[0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)]",
+    "hover:translate-y-[-2px]",
+  ],
+  "footerClasses": [
+    "[border-top:1px solid #e5e7eb]",
+    "bg-[#f9fafb]",
+    "px-[1.5rem]",
+    "py-[1rem]",
+  ],
+  "headerClasses": [
+    "[border-bottom:1px solid #e5e7eb]",
+    "p-[1.5rem]",
+  ],
+  "selectors": [
+    ".card",
+    ".card-body",
+    ".card-footer",
+    ".card-header",
+    ".card-title",
+    ".card:hover",
+  ],
+}
+`;
