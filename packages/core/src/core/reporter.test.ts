@@ -6,6 +6,9 @@ import {
   calculateCategoryStats,
   categorizeWarning,
   summarize,
+  compareResults,
+  generateDiff,
+  CssTransformResult,
 } from './reporter';
 import { TransformResult } from '../types';
 
@@ -397,6 +400,72 @@ describe('reporter', () => {
       expect(summary.stats.warningsByCategory).toHaveProperty('token-miss');
       expect(summary.stats.warningsByCategory).toHaveProperty('v3-fallback');
       expect(summary.stats.warningsByCategory).toHaveProperty('other');
+    });
+  });
+
+  describe('compareResults', () => {
+    it('should compare strict and approximate results', () => {
+      const strictResult: CssTransformResult = {
+        bySelector: {
+          '.button': {
+            classes: ['px-4', 'py-2'],
+            warnings: ['warning 1'],
+            coverage: { matched: 2, total: 3, percentage: 66.67, nonArbitrary: 2 },
+          },
+        },
+      };
+
+      const approximateResult: CssTransformResult = {
+        bySelector: {
+          '.button': {
+            classes: ['px-4', 'py-2', 'rounded'],
+            warnings: [],
+            coverage: { matched: 3, total: 3, percentage: 100, nonArbitrary: 3 },
+          },
+        },
+      };
+
+      const comparison = compareResults(strictResult, approximateResult);
+
+      expect(comparison.strictCoverage).toBeCloseTo(66.67, 1);
+      expect(comparison.approximateCoverage).toBe(100);
+      expect(comparison.coverageDiff).toBeCloseTo(33.33, 1);
+      expect(comparison.strictWarnings).toBe(1);
+      expect(comparison.approximateWarnings).toBe(0);
+      expect(comparison.selectorComparison).toHaveLength(1);
+      expect(comparison.selectorComparison[0].classesDiff).toBe(1);
+    });
+  });
+
+  describe('generateDiff', () => {
+    it('should generate visual diff between CSS and Tailwind', () => {
+      const cssDeclarations = [
+        { prop: 'padding', value: '1rem' },
+        { prop: 'color', value: 'blue' },
+      ];
+      const tailwindClasses = ['p-4', 'text-blue-500'];
+
+      const diff = generateDiff(cssDeclarations, tailwindClasses);
+
+      expect(diff.cssLines).toHaveLength(2);
+      expect(diff.tailwindLines).toHaveLength(2);
+      expect(diff.diff).toContain('CSS');
+      expect(diff.diff).toContain('Tailwind');
+      expect(diff.diff).toContain('padding: 1rem');
+      expect(diff.diff).toContain('p-4');
+    });
+
+    it('should handle different lengths', () => {
+      const cssDeclarations = [{ prop: 'padding', value: '1rem' }];
+      const tailwindClasses = ['p-4', 'text-blue-500', 'rounded'];
+
+      const diff = generateDiff(cssDeclarations, tailwindClasses);
+
+      expect(diff.cssLines).toHaveLength(1);
+      expect(diff.tailwindLines).toHaveLength(3);
+      expect(diff.diff).toContain('padding: 1rem');
+      expect(diff.diff).toContain('p-4');
+      expect(diff.diff).toContain('rounded');
     });
   });
 });

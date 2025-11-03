@@ -10,6 +10,13 @@ import {
 } from '../types';
 
 /**
+ * Result from transformCssText with bySelector
+ */
+export interface CssTransformResult {
+  bySelector: Record<string, TransformResult>;
+}
+
+/**
  * Maps CSS properties to their categories
  */
 export const propertyCategoryMap: Record<string, PropertyCategory> = {
@@ -450,5 +457,191 @@ function buildSummarizeResult(result: TransformResult): SummarizeResult {
         warnings: sampleWarnings,
       },
     },
+  };
+}
+
+/**
+ * Export report to file in JSON or Markdown format
+ *
+ * @param result Transform result to export
+ * @param format Output format ('json' or 'markdown')
+ * @param filepath Path to write the file
+ * @returns Promise that resolves when file is written
+ */
+export async function exportReport(
+  result: CssTransformResult,
+  format: 'json' | 'markdown',
+  filepath: string
+): Promise<void> {
+  const fs = await import('fs');
+  const path = await import('path');
+
+  // Ensure directory exists
+  const dir = path.dirname(filepath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  let content: string;
+
+  if (format === 'json') {
+    // Export as JSON
+    const exportData = {
+      meta: {
+        timestamp: new Date().toISOString(),
+        format: 'json',
+      },
+      selectors: Object.entries(result.bySelector).map(([selector, data]) => ({
+        selector,
+        classes: data.classes,
+        coverage: data.coverage,
+        warnings: data.warnings,
+      })),
+    };
+    content = JSON.stringify(exportData, null, 2);
+  } else {
+    // Export as Markdown
+    const lines: string[] = [];
+    lines.push('# CSS to Tailwind Conversion Report\n');
+    lines.push(`**Generated:** ${new Date().toISOString()}\n`);
+    lines.push('---\n');
+
+    for (const [selector, data] of Object.entries(result.bySelector)) {
+      lines.push(`## ${selector}\n`);
+      lines.push('**Classes:**');
+      lines.push('```');
+      lines.push(data.classes.join(' '));
+      lines.push('```\n');
+
+      lines.push(
+        `**Coverage:** ${data.coverage.percentage}% (${data.coverage.matched}/${data.coverage.total})\n`
+      );
+
+      if (data.warnings.length > 0) {
+        lines.push('**Warnings:**');
+        data.warnings.forEach((w) => lines.push(`- ${w}`));
+        lines.push('');
+      }
+
+      lines.push('---\n');
+    }
+
+    content = lines.join('\n');
+  }
+
+  fs.writeFileSync(filepath, content, 'utf-8');
+}
+
+/**
+ * Compare results from strict and approximate modes
+ *
+ * @param strictResult Result from strict mode
+ * @param approximateResult Result from approximate mode
+ * @returns Comparison report
+ */
+export function compareResults(
+  strictResult: CssTransformResult,
+  approximateResult: CssTransformResult
+): {
+  strictCoverage: number;
+  approximateCoverage: number;
+  coverageDiff: number;
+  strictWarnings: number;
+  approximateWarnings: number;
+  warningsDiff: number;
+  selectorComparison: Array<{
+    selector: string;
+    strictClasses: string[];
+    approximateClasses: string[];
+    classesDiff: number;
+    strictCoverage: number;
+    approximateCoverage: number;
+  }>;
+} {
+  // Calculate overall coverage
+  const strictSelectors = Object.values(strictResult.bySelector);
+  const approximateSelectors = Object.values(approximateResult.bySelector);
+
+  const strictTotalMatched = strictSelectors.reduce((sum, r) => sum + r.coverage.matched, 0);
+  const strictTotalProps = strictSelectors.reduce((sum, r) => sum + r.coverage.total, 0);
+  const strictCoverage = (strictTotalMatched / strictTotalProps) * 100;
+
+  const approximateTotalMatched = approximateSelectors.reduce(
+    (sum, r) => sum + r.coverage.matched,
+    0
+  );
+  const approximateTotalProps = approximateSelectors.reduce((sum, r) => sum + r.coverage.total, 0);
+  const approximateCoverage = (approximateTotalMatched / approximateTotalProps) * 100;
+
+  // Calculate warnings
+  const strictWarnings = strictSelectors.reduce((sum, r) => sum + r.warnings.length, 0);
+  const approximateWarnings = approximateSelectors.reduce((sum, r) => sum + r.warnings.length, 0);
+
+  // Compare selectors
+  const selectorComparison = Object.keys(strictResult.bySelector).map((selector) => {
+    const strictData = strictResult.bySelector[selector];
+    const approximateData = approximateResult.bySelector[selector];
+
+    return {
+      selector,
+      strictClasses: strictData.classes,
+      approximateClasses: approximateData?.classes || [],
+      classesDiff: (approximateData?.classes.length || 0) - strictData.classes.length,
+      strictCoverage: strictData.coverage.percentage,
+      approximateCoverage: approximateData?.coverage.percentage || 0,
+    };
+  });
+
+  return {
+    strictCoverage,
+    approximateCoverage,
+    coverageDiff: approximateCoverage - strictCoverage,
+    strictWarnings,
+    approximateWarnings,
+    warningsDiff: approximateWarnings - strictWarnings,
+    selectorComparison,
+  };
+}
+
+/**
+ * Generate a visual diff between CSS and Tailwind classes
+ *
+ * @param cssDeclarations Array of CSS declarations
+ * @param tailwindClasses Array of Tailwind classes
+ * @returns Formatted diff visualization
+ */
+export function generateDiff(
+  cssDeclarations: Array<{ prop: string; value: string }>,
+  tailwindClasses: string[]
+): {
+  cssLines: string[];
+  tailwindLines: string[];
+  diff: string;
+} {
+  const cssLines = cssDeclarations.map((d) => `  ${d.prop}: ${d.value};`);
+  const tailwindLines = tailwindClasses.map((c) => `  ${c}`);
+
+  // Generate side-by-side diff
+  const diffLines: string[] = [];
+  diffLines.push('┌─ CSS ─────────────────────────┬─ Tailwind ────────────────────┐');
+
+  const maxLines = Math.max(cssLines.length, tailwindLines.length);
+  for (let i = 0; i < maxLines; i++) {
+    const cssLine = cssLines[i] || '';
+    const tailwindLine = tailwindLines[i] || '';
+
+    // Pad lines to 30 characters for alignment
+    const paddedCss = cssLine.padEnd(30);
+    const paddedTailwind = tailwindLine.padEnd(30);
+
+    diffLines.push(`│ ${paddedCss} │ ${paddedTailwind} │`);
+  }
+
+  diffLines.push('└───────────────────────────────┴───────────────────────────────┘');
+
+  return {
+    cssLines,
+    tailwindLines,
+    diff: diffLines.join('\n'),
   };
 }

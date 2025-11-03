@@ -285,29 +285,29 @@
 
 #### Export para Arquivo
 
-- [ ] Função exportReport(result, format, filepath)
-- [ ] Suporte para JSON
-- [ ] Suporte para Markdown
+- [x] Função exportReport(result, format, filepath)
+- [x] Suporte para JSON
+- [x] Suporte para Markdown
 - [ ] Suporte para HTML (opcional)
 
-**Arquivo:** `packages/core/src/core/reporter.ts`
+**Arquivo:** `packages/core/src/core/reporter.ts` ✅ **COMPLETO**
 
 #### Comparação Strict vs Approximate
 
-- [ ] Função compareResults(strictResult, approximateResult)
-- [ ] Mostrar diferenças em coverage
-- [ ] Mostrar diferenças em warnings
-- [ ] Mostrar diferenças em classes geradas
+- [x] Função compareResults(strictResult, approximateResult)
+- [x] Mostrar diferenças em coverage
+- [x] Mostrar diferenças em warnings
+- [x] Mostrar diferenças em classes geradas
 
-**Arquivo:** `packages/core/src/core/reporter.ts`
+**Arquivo:** `packages/core/src/core/reporter.ts` ✅ **COMPLETO**
 
 #### Visualização de Diffs
 
-- [ ] Mostrar CSS original vs Tailwind gerado
-- [ ] Highlight de diferenças
-- [ ] Formato texto ou HTML
+- [x] Mostrar CSS original vs Tailwind gerado
+- [x] Highlight de diferenças
+- [x] Formato texto ou HTML
 
-**Arquivo:** `packages/core/src/core/reporter.ts`
+**Arquivo:** `packages/core/src/core/reporter.ts` ✅ **COMPLETO**
 
 ---
 
