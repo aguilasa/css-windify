@@ -81,6 +81,7 @@ import {
   matchBoxShadow,
   matchFilter,
   matchMixBlendMode,
+  matchIsolation,
 } from './matchers';
 
 // Define property groups for ordering (used for documentation and future sorting)
@@ -455,6 +456,7 @@ const propertyHandlers: Record<string, RuleHandler> = {
       : result.classes;
   },
   'mix-blend-mode': (value) => [matchMixBlendMode(value)],
+  isolation: (value) => [matchIsolation(value)],
 };
 
 /**

@@ -186,6 +186,7 @@ export {
   matchBoxShadow,
   matchFilter,
   matchMixBlendMode,
+  matchIsolation,
 } from './core/matchers';
 
 // Variant utilities

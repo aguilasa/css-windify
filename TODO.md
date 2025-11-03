@@ -36,12 +36,12 @@
 
 #### isolation
 
-- [ ] Implementar matchIsolation()
-- [ ] Mapear: isolate, isolation-auto
-- [ ] Adicionar testes
-- [ ] Adicionar ao propertyHandlers
+- [x] Implementar matchIsolation()
+- [x] Mapear: isolate, isolation-auto
+- [x] Adicionar testes
+- [x] Adicionar ao propertyHandlers
 
-**Arquivo:** `packages/core/src/core/matchers/misc.ts`
+**Arquivo:** `packages/core/src/core/matchers/misc.ts` ✅ **COMPLETO**
 
 ---
 

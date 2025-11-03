@@ -507,3 +507,30 @@ export function matchMixBlendMode(value: string, _ctx?: MatchCtx): string {
   // Use arbitrary value if no match found
   return toArbitrary('mix-blend', normalizedValue);
 }
+
+// Isolation mapping
+const isolationMap: Record<string, string> = {
+  isolate: 'isolate',
+  auto: 'isolation-auto',
+};
+
+/**
+ * Matches isolation values to Tailwind classes
+ *
+ * @param value The CSS isolation value
+ * @param _ctx Match context (for future extensibility)
+ * @returns Tailwind class
+ */
+export function matchIsolation(value: string, _ctx?: MatchCtx): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Check for predefined isolation values
+  if (isolationMap[normalizedValue]) {
+    return isolationMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return toArbitrary('isolation', normalizedValue);
+}

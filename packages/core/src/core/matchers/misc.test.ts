@@ -6,6 +6,7 @@ import {
   matchBoxShadow,
   matchFilter,
   matchMixBlendMode,
+  matchIsolation,
 } from './misc';
 
 describe('misc matchers', () => {
@@ -393,6 +394,32 @@ describe('misc matchers', () => {
     it('should handle empty or invalid values', () => {
       expect(matchMixBlendMode('')).toBe('');
       expect(matchMixBlendMode(null as unknown as string)).toBe('');
+    });
+  });
+
+  describe('isolation', () => {
+    it('should match isolate value', () => {
+      expect(matchIsolation('isolate')).toBe('isolate');
+    });
+
+    it('should match auto value', () => {
+      expect(matchIsolation('auto')).toBe('isolation-auto');
+    });
+
+    it('should normalize values before matching', () => {
+      expect(matchIsolation('  isolate  ')).toBe('isolate');
+      expect(matchIsolation('ISOLATE')).toBe('isolate');
+      expect(matchIsolation('AUTO')).toBe('isolation-auto');
+    });
+
+    it('should use arbitrary values for non-predefined isolation', () => {
+      expect(matchIsolation('inherit')).toBe('isolation-[inherit]');
+      expect(matchIsolation('unset')).toBe('isolation-[unset]');
+    });
+
+    it('should handle empty or invalid values', () => {
+      expect(matchIsolation('')).toBe('');
+      expect(matchIsolation(null as unknown as string)).toBe('');
     });
   });
 });
