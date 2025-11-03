@@ -87,12 +87,12 @@
 
 #### API Documentation
 
-- [ ] Configurar TypeDoc
-- [ ] Gerar documentação automática
-- [ ] Adicionar exemplos em JSDoc
-- [ ] Publicar em GitHub Pages ou similar
+- [x] Configurar TypeDoc
+- [x] Gerar documentação automática
+- [x] Adicionar exemplos em JSDoc
+- [x] Publicar em GitHub Pages ou similar
 
-**Tempo estimado:** 1 dia
+**Tempo estimado:** 1 dia ✅ **COMPLETO**
 
 #### Migration Guide
 

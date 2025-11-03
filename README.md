@@ -91,10 +91,21 @@ echo ".btn { padding: 1rem; }" | css-windify
 
 ## 📚 Documentation
 
-- **[API Documentation](https://yourusername.github.io/css-windify/)** - Complete API reference
+- **[API Documentation](https://yourusername.github.io/css-windify/)** - Complete TypeDoc API reference (auto-generated)
 - **[Migration Guide](./MIGRATION.md)** - Migrating from Tailwind v3 to v4
 - **[Plugin Development](./packages/core/src/plugins/README.md)** - Creating custom plugins
 - **[Contributing Guide](./CONTRIBUTING.md)** - How to contribute
+
+### Generate Documentation Locally
+
+```bash
+# Generate API docs
+pnpm docs:generate
+
+# Serve docs locally
+pnpm docs:serve
+# Open http://localhost:8080
+```
 
 ## 🎯 Conversion Modes
 

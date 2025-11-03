@@ -1,5 +1,27 @@
 /**
- * Tailwindify core functionality
+ * @packageDocumentation
+ * CSSWindify Core - Convert CSS to Tailwind CSS utility classes
+ *
+ * This package provides the core functionality for converting traditional CSS
+ * into Tailwind CSS utility classes. It supports both Tailwind v3 and v4,
+ * features 100+ property matchers, and offers strict and approximate conversion modes.
+ *
+ * @example Basic usage
+ * ```typescript
+ * import { transformCssText } from '@css-windify/core';
+ *
+ * const css = '.button { padding: 1rem; background-color: #3b82f6; }';
+ * const result = transformCssText(css, {
+ *   theme: {},
+ *   version: 'auto',
+ *   opts: { strict: false, approximate: true }
+ * });
+ *
+ * console.log(result['.button'].classes);
+ * // ['px-4', 'py-4', 'bg-blue-500']
+ * ```
+ *
+ * @see {@link https://github.com/yourusername/css-windify | GitHub Repository}
  */
 import { transformRule, transformDeclarations } from './core/rulesEngine';
 import {

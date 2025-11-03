@@ -50,3 +50,4 @@ Thumbs.db
 # Office temp files
 .~lock.*
 *.tmp
+docs/api/

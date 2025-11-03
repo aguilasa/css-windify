@@ -32,7 +32,7 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "pnpm --filter css-windify-core build",
+    "build": "pnpm --filter @css-windify/core build",
     "test": "vitest run",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
@@ -40,6 +40,8 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "ci": "pnpm build && pnpm check",
     "prepare": "husky install",
+    "docs:generate": "typedoc",
+    "docs:serve": "cd docs/api && python3 -m http.server 8080",
     "playground": "cd apps/Playground && pnpm dev",
     "playground:inline": "cd apps/Playground && pnpm exec tsx src/index.ts 'inline:color: #1f2937; font-size: 18px; line-height: 1.4; margin: 10px 20px;'",
     "playground:rule": "cd apps/Playground && pnpm exec tsx src/index.ts 'rule:.btn { display: flex; justify-content: center; gap: 12px; }'"
