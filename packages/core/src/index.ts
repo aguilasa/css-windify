@@ -154,6 +154,7 @@ export {
   matchInset,
   matchInsetShorthand,
   matchObjectPosition,
+  matchAspectRatio,
   displayMap,
   positionMap,
   // Color matchers

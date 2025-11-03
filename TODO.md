@@ -59,13 +59,13 @@
 
 #### aspect-ratio
 
-- [ ] Implementar matchAspectRatio()
-- [ ] Mapear: 1/1 → aspect-square, 16/9 → aspect-video
-- [ ] Fallback para arbitrary aspect-[value]
-- [ ] Adicionar testes
-- [ ] Adicionar ao propertyHandlers
+- [x] Implementar matchAspectRatio()
+- [x] Mapear: 1/1 → aspect-square, 16/9 → aspect-video
+- [x] Fallback para arbitrary aspect-[value]
+- [x] Adicionar testes
+- [x] Adicionar ao propertyHandlers
 
-**Arquivo:** `packages/core/src/core/matchers/layout.ts`
+**Arquivo:** `packages/core/src/core/matchers/layout.ts` ✅ **COMPLETO**
 
 ---
 

@@ -5,6 +5,7 @@ import {
   matchInset,
   matchInsetShorthand,
   matchObjectPosition,
+  matchAspectRatio,
 } from './layout';
 import { MatchCtx } from '../../types';
 
@@ -220,6 +221,32 @@ describe('layout matcher', () => {
     it('should handle empty values', () => {
       expect(matchObjectPosition('')).toBe('');
       expect(matchObjectPosition(null as unknown as string)).toBe('');
+    });
+  });
+
+  describe('matchAspectRatio', () => {
+    it('should match predefined aspect ratios', () => {
+      expect(matchAspectRatio('auto')).toBe('aspect-auto');
+      expect(matchAspectRatio('1/1')).toBe('aspect-square');
+      expect(matchAspectRatio('16/9')).toBe('aspect-video');
+    });
+
+    it('should normalize values before matching', () => {
+      expect(matchAspectRatio('  auto  ')).toBe('aspect-auto');
+      expect(matchAspectRatio('AUTO')).toBe('aspect-auto');
+      expect(matchAspectRatio('  1/1  ')).toBe('aspect-square');
+    });
+
+    it('should use arbitrary values for custom aspect ratios', () => {
+      expect(matchAspectRatio('4/3')).toBe('aspect-[4/3]');
+      expect(matchAspectRatio('21/9')).toBe('aspect-[21/9]');
+      expect(matchAspectRatio('3/2')).toBe('aspect-[3/2]');
+      expect(matchAspectRatio('2')).toBe('aspect-[2]');
+    });
+
+    it('should handle empty values', () => {
+      expect(matchAspectRatio('')).toBe('');
+      expect(matchAspectRatio(null as unknown as string)).toBe('');
     });
   });
 });

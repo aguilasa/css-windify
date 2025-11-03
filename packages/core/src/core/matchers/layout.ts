@@ -150,3 +150,31 @@ export function matchObjectPosition(value: string, _ctx?: MatchCtx): string {
   // Use arbitrary value if no match found
   return toArbitrary('object', normalizedValue);
 }
+
+// Aspect ratio mapping
+const aspectRatioMap: Record<string, string> = {
+  auto: 'aspect-auto',
+  '1/1': 'aspect-square',
+  '16/9': 'aspect-video',
+};
+
+/**
+ * Matches aspect-ratio values to Tailwind classes
+ *
+ * @param value The CSS aspect-ratio value
+ * @param _ctx Match context (for future extensibility)
+ * @returns Tailwind class
+ */
+export function matchAspectRatio(value: string, _ctx?: MatchCtx): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Check for predefined aspect ratio values
+  if (aspectRatioMap[normalizedValue]) {
+    return aspectRatioMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return toArbitrary('aspect', normalizedValue);
+}
