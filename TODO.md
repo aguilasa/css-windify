@@ -16,13 +16,13 @@
 
 #### filter
 
-- [ ] Implementar matchFilter() básico
-- [ ] Suporte para blur(), brightness(), contrast(), grayscale(), etc.
-- [ ] Fallback para arbitrary [filter:...]
-- [ ] Adicionar testes
-- [ ] Adicionar ao propertyHandlers
+- [x] Implementar matchFilter() básico
+- [x] Suporte para blur(), brightness(), contrast(), grayscale(), etc.
+- [x] Fallback para arbitrary [filter:...]
+- [x] Adicionar testes
+- [x] Adicionar ao propertyHandlers
 
-**Arquivo:** `packages/core/src/core/matchers/misc.ts`
+**Arquivo:** `packages/core/src/core/matchers/misc.ts` ✅ **COMPLETO**
 
 #### mix-blend-mode
 

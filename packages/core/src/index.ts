@@ -184,6 +184,7 @@ export {
   matchZIndex,
   matchOpacity,
   matchBoxShadow,
+  matchFilter,
 } from './core/matchers';
 
 // Variant utilities

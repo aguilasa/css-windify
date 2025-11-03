@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { matchOverflow, matchZIndex, matchOpacity, matchBoxShadow } from './misc';
+import { matchOverflow, matchZIndex, matchOpacity, matchBoxShadow, matchFilter } from './misc';
 
 describe('misc matchers', () => {
   describe('overflow', () => {
@@ -179,6 +179,169 @@ describe('misc matchers', () => {
       const result = matchBoxShadow('0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1)');
       expect(result.class).toBe('shadow');
       expect(result.warning).toBeUndefined();
+    });
+  });
+
+  describe('filter', () => {
+    describe('blur', () => {
+      it('should match predefined blur values', () => {
+        expect(matchFilter('blur(4px)').classes).toEqual(['blur-sm']);
+        expect(matchFilter('blur(8px)').classes).toEqual(['blur']);
+        expect(matchFilter('blur(12px)').classes).toEqual(['blur-md']);
+        expect(matchFilter('blur(16px)').classes).toEqual(['blur-lg']);
+        expect(matchFilter('blur(24px)').classes).toEqual(['blur-xl']);
+        expect(matchFilter('blur(40px)').classes).toEqual(['blur-2xl']);
+        expect(matchFilter('blur(64px)').classes).toEqual(['blur-3xl']);
+      });
+
+      it('should match blur-none', () => {
+        expect(matchFilter('blur(0)').classes).toEqual(['blur-none']);
+        expect(matchFilter('blur(0px)').classes).toEqual(['blur-none']);
+      });
+
+      it('should use arbitrary for custom blur values', () => {
+        const result = matchFilter('blur(5px)');
+        expect(result.classes).toEqual(['blur-[5px]']);
+      });
+    });
+
+    describe('brightness', () => {
+      it('should match predefined brightness values', () => {
+        expect(matchFilter('brightness(0)').classes).toEqual(['brightness-0']);
+        expect(matchFilter('brightness(0.5)').classes).toEqual(['brightness-50']);
+        expect(matchFilter('brightness(0.75)').classes).toEqual(['brightness-75']);
+        expect(matchFilter('brightness(1)').classes).toEqual(['brightness-100']);
+        expect(matchFilter('brightness(1.5)').classes).toEqual(['brightness-150']);
+        expect(matchFilter('brightness(2)').classes).toEqual(['brightness-200']);
+      });
+
+      it('should convert percentage to decimal', () => {
+        expect(matchFilter('brightness(50%)').classes).toEqual(['brightness-50']);
+        expect(matchFilter('brightness(100%)').classes).toEqual(['brightness-100']);
+        expect(matchFilter('brightness(150%)').classes).toEqual(['brightness-150']);
+      });
+
+      it('should use arbitrary for custom brightness values', () => {
+        const result = matchFilter('brightness(0.85)');
+        expect(result.classes).toEqual(['brightness-[0.85]']);
+      });
+    });
+
+    describe('contrast', () => {
+      it('should match predefined contrast values', () => {
+        expect(matchFilter('contrast(0)').classes).toEqual(['contrast-0']);
+        expect(matchFilter('contrast(0.5)').classes).toEqual(['contrast-50']);
+        expect(matchFilter('contrast(1)').classes).toEqual(['contrast-100']);
+        expect(matchFilter('contrast(1.5)').classes).toEqual(['contrast-150']);
+      });
+
+      it('should convert percentage to decimal', () => {
+        expect(matchFilter('contrast(100%)').classes).toEqual(['contrast-100']);
+        expect(matchFilter('contrast(150%)').classes).toEqual(['contrast-150']);
+      });
+    });
+
+    describe('grayscale', () => {
+      it('should match predefined grayscale values', () => {
+        expect(matchFilter('grayscale(0)').classes).toEqual(['grayscale-0']);
+        expect(matchFilter('grayscale(1)').classes).toEqual(['grayscale']);
+      });
+
+      it('should convert percentage to decimal', () => {
+        expect(matchFilter('grayscale(100%)').classes).toEqual(['grayscale']);
+        expect(matchFilter('grayscale(0%)').classes).toEqual(['grayscale-0']);
+      });
+    });
+
+    describe('hue-rotate', () => {
+      it('should match predefined hue-rotate values', () => {
+        expect(matchFilter('hue-rotate(0deg)').classes).toEqual(['hue-rotate-0']);
+        expect(matchFilter('hue-rotate(15deg)').classes).toEqual(['hue-rotate-15']);
+        expect(matchFilter('hue-rotate(30deg)').classes).toEqual(['hue-rotate-30']);
+        expect(matchFilter('hue-rotate(90deg)').classes).toEqual(['hue-rotate-90']);
+        expect(matchFilter('hue-rotate(180deg)').classes).toEqual(['hue-rotate-180']);
+      });
+
+      it('should use arbitrary for custom angles', () => {
+        const result = matchFilter('hue-rotate(45deg)');
+        expect(result.classes).toEqual(['hue-rotate-[45deg]']);
+      });
+    });
+
+    describe('invert', () => {
+      it('should match predefined invert values', () => {
+        expect(matchFilter('invert(0)').classes).toEqual(['invert-0']);
+        expect(matchFilter('invert(1)').classes).toEqual(['invert']);
+      });
+
+      it('should convert percentage to decimal', () => {
+        expect(matchFilter('invert(100%)').classes).toEqual(['invert']);
+      });
+    });
+
+    describe('saturate', () => {
+      it('should match predefined saturate values', () => {
+        expect(matchFilter('saturate(0)').classes).toEqual(['saturate-0']);
+        expect(matchFilter('saturate(0.5)').classes).toEqual(['saturate-50']);
+        expect(matchFilter('saturate(1)').classes).toEqual(['saturate-100']);
+        expect(matchFilter('saturate(1.5)').classes).toEqual(['saturate-150']);
+        expect(matchFilter('saturate(2)').classes).toEqual(['saturate-200']);
+      });
+    });
+
+    describe('sepia', () => {
+      it('should match predefined sepia values', () => {
+        expect(matchFilter('sepia(0)').classes).toEqual(['sepia-0']);
+        expect(matchFilter('sepia(1)').classes).toEqual(['sepia']);
+      });
+
+      it('should convert percentage to decimal', () => {
+        expect(matchFilter('sepia(100%)').classes).toEqual(['sepia']);
+      });
+    });
+
+    describe('multiple filters', () => {
+      it('should handle multiple filter functions', () => {
+        const result = matchFilter('blur(4px) brightness(1.5)');
+        expect(result.classes).toEqual(['blur-sm', 'brightness-150']);
+        expect(result.warning).toBeUndefined();
+      });
+
+      it('should handle three or more filters', () => {
+        const result = matchFilter('blur(8px) brightness(1.5) contrast(1.25)');
+        expect(result.classes).toEqual(['blur', 'brightness-150', 'contrast-125']);
+        expect(result.warning).toBeUndefined();
+      });
+
+      it('should handle mix of matched and arbitrary filters', () => {
+        const result = matchFilter('blur(8px) brightness(0.85)');
+        expect(result.classes).toContain('blur');
+        expect(result.classes).toContain('brightness-[0.85]');
+      });
+    });
+
+    describe('special cases', () => {
+      it('should handle filter: none', () => {
+        const result = matchFilter('none');
+        expect(result.classes).toEqual(['filter-none']);
+        expect(result.warning).toBeUndefined();
+      });
+
+      it('should handle empty value', () => {
+        const result = matchFilter('');
+        expect(result.classes).toEqual([]);
+      });
+
+      it('should handle unparseable filter', () => {
+        const result = matchFilter('invalid-filter');
+        expect(result.classes).toEqual(['[filter:invalid-filter]']);
+        expect(result.warning).toContain('Unable to parse');
+      });
+
+      it('should normalize whitespace', () => {
+        const result = matchFilter('  blur(8px)  brightness(1.5)  ');
+        expect(result.classes).toEqual(['blur', 'brightness-150']);
+      });
     });
   });
 });

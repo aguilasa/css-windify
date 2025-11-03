@@ -79,6 +79,7 @@ import {
   matchZIndex,
   matchOpacity,
   matchBoxShadow,
+  matchFilter,
 } from './matchers';
 
 // Define property groups for ordering (used for documentation and future sorting)
@@ -445,6 +446,12 @@ const propertyHandlers: Record<string, RuleHandler> = {
     return result.warning
       ? { classes: [result.class], warnings: [result.warning] }
       : [result.class];
+  },
+  filter: (value, ctx) => {
+    const result = matchFilter(value, ctx);
+    return result.warning
+      ? { classes: result.classes, warnings: [result.warning] }
+      : result.classes;
   },
 };
 

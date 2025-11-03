@@ -1,7 +1,7 @@
 /**
- * Miscellaneous matchers for Tailwind CSS (overflow, z-index, opacity, box-shadow)
+ * Miscellaneous matchers for Tailwind CSS (overflow, z-index, opacity, box-shadow, filter)
  */
-import { normalizeValue, toArbitrary } from '../normalizers';
+import { normalizeValue, toArbitrary, arbitraryProperty } from '../normalizers';
 import type { MatchCtx } from '../../types';
 
 // Overflow mapping
@@ -170,4 +170,296 @@ export function matchBoxShadow(
     class: arbitraryClass,
     warning: `No exact Tailwind token for box-shadow: ${value}, used arbitrary value`,
   };
+}
+
+// Filter function mappings
+const blurMap: Record<string, string> = {
+  '0': 'blur-none',
+  '4px': 'blur-sm',
+  '8px': 'blur',
+  '12px': 'blur-md',
+  '16px': 'blur-lg',
+  '24px': 'blur-xl',
+  '40px': 'blur-2xl',
+  '64px': 'blur-3xl',
+};
+
+const brightnessMap: Record<string, string> = {
+  '0': 'brightness-0',
+  '0.5': 'brightness-50',
+  '0.75': 'brightness-75',
+  '0.9': 'brightness-90',
+  '0.95': 'brightness-95',
+  '1': 'brightness-100',
+  '1.05': 'brightness-105',
+  '1.1': 'brightness-110',
+  '1.25': 'brightness-125',
+  '1.5': 'brightness-150',
+  '2': 'brightness-200',
+};
+
+const contrastMap: Record<string, string> = {
+  '0': 'contrast-0',
+  '0.5': 'contrast-50',
+  '0.75': 'contrast-75',
+  '1': 'contrast-100',
+  '1.25': 'contrast-125',
+  '1.5': 'contrast-150',
+  '2': 'contrast-200',
+};
+
+const grayscaleMap: Record<string, string> = {
+  '0': 'grayscale-0',
+  '1': 'grayscale',
+};
+
+const hueRotateMap: Record<string, string> = {
+  '0deg': 'hue-rotate-0',
+  '15deg': 'hue-rotate-15',
+  '30deg': 'hue-rotate-30',
+  '60deg': 'hue-rotate-60',
+  '90deg': 'hue-rotate-90',
+  '180deg': 'hue-rotate-180',
+};
+
+const invertMap: Record<string, string> = {
+  '0': 'invert-0',
+  '1': 'invert',
+};
+
+const saturateMap: Record<string, string> = {
+  '0': 'saturate-0',
+  '0.5': 'saturate-50',
+  '1': 'saturate-100',
+  '1.5': 'saturate-150',
+  '2': 'saturate-200',
+};
+
+const sepiaMap: Record<string, string> = {
+  '0': 'sepia-0',
+  '1': 'sepia',
+};
+
+const dropShadowMap: Record<string, string> = {
+  '0 1px 2px rgb(0 0 0 / 0.1)': 'drop-shadow-sm',
+  '0 1px 1px rgb(0 0 0 / 0.05)': 'drop-shadow-sm',
+  '0 4px 3px rgb(0 0 0 / 0.07)': 'drop-shadow',
+  '0 10px 8px rgb(0 0 0 / 0.04)': 'drop-shadow-md',
+  '0 20px 13px rgb(0 0 0 / 0.03)': 'drop-shadow-lg',
+  '0 25px 25px rgb(0 0 0 / 0.15)': 'drop-shadow-xl',
+  '0 0 #0000': 'drop-shadow-none',
+};
+
+/**
+ * Parse a single filter function from CSS filter value
+ * Examples: blur(4px), brightness(1.5), contrast(200%), hue-rotate(90deg)
+ */
+function parseFilterFunction(func: string): { name: string; value: string } | null {
+  const match = func.trim().match(/^([\w-]+)\(([^)]+)\)$/);
+  if (!match) return null;
+
+  const [, name, value] = match;
+  return { name: name.toLowerCase(), value: value.trim() };
+}
+
+/**
+ * Match a single filter function to Tailwind class
+ */
+function matchSingleFilter(name: string, value: string): string | null {
+  const normalizedValue = normalizeValue(value);
+
+  switch (name) {
+    case 'blur': {
+      if (blurMap[normalizedValue]) {
+        return blurMap[normalizedValue];
+      }
+      // Try to match without unit for 0
+      if (normalizedValue === '0' || normalizedValue === '0px') {
+        return 'blur-none';
+      }
+      return toArbitrary('blur', normalizedValue);
+    }
+
+    case 'brightness': {
+      // Convert percentage to decimal
+      let decimalValue = normalizedValue;
+      if (normalizedValue.endsWith('%')) {
+        const percentage = parseFloat(normalizedValue);
+        if (!isNaN(percentage)) {
+          decimalValue = (percentage / 100).toString();
+        }
+      }
+      if (brightnessMap[decimalValue]) {
+        return brightnessMap[decimalValue];
+      }
+      return toArbitrary('brightness', normalizedValue);
+    }
+
+    case 'contrast': {
+      // Convert percentage to decimal
+      let decimalValue = normalizedValue;
+      if (normalizedValue.endsWith('%')) {
+        const percentage = parseFloat(normalizedValue);
+        if (!isNaN(percentage)) {
+          decimalValue = (percentage / 100).toString();
+        }
+      }
+      if (contrastMap[decimalValue]) {
+        return contrastMap[decimalValue];
+      }
+      return toArbitrary('contrast', normalizedValue);
+    }
+
+    case 'grayscale': {
+      // Convert percentage to decimal
+      let decimalValue = normalizedValue;
+      if (normalizedValue.endsWith('%')) {
+        const percentage = parseFloat(normalizedValue);
+        if (!isNaN(percentage)) {
+          decimalValue = (percentage / 100).toString();
+        }
+      }
+      if (grayscaleMap[decimalValue]) {
+        return grayscaleMap[decimalValue];
+      }
+      return toArbitrary('grayscale', normalizedValue);
+    }
+
+    case 'hue-rotate': {
+      if (hueRotateMap[normalizedValue]) {
+        return hueRotateMap[normalizedValue];
+      }
+      return toArbitrary('hue-rotate', normalizedValue);
+    }
+
+    case 'invert': {
+      // Convert percentage to decimal
+      let decimalValue = normalizedValue;
+      if (normalizedValue.endsWith('%')) {
+        const percentage = parseFloat(normalizedValue);
+        if (!isNaN(percentage)) {
+          decimalValue = (percentage / 100).toString();
+        }
+      }
+      if (invertMap[decimalValue]) {
+        return invertMap[decimalValue];
+      }
+      return toArbitrary('invert', normalizedValue);
+    }
+
+    case 'saturate': {
+      // Convert percentage to decimal
+      let decimalValue = normalizedValue;
+      if (normalizedValue.endsWith('%')) {
+        const percentage = parseFloat(normalizedValue);
+        if (!isNaN(percentage)) {
+          decimalValue = (percentage / 100).toString();
+        }
+      }
+      if (saturateMap[decimalValue]) {
+        return saturateMap[decimalValue];
+      }
+      return toArbitrary('saturate', normalizedValue);
+    }
+
+    case 'sepia': {
+      // Convert percentage to decimal
+      let decimalValue = normalizedValue;
+      if (normalizedValue.endsWith('%')) {
+        const percentage = parseFloat(normalizedValue);
+        if (!isNaN(percentage)) {
+          decimalValue = (percentage / 100).toString();
+        }
+      }
+      if (sepiaMap[decimalValue]) {
+        return sepiaMap[decimalValue];
+      }
+      return toArbitrary('sepia', normalizedValue);
+    }
+
+    case 'drop-shadow': {
+      const normalized = normalizeBoxShadow(value);
+      if (dropShadowMap[normalized]) {
+        return dropShadowMap[normalized];
+      }
+      return toArbitrary('drop-shadow', value);
+    }
+
+    default:
+      return null;
+  }
+}
+
+/**
+ * Matches CSS filter values to Tailwind classes
+ * Supports multiple filter functions and generates multiple classes
+ *
+ * @param value The CSS filter value (e.g., "blur(4px) brightness(1.5)")
+ * @param _ctx Match context (for future extensibility)
+ * @returns Object with classes array and optional warning
+ */
+export function matchFilter(
+  value: string,
+  _ctx?: MatchCtx
+): { classes: string[]; warning?: string } {
+  if (!value) {
+    return { classes: [] };
+  }
+
+  const normalizedValue = normalizeValue(value);
+
+  // Handle "none"
+  if (normalizedValue === 'none') {
+    return { classes: ['filter-none'] };
+  }
+
+  // Parse multiple filter functions
+  // Split by closing parenthesis followed by space and function name
+  const functions = value.match(/[\w-]+\([^)]+\)/g);
+
+  if (!functions || functions.length === 0) {
+    // Unable to parse, use arbitrary property
+    return {
+      classes: [arbitraryProperty('filter', value)],
+      warning: `Unable to parse filter value: ${value}, used arbitrary value`,
+    };
+  }
+
+  const classes: string[] = [];
+  const unmatchedFunctions: string[] = [];
+
+  for (const func of functions) {
+    const parsed = parseFilterFunction(func);
+    if (!parsed) {
+      unmatchedFunctions.push(func);
+      continue;
+    }
+
+    const matched = matchSingleFilter(parsed.name, parsed.value);
+    if (matched) {
+      classes.push(matched);
+    } else {
+      unmatchedFunctions.push(func);
+    }
+  }
+
+  // If we have unmatched functions, add them as arbitrary
+  if (unmatchedFunctions.length > 0) {
+    const arbitraryValue = unmatchedFunctions.join(' ');
+    classes.push(toArbitrary('filter', arbitraryValue));
+    return {
+      classes,
+      warning: `Some filter functions could not be matched: ${arbitraryValue}`,
+    };
+  }
+
+  // If no classes were generated, use arbitrary for the whole value
+  if (classes.length === 0) {
+    return {
+      classes: [toArbitrary('filter', value)],
+      warning: `No Tailwind classes found for filter: ${value}, used arbitrary value`,
+    };
+  }
+
+  return { classes };
 }
