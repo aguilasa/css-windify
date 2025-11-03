@@ -221,22 +221,22 @@
 
 #### Parser de @media
 
-- [ ] Extrair min-width de @media queries
-- [ ] Mapear para breakpoints (sm/md/lg/xl/2xl)
-- [ ] Tolerância de 1px em approximate mode
-- [ ] Suporte para max-width
-- [ ] Suporte para orientation
-- [ ] Suporte para prefers-color-scheme (dark:)
+- [x] Extrair min-width de @media queries
+- [x] Mapear para breakpoints (sm/md/lg/xl/2xl)
+- [x] Tolerância de 1px em approximate mode
+- [x] Suporte para max-width
+- [x] Suporte para orientation
+- [x] Suporte para prefers-color-scheme (dark:)
 
-**Arquivo:** `packages/core/src/parsers/cssRules.ts`
+**Arquivo:** `packages/core/src/parsers/cssRules.ts` ✅ **COMPLETO**
 
 #### Aplicação de Variants
 
-- [ ] Aplicar variants responsivos automaticamente
-- [ ] Preservar ordem de variants
-- [ ] Adicionar testes
+- [x] Aplicar variants responsivos automaticamente
+- [x] Preservar ordem de variants
+- [x] Adicionar testes
 
-**Arquivo:** `packages/core/src/core/cssTransformer.ts`
+**Arquivo:** `packages/core/src/parsers/cssRules.ts` ✅ **COMPLETO**
 
 ---
 

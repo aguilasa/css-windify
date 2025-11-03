@@ -271,4 +271,104 @@ describe('cssRules parser', () => {
       expect(rules[0].declarations[0].variants?.length).toBe(3);
     });
   });
+
+  describe('media query parsing', () => {
+    it('should extract max-width variants', () => {
+      const css = `
+        @media (max-width: 639px) {
+          .card {
+            padding: 0.5rem;
+          }
+        }
+      `;
+
+      const rules = parseCssRules(css);
+      expect(rules[0].declarations[0].variants).toContain('max-sm');
+    });
+
+    it('should extract orientation variants', () => {
+      const css = `
+        @media (orientation: portrait) {
+          .card {
+            flex-direction: column;
+          }
+        }
+      `;
+
+      const rules = parseCssRules(css);
+      expect(rules[0].declarations[0].variants).toContain('portrait');
+    });
+
+    it('should extract landscape orientation', () => {
+      const css = `
+        @media (orientation: landscape) {
+          .card {
+            flex-direction: row;
+          }
+        }
+      `;
+
+      const rules = parseCssRules(css);
+      expect(rules[0].declarations[0].variants).toContain('landscape');
+    });
+
+    it('should extract dark mode variant', () => {
+      const css = `
+        @media (prefers-color-scheme: dark) {
+          .card {
+            background-color: #1a1a1a;
+          }
+        }
+      `;
+
+      const rules = parseCssRules(css);
+      expect(rules[0].declarations[0].variants).toContain('dark');
+    });
+
+    it('should use 1px tolerance in approximate mode', () => {
+      const css = `
+        @media (min-width: 639px) {
+          .card {
+            padding: 1rem;
+          }
+        }
+      `;
+
+      // Without approximate, 639px should not match sm (640px)
+      const rulesStrict = parseCssRules(css, false);
+      expect(rulesStrict[0].declarations[0].variants).toBeUndefined();
+
+      // With approximate, 639px should match sm (640px) with 1px tolerance
+      const rulesApprox = parseCssRules(css, true);
+      expect(rulesApprox[0].declarations[0].variants).toContain('sm');
+    });
+
+    it('should match exact breakpoints without tolerance', () => {
+      const css = `
+        @media (min-width: 640px) {
+          .card {
+            padding: 1rem;
+          }
+        }
+      `;
+
+      const rules = parseCssRules(css, false);
+      expect(rules[0].declarations[0].variants).toContain('sm');
+    });
+
+    it('should handle multiple media query conditions', () => {
+      const css = `
+        @media (min-width: 768px) and (orientation: landscape) {
+          .card {
+            display: grid;
+          }
+        }
+      `;
+
+      const rules = parseCssRules(css);
+      expect(rules[0].declarations[0].variants).toContain('md');
+      // Note: Currently only extracts one variant per media query
+      // Multiple conditions in same query would need enhancement
+    });
+  });
 });

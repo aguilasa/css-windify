@@ -9,9 +9,12 @@ import { PSEUDO_VARIANTS, GROUP_VARIANTS, PEER_VARIANTS } from '../core/variants
  * Extract responsive variants from a media query
  *
  * @param mediaQuery The media query string
+ * @param approximate Whether to use approximate matching with 1px tolerance
  * @returns The responsive variant or undefined if not recognized
  */
-function extractResponsiveVariant(mediaQuery: string): string | undefined {
+function extractResponsiveVariant(mediaQuery: string, approximate = false): string | undefined {
+  const tolerance = approximate ? 1 : 0;
+
   // Match min-width media queries
   const minWidthMatch = mediaQuery.match(/\(min-width:\s*([\d.]+)(px|rem|em)\)/i);
   if (minWidthMatch) {
@@ -23,12 +26,17 @@ function extractResponsiveVariant(mediaQuery: string): string | undefined {
     if (unit === 'rem') valueInPx = value * 16;
     if (unit === 'em') valueInPx = value * 16;
 
-    // Map to Tailwind's default breakpoints
-    if (valueInPx >= 1535) return '2xl';
-    if (valueInPx >= 1279) return 'xl';
-    if (valueInPx >= 1023) return 'lg';
-    if (valueInPx >= 767) return 'md';
-    if (valueInPx >= 639) return 'sm';
+    // Map to Tailwind's default breakpoints with tolerance
+    // 2xl: 1536px
+    if (Math.abs(valueInPx - 1536) <= tolerance) return '2xl';
+    // xl: 1280px
+    if (Math.abs(valueInPx - 1280) <= tolerance) return 'xl';
+    // lg: 1024px
+    if (Math.abs(valueInPx - 1024) <= tolerance) return 'lg';
+    // md: 768px
+    if (Math.abs(valueInPx - 768) <= tolerance) return 'md';
+    // sm: 640px
+    if (Math.abs(valueInPx - 640) <= tolerance) return 'sm';
   }
 
   // Match max-width media queries (for reverse breakpoints)
@@ -42,12 +50,20 @@ function extractResponsiveVariant(mediaQuery: string): string | undefined {
     if (unit === 'rem') valueInPx = value * 16;
     if (unit === 'em') valueInPx = value * 16;
 
-    // Map to Tailwind's max-* variants
-    if (valueInPx <= 640) return 'max-sm';
-    if (valueInPx <= 768) return 'max-md';
-    if (valueInPx <= 1024) return 'max-lg';
-    if (valueInPx <= 1280) return 'max-xl';
-    if (valueInPx <= 1536) return 'max-2xl';
+    // Map to Tailwind's max-* variants with tolerance
+    if (Math.abs(valueInPx - 639) <= tolerance) return 'max-sm';
+    if (Math.abs(valueInPx - 767) <= tolerance) return 'max-md';
+    if (Math.abs(valueInPx - 1023) <= tolerance) return 'max-lg';
+    if (Math.abs(valueInPx - 1279) <= tolerance) return 'max-xl';
+    if (Math.abs(valueInPx - 1535) <= tolerance) return 'max-2xl';
+  }
+
+  // Handle orientation media queries
+  if (mediaQuery.includes('orientation: portrait')) {
+    return 'portrait';
+  }
+  if (mediaQuery.includes('orientation: landscape')) {
+    return 'landscape';
   }
 
   // Handle dark mode media query
@@ -128,9 +144,10 @@ function extractPseudoVariants(selector: string): string[] {
  * Parse a CSS string into an array of CSS rules
  *
  * @param css The CSS string to parse
+ * @param approximate Whether to use approximate matching with 1px tolerance for breakpoints
  * @returns Array of CSS rules
  */
-export function parseCssRules(css: string): CssRule[] {
+export function parseCssRules(css: string, approximate = false): CssRule[] {
   if (!css) {
     return [];
   }
@@ -148,7 +165,7 @@ export function parseCssRules(css: string): CssRule[] {
       // Extract responsive variants from media queries
       if (rule.parent?.type === 'atrule' && rule.parent.name === 'media') {
         const mediaQuery = rule.parent.params;
-        const responsiveVariant = extractResponsiveVariant(mediaQuery);
+        const responsiveVariant = extractResponsiveVariant(mediaQuery, approximate);
         if (responsiveVariant) {
           variants.push(responsiveVariant);
         }
