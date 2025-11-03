@@ -317,11 +317,13 @@
 
 #### Setup Básico
 
-- [ ] Configurar Vite + React
-- [ ] Configurar TailwindCSS
-- [ ] Estrutura de componentes
+- [x] Configurar Vite + React
+- [x] Configurar TailwindCSS
+- [x] Estrutura de componentes
 
-**Arquivo:** `apps/web/`
+**Arquivo:** `apps/web/` ✅ **ESTRUTURA CRIADA**
+
+**Nota:** A estrutura básica do projeto web está criada com Vite, React, TypeScript e configurações. A implementação completa dos componentes (Monaco Editor, Web Worker, UI completa) está documentada no README.md e pode ser desenvolvida incrementalmente conforme necessário.
 
 #### Monaco Editor
 
@@ -329,7 +331,7 @@
 - [ ] Syntax highlighting CSS
 - [ ] Auto-complete
 
-**Arquivo:** `apps/web/src/components/Editor.tsx`
+**Arquivo:** `apps/web/src/components/Editor.tsx` (planejado)
 
 #### Worker Execution
 
@@ -337,7 +339,7 @@
 - [ ] Comunicação com worker
 - [ ] Loading states
 
-**Arquivo:** `apps/web/src/worker.ts`
+**Arquivo:** `apps/web/src/worker.ts` (planejado)
 
 #### UI Components
 
@@ -347,7 +349,7 @@
 - [ ] Settings panel (options)
 - [ ] Export button
 
-**Arquivo:** `apps/web/src/components/`
+**Arquivo:** `apps/web/src/components/` (planejado)
 
 ---
 
