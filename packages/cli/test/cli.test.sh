@@ -136,6 +136,59 @@ else
 fi
 echo ""
 
+# Test 11: --output flag with JSON
+echo "Test 11: --output flag with JSON"
+node "$CLI_PATH" "$FIXTURES_DIR/button.css" --report json --output "$OUTPUT_DIR/test11-output.json" 2>&1 | grep -q "Output written"
+if [ -f "$OUTPUT_DIR/test11-output.json" ] && grep -q "\"selector\"" "$OUTPUT_DIR/test11-output.json"; then
+    echo -e "${GREEN}✓ Test 11 passed${NC}"
+else
+    echo -e "${RED}✗ Test 11 failed${NC}"
+    exit 1
+fi
+echo ""
+
+# Test 12: --output flag with Markdown
+echo "Test 12: --output flag with Markdown"
+node "$CLI_PATH" "$FIXTURES_DIR/button.css" --output "$OUTPUT_DIR/test12-output.md" 2>&1 | grep -q "Output written"
+if [ -f "$OUTPUT_DIR/test12-output.md" ] && grep -q "CSSWindify Conversion Report" "$OUTPUT_DIR/test12-output.md"; then
+    echo -e "${GREEN}✓ Test 12 passed${NC}"
+else
+    echo -e "${RED}✗ Test 12 failed${NC}"
+    exit 1
+fi
+echo ""
+
+# Test 13: --min-coverage with passing coverage (should exit 0)
+echo "Test 13: --min-coverage with passing coverage"
+if node "$CLI_PATH" "$FIXTURES_DIR/button.css" --min-coverage 50 --report json > "$OUTPUT_DIR/test13.json" 2>&1; then
+    echo -e "${GREEN}✓ Test 13 passed (exit code 0)${NC}"
+else
+    echo -e "${RED}✗ Test 13 failed (expected exit code 0)${NC}"
+    exit 1
+fi
+echo ""
+
+# Test 14: --min-coverage with failing coverage (should exit 1)
+echo "Test 14: --min-coverage with failing coverage"
+if node "$CLI_PATH" "$FIXTURES_DIR/button.css" --min-coverage 99.9 --report json > "$OUTPUT_DIR/test14.json" 2>&1; then
+    echo -e "${RED}✗ Test 14 failed (expected exit code 1)${NC}"
+    exit 1
+else
+    echo -e "${GREEN}✓ Test 14 passed (exit code 1)${NC}"
+fi
+echo ""
+
+# Test 15: --output and --min-coverage combined
+echo "Test 15: --output and --min-coverage combined"
+node "$CLI_PATH" "$FIXTURES_DIR/button.css" --report json --output "$OUTPUT_DIR/test15-combined.json" --min-coverage 50 2>&1 | grep -q "Output written"
+if [ -f "$OUTPUT_DIR/test15-combined.json" ] && grep -q "\"selector\"" "$OUTPUT_DIR/test15-combined.json"; then
+    echo -e "${GREEN}✓ Test 15 passed${NC}"
+else
+    echo -e "${RED}✗ Test 15 failed${NC}"
+    exit 1
+fi
+echo ""
+
 echo "=============================================="
 echo -e "${GREEN}All tests passed!${NC}"
 echo ""

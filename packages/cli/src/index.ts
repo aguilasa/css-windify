@@ -6,7 +6,7 @@
  */
 
 import { Command } from 'commander';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { glob } from 'glob';
 import chalk from 'chalk';
 import { transformCssText, summarize, sortClasses } from 'css-windify-core';
@@ -32,6 +32,12 @@ program
   .option('--version <version>', 'Tailwind version (auto|v3|v4)', 'auto')
   .option('--screens <screens>', 'Custom breakpoints (e.g., sm:640,md:768)', '')
   .option('--report <format>', 'Report format (json|markdown)', 'markdown')
+  .option('--output <file>', 'Write output to file instead of stdout')
+  .option(
+    '--min-coverage <percentage>',
+    'Minimum coverage percentage required (exit code 1 if not met)',
+    '0'
+  )
   .action(async (files: string[], options) => {
     try {
       // Parse thresholds
@@ -115,10 +121,40 @@ program
       const summary = summarize(allResults);
 
       // Format output based on report type
+      let output: string;
       if (options.report === 'json') {
-        outputJson(result, summary, inputFiles);
+        output = formatJson(result, summary, inputFiles);
       } else {
-        outputMarkdown(result, summary, inputFiles, ctx);
+        output = formatMarkdown(result, summary, inputFiles, ctx);
+      }
+
+      // Write to file or stdout
+      if (options.output) {
+        try {
+          writeFileSync(options.output, output, 'utf-8');
+          console.error(chalk.green(`✓ Output written to ${options.output}`));
+        } catch (err) {
+          console.error(chalk.red(`Error writing to file ${options.output}:`), err);
+          process.exit(1);
+        }
+      } else {
+        console.log(output);
+      }
+
+      // Check minimum coverage and exit accordingly
+      const minCoverage = parseFloat(options.minCoverage || '0');
+      if (minCoverage > 0) {
+        const actualCoverage = summary.stats.totals.percentage;
+        if (actualCoverage < minCoverage) {
+          console.error(
+            chalk.red(`✗ Coverage ${actualCoverage.toFixed(1)}% is below minimum ${minCoverage}%`)
+          );
+          process.exit(1);
+        } else {
+          console.error(
+            chalk.green(`✓ Coverage ${actualCoverage.toFixed(1)}% meets minimum ${minCoverage}%`)
+          );
+        }
       }
     } catch (err) {
       console.error(chalk.red('Error:'), err);
@@ -151,9 +187,9 @@ async function readStdin(): Promise<string> {
 }
 
 /**
- * Output results as JSON
+ * Format results as JSON
  */
-function outputJson(result: any, summary: any, inputFiles: string[]): void {
+function formatJson(result: any, summary: any, inputFiles: string[]): string {
   const output = {
     meta: {
       files: inputFiles,
@@ -171,52 +207,54 @@ function outputJson(result: any, summary: any, inputFiles: string[]): void {
     },
   };
 
-  console.log(JSON.stringify(output, null, 2));
+  return JSON.stringify(output, null, 2);
 }
 
 /**
- * Output results as Markdown
+ * Format results as Markdown
  */
-function outputMarkdown(result: any, summary: any, inputFiles: string[], ctx: MatchCtx): void {
-  console.log(chalk.bold.blue('# CSSWindify Conversion Report\n'));
+function formatMarkdown(result: any, summary: any, inputFiles: string[], ctx: MatchCtx): string {
+  const lines: string[] = [];
+
+  lines.push('# CSSWindify Conversion Report\n');
 
   // Input info
-  console.log(chalk.bold('## Input'));
-  console.log(`Files: ${inputFiles.join(', ')}`);
-  console.log(`Mode: ${ctx.opts.strict ? 'Strict' : 'Approximate'}`);
-  console.log(
+  lines.push('## Input');
+  lines.push(`Files: ${inputFiles.join(', ')}`);
+  lines.push(`Mode: ${ctx.opts.strict ? 'Strict' : 'Approximate'}`);
+  lines.push(
     `Thresholds: spacing=${ctx.opts.thresholds.spacingPx}px, font=${ctx.opts.thresholds.fontPx}px, radii=${ctx.opts.thresholds.radiiPx}px`
   );
-  console.log('');
+  lines.push('');
 
   // Results by selector
-  console.log(chalk.bold('## Results by Selector\n'));
+  lines.push('## Results by Selector\n');
 
   for (const [selector, res] of Object.entries(result.bySelector) as [string, any][]) {
-    console.log(chalk.cyan(`### ${selector}`));
+    lines.push(`### ${selector}`);
 
     const orderedClasses = sortClasses(res.classes).join(' ');
-    console.log(chalk.green('Classes:'), orderedClasses);
+    lines.push(`**Classes:** ${orderedClasses}`);
 
     if (res.warnings.length > 0) {
-      console.log(chalk.yellow('Warnings:'));
+      lines.push('\n**Warnings:**');
       res.warnings.slice(0, 3).forEach((w: string) => {
-        console.log(`  - ${w}`);
+        lines.push(`  - ${w}`);
       });
       if (res.warnings.length > 3) {
-        console.log(chalk.dim(`  ... and ${res.warnings.length - 3} more`));
+        lines.push(`  ... and ${res.warnings.length - 3} more`);
       }
     }
 
-    console.log(
-      chalk.dim(
-        `Coverage: ${res.coverage.percentage}% (${res.coverage.matched}/${res.coverage.total})`
-      )
+    lines.push(
+      `\n*Coverage: ${res.coverage.percentage}% (${res.coverage.matched}/${res.coverage.total})*`
     );
-    console.log('');
+    lines.push('');
   }
 
   // Summary
-  console.log(chalk.bold('## Summary\n'));
-  console.log(summary.text);
+  lines.push('## Summary\n');
+  lines.push(summary.text);
+
+  return lines.join('\n');
 }

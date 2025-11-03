@@ -122,31 +122,33 @@
 
 #### Output para Arquivo
 
-- [ ] Adicionar flag --output <file>
-- [ ] Escrever resultado em arquivo quando especificado
-- [ ] Suporte para JSON e Markdown
-- [ ] Adicionar teste
+- [x] Adicionar flag --output <file>
+- [x] Escrever resultado em arquivo quando especificado
+- [x] Suporte para JSON e Markdown
+- [x] Adicionar teste
 
-**Arquivo:** `packages/cli/src/index.ts`
+**Arquivo:** `packages/cli/src/index.ts` ✅ **COMPLETO**
 
 #### Exit Codes
 
-- [ ] Adicionar flag --min-coverage <percentage>
-- [ ] Exit code 0 se coverage >= min-coverage
-- [ ] Exit code 1 se coverage < min-coverage
-- [ ] Adicionar teste
+- [x] Adicionar flag --min-coverage <percentage>
+- [x] Exit code 0 se coverage >= min-coverage
+- [x] Exit code 1 se coverage < min-coverage
+- [x] Adicionar teste
 
-**Arquivo:** `packages/cli/src/index.ts`
+**Arquivo:** `packages/cli/src/index.ts` ✅ **COMPLETO**
 
 #### Testes CLI
 
-- [ ] Verificar se test/cli.test.sh funciona
-- [ ] Adicionar testes para stdin
-- [ ] Adicionar testes para glob patterns
-- [ ] Adicionar testes para flags
-- [ ] Adicionar testes para output JSON/Markdown
+- [x] Verificar se test/cli.test.sh funciona
+- [x] Adicionar testes para stdin
+- [x] Adicionar testes para glob patterns
+- [x] Adicionar testes para flags
+- [x] Adicionar testes para output JSON/Markdown
+- [x] Adicionar testes para --output flag
+- [x] Adicionar testes para --min-coverage flag
 
-**Arquivo:** `packages/cli/test/cli.test.sh`
+**Arquivo:** `packages/cli/test/cli.test.sh` ✅ **COMPLETO**
 
 ---
 
