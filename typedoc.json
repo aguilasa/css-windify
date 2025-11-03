@@ -10,5 +10,10 @@
   "sort": ["source-order"],
   "categorizeByGroup": true,
   "defaultCategory": "Other",
-  "categoryOrder": ["Main", "Matchers", "Resolvers", "Plugins", "Reporters", "Types", "*"]
+  "categoryOrder": ["Main", "Matchers", "Resolvers", "Plugins", "Reporters", "Types", "*"],
+  "tsconfig": "packages/core/tsconfig.json",
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/test/**", "**/__tests__/**"],
+  "compilerOptions": {
+    "downlevelIteration": true
+  }
 }
