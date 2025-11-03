@@ -37,13 +37,13 @@
 
 #### Monaco Editor Integration
 
-- [ ] Instalar @monaco-editor/react
-- [ ] Criar componente Editor.tsx
-- [ ] Configurar syntax highlighting CSS
-- [ ] Adicionar auto-complete básico
-- [ ] Configurar theme (dark/light)
+- [x] Instalar @monaco-editor/react
+- [x] Criar componente Editor.tsx
+- [x] Configurar syntax highlighting CSS
+- [x] Adicionar auto-complete básico
+- [x] Configurar theme (dark/light)
 
-**Arquivo:** `apps/web/src/components/Editor.tsx`
+**Arquivo:** `apps/web/src/components/Editor.tsx` ✅ **COMPLETO**
 **Tempo estimado:** 1 dia
 
 #### Web Worker
