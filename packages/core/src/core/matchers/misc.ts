@@ -1,7 +1,8 @@
 /**
- * Miscellaneous matchers for Tailwind CSS (overflow, z-index, opacity)
+ * Miscellaneous matchers for Tailwind CSS (overflow, z-index, opacity, box-shadow)
  */
 import { normalizeValue, toArbitrary } from '../normalizers';
+import type { MatchCtx } from '../../types';
 
 // Overflow mapping
 const overflowMap: Record<string, string> = {
@@ -94,4 +95,79 @@ export function matchOpacity(value: string): string {
 
   // Use arbitrary value if no match found
   return toArbitrary('opacity', normalizedValue);
+}
+
+/**
+ * Normalize box-shadow value for comparison
+ * Removes extra spaces and normalizes rgb/rgba format
+ */
+function normalizeBoxShadow(value: string): string {
+  return (
+    value
+      .trim()
+      .toLowerCase()
+      // Normalize spaces around commas
+      .replace(/\s*,\s*/g, ',')
+      // Normalize multiple spaces to single space
+      .replace(/\s+/g, ' ')
+      // Normalize rgb/rgba format
+      .replace(/rgb\(\s*/g, 'rgb(')
+      .replace(/rgba\(\s*/g, 'rgba(')
+      .replace(/\s*\/\s*/g, '/')
+      // Remove spaces before closing parenthesis
+      .replace(/\s+\)/g, ')')
+  );
+}
+
+// Box-shadow token mapping (Tailwind v3 default values)
+const boxShadowMap: Record<string, string> = {
+  none: 'shadow-none',
+  '0 1px 2px 0 rgb(0 0 0/0.05)': 'shadow-sm',
+  '0 1px 3px 0 rgb(0 0 0/0.1),0 1px 2px -1px rgb(0 0 0/0.1)': 'shadow',
+  '0 4px 6px -1px rgb(0 0 0/0.1),0 2px 4px -2px rgb(0 0 0/0.1)': 'shadow-md',
+  '0 10px 15px -3px rgb(0 0 0/0.1),0 4px 6px -4px rgb(0 0 0/0.1)': 'shadow-lg',
+  '0 20px 25px -5px rgb(0 0 0/0.1),0 8px 10px -6px rgb(0 0 0/0.1)': 'shadow-xl',
+  '0 25px 50px -12px rgb(0 0 0/0.25)': 'shadow-2xl',
+  // Alternative formats with rgba
+  '0 1px 2px 0 rgba(0,0,0,0.05)': 'shadow-sm',
+  '0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px -1px rgba(0,0,0,0.1)': 'shadow',
+  '0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -2px rgba(0,0,0,0.1)': 'shadow-md',
+  '0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -4px rgba(0,0,0,0.1)': 'shadow-lg',
+  '0 20px 25px -5px rgba(0,0,0,0.1),0 8px 10px -6px rgba(0,0,0,0.1)': 'shadow-xl',
+  '0 25px 50px -12px rgba(0,0,0,0.25)': 'shadow-2xl',
+};
+
+/**
+ * Matches box-shadow values to Tailwind classes
+ *
+ * @param value The CSS box-shadow value
+ * @param ctx Match context (for future extensibility)
+ * @returns Object with class and optional warning
+ */
+export function matchBoxShadow(
+  value: string,
+  _ctx?: MatchCtx
+): { class: string; warning?: string } {
+  if (!value) {
+    return { class: '' };
+  }
+
+  const normalizedValue = normalizeBoxShadow(value);
+
+  // Check for exact match in token map
+  if (boxShadowMap[normalizedValue]) {
+    return { class: boxShadowMap[normalizedValue] };
+  }
+
+  // Check for "none"
+  if (normalizedValue === 'none') {
+    return { class: 'shadow-none' };
+  }
+
+  // Use arbitrary value for custom shadows
+  const arbitraryClass = toArbitrary('shadow', value);
+  return {
+    class: arbitraryClass,
+    warning: `No exact Tailwind token for box-shadow: ${value}, used arbitrary value`,
+  };
 }

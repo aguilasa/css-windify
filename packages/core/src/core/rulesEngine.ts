@@ -78,6 +78,7 @@ import {
   matchOverflow,
   matchZIndex,
   matchOpacity,
+  matchBoxShadow,
 } from './matchers';
 
 // Define property groups for ordering (used for documentation and future sorting)
@@ -439,6 +440,12 @@ const propertyHandlers: Record<string, RuleHandler> = {
   'overflow-y': (value) => [matchOverflow(value, 'y')],
   'z-index': (value) => [matchZIndex(value)],
   opacity: (value) => [matchOpacity(value)],
+  'box-shadow': (value, ctx) => {
+    const result = matchBoxShadow(value, ctx);
+    return result.warning
+      ? { classes: [result.class], warnings: [result.warning] }
+      : [result.class];
+  },
 };
 
 /**

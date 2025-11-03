@@ -2,7 +2,14 @@
  * Tailwindify core functionality
  */
 import { transformRule, transformDeclarations } from './core/rulesEngine';
-import { TailwindifyOptions, CssRule, CssDeclaration, MatchCtx, TransformResult } from './types';
+import {
+  TailwindifyOptions,
+  CssRule,
+  CssDeclaration,
+  MatchCtx,
+  TransformResult,
+  ThemeTokens,
+} from './types';
 import { loadTokens, detectTailwindVersion } from './core/tokensLoader';
 
 // Re-export types
@@ -10,7 +17,7 @@ export * from './types';
 
 class Tailwindify {
   private options: TailwindifyOptions;
-  private tokensPromise: Promise<any> | null = null;
+  private tokensPromise: Promise<ThemeTokens> | null = null;
 
   constructor(options: TailwindifyOptions = {}) {
     this.options = {
@@ -63,7 +70,7 @@ class Tailwindify {
       this.preloadTokens();
     }
 
-    const tokens = await this.tokensPromise;
+    const tokens = await this.tokensPromise!;
     const version =
       this.options.version === 'auto'
         ? detectTailwindVersion({ version: this.options.version })
@@ -176,6 +183,7 @@ export {
   matchOverflow,
   matchZIndex,
   matchOpacity,
+  matchBoxShadow,
 } from './core/matchers';
 
 // Variant utilities

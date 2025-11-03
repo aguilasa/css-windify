@@ -6,13 +6,13 @@
 
 #### box-shadow
 
-- [ ] Implementar matcher para box-shadow com tokens
-- [ ] Mapear: shadow-none, shadow-sm, shadow, shadow-md, shadow-lg, shadow-xl, shadow-2xl
-- [ ] Fallback para arbitrary quando não houver match
-- [ ] Adicionar testes unitários
-- [ ] Adicionar ao propertyHandlers em rulesEngine.ts
+- [x] Implementar matcher para box-shadow com tokens
+- [x] Mapear: shadow-none, shadow-sm, shadow, shadow-md, shadow-lg, shadow-xl, shadow-2xl
+- [x] Fallback para arbitrary quando não houver match
+- [x] Adicionar testes unitários
+- [x] Adicionar ao propertyHandlers em rulesEngine.ts
 
-**Arquivo:** `packages/core/src/core/matchers/misc.ts`
+**Arquivo:** `packages/core/src/core/matchers/misc.ts` ✅ **COMPLETO**
 
 #### filter
 
