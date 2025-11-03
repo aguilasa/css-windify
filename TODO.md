@@ -357,29 +357,29 @@
 
 #### Plugin System
 
-- [ ] Interface Plugin
-- [ ] Registro de plugins
-- [ ] Lifecycle hooks
-- [ ] Documentação
+- [x] Interface Plugin
+- [x] Registro de plugins
+- [x] Lifecycle hooks
+- [x] Documentação
 
-**Arquivo:** `packages/core/src/plugins/` (criar)
+**Arquivo:** `packages/core/src/plugins/` ✅ **COMPLETO**
 
 #### Custom Handlers
 
-- [ ] API para registrar handlers customizados
-- [ ] Override de handlers existentes
-- [ ] Documentação
+- [x] API para registrar handlers customizados
+- [x] Override de handlers existentes
+- [x] Documentação
 
-**Arquivo:** `packages/core/src/core/rulesEngine.ts`
+**Arquivo:** `packages/core/src/plugins/` ✅ **COMPLETO**
 
 #### Configurações Avançadas
 
-- [ ] Base font size configurável
-- [ ] Shadow similarity threshold
-- [ ] Custom color matching
-- [ ] Custom spacing scale
+- [x] Base font size configurável (via MatchCtx)
+- [x] Shadow similarity threshold (via thresholds)
+- [x] Custom color matching (via plugins)
+- [x] Custom spacing scale (via tokens)
 
-**Arquivo:** `packages/core/src/types.ts`
+**Arquivo:** `packages/core/src/types.ts` ✅ **COMPLETO**
 
 ---
 

@@ -202,6 +202,28 @@ export { withVariant, withVariants } from './core/variants';
 // Parsers
 export { parseInlineCss, parseCssRules } from './parsers';
 
+// Plugin system types
+export type {
+  Plugin,
+  PluginMetadata,
+  PropertyHandler,
+  PluginHooks,
+  PluginRegistryOptions,
+} from './plugins';
+
+// Plugin system functions
+export {
+  PluginRegistry,
+  createPlugin,
+  registerPlugin,
+  unregisterPlugin,
+  getPlugin,
+  getAllPlugins,
+  clearPlugins,
+  getPluginHandlers,
+  globalRegistry,
+} from './plugins';
+
 // Export both named and default exports
 export { Tailwindify };
 export default Tailwindify;
