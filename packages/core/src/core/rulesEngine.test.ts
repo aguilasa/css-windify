@@ -70,8 +70,8 @@ describe('rulesEngine', () => {
     });
 
     it('should handle properties without direct handlers', () => {
-      const result = toTailwind('transform', 'rotate(45deg)', ctx);
-      expect(result.classes[0]).toContain('[transform:rotate(45deg)]');
+      const result = toTailwind('custom-property', 'custom-value', ctx);
+      expect(result.classes[0]).toContain('[custom-property:custom-value]');
       expect(result.warning).not.toBeNull();
     });
   });

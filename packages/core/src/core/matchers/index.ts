@@ -29,5 +29,8 @@ export * from './fonts';
 // Transition and Animation matchers
 export * from './transitions';
 
+// Transform matchers
+export * from './transforms';
+
 // Misc matchers
 export * from './misc';

@@ -158,49 +158,49 @@
 
 #### translate
 
-- [ ] Implementar matchTranslate()
-- [ ] Suporte para translateX, translateY
-- [ ] Mapear valores de spacing quando possível
-- [ ] Fallback para arbitrary
-- [ ] Adicionar testes
+- [x] Implementar matchTranslate()
+- [x] Suporte para translateX, translateY
+- [x] Mapear valores de spacing quando possível
+- [x] Fallback para arbitrary
+- [x] Adicionar testes
 
-**Arquivo:** `packages/core/src/core/matchers/transforms.ts` (criar)
+**Arquivo:** `packages/core/src/core/matchers/transforms.ts` ✅ **COMPLETO**
 
 #### scale
 
-- [ ] Implementar matchScale()
-- [ ] Suporte para scaleX, scaleY
-- [ ] Mapear valores comuns (0, 50, 75, 90, 95, 100, 105, 110, 125, 150)
-- [ ] Fallback para arbitrary
-- [ ] Adicionar testes
+- [x] Implementar matchScale()
+- [x] Suporte para scaleX, scaleY
+- [x] Mapear valores comuns (0, 50, 75, 90, 95, 100, 105, 110, 125, 150)
+- [x] Fallback para arbitrary
+- [x] Adicionar testes
 
-**Arquivo:** `packages/core/src/core/matchers/transforms.ts`
+**Arquivo:** `packages/core/src/core/matchers/transforms.ts` ✅ **COMPLETO**
 
 #### rotate
 
-- [ ] Implementar matchRotate()
-- [ ] Mapear valores comuns (0, 1, 2, 3, 6, 12, 45, 90, 180)
-- [ ] Fallback para arbitrary
-- [ ] Adicionar testes
+- [x] Implementar matchRotate()
+- [x] Mapear valores comuns (0, 1, 2, 3, 6, 12, 45, 90, 180)
+- [x] Fallback para arbitrary
+- [x] Adicionar testes
 
-**Arquivo:** `packages/core/src/core/matchers/transforms.ts`
+**Arquivo:** `packages/core/src/core/matchers/transforms.ts` ✅ **COMPLETO**
 
 #### skew
 
-- [ ] Implementar matchSkew()
-- [ ] Suporte para skewX, skewY
-- [ ] Mapear valores comuns (0, 1, 2, 3, 6, 12)
-- [ ] Fallback para arbitrary
-- [ ] Adicionar testes
+- [x] Implementar matchSkew()
+- [x] Suporte para skewX, skewY
+- [x] Mapear valores comuns (0, 1, 2, 3, 6, 12)
+- [x] Fallback para arbitrary
+- [x] Adicionar testes
 
-**Arquivo:** `packages/core/src/core/matchers/transforms.ts`
+**Arquivo:** `packages/core/src/core/matchers/transforms.ts` ✅ **COMPLETO**
 
 #### transform property
 
-- [ ] Implementar matchTransform() para propriedade transform
-- [ ] Parse de múltiplas funções (translate + rotate + scale)
-- [ ] Gerar múltiplas classes Tailwind
-- [ ] Adicionar testes
+- [x] Implementar matchTransform() para propriedade transform
+- [x] Parse de múltiplas funções (translate + rotate + scale)
+- [x] Gerar múltiplas classes Tailwind
+- [x] Adicionar testes
 
 **Arquivo:** `packages/core/src/core/matchers/transforms.ts`
 

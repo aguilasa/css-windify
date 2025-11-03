@@ -76,6 +76,13 @@ import {
   matchTransitionShorthand,
   matchAnimationShorthand,
 
+  // Transform matchers
+  matchTranslate,
+  matchScale,
+  matchRotate,
+  matchSkew,
+  matchTransform,
+
   // Misc matchers
   matchOverflow,
   matchZIndex,
@@ -440,6 +447,18 @@ const propertyHandlers: Record<string, RuleHandler> = {
 
   // Animation properties
   animation: (value) => matchAnimationShorthand(value).classes,
+
+  // Transform properties
+  transform: (value, ctx) => {
+    const result = matchTransform(value, ctx);
+    return result.warning
+      ? { classes: result.classes, warnings: [result.warning] }
+      : result.classes;
+  },
+  translate: (value, ctx) => [matchTranslate(value, undefined, ctx)],
+  scale: (value, ctx) => [matchScale(value, undefined, ctx)],
+  rotate: (value, ctx) => [matchRotate(value, ctx)],
+  skew: (value, ctx) => [matchSkew(value, undefined, ctx)],
 
   // Misc properties
   overflow: (value) => [matchOverflow(value)],
