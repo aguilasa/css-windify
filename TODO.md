@@ -59,14 +59,14 @@
 
 #### UI Components
 
-- [ ] Input panel (CSS editor)
-- [ ] Output panel (Tailwind classes)
-- [ ] Side panel (warnings/coverage stats)
-- [ ] Settings panel (strict/approximate, thresholds)
-- [ ] Export button (copy, download)
-- [ ] Split view resizable
+- [x] Input panel (CSS editor)
+- [x] Output panel (Tailwind classes)
+- [x] Side panel (warnings/coverage stats)
+- [x] Settings panel (strict/approximate, thresholds)
+- [x] Export button (copy, download)
+- [x] Split view resizable
 
-**Arquivo:** `apps/web/src/components/`
+**Arquivo:** `apps/web/src/components/` ✅ **COMPLETO**
 **Tempo estimado:** 2-3 dias
 
 #### Features Adicionais
