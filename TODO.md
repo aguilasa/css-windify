@@ -26,13 +26,13 @@
 
 #### mix-blend-mode
 
-- [ ] Implementar matchMixBlendMode()
-- [ ] Mapear: multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color, luminosity
-- [ ] Fallback para arbitrary
-- [ ] Adicionar testes
-- [ ] Adicionar ao propertyHandlers
+- [x] Implementar matchMixBlendMode()
+- [x] Mapear: multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color, luminosity
+- [x] Fallback para arbitrary
+- [x] Adicionar testes
+- [x] Adicionar ao propertyHandlers
 
-**Arquivo:** `packages/core/src/core/matchers/misc.ts`
+**Arquivo:** `packages/core/src/core/matchers/misc.ts` ✅ **COMPLETO**
 
 #### isolation
 

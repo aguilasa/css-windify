@@ -463,3 +463,47 @@ export function matchFilter(
 
   return { classes };
 }
+
+// Mix blend mode mapping
+const mixBlendModeMap: Record<string, string> = {
+  normal: 'mix-blend-normal',
+  multiply: 'mix-blend-multiply',
+  screen: 'mix-blend-screen',
+  overlay: 'mix-blend-overlay',
+  darken: 'mix-blend-darken',
+  lighten: 'mix-blend-lighten',
+  'color-dodge': 'mix-blend-color-dodge',
+  'color-burn': 'mix-blend-color-burn',
+  'hard-light': 'mix-blend-hard-light',
+  'soft-light': 'mix-blend-soft-light',
+  difference: 'mix-blend-difference',
+  exclusion: 'mix-blend-exclusion',
+  hue: 'mix-blend-hue',
+  saturation: 'mix-blend-saturation',
+  color: 'mix-blend-color',
+  luminosity: 'mix-blend-luminosity',
+  // Additional blend modes
+  'plus-darker': 'mix-blend-plus-darker',
+  'plus-lighter': 'mix-blend-plus-lighter',
+};
+
+/**
+ * Matches mix-blend-mode values to Tailwind classes
+ *
+ * @param value The CSS mix-blend-mode value
+ * @param _ctx Match context (for future extensibility)
+ * @returns Tailwind class
+ */
+export function matchMixBlendMode(value: string, _ctx?: MatchCtx): string {
+  if (!value) return '';
+
+  const normalizedValue = normalizeValue(value);
+
+  // Check for predefined blend mode values
+  if (mixBlendModeMap[normalizedValue]) {
+    return mixBlendModeMap[normalizedValue];
+  }
+
+  // Use arbitrary value if no match found
+  return toArbitrary('mix-blend', normalizedValue);
+}

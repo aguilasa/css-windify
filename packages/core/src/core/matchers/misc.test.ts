@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { matchOverflow, matchZIndex, matchOpacity, matchBoxShadow, matchFilter } from './misc';
+import {
+  matchOverflow,
+  matchZIndex,
+  matchOpacity,
+  matchBoxShadow,
+  matchFilter,
+  matchMixBlendMode,
+} from './misc';
 
 describe('misc matchers', () => {
   describe('overflow', () => {
@@ -342,6 +349,50 @@ describe('misc matchers', () => {
         const result = matchFilter('  blur(8px)  brightness(1.5)  ');
         expect(result.classes).toEqual(['blur', 'brightness-150']);
       });
+    });
+  });
+
+  describe('mix-blend-mode', () => {
+    it('should match all standard blend modes', () => {
+      expect(matchMixBlendMode('normal')).toBe('mix-blend-normal');
+      expect(matchMixBlendMode('multiply')).toBe('mix-blend-multiply');
+      expect(matchMixBlendMode('screen')).toBe('mix-blend-screen');
+      expect(matchMixBlendMode('overlay')).toBe('mix-blend-overlay');
+      expect(matchMixBlendMode('darken')).toBe('mix-blend-darken');
+      expect(matchMixBlendMode('lighten')).toBe('mix-blend-lighten');
+      expect(matchMixBlendMode('color-dodge')).toBe('mix-blend-color-dodge');
+      expect(matchMixBlendMode('color-burn')).toBe('mix-blend-color-burn');
+      expect(matchMixBlendMode('hard-light')).toBe('mix-blend-hard-light');
+      expect(matchMixBlendMode('soft-light')).toBe('mix-blend-soft-light');
+      expect(matchMixBlendMode('difference')).toBe('mix-blend-difference');
+      expect(matchMixBlendMode('exclusion')).toBe('mix-blend-exclusion');
+      expect(matchMixBlendMode('hue')).toBe('mix-blend-hue');
+      expect(matchMixBlendMode('saturation')).toBe('mix-blend-saturation');
+      expect(matchMixBlendMode('color')).toBe('mix-blend-color');
+      expect(matchMixBlendMode('luminosity')).toBe('mix-blend-luminosity');
+    });
+
+    it('should match additional blend modes', () => {
+      expect(matchMixBlendMode('plus-darker')).toBe('mix-blend-plus-darker');
+      expect(matchMixBlendMode('plus-lighter')).toBe('mix-blend-plus-lighter');
+    });
+
+    it('should normalize values before matching', () => {
+      expect(matchMixBlendMode('  multiply  ')).toBe('mix-blend-multiply');
+      expect(matchMixBlendMode('SCREEN')).toBe('mix-blend-screen');
+      expect(matchMixBlendMode('OVERLAY')).toBe('mix-blend-overlay');
+      expect(matchMixBlendMode('  DIFFERENCE  ')).toBe('mix-blend-difference');
+    });
+
+    it('should use arbitrary values for non-predefined blend modes', () => {
+      expect(matchMixBlendMode('custom-blend')).toBe('mix-blend-[custom-blend]');
+      expect(matchMixBlendMode('inherit')).toBe('mix-blend-[inherit]');
+      expect(matchMixBlendMode('unset')).toBe('mix-blend-[unset]');
+    });
+
+    it('should handle empty or invalid values', () => {
+      expect(matchMixBlendMode('')).toBe('');
+      expect(matchMixBlendMode(null as unknown as string)).toBe('');
     });
   });
 });
