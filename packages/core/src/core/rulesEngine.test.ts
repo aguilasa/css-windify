@@ -98,7 +98,7 @@ describe('rulesEngine', () => {
       expect(result.classes).toContain('p-4');
       expect(result.classes).toContain('bg-white');
       expect(result.classes).toContain('rounded');
-      expect(result.classes.some((cls) => cls.includes('[box-shadow:'))).toBe(true);
+      expect(result.classes.some((cls) => cls.includes('shadow-'))).toBe(true);
 
       // Check for warnings
       expect(result.warnings.some((w) => w.includes('box-shadow'))).toBe(true);

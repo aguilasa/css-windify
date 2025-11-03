@@ -1620,7 +1620,7 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
       "m-4",
       "bg-white",
       "rounded-lg",
-      "[box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
+      "shadow-[0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
     ],
     "coverage": {
       "categories": {
@@ -1681,8 +1681,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
       "total": 9,
       "warningsByCategory": {
         "approximate": 0,
-        "arbitrary-value": 1,
-        "no-handler": 1,
+        "arbitrary-value": 2,
+        "no-handler": 0,
         "other": 0,
         "token-miss": 0,
         "v3-fallback": 0,
@@ -1690,7 +1690,7 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
     },
     "selector": ".card",
     "warnings": [
-      "No direct Tailwind equivalent for 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', used arbitrary property",
+      "No exact Tailwind token for box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), used arbitrary value",
       "Used arbitrary value for 'width: 100%'",
       "Selector '.card' was converted but may need manual adjustment",
     ],
@@ -2411,7 +2411,7 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
       "m-4",
       "bg-white",
       "rounded-lg",
-      "[box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
+      "shadow-[0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)]",
     ],
     "coverage": {
       "categories": {
@@ -2472,8 +2472,8 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
       "total": 9,
       "warningsByCategory": {
         "approximate": 0,
-        "arbitrary-value": 1,
-        "no-handler": 1,
+        "arbitrary-value": 2,
+        "no-handler": 0,
         "other": 0,
         "token-miss": 0,
         "v3-fallback": 0,
@@ -2481,7 +2481,7 @@ exports[`CSS to Tailwind Integration Tests > Card Component > should transform c
     },
     "selector": ".card",
     "warnings": [
-      "No direct Tailwind equivalent for 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', used arbitrary property",
+      "No exact Tailwind token for box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), used arbitrary value",
       "Used arbitrary value for 'width: 100%'",
       "Selector '.card' was converted but may need manual adjustment",
     ],
