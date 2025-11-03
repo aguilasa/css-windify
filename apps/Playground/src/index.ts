@@ -1,4 +1,4 @@
-import { loadTheme, transformRule, transformDeclarations } from 'css-windify-core';
+import { loadTheme, transformRule, transformDeclarations } from '@css-windify/core';
 import postcss from 'postcss';
 import { createInterface } from 'readline';
 

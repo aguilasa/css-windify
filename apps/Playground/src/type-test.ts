@@ -1,4 +1,9 @@
-import { transformDeclarations, TransformResult, CssDeclaration, MatchCtx } from 'css-windify-core';
+import {
+  transformDeclarations,
+  TransformResult,
+  CssDeclaration,
+  MatchCtx,
+} from '@css-windify/core';
 
 // Teste de tipos
 const declarations: CssDeclaration[] = [
