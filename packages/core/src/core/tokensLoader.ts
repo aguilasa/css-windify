@@ -15,6 +15,38 @@ import { loadTheme } from './themeLoader';
 const ROOT_SELECTOR_REGEX = /:root\s*{([^}]*)}/g;
 const CSS_VAR_REGEX = /--([a-zA-Z0-9-_.\\]+)\s*:\s*([^;]+);/g;
 
+/**
+ * Token cache entry
+ */
+interface TokenCacheEntry {
+  tokens: ThemeTokens;
+  mtime: number;
+  path: string;
+}
+
+/**
+ * In-memory token cache
+ * Key: file path, Value: cache entry with tokens and mtime
+ */
+const tokenCache = new Map<string, TokenCacheEntry>();
+
+/**
+ * Clear the token cache
+ */
+export function clearTokenCache(): void {
+  tokenCache.clear();
+}
+
+/**
+ * Get cache statistics
+ */
+export function getTokenCacheStats(): { size: number; keys: string[] } {
+  return {
+    size: tokenCache.size,
+    keys: Array.from(tokenCache.keys()),
+  };
+}
+
 // Token prefix patterns
 const TOKEN_PATTERNS = {
   spacing: /^spacing-(.+)$/,
@@ -290,18 +322,35 @@ export async function loadTokens(options?: {
   // @see SPEC.md → "Tailwind v4 Migration Plan" → "Version detection"
   if (options?.cssPath && fs.existsSync(options.cssPath)) {
     try {
+      // Check cache first
+      const stats = fs.statSync(options.cssPath);
+      const mtime = stats.mtimeMs;
+      const cached = tokenCache.get(options.cssPath);
+
+      // Return cached tokens if file hasn't changed
+      if (cached && cached.mtime === mtime) {
+        return { ...cached.tokens };
+      }
+
       const cssContent = fs.readFileSync(options.cssPath, 'utf-8');
       const customProperties = parseCssCustomProperties(cssContent);
 
       // Check if we found any relevant tokens
       const tokens = convertCustomPropertiesToTokens(customProperties);
 
-      // If we found any tokens, return them
+      // If we found any tokens, cache and return them
       if (
         Object.keys(tokens.spacing).length > 0 ||
         Object.keys(tokens.colors).length > 0 ||
         Object.keys(tokens.fontSize).length > 0
       ) {
+        // Cache the tokens
+        tokenCache.set(options.cssPath, {
+          tokens: { ...tokens },
+          mtime,
+          path: options.cssPath,
+        });
+
         return tokens;
       }
     } catch (error) {

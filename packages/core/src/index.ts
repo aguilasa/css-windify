@@ -141,6 +141,8 @@ export {
   defaultTokens,
   detectTailwindVersion,
   parseCustomProperties,
+  clearTokenCache,
+  getTokenCacheStats,
 } from './core/tokensLoader';
 
 export {
@@ -149,6 +151,8 @@ export {
   resolveColorToken,
   resolveFontSizeToken,
   resolveLineHeightToken,
+  clearResolverCache,
+  getResolverCacheStats,
 } from './core/resolvers';
 
 export {

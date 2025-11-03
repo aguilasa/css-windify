@@ -387,28 +387,28 @@
 
 #### Cache de Tokens
 
-- [ ] Implementar cache em memória
-- [ ] Cache key: file mtime + path
-- [ ] Invalidação de cache
-- [ ] Testes de performance
+- [x] Implementar cache em memória
+- [x] Cache key: file mtime + path
+- [x] Invalidação de cache
+- [x] Testes de performance
 
-**Arquivo:** `packages/core/src/core/tokensLoader.ts`
+**Arquivo:** `packages/core/src/core/tokensLoader.ts` ✅ **COMPLETO**
 
 #### Memoization
 
-- [ ] Memoizar resolvers
-- [ ] Memoizar matchers
-- [ ] Benchmarks
+- [x] Memoizar resolvers
+- [x] Memoizar matchers (via resolvers)
+- [x] Benchmarks
 
-**Arquivo:** `packages/core/src/core/resolvers.ts`
+**Arquivo:** `packages/core/src/core/resolvers.ts` ✅ **COMPLETO**
 
 #### Benchmarks
 
-- [ ] Suite de benchmarks
-- [ ] Comparação de performance
-- [ ] Relatório de performance
+- [x] Suite de benchmarks
+- [x] Comparação de performance
+- [x] Relatório de performance
 
-**Arquivo:** `packages/core/benchmarks/` (criar)
+**Arquivo:** `packages/core/benchmarks/` ✅ **COMPLETO**
 
 ---
 

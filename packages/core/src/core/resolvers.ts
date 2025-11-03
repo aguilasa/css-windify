@@ -11,6 +11,34 @@ import { MatchCtx } from '../types';
 import { normalizeValue, parseColorNormalize, toPx } from './normalizers';
 
 /**
+ * Memoization cache for resolver functions
+ */
+const resolverCache = new Map<string, any>();
+
+/**
+ * Clear the resolver cache
+ */
+export function clearResolverCache(): void {
+  resolverCache.clear();
+}
+
+/**
+ * Get cache statistics
+ */
+export function getResolverCacheStats(): { size: number; hitRate?: number } {
+  return {
+    size: resolverCache.size,
+  };
+}
+
+/**
+ * Create a cache key from function name and arguments
+ */
+function createCacheKey(fnName: string, ...args: any[]): string {
+  return `${fnName}:${JSON.stringify(args)}`;
+}
+
+/**
  * Find the nearest token in a numeric token map based on a pixel value
  *
  * @see SPEC.md → "Resolvers" → "resolveNearestTokenPx"
@@ -97,6 +125,10 @@ export function resolveSpacingToken(
   value: string,
   ctx: MatchCtx
 ): { token: string | null; type: 'exact' | 'approximate' | 'none'; warning?: string } {
+  // Check cache
+  const cacheKey = createCacheKey('resolveSpacingToken', value, ctx.opts.approximate);
+  const cached = resolverCache.get(cacheKey);
+  if (cached) return cached;
   if (!value) {
     return { token: null, type: 'none' };
   }
@@ -172,18 +204,22 @@ export function resolveSpacingToken(
         if (nearest && nearest.diffPx <= thresholdPx) {
           const warningPrefix =
             ctx.version === 'v4' ? 'v3-fallback approximate: ' : 'approximate: ';
-          return {
+          const result = {
             token: nearest.tokenKey,
-            type: 'approximate',
+            type: 'approximate' as const,
             warning: `${warningPrefix}${prop} ${value} → ${nearest.tokenKey} (${nearest.diffPx.toFixed(1)}px difference)`,
           };
+          resolverCache.set(cacheKey, result);
+          return result;
         }
       }
     }
   }
 
   // No match found
-  return { token: null, type: 'none' };
+  const result = { token: null, type: 'none' as const };
+  resolverCache.set(cacheKey, result);
+  return result;
 }
 
 /**
