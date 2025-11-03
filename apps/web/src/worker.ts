@@ -1,30 +1,104 @@
 /**
  * Web Worker for CSS to Tailwind transformation
- * This worker will use css-windify-core to transform CSS without blocking the UI
+ * Runs transformCssText in a separate thread to avoid blocking the UI
  */
 
-// Placeholder for the actual worker implementation
-self.onmessage = (event) => {
-  // We'll use these variables in the future implementation
-  // For now, just acknowledge we received the data
-  console.log(`Received data for processing: ${Object.keys(event.data).join(', ')}`);
+import { transformCssText } from '@css-windify/core';
+import type { WorkerMessage, WorkerResponse, WorkerError } from './types/worker';
 
-  // In the future, this will use css-windify-core's transformCssText
-  const mockResult = {
-    bySelector: {
-      '.example': {
-        classes: ['placeholder'],
-        warnings: ['This is a placeholder implementation'],
-        coverage: { matched: 0, total: 0, percentage: 0 },
+/**
+ * Handle incoming messages from the main thread
+ */
+self.onmessage = async (event: MessageEvent<WorkerMessage>) => {
+  const { type, id, payload } = event.data;
+
+  // Only handle 'transform' messages
+  if (type !== 'transform') {
+    const errorResponse: WorkerResponse = {
+      type: 'error',
+      id,
+      payload: {
+        name: 'InvalidMessageType',
+        message: `Unknown message type: ${type}`,
       },
+    };
+    self.postMessage(errorResponse);
+    return;
+  }
+
+  try {
+    const { css, options } = payload;
+
+    // Validate input
+    if (typeof css !== 'string') {
+      throw new Error('CSS must be a string');
+    }
+
+    if (!options || typeof options !== 'object') {
+      throw new Error('Options must be an object');
+    }
+
+    // Transform CSS using the core library
+    const result = transformCssText(css, options);
+
+    // Send success response
+    const successResponse: WorkerResponse = {
+      type: 'success',
+      id,
+      payload: result,
+    };
+
+    self.postMessage(successResponse);
+  } catch (error) {
+    // Handle errors and send error response
+    const workerError: WorkerError = {
+      name: error instanceof Error ? error.name : 'UnknownError',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    };
+
+    const errorResponse: WorkerResponse = {
+      type: 'error',
+      id,
+      payload: workerError,
+    };
+
+    self.postMessage(errorResponse);
+  }
+};
+
+/**
+ * Handle worker errors
+ */
+self.onerror = (event) => {
+  console.error('Worker error:', event);
+  const errorResponse: WorkerResponse = {
+    type: 'error',
+    id: 'unknown',
+    payload: {
+      name: 'WorkerError',
+      message: event.message || 'Unknown worker error',
+      stack: undefined,
     },
   };
+  self.postMessage(errorResponse);
+};
 
-  // Send the result back to the main thread
-  self.postMessage({
-    type: 'result',
-    result: mockResult,
-  });
+/**
+ * Handle unhandled promise rejections
+ */
+self.onunhandledrejection = (event) => {
+  console.error('Unhandled rejection in worker:', event.reason);
+  const errorResponse: WorkerResponse = {
+    type: 'error',
+    id: 'unknown',
+    payload: {
+      name: 'UnhandledRejection',
+      message: event.reason?.message || String(event.reason),
+      stack: event.reason?.stack,
+    },
+  };
+  self.postMessage(errorResponse);
 };
 
 export {};

@@ -48,13 +48,13 @@
 
 #### Web Worker
 
-- [ ] Criar worker.ts para execução do core
-- [ ] Implementar comunicação postMessage
-- [ ] Adicionar loading states
-- [ ] Tratamento de erros
-- [ ] Progress feedback
+- [x] Criar worker.ts para execução do core
+- [x] Implementar comunicação postMessage
+- [x] Adicionar loading states
+- [x] Tratamento de erros
+- [x] Progress feedback
 
-**Arquivo:** `apps/web/src/worker.ts`
+**Arquivo:** `apps/web/src/worker.ts` ✅ **COMPLETO**
 **Tempo estimado:** 1 dia
 
 #### UI Components
