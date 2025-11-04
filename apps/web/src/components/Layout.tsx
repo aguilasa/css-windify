@@ -56,7 +56,8 @@ export function Layout() {
     try {
       const matchCtx = getMatchCtxFromSettings(settings);
       const result = await transform(cssInput, matchCtx);
-      setResult(result);
+      // Extract bySelector from the result
+      setResult(result.bySelector);
     } catch (err) {
       console.error('Transform error:', err);
     }

@@ -67,7 +67,7 @@ export function OutputPanel() {
               <div key={selector} className="rounded border border-gray-700 bg-gray-800 p-4">
                 <div className="mb-2 font-mono text-sm font-semibold text-blue-400">{selector}</div>
                 <div className="mb-2 flex flex-wrap gap-2">
-                  {data.classes.map((cls: string, idx: number) => (
+                  {data.classes?.map((cls: string, idx: number) => (
                     <button
                       key={idx}
                       onClick={() => copyToClipboard(cls)}
@@ -81,9 +81,9 @@ export function OutputPanel() {
                         </span>
                       )}
                     </button>
-                  ))}
+                  )) || []}
                 </div>
-                {data.warnings.length > 0 && (
+                {data.warnings?.length > 0 && (
                   <div className="mt-2 space-y-1">
                     {data.warnings.map((warning: string, idx: number) => (
                       <div key={idx} className="text-xs text-yellow-400">
@@ -93,8 +93,8 @@ export function OutputPanel() {
                   </div>
                 )}
                 <div className="mt-2 text-xs text-gray-500">
-                  Coverage: {data.coverage.matched}/{data.coverage.total} (
-                  {data.coverage.percentage.toFixed(1)}%)
+                  Coverage: {data.coverage?.matched || 0}/{data.coverage?.total || 0} (
+                  {data.coverage?.percentage?.toFixed(1) || '0.0'}%)
                 </div>
               </div>
             ))}

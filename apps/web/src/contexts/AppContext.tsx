@@ -26,8 +26,8 @@ interface AppState {
   setCssInput: (css: string) => void;
 
   // Transform Result
-  result: TransformResult | null;
-  setResult: (result: TransformResult | null) => void;
+  result: Record<string, TransformResult> | null;
+  setResult: (result: Record<string, TransformResult> | null) => void;
 
   // Settings
   settings: AppSettings;
@@ -103,7 +103,7 @@ function saveSettings(settings: AppSettings) {
  */
 export function AppProvider({ children }: { children: ReactNode }) {
   const [cssInput, setCssInput] = useState('');
-  const [result, setResult] = useState<TransformResult | null>(null);
+  const [result, setResult] = useState<Record<string, TransformResult> | null>(null);
   const [settings, setSettings] = useState<AppSettings>(loadSettings);
   const [activeTab, setActiveTab] = useState<'warnings' | 'coverage' | 'settings'>('warnings');
   const [history, setHistory] = useState<string[]>(() => loadHistory());
@@ -248,13 +248,17 @@ export function useApp() {
  * Get MatchCtx from settings
  */
 export function getMatchCtxFromSettings(settings: AppSettings): MatchCtx {
+  // Convert 'auto' to 'v4' as default
+  const version = settings.version === 'auto' ? 'v4' : settings.version;
+
   return {
     theme: {},
-    version: settings.version,
+    version,
     opts: {
       strict: settings.strict,
       approximate: settings.approximate,
       thresholds: settings.thresholds,
+      screens: {}, // Empty screens for now, can be populated from theme if needed
     },
   };
 }

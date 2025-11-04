@@ -50,7 +50,7 @@ function WarningsTab({ result }: { result: any }) {
   }
 
   const warnings = Object.entries(result).flatMap(([selector, data]: [string, any]) =>
-    data.warnings.map((warning: string) => ({ selector, warning }))
+    (data.warnings || []).map((warning: string) => ({ selector, warning }))
   );
 
   if (warnings.length === 0) {
@@ -75,11 +75,11 @@ function CoverageTab({ result }: { result: any }) {
   }
 
   const totalMatched = Object.values(result).reduce(
-    (sum: number, data: any) => sum + data.coverage.matched,
+    (sum: number, data: any) => sum + (data.coverage?.matched || 0),
     0
   );
   const totalProps = Object.values(result).reduce(
-    (sum: number, data: any) => sum + data.coverage.total,
+    (sum: number, data: any) => sum + (data.coverage?.total || 0),
     0
   );
   const percentage = totalProps > 0 ? (totalMatched / totalProps) * 100 : 0;
@@ -106,11 +106,12 @@ function CoverageTab({ result }: { result: any }) {
             <div className="mb-1 h-2 overflow-hidden rounded-full bg-gray-700">
               <div
                 className="h-full bg-green-500"
-                style={{ width: `${data.coverage.percentage}%` }}
+                style={{ width: `${data.coverage?.percentage || 0}%` }}
               />
             </div>
             <div className="text-xs text-gray-400">
-              {data.coverage.matched}/{data.coverage.total} ({data.coverage.percentage.toFixed(1)}%)
+              {data.coverage?.matched || 0}/{data.coverage?.total || 0} (
+              {data.coverage?.percentage?.toFixed(1) || '0.0'}%)
             </div>
           </div>
         ))}
@@ -120,5 +121,8 @@ function CoverageTab({ result }: { result: any }) {
 }
 
 function getTotalWarnings(result: any): number {
-  return Object.values(result).reduce((sum: number, data: any) => sum + data.warnings.length, 0);
+  return Object.values(result).reduce(
+    (sum: number, data: any) => sum + (data.warnings?.length || 0),
+    0
+  );
 }

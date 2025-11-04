@@ -1,6 +1,13 @@
 import type { MatchCtx, TransformResult } from '@css-windify/core';
 
 /**
+ * Result from transformCssText with bySelector
+ */
+export interface CssTransformResult {
+  bySelector: Record<string, TransformResult>;
+}
+
+/**
  * Message sent from main thread to worker
  */
 export interface WorkerMessage {
@@ -18,7 +25,7 @@ export interface WorkerMessage {
 export interface WorkerResponse {
   type: 'success' | 'error';
   id: string;
-  payload: TransformResult | WorkerError;
+  payload: CssTransformResult | WorkerError;
 }
 
 /**
@@ -40,9 +47,9 @@ export type WorkerState = 'idle' | 'processing' | 'success' | 'error';
  */
 export interface UseWorkerResult {
   state: WorkerState;
-  result: TransformResult | null;
+  result: CssTransformResult | null;
   error: WorkerError | null;
-  transform: (css: string, options: MatchCtx) => Promise<TransformResult>;
+  transform: (css: string, options: MatchCtx) => Promise<CssTransformResult>;
   cancel: () => void;
   reset: () => void;
 }

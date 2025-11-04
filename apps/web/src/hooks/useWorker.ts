@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import type { MatchCtx, TransformResult } from '@css-windify/core';
+import type { MatchCtx } from '@css-windify/core';
 import type {
   WorkerMessage,
   WorkerResponse,
   WorkerError,
   WorkerState,
   UseWorkerResult,
+  CssTransformResult,
 } from '../types/worker';
 
 /**
@@ -14,7 +15,7 @@ import type {
  */
 export function useWorker(): UseWorkerResult {
   const [state, setState] = useState<WorkerState>('idle');
-  const [result, setResult] = useState<TransformResult | null>(null);
+  const [result, setResult] = useState<CssTransformResult | null>(null);
   const [error, setError] = useState<WorkerError | null>(null);
 
   const workerRef = useRef<Worker | null>(null);
@@ -41,7 +42,7 @@ export function useWorker(): UseWorkerResult {
 
       if (type === 'success') {
         setState('success');
-        setResult(payload as TransformResult);
+        setResult(payload as CssTransformResult);
         setError(null);
         pendingRequestRef.current = null;
       } else if (type === 'error') {
@@ -81,7 +82,7 @@ export function useWorker(): UseWorkerResult {
    * Transform CSS using the worker
    */
   const transform = useCallback(
-    async (css: string, options: MatchCtx): Promise<TransformResult> => {
+    async (css: string, options: MatchCtx): Promise<CssTransformResult> => {
       return new Promise((resolve, reject) => {
         if (!workerRef.current) {
           const error: WorkerError = {
@@ -139,7 +140,7 @@ export function useWorker(): UseWorkerResult {
           }
 
           if (type === 'success') {
-            resolve(payload as TransformResult);
+            resolve(payload as CssTransformResult);
           } else if (type === 'error') {
             reject(payload as WorkerError);
           }
