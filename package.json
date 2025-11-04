@@ -39,7 +39,6 @@
     "typecheck": "tsc --noEmit -p tsconfig.base.json",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "ci": "pnpm build && pnpm check",
-    "prepare": "husky install",
     "docs:generate": "typedoc",
     "docs:serve": "cd docs/api && python3 -m http.server 8080",
     "playground": "cd apps/Playground && pnpm dev",
