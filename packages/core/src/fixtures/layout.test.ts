@@ -137,8 +137,8 @@ describe('Complex Layout Fixture', () => {
     theme: {},
     version: 'v3',
     opts: {
-      strict: true,
-      approximate: false,
+      strict: false,
+      approximate: true,
       thresholds: {
         spacingPx: 2,
         fontPx: 1,

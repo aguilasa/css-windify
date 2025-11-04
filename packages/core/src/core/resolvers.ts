@@ -13,6 +13,7 @@ import { normalizeValue, parseColorNormalize, toPx } from './normalizers';
 /**
  * Memoization cache for resolver functions
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const resolverCache = new Map<string, any>();
 
 /**
@@ -34,6 +35,7 @@ export function getResolverCacheStats(): { size: number; hitRate?: number } {
 /**
  * Create a cache key from function name and arguments
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function createCacheKey(fnName: string, ...args: any[]): string {
   return `${fnName}:${JSON.stringify(args)}`;
 }
@@ -126,7 +128,12 @@ export function resolveSpacingToken(
   ctx: MatchCtx
 ): { token: string | null; type: 'exact' | 'approximate' | 'none'; warning?: string } {
   // Check cache
-  const cacheKey = createCacheKey('resolveSpacingToken', value, ctx.opts.approximate);
+  const cacheKey = createCacheKey(
+    'resolveSpacingToken',
+    value,
+    ctx.opts.approximate,
+    ctx.opts.strict
+  );
   const cached = resolverCache.get(cacheKey);
   if (cached) return cached;
   if (!value) {
