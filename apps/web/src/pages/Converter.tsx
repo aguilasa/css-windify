@@ -1,11 +1,13 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
 import { Layout } from '../components/Layout';
 import { useApp } from '../contexts/AppContext';
 import { getExampleById } from '../examples';
 
 export function Converter() {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const { setCssInput } = useApp();
 
   useEffect(() => {

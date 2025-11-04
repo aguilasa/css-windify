@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import { CSS_EXAMPLES, getCategories } from '../examples';
 import { useState } from 'react';
 import type { CSSExample } from '../examples';
@@ -14,7 +16,7 @@ export function Examples() {
       <header className="border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600">
                 <span className="text-xl font-bold text-white">C</span>
               </div>
@@ -24,7 +26,7 @@ export function Examples() {
               </div>
             </Link>
             <Link
-              to="/converter"
+              href="/converter"
               className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
             >
               Try Converter
@@ -82,7 +84,7 @@ export function Examples() {
                 {/* Actions */}
                 <div className="flex space-x-3">
                   <Link
-                    to={`/converter?example=${example.id}`}
+                    href={`/converter?example=${example.id}`}
                     className="flex-1 rounded-lg bg-blue-500 px-4 py-2 text-center text-white transition-colors hover:bg-blue-600"
                   >
                     Try in Converter

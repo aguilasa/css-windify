@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import type { TransformResult, MatchCtx } from '@css-windify/core';
 

@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 
 export function Home() {
   return (
@@ -131,13 +133,13 @@ export function Home() {
         {/* CTA Buttons */}
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            to="/converter"
+            href="/converter"
             className="transform rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
           >
             Start Converting →
           </Link>
           <Link
-            to="/examples"
+            href="/examples"
             className="transform rounded-lg border border-gray-200 bg-white px-8 py-4 font-semibold text-gray-900 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           >
             View Examples

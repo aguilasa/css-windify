@@ -4,13 +4,13 @@ import { OutputPanel } from './OutputPanel';
 import { SidePanel } from './SidePanel';
 import { ExportButton } from './ExportButton';
 import { ExamplesModal } from './ExamplesModal';
-import { useWorker } from '../hooks/useWorker';
+import { useTransform } from '../hooks/useTransform';
 import { useApp, getMatchCtxFromSettings } from '../contexts/AppContext';
 
 export function Layout() {
   const { cssInput, setCssInput, setResult, settings, setShowExamplesModal, setActiveTab } =
     useApp();
-  const { state, transform, cancel } = useWorker();
+  const { state, transform, cancel } = useTransform();
   const [leftWidth, setLeftWidth] = useState(40); // percentage
   const [isMobile, setIsMobile] = useState(false);
 
