@@ -1,6 +1,17 @@
 /**
- * Main entry point for the Tailwindify Web application
- * This is a placeholder file that will be implemented in the future
+ * Main entry point for the CSSWindify Web application
  */
 
-console.log('Tailwindify Web - Coming soon!');
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { AppProvider } from './contexts/AppContext';
+import { Layout } from './components/Layout';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <AppProvider>
+      <Layout />
+    </AppProvider>
+  </React.StrictMode>
+);
