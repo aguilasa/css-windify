@@ -104,7 +104,9 @@ export function Home() {
           <div className="rounded-xl bg-white p-6 shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900">
               <svg
-                className="h-6 w-6 text-purple-600 dark:text-purple-400"
+                width="24"
+                height="24"
+                className="text-purple-600 dark:text-purple-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
