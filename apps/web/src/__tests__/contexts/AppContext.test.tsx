@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
+import React, { type ReactNode } from 'react';
 import { AppProvider, useApp } from '../../contexts/AppContext';
-import type { ReactNode } from 'react';
 
 describe('AppContext', () => {
   beforeEach(() => {
