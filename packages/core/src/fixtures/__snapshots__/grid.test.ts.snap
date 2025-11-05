@@ -3,14 +3,20 @@
 exports[`Grid Layout Fixture > Snapshots > should match grid layout snapshot 1`] = `
 {
   "containerClasses": [
-    "lg:gap-[2rem]",
+    "gap-4",
+    "grid",
+    "grid-cols-12",
+    "lg:gap-8",
     "lg:grid-cols-12",
+    "p-8",
+    "sm:gap-6",
+    "sm:grid-cols-6",
   ],
   "itemClasses": [
-    "bg-[#f3f4f6]",
+    "bg-gray-100",
     "border",
-    "border-[#e5e7eb]",
-    "p-[1.5rem]",
+    "border-gray-200",
+    "p-6",
     "rounded-lg",
   ],
   "selectors": [

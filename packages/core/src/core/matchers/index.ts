@@ -34,3 +34,6 @@ export * from './transforms';
 
 // Misc matchers
 export * from './misc';
+
+// Cursor matcher
+export * from './cursor';

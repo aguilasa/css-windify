@@ -28,6 +28,9 @@ import {
   // Border matchers
   matchBorderWidth,
   matchBorderRadius,
+
+  // Cursor matcher
+  matchCursor,
   matchBorderShorthand,
   matchBorderStyle,
 
@@ -482,6 +485,12 @@ const propertyHandlers: Record<string, RuleHandler> = {
   },
   'mix-blend-mode': (value) => [matchMixBlendMode(value)],
   isolation: (value) => [matchIsolation(value)],
+  cursor: (value) => {
+    const result = matchCursor(value);
+    return result.warnings.length > 0
+      ? { classes: result.classes, warnings: result.warnings }
+      : result.classes;
+  },
 };
 
 /**
