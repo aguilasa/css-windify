@@ -5,8 +5,12 @@ import { AppProvider, useApp } from '../../contexts/AppContext';
 
 describe('AppContext', () => {
   beforeEach(() => {
-    localStorage.clear();
-    window.location.hash = '';
+    if (typeof localStorage !== 'undefined') {
+      localStorage.clear();
+    }
+    if (typeof window !== 'undefined' && window.location) {
+      window.location.hash = '';
+    }
   });
 
   const wrapper = ({ children }: { children: ReactNode }) => <AppProvider>{children}</AppProvider>;

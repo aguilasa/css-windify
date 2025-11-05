@@ -180,6 +180,11 @@ describe('tokensLoader', () => {
     });
 
     it('should handle errors gracefully when reading CSS file', async () => {
+      // Mock statSync to throw an error
+      vi.mocked(fs.statSync).mockImplementation(() => {
+        throw new Error('Error reading file');
+      });
+
       // Mock readFileSync to throw an error
       vi.mocked(fs.readFileSync).mockImplementation(() => {
         throw new Error('Error reading file');
