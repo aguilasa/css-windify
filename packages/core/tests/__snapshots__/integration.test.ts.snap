@@ -17,12 +17,12 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
       "border",
       "border-transparent",
       "rounded",
+      "cursor-pointer",
       "duration-150",
       "transition-colors",
       "[vertical-align:middle]",
       "[user-select:none]",
       "[white-space:nowrap]",
-      "[cursor:pointer]",
     ],
     "coverage": {
       "categories": {
@@ -78,13 +78,13 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
         },
       },
       "matched": 16,
-      "nonArbitrary": 14,
+      "nonArbitrary": 15,
       "percentage": 100,
       "total": 16,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 1,
-        "no-handler": 4,
+        "no-handler": 3,
         "other": 0,
         "token-miss": 0,
         "v3-fallback": 0,
@@ -94,7 +94,6 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
     "warnings": [
       "No direct Tailwind equivalent for 'white-space: nowrap', used arbitrary property",
       "No direct Tailwind equivalent for 'vertical-align: middle', used arbitrary property",
-      "No direct Tailwind equivalent for 'cursor: pointer', used arbitrary property",
       "No direct Tailwind equivalent for 'user-select: none', used arbitrary property",
       "Used arbitrary value for 'background-color: #3b82f6'",
       "Selector '.btn' was converted but may need manual adjustment",
@@ -821,12 +820,12 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
       "border",
       "border-transparent",
       "rounded",
+      "cursor-pointer",
       "duration-150",
       "transition-colors",
       "[vertical-align:middle]",
       "[user-select:none]",
       "[white-space:nowrap]",
-      "[cursor:pointer]",
     ],
     "coverage": {
       "categories": {
@@ -882,13 +881,13 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
         },
       },
       "matched": 16,
-      "nonArbitrary": 14,
+      "nonArbitrary": 15,
       "percentage": 100,
       "total": 16,
       "warningsByCategory": {
         "approximate": 0,
         "arbitrary-value": 1,
-        "no-handler": 4,
+        "no-handler": 3,
         "other": 0,
         "token-miss": 0,
         "v3-fallback": 0,
@@ -898,7 +897,6 @@ exports[`CSS to Tailwind Integration Tests > Button Component > should transform
     "warnings": [
       "No direct Tailwind equivalent for 'white-space: nowrap', used arbitrary property",
       "No direct Tailwind equivalent for 'vertical-align: middle', used arbitrary property",
-      "No direct Tailwind equivalent for 'cursor: pointer', used arbitrary property",
       "No direct Tailwind equivalent for 'user-select: none', used arbitrary property",
       "Used arbitrary value for 'background-color: #3b82f6'",
       "Selector '.btn' was converted but may need manual adjustment",
@@ -3195,16 +3193,16 @@ exports[`CSS to Tailwind Integration Tests > Coverage Comparison > should compar
   {
     "approximate": {
       "matched": 36,
-      "nonArbitrary": 23,
+      "nonArbitrary": 24,
       "total": 36,
-      "warnings": 28,
+      "warnings": 27,
     },
     "fixture": "button",
     "strict": {
       "matched": 36,
-      "nonArbitrary": 23,
+      "nonArbitrary": 24,
       "total": 36,
-      "warnings": 28,
+      "warnings": 27,
     },
   },
   {
@@ -4011,9 +4009,9 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-md:grid-cols-[repeat(6, 1fr)]",
-      "max-md:p-4",
-      "max-md:[grid-gap:1rem]",
+      "grid-cols-[repeat(6, 1fr)]",
+      "p-4",
+      "[grid-gap:1rem]",
     ],
     "coverage": {
       "categories": {
@@ -4090,7 +4088,7 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-md:col-span-6",
+      "col-span-6",
     ],
     "coverage": {
       "categories": {
@@ -4165,8 +4163,8 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-md:col-span-6",
-      "max-md:row-span-1",
+      "col-span-6",
+      "row-span-1",
     ],
     "coverage": {
       "categories": {
@@ -4241,8 +4239,8 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-sm:grid-cols-[1fr]",
-      "max-sm:[grid-gap:0.75rem]",
+      "grid-cols-[1fr]",
+      "[grid-gap:0.75rem]",
     ],
     "coverage": {
       "categories": {
@@ -4319,7 +4317,7 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-sm:col-span-1",
+      "col-span-1",
     ],
     "coverage": {
       "categories": {
@@ -5166,9 +5164,9 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-md:grid-cols-[repeat(6, 1fr)]",
-      "max-md:p-4",
-      "max-md:[grid-gap:1rem]",
+      "grid-cols-[repeat(6, 1fr)]",
+      "p-4",
+      "[grid-gap:1rem]",
     ],
     "coverage": {
       "categories": {
@@ -5245,7 +5243,7 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-md:col-span-6",
+      "col-span-6",
     ],
     "coverage": {
       "categories": {
@@ -5320,8 +5318,8 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-md:col-span-6",
-      "max-md:row-span-1",
+      "col-span-6",
+      "row-span-1",
     ],
     "coverage": {
       "categories": {
@@ -5396,8 +5394,8 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-sm:grid-cols-[1fr]",
-      "max-sm:[grid-gap:0.75rem]",
+      "grid-cols-[1fr]",
+      "[grid-gap:0.75rem]",
     ],
     "coverage": {
       "categories": {
@@ -5474,7 +5472,7 @@ exports[`CSS to Tailwind Integration Tests > Grid Component > should transform g
   },
   {
     "classes": [
-      "max-sm:col-span-1",
+      "col-span-1",
     ],
     "coverage": {
       "categories": {

@@ -80,6 +80,14 @@ describe('tokensLoader', () => {
       throw new Error(`File not found: ${String(filePath)}`);
     });
 
+    // Mock fs.statSync
+    vi.mocked(fs.statSync).mockImplementation((filePath) => {
+      if (filePath === '/path/to/tokens.css') {
+        return { mtimeMs: 1234567890 } as fs.Stats;
+      }
+      throw new Error(`File not found: ${String(filePath)}`);
+    });
+
     // Mock path.dirname
     vi.mocked(path.dirname).mockImplementation(() => {
       return '/path/to';
